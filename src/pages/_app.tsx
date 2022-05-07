@@ -32,7 +32,7 @@ export default function App(props: AppProps) {
             >
                 <Global
                     styles={{
-                        'body, html, #next': {
+                        'body, html, #__next': {
                             height: '100%',
                         },
                     }}
@@ -41,10 +41,15 @@ export default function App(props: AppProps) {
                     navbar={<Sidebar />}
                     padding="md"
                     styles={(theme) => ({
+                        body: {
+                            height: '100%',
+                        },
                         main: {
                             backgroundColor: theme.colors.gray[0],
-                            height: '100%',
                             padding: 0,
+                        },
+                        root: {
+                            height: '100%',
                         },
                     })}
                 >
