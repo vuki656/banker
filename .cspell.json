@@ -1,0 +1,9 @@
+{
+    "useGitignore": true,
+    "cache": {
+        "useCache": true,
+        "cacheStrategy": "content",
+        "cacheLocation": "./.cspellcache"
+    },
+    "ignoreWords": ["eslintcache", "prettierrc", "rimac", "yarnrc", "loglevel"]
+}
