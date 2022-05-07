@@ -5,5 +5,15 @@
         "cacheStrategy": "content",
         "cacheLocation": "./.cspellcache"
     },
-    "ignoreWords": ["eslintcache", "prettierrc", "rimac", "yarnrc", "loglevel"]
+    "ignoreWords": [
+        "eslintcache",
+        "prettierrc",
+        "rimac",
+        "yarnrc",
+        "loglevel",
+        "mantine",
+        "dropzone",
+        "tabler",
+        "Unstyled"
+    ]
 }
