@@ -1,6 +1,7 @@
 import {
     Group,
     Text,
+    ThemeIcon,
     useMantineTheme,
 } from '@mantine/core'
 import {
@@ -53,10 +54,16 @@ export const HomeFileUploadDropzone: React.FunctionComponent<HomeFileUploadDropz
                         position="center"
                         spacing="md"
                     >
-                        <IconFileAnalytics
-                            color={theme.colors.gray[8]}
-                            size={40}
-                        />
+                        <ThemeIcon
+                            color="green"
+                            size={50}
+                            variant="light"
+                        >
+                            <IconFileAnalytics
+                                color={theme.colors.green[8]}
+                                size={30}
+                            />
+                        </ThemeIcon>
                         <Text
                             inline={true}
                             size="xl"
@@ -68,7 +75,7 @@ export const HomeFileUploadDropzone: React.FunctionComponent<HomeFileUploadDropz
                             inline={true}
                             size="sm"
                         >
-                            Or click on the box to select the file yourself.
+                            Or click on the box to select the file on your PC
                         </Text>
                     </Group>
                 )
