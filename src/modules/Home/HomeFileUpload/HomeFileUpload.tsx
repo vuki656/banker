@@ -10,10 +10,14 @@ import {
     utils,
 } from 'xlsx'
 
+import { useHomeStore } from '../hooks'
+
 import { HomeFileUploadDropzone } from './HomeFileUploadDropzone'
 
 export const HomeFileUpload: React.FunctionComponent = () => {
     const [isOpen, setIsOpen] = useToggle(false)
+
+    const store = useHomeStore()
 
     const onCompleted = (file: File) => {
         const reader = new FileReader()
@@ -36,7 +40,7 @@ export const HomeFileUpload: React.FunctionComponent = () => {
 
             const result = utils.sheet_to_json(sheet)
 
-            console.log(result)
+            store.readTransactions(result)
         }
 
         reader.onerror = () => {

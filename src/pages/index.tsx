@@ -1,10 +1,16 @@
 import type { NextPage } from 'next'
+import { createContext } from 'react'
 
 import { Home } from '../modules'
+import { HomeStore } from '../modules/Home/stores'
+
+export const HomeStoreContext = createContext<HomeStore | null>(null)
 
 const HomePage: NextPage = () => {
     return (
-        <Home />
+        <HomeStoreContext.Provider value={new HomeStore()}>
+            <Home />
+        </HomeStoreContext.Provider>
     )
 }
 
