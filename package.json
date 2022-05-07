@@ -17,6 +17,8 @@
         "@mantine/dropzone": "^4.2.2",
         "@mantine/hooks": "^4.2.2",
         "@mantine/next": "^4.2.2",
+        "@mantine/notifications": "^4.2.2",
+        "@react-hookz/web": "^13.3.0",
         "@tabler/icons": "^1.68.0",
         "next": "12.1.6",
         "react": "18.1.0",

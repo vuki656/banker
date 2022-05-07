@@ -1,7 +1,17 @@
+import { Box } from '@mantine/core'
+
+import { HomeHeader } from './HomeHeader'
+
 export const Home: React.FunctionComponent = () => {
     return (
-        <p>
-            Home
-        </p>
+        <Box
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+            }}
+        >
+            <HomeHeader />
+        </Box>
     )
 }

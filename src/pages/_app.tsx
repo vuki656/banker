@@ -3,6 +3,7 @@ import {
     Global,
     MantineProvider,
 } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
@@ -30,31 +31,33 @@ export default function App(props: AppProps) {
                 withGlobalStyles={true}
                 withNormalizeCSS={true}
             >
-                <Global
-                    styles={{
-                        'body, html, #__next': {
-                            height: '100%',
-                        },
-                    }}
-                />
-                <AppShell
-                    navbar={<Sidebar />}
-                    padding="md"
-                    styles={(theme) => ({
-                        body: {
-                            height: '100%',
-                        },
-                        main: {
-                            backgroundColor: theme.colors.gray[0],
-                            padding: 0,
-                        },
-                        root: {
-                            height: '100%',
-                        },
-                    })}
-                >
-                    <Component {...pageProps} />
-                </AppShell>
+                <NotificationsProvider>
+                    <Global
+                        styles={{
+                            'body, html, #__next': {
+                                height: '100%',
+                            },
+                        }}
+                    />
+                    <AppShell
+                        navbar={<Sidebar />}
+                        padding="md"
+                        styles={(theme) => ({
+                            body: {
+                                height: '100%',
+                            },
+                            main: {
+                                backgroundColor: theme.colors.gray[0],
+                                padding: 0,
+                            },
+                            root: {
+                                height: '100%',
+                            },
+                        })}
+                    >
+                        <Component {...pageProps} />
+                    </AppShell>
+                </NotificationsProvider>
             </MantineProvider>
         </>
     )
