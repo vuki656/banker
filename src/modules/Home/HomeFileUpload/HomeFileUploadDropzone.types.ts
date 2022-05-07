@@ -1,3 +1,3 @@
 export type HomeFileUploadDropzoneProps = {
-    onCompleted(file: File): void;
+    onCompleted(file: File): void
 }

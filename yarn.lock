@@ -1392,6 +1392,7 @@ __metadata:
     react: 18.1.0
     react-dom: 18.1.0
     typescript: 4.6.4
+    xlsx: "https://cdn.sheetjs.com/xlsx-0.18.7/xlsx-0.18.7.tgz"
   languageName: unknown
   linkType: soft
 
@@ -4829,6 +4830,15 @@ __metadata:
   version: 4.0.0
   resolution: "xdg-basedir@npm:4.0.0"
   checksum: 0073d5b59a37224ed3a5ac0dd2ec1d36f09c49f0afd769008a6e9cd3cd666bd6317bd1c7ce2eab47e1de285a286bad11a9b038196413cd753b79770361855f3c
+  languageName: node
+  linkType: hard
+
+"xlsx@https://cdn.sheetjs.com/xlsx-0.18.7/xlsx-0.18.7.tgz":
+  version: 0.18.7
+  resolution: "xlsx@https://cdn.sheetjs.com/xlsx-0.18.7/xlsx-0.18.7.tgz"
+  bin:
+    xlsx: ./bin/xlsx.njs
+  checksum: fc5f86fd7f1092c0ddbcfe26a800c19fae1b0fa2e87c2676bececda79479ff3892853b88a326ccc60e3dd4ed0fd1b89362e36e83132480f9b04ec46d421826f2
   languageName: node
   linkType: hard
 
