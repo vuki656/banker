@@ -8,11 +8,11 @@
         "build": "next build"
     },
     "dependencies": {
-        "@mantine/core": "^4.2.2",
-        "@mantine/dropzone": "^4.2.2",
-        "@mantine/hooks": "^4.2.2",
-        "@mantine/next": "^4.2.2",
-        "@mantine/notifications": "^4.2.2",
+        "@mantine/core": "^4.2.4",
+        "@mantine/dropzone": "^4.2.4",
+        "@mantine/hooks": "^4.2.4",
+        "@mantine/next": "^4.2.4",
+        "@mantine/notifications": "^4.2.4",
         "@react-hookz/web": "^13.3.0",
         "@tabler/icons": "^1.68.0",
         "mobx": "^6.5.0",

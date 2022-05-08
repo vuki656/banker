@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "strictPropertyInitialization": false,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "inlineSources": true,
+        "outDir": "dist",
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "strictNullChecks": true,
+        "lib": ["dom", "ESNext", "esnext.asynciterable"],
+        "baseUrl": "./src",
+        "paths": {
+            "#errors": ["./errors"],
+            "#enums": ["./shared/enums"],
+            "#orm": ["./orm/client.ts"],
+            "#utils": ["./shared/utils"],
+            "#env": ["./shared/env.ts"],
+            "#server": ["./server/server.ts"],
+            "#schema": ["./schema"],
+            "#resolvers": ["./resolvers"],
+            "#shared/typescript-types": ["./shared/types/typescript"],
+            "#shared/type-graphql-types": ["./shared/types/type-graphql"],
+            "#shared/selects": ["./shared/selects"],
+            "#tests/integration/factories": ["./tests/integration/factories"],
+            "#tests/integration/utils": ["./tests/integration/utils"],
+            "#tests/integration/graphql": ["./tests/integration/graphql"],
+            "#tests/integration/types": ["./tests/integration/types"],
+            "#tests/integration/generated-types": ["./tests/integration/types/generated.ts"]
+        }
+    },
+    "exclude": ["node_modules"]
+}

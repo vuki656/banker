@@ -15,6 +15,20 @@
         "dropzone",
         "tabler",
         "unstyled",
-        "hookz"
+        "hookz",
+        "devoxa",
+        "envalid",
+        "tsyringe",
+        "codegen",
+        "pino",
+        "yarnpkg",
+        "asynciterable",
+        "healthcheck",
+        "liquibase",
+        "jdbc",
+        "varchar",
+        "ossp",
+        "datasource",
+        "dbgenerated"
     ]
 }
