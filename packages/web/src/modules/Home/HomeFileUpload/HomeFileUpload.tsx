@@ -38,7 +38,7 @@ export const HomeFileUpload: React.FunctionComponent = () => {
                 throw new Error('Failed extracting sheet from file')
             }
 
-            const excelRows = utils.sheet_to_json(sheet)
+            const excelRows = utils.sheet_to_json<Record<string, number | string>>(sheet)
 
             store.parseTransactions(excelRows)
         }

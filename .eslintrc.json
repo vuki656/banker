@@ -4,6 +4,7 @@
         "@rimac-technology/eslint-config/react"
     ],
     "parser": "@typescript-eslint/parser",
+    "ignorePatterns": ["**/*.json"],
     "parserOptions": {
         "project": "./tsconfig.json"
     }

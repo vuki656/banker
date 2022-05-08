@@ -1,0 +1,28 @@
+{
+    "name": "web",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "start": "next start",
+        "build": "next build"
+    },
+    "dependencies": {
+        "@mantine/core": "^4.2.2",
+        "@mantine/dropzone": "^4.2.2",
+        "@mantine/hooks": "^4.2.2",
+        "@mantine/next": "^4.2.2",
+        "@mantine/notifications": "^4.2.2",
+        "@react-hookz/web": "^13.3.0",
+        "@tabler/icons": "^1.68.0",
+        "mobx": "^6.5.0",
+        "next": "12.1.6",
+        "react": "18.1.0",
+        "react-dom": "18.1.0",
+        "xlsx": "https://cdn.sheetjs.com/xlsx-0.18.7/xlsx-0.18.7.tgz"
+    },
+    "devDependencies": {
+        "@types/react": "18.0.9",
+        "@types/react-dom": "18.0.3"
+    }
+}
