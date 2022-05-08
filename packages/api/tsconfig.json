@@ -1,4 +1,5 @@
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
         "sourceMap": true,
         "strictPropertyInitialization": false,
@@ -10,26 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strictNullChecks": true,
-        "lib": ["dom", "ESNext", "esnext.asynciterable"],
-        "baseUrl": "./src",
-        "paths": {
-            "#errors": ["./errors"],
-            "#enums": ["./shared/enums"],
-            "#orm": ["./orm/client.ts"],
-            "#utils": ["./shared/utils"],
-            "#env": ["./shared/env.ts"],
-            "#server": ["./server/server.ts"],
-            "#schema": ["./schema"],
-            "#resolvers": ["./resolvers"],
-            "#shared/typescript-types": ["./shared/types/typescript"],
-            "#shared/type-graphql-types": ["./shared/types/type-graphql"],
-            "#shared/selects": ["./shared/selects"],
-            "#tests/integration/factories": ["./tests/integration/factories"],
-            "#tests/integration/utils": ["./tests/integration/utils"],
-            "#tests/integration/graphql": ["./tests/integration/graphql"],
-            "#tests/integration/types": ["./tests/integration/types"],
-            "#tests/integration/generated-types": ["./tests/integration/types/generated.ts"]
-        }
+        "lib": ["dom", "ESNext", "esnext.asynciterable"]
     },
     "exclude": ["node_modules"]
 }

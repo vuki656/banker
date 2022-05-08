@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
+        "api:dev": "yarn workspace api dev",
+        "api:start": "yarn workspace api start",
+        "api:build": "yarn workspace api build",
         "web:dev": "yarn workspace web dev",
         "web:start": "yarn workspace web start",
         "web:build": "yarn workspace web build",
@@ -10,7 +13,8 @@
         "lint:fix": "eslint './packages/**/*' --fix --quiet",
         "lint:source": "eslint './packages/**/*' --quiet --cache --cache-strategy='content' --cache-location='.eslintcache/'",
         "lint:config": "prettier --loglevel warn --check {*,**/*}.{json,yml,yaml}",
-        "lint:spell": "cspell lint '**' --no-summary --no-progress"
+        "lint:spell": "cspell lint '**' --no-summary --no-progress",
+        "lint:clean": "rm -rf ./eslintcache && rm .cspellcache"
     },
     "devDependencies": {
         "@rimac-technology/eslint-config": "^23.0.0",

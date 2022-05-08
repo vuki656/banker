@@ -1,10 +1,7 @@
 {
-    "extends": [
-        "@rimac-technology/eslint-config/core",
-        "@rimac-technology/eslint-config/react"
-    ],
+    "extends": ["@rimac-technology/eslint-config/core", "@rimac-technology/eslint-config/react"],
     "parser": "@typescript-eslint/parser",
-    "ignorePatterns": ["**/*.json"],
+    "ignorePatterns": ["**/*.json", "**/*.yaml", "**/*.yml", "**/*.prisma"],
     "parserOptions": {
         "project": "./tsconfig.json"
     }

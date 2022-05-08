@@ -6,6 +6,8 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "nodemon",
+        "typegraphql",
         "eslintcache",
         "prettierrc",
         "rimac",
@@ -29,6 +31,8 @@
         "varchar",
         "ossp",
         "datasource",
-        "dbgenerated"
+        "dbgenerated",
+        "domagoj",
+        "vukovic"
     ]
 }
