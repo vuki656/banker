@@ -18,7 +18,7 @@
     },
     "devDependencies": {
         "@rimac-technology/eslint-config": "^23.0.0",
-        "@types/node": "16.11.33",
+        "@types/node": "16.11.34",
         "cspell": "^5.20.0",
         "eslint": "8.15.0",
         "prettier": "^2.6.2",
