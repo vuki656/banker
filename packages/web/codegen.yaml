@@ -1,0 +1,25 @@
+overwrite: true
+schema:
+    - './schema.graphql'
+documents:
+    - './src/graphql/**/*.gql'
+config:
+    scalars:
+        DateTime: 'string'
+        JSON: '{ [key: string]: any }'
+        Upload: 'unknown'
+hooks:
+    afterAllFileWrite:
+        - prettier --write
+generates:
+    src/graphql/types.generated.ts:
+        plugins:
+            - typescript
+            - fragment-matcher
+            - typescript-operations
+            - typescript-react-apollo
+        config:
+            withHooks: true
+            avoidOptionals:
+                field: true
+                object: true

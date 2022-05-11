@@ -1,7 +1,15 @@
 {
     "extends": ["@rimac-technology/eslint-config/core", "@rimac-technology/eslint-config/react"],
     "parser": "@typescript-eslint/parser",
-    "ignorePatterns": ["**/*.json", "**/*.yaml", "**/*.yml", "**/*.prisma"],
+    "ignorePatterns": [
+        "**/*.json",
+        "**/*.yaml",
+        "**/*.yml",
+        "**/*.prisma",
+        "**/*.graphql",
+        "**/*.gql",
+        "**/*.generated.ts"
+    ],
     "parserOptions": {
         "project": "./tsconfig.json"
     }

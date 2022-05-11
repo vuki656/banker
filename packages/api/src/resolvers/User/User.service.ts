@@ -128,7 +128,7 @@ export class UserService {
                 password: true,
             },
             where: {
-                id: input.id,
+                email: input.email,
             },
         })
 

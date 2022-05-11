@@ -1,17 +1,11 @@
 import type { NextPage } from 'next'
-import { createContext } from 'react'
 
-import { Home } from '../modules'
-import { HomeStore } from '../modules/Home/stores'
+import { Login } from '../modules'
 
-export const HomeStoreContext = createContext<HomeStore | null>(null)
-
-const HomePage: NextPage = () => {
+const LoginPage: NextPage = () => {
     return (
-        <HomeStoreContext.Provider value={new HomeStore()}>
-            <Home />
-        </HomeStoreContext.Provider>
+        <Login />
     )
 }
 
-export default HomePage
+export default LoginPage

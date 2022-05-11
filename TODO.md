@@ -1,0 +1,2 @@
+-   [ ] Setup server side auth https://nextjs.org/docs/authentication
+-   [ ] Check todo for setup continuation

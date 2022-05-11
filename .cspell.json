@@ -6,6 +6,8 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "dedupe",
+        "hookform",
         "nodemon",
         "typegraphql",
         "eslintcache",

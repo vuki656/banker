@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { HomeStoreContext } from '../../../pages'
+import { HomeStoreContext } from '../../../pages/home'
 import type { HomeStore } from '../stores'
 
 export function useHomeStore(): HomeStore {

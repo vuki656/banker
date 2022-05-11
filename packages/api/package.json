@@ -1,5 +1,5 @@
 {
-    "name": "api",
+    "name": "@banker/api",
     "version": "1.0.0",
     "private": true,
     "scripts": {
@@ -10,7 +10,8 @@
         "database": "docker-compose run --rm migrations && docker image rm api_migrations",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "database:seed": "prisma db seed",
-        "orm:generate": "prisma generate"
+        "orm:generate": "prisma generate",
+        "schema:build": "ts-node './src/server/generateSchemaFile.ts'"
     },
     "dependencies": {
         "@devoxa/prisma-relay-cursor-connection": "^2.2.1",

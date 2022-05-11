@@ -4,6 +4,6 @@
     "semi": false,
     "singleQuote": true,
     "proseWrap": "always",
-    "printWidth": 130,
+    "printWidth": 120,
     "plugins": ["prettier-plugin-prisma"]
 }

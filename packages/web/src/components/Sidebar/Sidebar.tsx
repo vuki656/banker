@@ -4,12 +4,25 @@ import {
     Text,
     useMantineTheme,
 } from '@mantine/core'
-import { IconReportMoney } from '@tabler/icons'
+import {
+    IconLogout,
+    IconReportMoney,
+} from '@tabler/icons'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 
+import { COOKIE_TOKEN_NAME } from '../../utils'
 import { SidebarButton } from '../SidebarButton'
 
 export const Sidebar: React.FunctionComponent = () => {
     const theme = useMantineTheme()
+    const router = useRouter()
+
+    const onLogout = async () => {
+        await router.push('/')
+
+        Cookies.remove(COOKIE_TOKEN_NAME)
+    }
 
     return (
         <Navbar
@@ -43,6 +56,12 @@ export const Sidebar: React.FunctionComponent = () => {
                     color="blue"
                     icon={<IconReportMoney size={16} />}
                     label="Home"
+                />
+                <SidebarButton
+                    color="red"
+                    icon={<IconLogout size={16} />}
+                    label="Logout"
+                    onClick={onLogout}
                 />
             </Navbar.Section>
         </Navbar>
