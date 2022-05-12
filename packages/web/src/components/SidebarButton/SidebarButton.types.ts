@@ -4,4 +4,5 @@ export type SidebarButtonProps = UnstyledButtonProps<'button'> & {
     color: string
     icon: React.ReactNode
     label: string
+    selected?: boolean
 }

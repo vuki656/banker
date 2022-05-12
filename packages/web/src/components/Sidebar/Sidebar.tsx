@@ -6,6 +6,7 @@ import {
 } from '@mantine/core'
 import {
     IconLogout,
+    IconPackage,
     IconReportMoney,
 } from '@tabler/icons'
 import Cookies from 'js-cookie'
@@ -56,6 +57,19 @@ export const Sidebar: React.FunctionComponent = () => {
                     color="blue"
                     icon={<IconReportMoney size={16} />}
                     label="Home"
+                    onClick={() => {
+                        void router.push('/home')
+                    }}
+                    selected={router.pathname === '/home'}
+                />
+                <SidebarButton
+                    color="orange"
+                    icon={<IconPackage size={16} />}
+                    label="Categories"
+                    onClick={() => {
+                        void router.push('/categories')
+                    }}
+                    selected={router.pathname.startsWith('/categories')}
                 />
                 <SidebarButton
                     color="red"

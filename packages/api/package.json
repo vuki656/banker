@@ -7,9 +7,10 @@
         "start": "NODE_ENV=production node 'dist/index.js'",
         "generate": "ts-node ./generator",
         "generate:pagination": "ts-node ./src/shared/utils/generatePaginationTypes/generatePaginationTypes.ts",
-        "database": "docker-compose run --rm migrations && docker image rm api_migrations",
+        "database:setup": "docker-compose run --rm migrations",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "database:seed": "prisma db seed",
+        "database:migrate": "docker-compose run --no-deps --rm migrations",
         "orm:generate": "prisma generate",
         "schema:build": "ts-node './src/server/generateSchemaFile.ts'"
     },

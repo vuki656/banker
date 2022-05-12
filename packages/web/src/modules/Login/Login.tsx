@@ -39,8 +39,8 @@ export const Login: React.FunctionComponent = () => {
         onError: () => {
             showNotification({
                 color: 'red',
-                message: 'Please try again',
-                title: 'Login Failed',
+                message: 'Login Failed',
+                title: 'Error',
             })
         },
     })

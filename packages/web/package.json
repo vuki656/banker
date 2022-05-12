@@ -9,14 +9,15 @@
         "codegen": "graphql-codegen --config ./codegen.yaml"
     },
     "dependencies": {
-        "@apollo/client": "3.6.2",
-        "@hookform/resolvers": "^2.8.8",
-        "@mantine/core": "^4.2.4",
-        "@mantine/dropzone": "^4.2.4",
-        "@mantine/hooks": "^4.2.4",
-        "@mantine/next": "^4.2.4",
-        "@mantine/notifications": "^4.2.4",
-        "@react-hookz/web": "^13.3.0",
+        "@apollo/client": "3.6.3",
+        "@hookform/resolvers": "^2.8.9",
+        "@mantine/core": "^4.2.5",
+        "@mantine/dropzone": "^4.2.5",
+        "@mantine/hooks": "^4.2.5",
+        "@mantine/modals": "^4.2.5",
+        "@mantine/next": "^4.2.5",
+        "@mantine/notifications": "^4.2.5",
+        "@react-hookz/web": "^14.2.2",
         "@tabler/icons": "^1.68.0",
         "graphql": "^16.5.0",
         "js-cookie": "^3.0.1",
@@ -25,19 +26,20 @@
         "react": "18.1.0",
         "react-dom": "18.1.0",
         "react-hook-form": "^7.31.1",
+        "react-virtual": "^2.10.4",
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.18.7/xlsx-0.18.7.tgz",
-        "zod": "^3.15.1"
+        "zod": "^3.16.0"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "^2.6.2",
         "@graphql-codegen/fragment-matcher": "^3.2.1",
         "@graphql-codegen/introspection": "^2.1.1",
-        "@graphql-codegen/near-operation-file-preset": "^2.2.9",
-        "@graphql-codegen/typescript": "^2.4.8",
-        "@graphql-codegen/typescript-operations": "2.3.5",
-        "@graphql-codegen/typescript-react-apollo": "^3.2.11",
+        "@graphql-codegen/near-operation-file-preset": "^2.2.12",
+        "@graphql-codegen/typescript": "^2.4.11",
+        "@graphql-codegen/typescript-operations": "2.4.0",
+        "@graphql-codegen/typescript-react-apollo": "^3.2.14",
         "@types/js-cookie": "^3.0.2",
         "@types/react": "18.0.9",
-        "@types/react-dom": "18.0.3"
+        "@types/react-dom": "18.0.4"
     }
 }

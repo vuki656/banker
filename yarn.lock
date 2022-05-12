@@ -15,9 +15,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:3.6.2":
-  version: 3.6.2
-  resolution: "@apollo/client@npm:3.6.2"
+"@apollo/client@npm:3.6.3":
+  version: 3.6.3
+  resolution: "@apollo/client@npm:3.6.3"
   dependencies:
     "@graphql-typed-document-node/core": ^3.1.1
     "@wry/context": ^0.6.0
@@ -28,7 +28,7 @@ __metadata:
     optimism: ^0.16.1
     prop-types: ^15.7.2
     symbol-observable: ^4.0.0
-    ts-invariant: ^0.10.0
+    ts-invariant: ^0.10.2
     tslib: ^2.3.0
     use-sync-external-store: ^1.0.0
     zen-observable-ts: ^1.2.0
@@ -44,7 +44,7 @@ __metadata:
       optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: 6363506861a0adeeff1b70bf51892f2493f940beeccaca1bf5894f1a9bc88929b9fcef39cde81b48c20304f7025f14b06d3063b8406f8407a0a080d540d11063
+  checksum: d1ccf3377ef5c629f605bea6216864266f2151f62ef95ea153f7887940609bab909f1265f7aca8b0f7fd8681a9aa3e8b9283db669513c499540d0387e4188bc2
   languageName: node
   linkType: hard
 
@@ -872,25 +872,26 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@banker/web@workspace:packages/web"
   dependencies:
-    "@apollo/client": 3.6.2
+    "@apollo/client": 3.6.3
     "@graphql-codegen/cli": ^2.6.2
     "@graphql-codegen/fragment-matcher": ^3.2.1
     "@graphql-codegen/introspection": ^2.1.1
-    "@graphql-codegen/near-operation-file-preset": ^2.2.9
-    "@graphql-codegen/typescript": ^2.4.8
-    "@graphql-codegen/typescript-operations": 2.3.5
-    "@graphql-codegen/typescript-react-apollo": ^3.2.11
-    "@hookform/resolvers": ^2.8.8
-    "@mantine/core": ^4.2.4
-    "@mantine/dropzone": ^4.2.4
-    "@mantine/hooks": ^4.2.4
-    "@mantine/next": ^4.2.4
-    "@mantine/notifications": ^4.2.4
-    "@react-hookz/web": ^13.3.0
+    "@graphql-codegen/near-operation-file-preset": ^2.2.12
+    "@graphql-codegen/typescript": ^2.4.11
+    "@graphql-codegen/typescript-operations": 2.4.0
+    "@graphql-codegen/typescript-react-apollo": ^3.2.14
+    "@hookform/resolvers": ^2.8.9
+    "@mantine/core": ^4.2.5
+    "@mantine/dropzone": ^4.2.5
+    "@mantine/hooks": ^4.2.5
+    "@mantine/modals": ^4.2.5
+    "@mantine/next": ^4.2.5
+    "@mantine/notifications": ^4.2.5
+    "@react-hookz/web": ^14.2.2
     "@tabler/icons": ^1.68.0
     "@types/js-cookie": ^3.0.2
     "@types/react": 18.0.9
-    "@types/react-dom": 18.0.3
+    "@types/react-dom": 18.0.4
     graphql: ^16.5.0
     js-cookie: ^3.0.1
     mobx: ^6.5.0
@@ -898,8 +899,9 @@ __metadata:
     react: 18.1.0
     react-dom: 18.1.0
     react-hook-form: ^7.31.1
+    react-virtual: ^2.10.4
     xlsx: "https://cdn.sheetjs.com/xlsx-0.18.7/xlsx-0.18.7.tgz"
-    zod: ^3.15.1
+    zod: ^3.16.0
   languageName: unknown
   linkType: soft
 
@@ -1593,7 +1595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/near-operation-file-preset@npm:^2.2.9":
+"@graphql-codegen/near-operation-file-preset@npm:^2.2.12":
   version: 2.2.12
   resolution: "@graphql-codegen/near-operation-file-preset@npm:2.2.12"
   dependencies:
@@ -1653,18 +1655,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-operations@npm:2.3.5":
-  version: 2.3.5
-  resolution: "@graphql-codegen/typescript-operations@npm:2.3.5"
+"@graphql-codegen/typescript-operations@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@graphql-codegen/typescript-operations@npm:2.4.0"
   dependencies:
     "@graphql-codegen/plugin-helpers": ^2.4.0
-    "@graphql-codegen/typescript": ^2.4.8
-    "@graphql-codegen/visitor-plugin-common": 2.7.4
+    "@graphql-codegen/typescript": ^2.4.11
+    "@graphql-codegen/visitor-plugin-common": 2.8.0
     auto-bind: ~4.0.0
-    tslib: ~2.3.0
+    tslib: ~2.4.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 0ded3d55358fddc0c9151ea66006422520d05c02083d26af6bdbfbd06a3f668a3f6e359c6a5287d7eabe6694090531bfc609c222d79a8f6822e9e0feaae69d64
+  checksum: c36ebe8bd2c0a1f0f894a70f494bd2e97309bf1cfcd1fc15561bd664875d42fad26f9af402a9f195e92148214be74f8cfb526f938d0af4ec47e5f2660d321463
   languageName: node
   linkType: hard
 
@@ -1683,7 +1685,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-react-apollo@npm:^3.2.11":
+"@graphql-codegen/typescript-react-apollo@npm:^3.2.14":
   version: 3.2.14
   resolution: "@graphql-codegen/typescript-react-apollo@npm:3.2.14"
   dependencies:
@@ -1714,7 +1716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript@npm:^2.4.8":
+"@graphql-codegen/typescript@npm:^2.4.11":
   version: 2.4.11
   resolution: "@graphql-codegen/typescript@npm:2.4.11"
   dependencies:
@@ -1726,26 +1728,6 @@ __metadata:
   peerDependencies:
     graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 481b581ab8505434c4ed84648b225e9bc4a4dcde488179014539e2093dc4f8bb4ee20e2d8899b4ce457da3036eaa5886b7d71b3ddb6b9a115bb78457d273711c
-  languageName: node
-  linkType: hard
-
-"@graphql-codegen/visitor-plugin-common@npm:2.7.4":
-  version: 2.7.4
-  resolution: "@graphql-codegen/visitor-plugin-common@npm:2.7.4"
-  dependencies:
-    "@graphql-codegen/plugin-helpers": ^2.4.0
-    "@graphql-tools/optimize": ^1.0.1
-    "@graphql-tools/relay-operation-optimizer": ^6.3.7
-    "@graphql-tools/utils": ^8.3.0
-    auto-bind: ~4.0.0
-    change-case-all: 1.0.14
-    dependency-graph: ^0.11.0
-    graphql-tag: ^2.11.0
-    parse-filepath: ^1.0.2
-    tslib: ~2.3.0
-  peerDependencies:
-    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 9e15f700cf043ccbd5202baf699b83ba91f711793c1cb1e7394e701948165b63149261a2b71e097ee75a516f777e90421162898a5f2f9fb74fd22ac9bad9b8e7
   languageName: node
   linkType: hard
 
@@ -2105,12 +2087,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^2.8.8":
-  version: 2.8.8
-  resolution: "@hookform/resolvers@npm:2.8.8"
+"@hookform/resolvers@npm:^2.8.9":
+  version: 2.8.9
+  resolution: "@hookform/resolvers@npm:2.8.9"
   peerDependencies:
     react-hook-form: ^7.0.0
-  checksum: 3de8b00ba3d085cd29b8d9d41bb17f5e31a483e46dafef98a37d898fbf5f3d19a74729e1cda8d15d7513486b5886ea12fbef0c1aa4ed009e3cf3c804cbe325a2
+  checksum: bb41c7243327f69d58914226abc8d81c69d2574e1685adf4ddd5599392ef0c8dac80a12dd08fc2e82c48d0af1447a8898098a15c7184f5e8f4100a4898c397dc
   languageName: node
   linkType: hard
 
@@ -2418,95 +2400,107 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/core@npm:4.2.4"
+"@mantine/core@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/core@npm:4.2.5"
   dependencies:
-    "@mantine/styles": 4.2.4
+    "@mantine/styles": 4.2.5
     "@popperjs/core": ^2.9.3
     "@radix-ui/react-scroll-area": ^0.1.1
     react-popper: ^2.2.5
     react-textarea-autosize: ^8.3.2
   peerDependencies:
-    "@mantine/hooks": 4.2.4
+    "@mantine/hooks": 4.2.5
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 6206c4129023e3ff2d110f609b7d68165898aefd7aca8d898078c02e402ca1f341750f44c820c45885291f2ef0bacc8fd95b08558644e2d5ddd400817593fc20
+  checksum: c6cc3ec1047b54cf31144c5d244958e88e7b9c673e7f056aaa857f764f3779ed5481bba9f0d7ee6cfff20f9975eb3a72bce7c7b8013995e64fac8beb76adce59
   languageName: node
   linkType: hard
 
-"@mantine/dropzone@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/dropzone@npm:4.2.4"
+"@mantine/dropzone@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/dropzone@npm:4.2.5"
   dependencies:
     react-dropzone: ^11.4.2
   peerDependencies:
-    "@mantine/core": 4.2.4
-    "@mantine/hooks": 4.2.4
+    "@mantine/core": 4.2.5
+    "@mantine/hooks": 4.2.5
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 7a85284a00a490e2f618700c7df67b596e000b7b0c7ee2b9033543e80d5c5b0bea0ed72c12164be554ae7f3a402f0a657e72b50f50d4e8e40f99bc6dbcd7a354
+  checksum: 252e419bc783c02e83fa10834bad1c2e436b15ebd082c381efc39994df3eb1eabcc680979ea6d897a65ee55fa957497b2382bd0fa25709d985c63b71b7512e07
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/hooks@npm:4.2.4"
+"@mantine/hooks@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/hooks@npm:4.2.5"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 1b5fc24523d939b41b8b1e179f17b489e2e5eb6a714605c8cdfcdd305c615e66df7c6d52cc334fb06e134ff2cd073e6d0a9c8b100f9e318207714b2d390dea9d
+  checksum: 1a2345a9a502af70b81ec6a8bb8924c00e9a181b147b9ac9557faf7381f139ee73b7675878fd3da2f8559875722f280d0a4ce6f6a045d32c8f29746c4e14afd1
   languageName: node
   linkType: hard
 
-"@mantine/next@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/next@npm:4.2.4"
+"@mantine/modals@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/modals@npm:4.2.5"
+  peerDependencies:
+    "@mantine/core": 4.2.5
+    "@mantine/hooks": 4.2.5
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 22daa15024c17a4006b66aa48ab278cb630ff034d35ffa1617e904ce1cc340b81230932ebf9b34b8a5075267a442aa0d5fec0653d0652ccc77ca73279539469d
+  languageName: node
+  linkType: hard
+
+"@mantine/next@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/next@npm:4.2.5"
   dependencies:
-    "@mantine/ssr": 4.2.4
+    "@mantine/ssr": 4.2.5
   peerDependencies:
     next: "*"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 1f722c9a9bb71807b2b00f19b1d3d4d5ad54dd7fbd771d30a2ce3c9f67aba2958dd8cb6540ac930e3d1a0ecead717d78b9961f89ebe7f27a9088b56f65b4cbc9
+  checksum: 82253ee3bc3045e2375fc6857bd5205a99af151586717a3353e4c2b243f4a1efe327e8023550ad73ae2cd2627b604c7b68b1c4c662178ddd27940a02e806ecdf
   languageName: node
   linkType: hard
 
-"@mantine/notifications@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/notifications@npm:4.2.4"
+"@mantine/notifications@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/notifications@npm:4.2.5"
   dependencies:
     react-transition-group: ^4.4.2
   peerDependencies:
-    "@mantine/core": 4.2.4
-    "@mantine/hooks": 4.2.4
+    "@mantine/core": 4.2.5
+    "@mantine/hooks": 4.2.5
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 0ce2376add8120c7cadd4b4303458532cb1ed5479861f02443b6668e75e1e6688057fe715f9be930a1d4a0b58d4eccf4a56343494066f1b492fabd255c4af772
+  checksum: 9fea32267bb46e245723556dc1b2963d383a1162f8a95f7119f48dacca78433bc59d9cdac6b24f8bdda38e61add49dc597e21ecfe33884a50d028b943940685d
   languageName: node
   linkType: hard
 
-"@mantine/ssr@npm:4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/ssr@npm:4.2.4"
+"@mantine/ssr@npm:4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/ssr@npm:4.2.5"
   dependencies:
     "@emotion/cache": 11.7.1
     "@emotion/react": 11.7.1
     "@emotion/serialize": 1.0.2
     "@emotion/server": 11.4.0
     "@emotion/utils": 1.0.0
-    "@mantine/styles": 4.2.4
+    "@mantine/styles": 4.2.5
     csstype: 3.0.9
     html-react-parser: 1.3.0
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 7a5c38e6f2dbbef6dbf450cc2a91c0500c5eaa9652a5428199a3dece6914bdc6b3e8ea2a629b31b6dbe8b1dc3638d4535aae9f67582729073e13ceb9a485dd84
+  checksum: dc2cd308fb54337ed6ea2386ec51997cc490e5436d59988b6ee361a2f87966fdb1c03af150b550ee9e77e80588339d3100032fabe424a7a509ce3234d69c3b63
   languageName: node
   linkType: hard
 
-"@mantine/styles@npm:4.2.4":
-  version: 4.2.4
-  resolution: "@mantine/styles@npm:4.2.4"
+"@mantine/styles@npm:4.2.5":
+  version: 4.2.5
+  resolution: "@mantine/styles@npm:4.2.5"
   dependencies:
     "@emotion/cache": 11.7.1
     "@emotion/react": 11.7.1
@@ -2517,7 +2511,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 92c13ec7cc7eb0c995af5795d80d684a700b1b6818f0ed785b8842ecb9c099445ff25e9c56e57a357b6901908a3317fdc60affbf67d1b8996fb705a515dc34c1
+  checksum: 62b45b106dc65b19c87af9f62aa5b1294276436fb232eea837750fcc64c62e5f87a8d14ffd1034ae17943bceed9a79c087b676f0c50dc62eede263b765eeab32
   languageName: node
   linkType: hard
 
@@ -2943,18 +2937,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/deep-equal@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@react-hookz/deep-equal@npm:1.0.1"
-  checksum: 23394b28357b87650aed9fbc425d53824acd64ee3c8c5800273271410c93fe51712c6935c1f632c0c53eeb5f8afd813d544713ba4cda86b2681b18dad3d31d2a
+"@reach/observe-rect@npm:^1.1.0":
+  version: 1.2.0
+  resolution: "@reach/observe-rect@npm:1.2.0"
+  checksum: 7dd903eeaad0e22c6d973bd26265d91eadba56ab5134701ceb3e85214db75339fae94aa7e8b88a65e8daa64bc7cf1b915d4ffcdfd324466b561dc6adc3c6e070
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^13.3.0":
-  version: 13.3.0
-  resolution: "@react-hookz/web@npm:13.3.0"
+"@react-hookz/deep-equal@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@react-hookz/deep-equal@npm:1.0.2"
+  checksum: a5d3f5012c34fae3d573e9245d00f2162b0f35a163700a325459090f18996408211f30ad51692fcec3d1de50859d496900ddffe18696f4a9e843623f95c2e6a3
+  languageName: node
+  linkType: hard
+
+"@react-hookz/web@npm:^14.2.2":
+  version: 14.2.2
+  resolution: "@react-hookz/web@npm:14.2.2"
   dependencies:
-    "@react-hookz/deep-equal": ^1.0.1
+    "@react-hookz/deep-equal": ^1.0.2
   peerDependencies:
     js-cookie: ^3.0.1
     react: ^16.8 || ^17 || ^18
@@ -2962,13 +2963,13 @@ __metadata:
   peerDependenciesMeta:
     js-cookie:
       optional: true
-  checksum: 82112dd80b3e3eb2cc752d76f5f060b202836667659afc6733a1043b349bacb8d93321b7099bfcb88f8b285c3040ac0d4c248221e8fc14de883c1eaf7974e06f
+  checksum: b85f3bdb64c569e5046d58cea838e23e92b6381241688ee77844c94055b46b86c278d3d1892ac79f00a2b9ad389bab0b68fd020125fe3832a5b1cbcd4606b9ab
   languageName: node
   linkType: hard
 
-"@rimac-technology/eslint-config@npm:^23.0.0":
-  version: 23.0.0
-  resolution: "@rimac-technology/eslint-config@npm:23.0.0"
+"@rimac-technology/eslint-config@npm:^25.0.0":
+  version: 25.0.0
+  resolution: "@rimac-technology/eslint-config@npm:25.0.0"
   dependencies:
     "@rimac-technology/eslint-plugin": ^1.0.1
     "@typescript-eslint/eslint-plugin": ^5.14.0
@@ -2988,6 +2989,7 @@ __metadata:
     eslint-plugin-sort-destructure-keys: ^1.4.0
     eslint-plugin-sort-keys-fix: ^1.1.2
     eslint-plugin-testing-library: ^5.0.6
+    eslint-plugin-todos: ^0.1.0
     eslint-plugin-type-graphql: ^1.0.0
     eslint-plugin-typescript-sort-keys: ^2.1.0
     eslint-plugin-unicorn: ^41.0.0
@@ -2995,7 +2997,7 @@ __metadata:
     eslint-plugin-workspaces: ^0.7.0
   peerDependencies:
     eslint: ^8
-  checksum: 01dd0c996606e9fc2f50844a47cf14a8a0e42afc82d83e7b767d8a880e5da5ac769de9f5e5cd4b2372ce51d552b0d9bf9288ddf2479ab11229d94ff2d63c8867
+  checksum: b05876ba09dc6c8837591eb589f3a42ecb49cd1e09c9d16a22f94252a1b93b3f5cb1dee1d84a5a83da3649ee966f71f7f49703685a629421c5374fa454016343
   languageName: node
   linkType: hard
 
@@ -3356,10 +3358,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.34":
-  version: 16.11.34
-  resolution: "@types/node@npm:16.11.34"
-  checksum: 8dad6065b13a4b68a036e878989a481795bf80a360224c2c72b49ec7b94c8c68fef27a220f3bf6388f5420ca76b95cb9ffa6ada8d8c346c55b11c379f1cf172d
+"@types/node@npm:16.11.35":
+  version: 16.11.35
+  resolution: "@types/node@npm:16.11.35"
+  checksum: c06e8716f579ba41e65f27bfc8a90276f2b0c3324f33372dab75ca73a11971da12dbfb89fffd2289d890b3ec31136c55c2bf6afdf5ae06183d0f4590512ec3db
   languageName: node
   linkType: hard
 
@@ -3412,12 +3414,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.3":
-  version: 18.0.3
-  resolution: "@types/react-dom@npm:18.0.3"
+"@types/react-dom@npm:18.0.4":
+  version: 18.0.4
+  resolution: "@types/react-dom@npm:18.0.4"
   dependencies:
     "@types/react": "*"
-  checksum: 5c87fb610e212f0942ebbf522dfca4c9dc2ac8afa4c601454415e7c42f993518868207faff7658d11974142937ba7af2f80e274c3a3f5e0e697bdd5547dbe1b0
+  checksum: decde42d02a90ac2fe94fd6bfd9c78d002c03762a2d940df9422bf61af89c03d05e2113fd55fe45521fe27fa872a79dfd654b7d6b89652b455425efdcb763c58
   languageName: node
   linkType: hard
 
@@ -4375,8 +4377,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "banker@workspace:."
   dependencies:
-    "@rimac-technology/eslint-config": ^23.0.0
-    "@types/node": 16.11.34
+    "@rimac-technology/eslint-config": ^25.0.0
+    "@types/node": 16.11.35
     cspell: ^5.20.0
     eslint: 8.15.0
     prettier: ^2.6.2
@@ -5827,6 +5829,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ellipsize@npm:0.1.0":
+  version: 0.1.0
+  resolution: "ellipsize@npm:0.1.0"
+  checksum: 2b2a78259206ead8a2f7b49b4c389dd8de32619ec1304eb042905a2c8b8b11b6a34f7e5f65ed43f29c9472af29531bb683e5a395e7b3dd51be95dd8096ccd426
+  languageName: node
+  linkType: hard
+
 "emitter-mixin@npm:0.0.3":
   version: 0.0.3
   resolution: "emitter-mixin@npm:0.0.3"
@@ -6275,6 +6284,19 @@ __metadata:
   peerDependencies:
     eslint: ^7.5.0 || ^8.0.0
   checksum: 39b11c5a412ddba994bc8e0734f6e6ba23ef88c99995d6a0e9e9e7c572c6d71f19589fe4d1bbafd8589cf7438d35559aeca6227e885d2b5f6d8baf8d7304e31e
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-todos@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "eslint-plugin-todos@npm:0.1.0"
+  dependencies:
+    ellipsize: 0.1.0
+    lodash: ^4.17.15
+    read-pkg-up: ^7.0.1
+  peerDependencies:
+    eslint: ^6.8.0
+  checksum: 22e7b7cb5ff5559f54ef48cf9ff9acbfb806810dfd0c749ad1e9ae33dba40d2550cf43c73b202c1ff797b343039f42c7a2eb2ffb52da31469e0897c9d528dc1a
   languageName: node
   linkType: hard
 
@@ -9273,7 +9295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.0":
+"lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -10984,6 +11006,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-virtual@npm:^2.10.4":
+  version: 2.10.4
+  resolution: "react-virtual@npm:2.10.4"
+  dependencies:
+    "@reach/observe-rect": ^1.1.0
+  peerDependencies:
+    react: ^16.6.3 || ^17.0.0
+  checksum: 1bebc741b01057829a7d7f29256114caecf0597d41b187cb41e75af77f24a87c780bc1a81ec11205b78ee2e9c801fc5e36b20a9e1ab7ddc70a18dd95417795f8
+  languageName: node
+  linkType: hard
+
 "react@npm:18.1.0":
   version: 18.1.0
   resolution: "react@npm:18.1.0"
@@ -12372,12 +12405,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-invariant@npm:^0.10.0":
-  version: 0.10.2
-  resolution: "ts-invariant@npm:0.10.2"
+"ts-invariant@npm:^0.10.2":
+  version: 0.10.3
+  resolution: "ts-invariant@npm:0.10.3"
   dependencies:
     tslib: ^2.1.0
-  checksum: 684e78933e7a7a36da44f1bd4a4a8f96a3aeadd004f77fa8f8b816491d1b334b239dc1fcfff12a04092a489761817daa178e5feb485ed187d108f5e57df9a80f
+  checksum: bb07d56fe4aae69d8860e0301dfdee2d375281159054bc24bf1e49e513fb0835bf7f70a11351344d213a79199c5e695f37ebbf5a447188a377ce0cd81d91ddb5
   languageName: node
   linkType: hard
 
@@ -13431,9 +13464,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "zod@npm:3.15.1"
-  checksum: d1ceec91b1b19fe26233c2e6be7625c6d5937c6c667ce23ff7d59948eb1239a24819227c615096a5e6a6377a17fc2df3720e8d613d2176dc482c0a1e8d02e1e2
+"zod@npm:^3.16.0":
+  version: 3.16.0
+  resolution: "zod@npm:3.16.0"
+  checksum: 2879a18e090ee67206375408eb0e506d32f3d6658634aa7f253250c4c223ebaef64dd0d76634a0b0bbd0ea64d26d512d8817a584a0490030b3b308fc62f83d1c
   languageName: node
   linkType: hard

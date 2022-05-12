@@ -8,7 +8,7 @@
             "changeSet": {
                 "id": "__timestamp__",
                 "author": "off.vukovic@gmail.com",
-                "comment": "__description__",
+                "comment": "__description__SentenceCase__",
                 "changes": [
                     // TODO: fill
                 ]

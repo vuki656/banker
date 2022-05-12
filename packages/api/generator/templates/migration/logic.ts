@@ -13,6 +13,7 @@ export const migrationTemplate: IConfigItem = {
     },
     option: 'Create Database Migration',
     output: {
+        overwrite: true,
         path: './src/database/migrations/changelog/__folder__/__timestamp__-__description__KebabCase__.migration.json',
         pathAndFileNameDefaultCase: CaseConverterEnum.KebabCase,
     },

@@ -7,6 +7,7 @@
 type Query {
     currentUser: UserType!
     user(args: UserArgs!): UserType
+    categories: [CategoryType!]!
 }
 
 type UserType implements BaseType {
@@ -24,11 +25,21 @@ input UserArgs {
     id: ID!
 }
 
+type CategoryType implements BaseType {
+    id: ID!
+    name: String!
+    color: String!
+    icon: String!
+}
+
 type Mutation {
     changeUserPassword(input: ChangeUserPasswordInput!): ChangeUserPasswordPayload!
     createUser(input: CreateUserInput!): CreateUserPayload!
     updateUser(input: UpdateUserInput!): UpdateUserPayload!
     loginUser(input: LoginUserInput!): LoginUserPayload!
+    createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
+    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
+    deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
 }
 
 type ChangeUserPasswordPayload {
@@ -69,4 +80,33 @@ type LoginUserPayload {
 input LoginUserInput {
     email: String!
     password: String!
+}
+
+type CreateCategoryPayload {
+    category: CategoryType!
+}
+
+input CreateCategoryInput {
+    name: String!
+    color: String!
+    icon: String!
+}
+
+type UpdateCategoryPayload {
+    category: CategoryType!
+}
+
+input UpdateCategoryInput {
+    id: ID!
+    name: String!
+    color: String!
+    icon: String!
+}
+
+type DeleteCategoryPayload {
+    id: ID!
+}
+
+input DeleteCategoryInput {
+    id: ID!
 }

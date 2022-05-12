@@ -1,0 +1,21 @@
+mutation CreateCategory($input: CreateCategoryInput!) {
+    createCategory(input: $input) {
+        category {
+            ...CategoryPayload
+        }
+    }
+}
+
+mutation DeleteCategory($input: DeleteCategoryInput!) {
+    deleteCategory(input: $input) {
+        id
+    }
+}
+
+mutation UpdateCategory($input: UpdateCategoryInput!) {
+    updateCategory(input: $input) {
+        category {
+            ...CategoryPayload
+        }
+    }
+}

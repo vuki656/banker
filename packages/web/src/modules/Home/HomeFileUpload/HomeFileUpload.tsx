@@ -47,8 +47,8 @@ export const HomeFileUpload: React.FunctionComponent = () => {
             showNotification({
                 autoClose: 2000,
                 color: 'red',
-                message: 'Please try again',
-                title: 'File reading Failed',
+                message: 'Failed reading file',
+                title: 'Error',
             })
         }
 
@@ -57,15 +57,6 @@ export const HomeFileUpload: React.FunctionComponent = () => {
 
     return (
         <>
-            <Modal
-                onClose={() => {
-                    setIsOpen(false)
-                }}
-                opened={isOpen}
-                title="Upload Your Bank Report"
-            >
-                <HomeFileUploadDropzone onCompleted={onCompleted} />
-            </Modal>
             <Button
                 leftIcon={<IconCloudUpload size={16} />}
                 onClick={() => {
@@ -74,6 +65,16 @@ export const HomeFileUpload: React.FunctionComponent = () => {
             >
                 Upload
             </Button>
+            <Modal
+                centered={true}
+                onClose={() => {
+                    setIsOpen(false)
+                }}
+                opened={isOpen}
+                title="Upload Your Bank Report"
+            >
+                <HomeFileUploadDropzone onCompleted={onCompleted} />
+            </Modal>
         </>
     )
 }

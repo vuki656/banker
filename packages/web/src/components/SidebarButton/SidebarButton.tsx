@@ -13,6 +13,7 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
         color,
         icon,
         label,
+        selected = false,
         ...other
     } = props
 
@@ -23,6 +24,7 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
                 '&:hover': {
                     backgroundColor: theme.colors.gray[0],
                 },
+                backgroundColor: selected ? theme.colors.gray[0] : theme.white,
                 borderRadius: theme.radius.sm,
                 color: theme.black,
                 display: 'block',

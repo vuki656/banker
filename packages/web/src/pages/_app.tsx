@@ -8,6 +8,7 @@ import {
     Global,
     MantineProvider,
 } from '@mantine/core'
+import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
 import Cookies from 'js-cookie'
 import type { AppProps } from 'next/app'
@@ -55,40 +56,42 @@ export default function(props: AppProps) {
                 withGlobalStyles={true}
                 withNormalizeCSS={true}
             >
-                <NotificationsProvider>
-                    <Global
-                        styles={{
-                            'body, html, #__next': {
-                                height: '100%',
-                            },
-                        }}
-                    />
-                    <ApolloProvider client={client}>
-                        {isNotAuthorized ? (
-                            <Component {...pageProps} />
-                        ) : (
-                            <AppShell
-                                navbar={<Sidebar />}
-                                padding="md"
-                                styles={(theme) => ({
-                                    body: {
-                                        height: '100%',
-                                    },
-                                    main: {
-                                        backgroundColor: theme.colors.gray[0],
-                                        padding: 0,
-                                    },
-                                    root: {
-                                        height: '100%',
-                                    },
-                                })}
-                            >
+                <ModalsProvider>
+                    <NotificationsProvider>
+                        <Global
+                            styles={{
+                                'body, html, #__next': {
+                                    height: '100%',
+                                },
+                            }}
+                        />
+                        <ApolloProvider client={client}>
+                            {isNotAuthorized ? (
                                 <Component {...pageProps} />
-                            </AppShell>
-                        )}
+                            ) : (
+                                <AppShell
+                                    navbar={<Sidebar />}
+                                    padding="md"
+                                    styles={(theme) => ({
+                                        body: {
+                                            height: '100%',
+                                        },
+                                        main: {
+                                            backgroundColor: theme.colors.gray[0],
+                                            padding: 0,
+                                        },
+                                        root: {
+                                            height: '100%',
+                                        },
+                                    })}
+                                >
+                                    <Component {...pageProps} />
+                                </AppShell>
+                            )}
 
-                    </ApolloProvider>
-                </NotificationsProvider>
+                        </ApolloProvider>
+                    </NotificationsProvider>
+                </ModalsProvider>
             </MantineProvider>
         </>
     )

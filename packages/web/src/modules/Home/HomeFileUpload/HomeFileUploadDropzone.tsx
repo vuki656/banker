@@ -22,8 +22,8 @@ export const HomeFileUploadDropzone: React.FunctionComponent<HomeFileUploadDropz
         showNotification({
             autoClose: 2000,
             color: 'red',
-            message: 'Please try again',
-            title: 'Upload Failed',
+            message: 'Upload failed',
+            title: 'Error',
         })
     }
 

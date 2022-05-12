@@ -1,6 +1,8 @@
 import { Box } from '@mantine/core'
 
-import { HomeHeader } from './HomeHeader'
+import { Header } from '../../components'
+
+import { HomeFileUpload } from './HomeFileUpload'
 
 export const Home: React.FunctionComponent = () => {
     return (
@@ -11,7 +13,10 @@ export const Home: React.FunctionComponent = () => {
                 justifyContent: 'flex-start',
             }}
         >
-            <HomeHeader />
+            <Header
+                action={<HomeFileUpload />}
+                title="Home"
+            />
         </Box>
     )
 }

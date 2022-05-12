@@ -1,0 +1,6 @@
+fragment CategoryPayload on CategoryType {
+    id
+    name
+    color
+    icon
+}
