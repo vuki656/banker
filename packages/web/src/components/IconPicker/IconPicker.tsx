@@ -12,7 +12,13 @@ import { useBoolean } from '../../utils'
 
 import type { IconPickerProps } from './IconPicker.types'
 
-const ICON_LIST = new Set(['IconPizza', 'IconShoppingCart', 'IconCar'])
+const ICON_LIST = new Set([
+    'IconPizza',
+    'IconShoppingCart',
+    'IconCar',
+    'IconHome',
+    'IconRotateClockwise',
+])
 
 const ALL_ICONS = Object
     .values(IconList)
@@ -85,7 +91,7 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                                 size="lg"
                                 variant="light"
                             >
-                                <SelectedIcon />
+                                <SelectedIcon size={18} />
                             </ThemeIcon>
                         ) : (
                             <Text
@@ -126,7 +132,7 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                         size="lg"
                         variant="light"
                     >
-                        <Icon />
+                        <Icon size={20} />
                     </ThemeIcon>
                 )
             })}

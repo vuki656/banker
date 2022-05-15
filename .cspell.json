@@ -6,6 +6,15 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "sonarjs",
+        "upsert",
+        "elekta",
+        "toplinarstvo",
+        "jadranka",
+        "uber",
+        "cazmatrans",
+        "glovo",
+        "wolt",
         "dedupe",
         "hookform",
         "nodemon",

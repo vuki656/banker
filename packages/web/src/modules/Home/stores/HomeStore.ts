@@ -9,16 +9,21 @@ export class HomeStore {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
-    public parseTransactions(excelRows: Record<string, number | string>[]) {
+    public parseTransactions(excelRows: Record<string, number | object | string>[]) {
         // Remove the first two rows that are not transactions
         excelRows.splice(0, 2)
 
         this.transactions = excelRows.map((excelRow) => {
             const rawTransaction = Object.values(excelRow)
 
+            const date = rawTransaction[0] as Date
             const id = rawTransaction[1]
             const description = rawTransaction[2]
             const amount = rawTransaction[4]
+
+            if (typeof date !== 'object') {
+                throw new TypeError('Date not a string')
+            }
 
             if (typeof id !== 'string') {
                 throw new TypeError('ID not a string')
@@ -34,6 +39,7 @@ export class HomeStore {
 
             const transaction: TransactionType = {
                 amount,
+                date,
                 description,
                 id,
             }

@@ -13,4 +13,7 @@ export class CreateCategoryInput {
 
     @Field(() => String)
     public icon: string
+
+    @Field(() => [String])
+    public keywords: string[]
 }

@@ -49,6 +49,9 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
                 input: {
                     color: formValue.color,
                     icon: formValue.icon,
+                    keywords: formValue.keywords.map((keyword) => {
+                        return keyword.name
+                    }),
                     name: formValue.name,
                 },
             },
@@ -67,6 +70,7 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
                 centered={true}
                 onClose={openActions.setFalse}
                 opened={isOpen}
+                size="lg"
                 title="Create Category"
             >
                 <CategoryForm
@@ -75,9 +79,6 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
                     submitButton={(
                         <Button
                             form={FORM_ID}
-                            style={{
-                                marginTop: '10px',
-                            }}
                             type="submit"
                         >
                             Create

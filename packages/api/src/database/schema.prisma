@@ -1,5 +1,6 @@
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -8,13 +9,14 @@ datasource db {
 }
 
 model Category {
-    id        String  @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
-    name      String  @db.VarChar(200)
-    icon      String  @db.VarChar(200)
-    color     String  @db.VarChar(200)
-    userFk    String  @map("user_fk") @db.Uuid
-    isDeleted Boolean @default(false) @map("is_deleted")
-    user      User    @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
+    id        String    @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
+    name      String    @db.VarChar(200)
+    icon      String    @db.VarChar(200)
+    color     String    @db.VarChar(200)
+    userFk    String    @map("user_fk") @db.Uuid
+    isDeleted Boolean   @default(false) @map("is_deleted")
+    user      User      @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
+    keywords  Keyword[]
 
     @@map("categories")
 }
@@ -29,4 +31,14 @@ model User {
     categories Category[]
 
     @@map("users")
+}
+
+model Keyword {
+    id         String   @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
+    name       String   @db.VarChar(200)
+    categoryFk String   @map("category_fk") @db.Uuid
+    isDeleted  Boolean  @default(false) @map("is_deleted")
+    category   Category @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__categories")
+
+    @@map("keywords")
 }

@@ -2,6 +2,7 @@ import { Box } from '@mantine/core'
 
 import { Header } from '../../components'
 
+import { HomeCategorization } from './HomeCategorization'
 import { HomeFileUpload } from './HomeFileUpload'
 
 export const Home: React.FunctionComponent = () => {
@@ -17,6 +18,7 @@ export const Home: React.FunctionComponent = () => {
                 action={<HomeFileUpload />}
                 title="Home"
             />
+            <HomeCategorization />
         </Box>
     )
 }

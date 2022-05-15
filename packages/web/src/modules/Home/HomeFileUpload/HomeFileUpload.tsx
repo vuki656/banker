@@ -31,7 +31,7 @@ export const HomeFileUpload: React.FunctionComponent = () => {
                 throw new Error('Failed reading data from file')
             }
 
-            const workbook = read(data, { type: 'binary' })
+            const workbook = read(data, { cellDates: true, type: 'binary' })
             const sheet = workbook.Sheets[workbook.SheetNames[0] ?? '']
 
             if (!sheet) {

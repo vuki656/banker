@@ -37,6 +37,15 @@ export class CategoryService {
             data: {
                 color: input.color,
                 icon: input.icon,
+                keywords: {
+                    createMany: {
+                        data: input.keywords.map((keyword) => {
+                            return {
+                                name: keyword,
+                            }
+                        }),
+                    },
+                },
                 name: input.name,
                 user: {
                     connect: {
@@ -53,20 +62,39 @@ export class CategoryService {
     }
 
     public async updateOne(input: UpdateCategoryInput): Promise<UpdateCategoryPayload> {
-        const updatedCategory = await orm.category.update({
-            data: {
-                color: input.color,
-                icon: input.icon,
-                name: input.name,
-            },
-            select: CATEGORY_DEFAULT_SELECT(),
-            where: {
-                id: input.id,
-            },
+        const category = await orm.$transaction(async (transaction) => {
+            await transaction.keyword.deleteMany({
+                where: {
+                    category: {
+                        id: input.id,
+                    },
+                },
+            })
+
+            return transaction.category.update({
+                data: {
+                    color: input.color,
+                    icon: input.icon,
+                    keywords: {
+                        createMany: {
+                            data: input.keywords.map((keyword) => {
+                                return {
+                                    name: keyword.name,
+                                }
+                            }),
+                        },
+                    },
+                    name: input.name,
+                },
+                select: CATEGORY_DEFAULT_SELECT(),
+                where: {
+                    id: input.id,
+                },
+            })
         })
 
         return {
-            category: updatedCategory,
+            category,
         }
     }
 

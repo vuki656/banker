@@ -6,6 +6,12 @@ import {
 import { BaseType } from '../../../shared/typegraphql-types'
 
 @ObjectType({ implements: BaseType })
+class KeywordType extends BaseType {
+    @Field(() => String)
+    public name: string
+}
+
+@ObjectType({ implements: BaseType })
 export class CategoryType extends BaseType {
     @Field(() => String)
     public name: string
@@ -15,4 +21,7 @@ export class CategoryType extends BaseType {
 
     @Field(() => String)
     public icon: string
+
+    @Field(() => [KeywordType])
+    public keywords: KeywordType[]
 }

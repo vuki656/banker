@@ -22,6 +22,6 @@ export const useBoolean = (initialValue?: boolean): UseBooleanValue => {
     return [value, {
         setFalse,
         setTrue,
-        toggle
+        toggle,
     }]
 }

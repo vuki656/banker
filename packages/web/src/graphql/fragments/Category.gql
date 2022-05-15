@@ -3,4 +3,8 @@ fragment CategoryPayload on CategoryType {
     name
     color
     icon
+    keywords {
+        id
+        name
+    }
 }

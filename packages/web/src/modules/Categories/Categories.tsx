@@ -1,5 +1,6 @@
 import {
     ActionIcon,
+    Badge,
     Box,
     Button,
     Paper,
@@ -41,7 +42,7 @@ export const Categories: React.FunctionComponent = () => {
         onCompleted: () => {
             showNotification({
                 color: 'green',
-                message: 'Category created',
+                message: 'Category updated',
                 title: 'Success',
             })
 
@@ -115,6 +116,7 @@ export const Categories: React.FunctionComponent = () => {
                                         color: formValue.color,
                                         icon: formValue.icon,
                                         id: category.id,
+                                        keywords: formValue.keywords,
                                         name: formValue.name,
                                     },
                                 },
@@ -134,7 +136,9 @@ export const Categories: React.FunctionComponent = () => {
                         value={category}
                     />
                 ),
+                size: 'lg',
                 title: 'Update Category',
+                zIndex: 250,
             })
         }
     }
@@ -187,14 +191,43 @@ export const Categories: React.FunctionComponent = () => {
                             >
                                 <ThemeIcon
                                     color={category.color}
-                                    size="md"
+                                    size="xl"
                                     variant="light"
                                 >
-                                    <Icon size={16} />
+                                    <Icon size={21} />
                                 </ThemeIcon>
-                                <Text weight={500}>
-                                    {category.name}
-                                </Text>
+                                <Box
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        rowGap: '5px',
+                                    }}
+                                >
+                                    <Text
+                                        size="sm"
+                                        weight={500}
+                                    >
+                                        {category.name}
+                                    </Text>
+                                    <Box
+                                        style={{
+                                            columnGap: '5px',
+                                            display: 'flex',
+                                        }}
+                                    >
+                                        {category.keywords.map((keyword) => {
+                                            return (
+                                                <Badge
+                                                    color="gray"
+                                                    key={keyword.id}
+                                                    size="xs"
+                                                >
+                                                    {keyword.name}
+                                                </Badge>
+                                            )
+                                        })}
+                                    </Box>
+                                </Box>
                             </Box>
                             <Box
                                 style={{

@@ -30,6 +30,12 @@ type CategoryType implements BaseType {
     name: String!
     color: String!
     icon: String!
+    keywords: [KeywordType!]!
+}
+
+type KeywordType implements BaseType {
+    id: ID!
+    name: String!
 }
 
 type Mutation {
@@ -90,6 +96,7 @@ input CreateCategoryInput {
     name: String!
     color: String!
     icon: String!
+    keywords: [String!]!
 }
 
 type UpdateCategoryPayload {
@@ -101,6 +108,12 @@ input UpdateCategoryInput {
     name: String!
     color: String!
     icon: String!
+    keywords: [UpdateKeywordInput!]!
+}
+
+input UpdateKeywordInput {
+    id: ID!
+    name: String!
 }
 
 type DeleteCategoryPayload {

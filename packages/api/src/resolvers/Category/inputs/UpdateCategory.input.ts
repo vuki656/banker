@@ -5,6 +5,15 @@ import {
 } from 'type-graphql'
 
 @InputType()
+export class UpdateKeywordInput {
+    @Field(() => ID)
+    public id: string
+
+    @Field(() => String)
+    public name: string
+}
+
+@InputType()
 export class UpdateCategoryInput {
     @Field(() => ID)
     public id: string
@@ -17,4 +26,7 @@ export class UpdateCategoryInput {
 
     @Field(() => String)
     public icon: string
+
+    @Field(() => [UpdateKeywordInput])
+    public keywords: UpdateKeywordInput[]
 }
