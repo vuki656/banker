@@ -43,7 +43,7 @@ const create = orm.user.create({
                 },
                 {
                     color: 'red',
-                    icon: 'IconReceipt',
+                    icon: 'IconBolt',
                     keywords: {
                         create: [
                             { name: 'elekta' },
@@ -62,9 +62,36 @@ const create = orm.user.create({
                             { name: 'hbo' },
                             { name: 'netflix' },
                             { name: 'google one' },
+                            { name: 'youtube music' },
                         ],
                     },
                     name: 'Subscriptions',
+                },
+                {
+                    color: 'purple',
+                    icon: 'IconCoffee',
+                    keywords: {
+                        create: [
+                            { name: 'kava' },
+                        ],
+                    },
+                    name: 'Bars',
+                },
+                {
+                    color: 'blue',
+                    icon: 'IconShoppingCart',
+                    keywords: {
+                        create: [
+                            { name: 'konzum' },
+                            { name: 'spar' },
+                        ],
+                    },
+                    name: 'Groceries',
+                },
+                {
+                    color: 'red',
+                    icon: 'IconPlane',
+                    name: 'Travel',
                 },
             ],
         },

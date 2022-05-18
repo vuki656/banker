@@ -6,6 +6,8 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "konzum",
+        "clob",
         "sonarjs",
         "upsert",
         "elekta",

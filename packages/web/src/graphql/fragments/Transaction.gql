@@ -1,0 +1,12 @@
+fragment TransactionPayload on TransactionType {
+    id
+    reference
+    amount
+    description
+    currency
+    date
+    status
+    category {
+        ...CategoryPayload
+    }
+}

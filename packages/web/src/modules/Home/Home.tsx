@@ -11,6 +11,7 @@ export const Home: React.FunctionComponent = () => {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
+                height: '100%',
                 justifyContent: 'flex-start',
             }}
         >

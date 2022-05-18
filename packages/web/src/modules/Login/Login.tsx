@@ -12,7 +12,7 @@ import {
     IconAt,
     IconLock,
 } from '@tabler/icons'
-import Cookies from 'js-cookie'
+import { setCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
@@ -32,7 +32,7 @@ export const Login: React.FunctionComponent = () => {
 
     const [loginUserMutation, { loading }] = useLoginUserMutation({
         onCompleted: (response) => {
-            Cookies.set(COOKIE_TOKEN_NAME, response.loginUser.token)
+            setCookies(COOKIE_TOKEN_NAME, response.loginUser.token)
 
             void router.push('/home')
         },

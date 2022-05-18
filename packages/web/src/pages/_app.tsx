@@ -1,8 +1,10 @@
+import type { NormalizedCacheObject } from '@apollo/client'
 import {
     ApolloClient,
     ApolloProvider,
     InMemoryCache,
 } from '@apollo/client'
+import { getDataFromTree } from '@apollo/client/react/ssr'
 import {
     AppShell,
     Global,
@@ -10,7 +12,9 @@ import {
 } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
-import Cookies from 'js-cookie'
+import { getCookie } from 'cookies-next'
+import withApollo from 'next-with-apollo'
+import NextApp from 'next/app'
 import type { AppProps } from 'next/app'
 import getConfig from 'next/config'
 import Head from 'next/head'
@@ -19,18 +23,14 @@ import { useRouter } from 'next/router'
 import { Sidebar } from '../components'
 import { COOKIE_TOKEN_NAME } from '../utils'
 
-const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    headers: {
-        'Authorization': `Bearer ${Cookies.get(COOKIE_TOKEN_NAME)}`,
-    },
-    ssrMode: typeof window === 'undefined',
-    uri: getConfig().publicRuntimeConfig.API_URL,
-})
+type ExtraAppProps = {
+    apollo: ApolloClient<NormalizedCacheObject>
+}
 
-export default function(props: AppProps) {
+const App = (props: AppProps & ExtraAppProps) => {
     const {
         Component,
+        apollo,
         pageProps,
     } = props
 
@@ -65,7 +65,7 @@ export default function(props: AppProps) {
                                 },
                             }}
                         />
-                        <ApolloProvider client={client}>
+                        <ApolloProvider client={apollo}>
                             {isNotAuthorized ? (
                                 <Component {...pageProps} />
                             ) : (
@@ -75,6 +75,7 @@ export default function(props: AppProps) {
                                     styles={(theme) => ({
                                         body: {
                                             height: '100%',
+                                            overflow: 'hidden',
                                         },
                                         main: {
                                             backgroundColor: theme.colors.gray[0],
@@ -96,3 +97,25 @@ export default function(props: AppProps) {
         </>
     )
 }
+
+App.getInitialProps = async (appContext: any) => {
+    const appProps = await NextApp.getInitialProps(appContext)
+
+    return { ...appProps }
+}
+
+export default withApollo(({ ctx, initialState }) => {
+    const token = getCookie(COOKIE_TOKEN_NAME, {
+        req: ctx?.req,
+        res: ctx?.res,
+    })
+
+    return new ApolloClient({
+        cache: new InMemoryCache().restore(initialState || {}),
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+        ssrMode: typeof window === 'undefined',
+        uri: getConfig().publicRuntimeConfig.API_URL,
+    })
+}, { getDataFromTree })(App)

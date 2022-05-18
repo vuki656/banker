@@ -1,5 +1,9 @@
 {
-    "extends": ["@rimac-technology/eslint-config/core", "@rimac-technology/eslint-config/react"],
+    "extends": [
+        "@rimac-technology/eslint-config/core",
+        "@rimac-technology/eslint-config/react",
+        "@rimac-technology/eslint-config/type-graphql"
+    ],
     "parser": "@typescript-eslint/parser",
     "ignorePatterns": [
         "**/*.json",

@@ -41,7 +41,7 @@ export class CategoryService {
                     createMany: {
                         data: input.keywords.map((keyword) => {
                             return {
-                                name: keyword,
+                                name: keyword.toLowerCase(),
                             }
                         }),
                     },
@@ -79,7 +79,7 @@ export class CategoryService {
                         createMany: {
                             data: input.keywords.map((keyword) => {
                                 return {
-                                    name: keyword.name,
+                                    name: keyword.name.toLowerCase(),
                                 }
                             }),
                         },

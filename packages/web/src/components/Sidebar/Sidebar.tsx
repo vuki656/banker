@@ -9,7 +9,7 @@ import {
     IconPackage,
     IconReportMoney,
 } from '@tabler/icons'
-import Cookies from 'js-cookie'
+import { removeCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
 
 import { COOKIE_TOKEN_NAME } from '../../utils'
@@ -22,11 +22,12 @@ export const Sidebar: React.FunctionComponent = () => {
     const onLogout = async () => {
         await router.push('/')
 
-        Cookies.remove(COOKIE_TOKEN_NAME)
+        removeCookies(COOKIE_TOKEN_NAME)
     }
 
     return (
         <Navbar
+            height="100%"
             p="xs"
             width={{ base: 300 }}
         >

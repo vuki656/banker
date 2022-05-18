@@ -5,9 +5,10 @@
 # ------------------------------------------------ #
 
 type Query {
-    currentUser: UserType!
+    currentUser: UserType
     user(args: UserArgs!): UserType
     categories: [CategoryType!]!
+    transactions: [TransactionType!]!
 }
 
 type UserType implements BaseType {
@@ -38,6 +39,28 @@ type KeywordType implements BaseType {
     name: String!
 }
 
+type TransactionType implements BaseType {
+    id: ID!
+    reference: String!
+    description: String!
+    currency: String!
+    date: DateTime!
+    category: CategoryType
+    amount: Float!
+    status: TransactionStatusEnum!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+enum TransactionStatusEnum {
+    DISCARDED
+    DONE
+    SKIPPED
+}
+
 type Mutation {
     changeUserPassword(input: ChangeUserPasswordInput!): ChangeUserPasswordPayload!
     createUser(input: CreateUserInput!): CreateUserPayload!
@@ -46,6 +69,7 @@ type Mutation {
     createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
     updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
     deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
+    createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
 }
 
 type ChangeUserPasswordPayload {
@@ -122,4 +146,18 @@ type DeleteCategoryPayload {
 
 input DeleteCategoryInput {
     id: ID!
+}
+
+type CreateTransactionPayload {
+    transaction: TransactionType!
+}
+
+input CreateTransactionInput {
+    reference: String!
+    amount: Float!
+    description: String!
+    currency: String!
+    date: String!
+    status: TransactionStatusEnum!
+    categoryId: String
 }

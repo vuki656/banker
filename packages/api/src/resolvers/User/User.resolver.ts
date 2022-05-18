@@ -31,7 +31,7 @@ export class UserResolver {
     private service = container.resolve(UserService)
 
     @Authorized()
-    @Query(() => UserType)
+    @Query(() => UserType, { nullable: true })
     public async currentUser(
         @Ctx() context: ContextType,
     ): Promise<UserType | null> {

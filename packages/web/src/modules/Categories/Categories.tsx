@@ -51,7 +51,7 @@ export const Categories: React.FunctionComponent = () => {
         onError: () => {
             showNotification({
                 color: 'red',
-                message: 'Failed to create category',
+                message: 'Failed to update category',
                 title: 'Error',
             })
         },

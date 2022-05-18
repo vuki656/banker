@@ -9,26 +9,28 @@ datasource db {
 }
 
 model Category {
-    id        String    @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
-    name      String    @db.VarChar(200)
-    icon      String    @db.VarChar(200)
-    color     String    @db.VarChar(200)
-    userFk    String    @map("user_fk") @db.Uuid
-    isDeleted Boolean   @default(false) @map("is_deleted")
-    user      User      @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
-    keywords  Keyword[]
+    id           String        @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
+    name         String        @db.VarChar(200)
+    icon         String        @db.VarChar(200)
+    color        String        @db.VarChar(200)
+    userFk       String        @map("user_fk") @db.Uuid
+    isDeleted    Boolean       @default(false) @map("is_deleted")
+    user         User          @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
+    keywords     Keyword[]
+    transactions Transaction[]
 
     @@map("categories")
 }
 
 model User {
-    id         String     @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
-    firstName  String     @map("first_name") @db.VarChar(200)
-    lastName   String     @map("last_name") @db.VarChar(200)
-    password   String     @db.VarChar(500)
-    email      String     @unique @db.VarChar(300)
-    isDeleted  Boolean    @default(false) @map("is_deleted")
-    categories Category[]
+    id           String        @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
+    firstName    String        @map("first_name") @db.VarChar(200)
+    lastName     String        @map("last_name") @db.VarChar(200)
+    password     String        @db.VarChar(500)
+    email        String        @unique @db.VarChar(300)
+    isDeleted    Boolean       @default(false) @map("is_deleted")
+    categories   Category[]
+    transactions Transaction[]
 
     @@map("users")
 }
@@ -41,4 +43,29 @@ model Keyword {
     category   Category @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__categories")
 
     @@map("keywords")
+}
+
+model Transaction {
+    id          String            @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
+    reference   String            @unique
+    amount      Decimal           @db.Decimal
+    description String            @db.VarChar(5000)
+    currency    String            @db.VarChar(3)
+    date        DateTime          @db.Timestamp(6)
+    userFk      String            @map("user_fk") @db.Uuid
+    isDeleted   Boolean           @default(false) @map("is_deleted")
+    status      TransactionStatus
+    categoryFk  String?           @map("category_fk") @db.Uuid
+    category    Category?         @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_transactions__categories")
+    user        User              @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_transactions__users")
+
+    @@map("transactions")
+}
+
+enum TransactionStatus {
+    DONE
+    DISCARDED
+    SKIPPED
+
+    @@map("transaction_status")
 }
