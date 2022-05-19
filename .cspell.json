@@ -6,6 +6,8 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "dinero",
+        "chartjs",
         "konzum",
         "clob",
         "sonarjs",

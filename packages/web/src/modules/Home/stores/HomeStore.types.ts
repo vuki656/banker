@@ -6,6 +6,6 @@ export type NewTransactionType = {
     currency: string
     date: Date
     description: string
-    keyword: string | null
+    keyword?: string | null
     reference: string
 }

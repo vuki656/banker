@@ -5,6 +5,7 @@ import {
     useMantineTheme,
 } from '@mantine/core'
 import {
+    IconChartBar,
     IconLogout,
     IconPackage,
     IconReportMoney,
@@ -71,6 +72,15 @@ export const Sidebar: React.FunctionComponent = () => {
                         void router.push('/categories')
                     }}
                     selected={router.pathname.startsWith('/categories')}
+                />
+                <SidebarButton
+                    color="green"
+                    icon={<IconChartBar size={16} />}
+                    label="Breakdown"
+                    onClick={() => {
+                        void router.push('/breakdown')
+                    }}
+                    selected={router.pathname.startsWith('/breakdown')}
                 />
                 <SidebarButton
                     color="red"
