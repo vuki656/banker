@@ -1,6 +1,6 @@
 import {
-    Box,
     Button,
+    Group,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import {
@@ -16,7 +16,7 @@ import {
 } from '../../../graphql/types.generated'
 import { useHomeStore } from '../hooks'
 
-export const HomeCategorizationButtons = observer(() => {
+export const HomeSortButtons = observer(() => {
     const store = useHomeStore()
 
     const [createTransactionMutation] = useCreateTransactionMutation({
@@ -31,7 +31,7 @@ export const HomeCategorizationButtons = observer(() => {
 
     const onTransactionSave = async (status: TransactionStatusEnum) => {
         if (!store.currentTransaction) {
-            throw new Error('No next transaction')
+            throw new Error('No transaction to save')
         }
 
         await createTransactionMutation({
@@ -65,18 +65,11 @@ export const HomeCategorizationButtons = observer(() => {
     }
 
     return (
-        <Box
-            style={{
-                columnGap: '20px',
-                display: 'flex',
-                marginTop: '30px',
-            }}
-        >
+        <Group>
             <Button
                 color="orange"
                 leftIcon={<IconClock size={16} />}
                 onClick={onSkipClick}
-                variant="outline"
             >
                 Skip
             </Button>
@@ -84,7 +77,6 @@ export const HomeCategorizationButtons = observer(() => {
                 color="red"
                 leftIcon={<IconTrash size={16} />}
                 onClick={onDiscardClick}
-                variant="outline"
             >
                 Discard
             </Button>
@@ -93,10 +85,9 @@ export const HomeCategorizationButtons = observer(() => {
                 disabled={!store.currentTransaction?.category}
                 leftIcon={<IconDeviceFloppy size={16} />}
                 onClick={onSaveClick}
-                variant="outline"
             >
                 Save
             </Button>
-        </Box>
+        </Group>
     )
 })

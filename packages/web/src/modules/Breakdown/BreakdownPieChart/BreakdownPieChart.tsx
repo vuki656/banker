@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mantine/core'
+import { Paper } from '@mantine/core'
 import {
     ArcElement,
     Chart,
@@ -16,12 +16,12 @@ export const BreakdownPieChart: React.FunctionComponent = () => {
 
     return (
         <Paper
+            shadow="xs"
             style={{
                 height: '300px',
+                padding: '20px',
                 width: '300px',
-                padding: '20px'
             }}
-            shadow='xs'
         >
             <Doughnut
                 data={{

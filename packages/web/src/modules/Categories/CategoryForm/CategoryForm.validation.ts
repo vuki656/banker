@@ -1,7 +1,5 @@
 import { z } from 'zod'
 
-import { keywordValidation } from '../KeywordForm'
-
 export const categoryFormValidation = z.object({
     color: z
         .string()
@@ -9,7 +7,16 @@ export const categoryFormValidation = z.object({
     icon: z
         .string()
         .min(1, 'Required'),
-    keywords: z.array(keywordValidation),
+    keywords: z
+        .array(
+            z.object({
+                id: z.string(),
+                name: z
+                    .string()
+                    .min(1, 'Required'),
+            })
+        )
+        .min(1, 'Required'),
     name: z
         .string()
         .min(1, 'Required')

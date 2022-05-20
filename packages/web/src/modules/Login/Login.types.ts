@@ -2,4 +2,4 @@ import type { z } from 'zod'
 
 import type { loginFormValidationSchema } from './Login.validation'
 
-export type LoginFormValuesType = z.infer<typeof loginFormValidationSchema>
+export type LoginFormValueType = z.infer<typeof loginFormValidationSchema>

@@ -1,6 +1,9 @@
-import type { ReactElement } from 'react'
+import type {
+    ReactElement,
+    ReactNode,
+} from 'react'
 
 export type HeaderProps = {
     action: ReactElement
-    title: string
+    title: ReactNode
 }

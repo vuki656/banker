@@ -27,7 +27,6 @@ NOTES.md
 # Generated API Schema
 packages/api/schema.graphql
 
-
 # Graphql Codegen Output
 **/*/graphql/types.ts
 **/*/graphql/introspection.json

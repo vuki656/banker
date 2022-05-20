@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-
 import {
     IconBolt,
     IconCar,
@@ -11,33 +9,43 @@ import {
     IconRotateClockwise,
     IconShoppingCart,
 } from '@tabler/icons'
+import { useMemo } from 'react'
 
 import type { IconsProps } from './Icons.props'
 
+export const ICONS = [
+    IconCar,
+    IconHome,
+    IconShoppingCart,
+    IconRotateClockwise,
+    IconCoffee,
+    IconPizza,
+    IconPlane,
+    IconBolt,
+]
+
 export const Icons: React.FunctionComponent<IconsProps> = (props) => {
     const {
+        fallback: Fallback,
         name,
         ...other
     } = props
 
-    switch (name) {
-        case IconPizza.name:
-            return <IconPizza {...other} />
-        case IconShoppingCart.name:
-            return <IconShoppingCart {...other} />
-        case IconCar.name:
-            return <IconCar {...other} />
-        case IconHome.name:
-            return <IconHome {...other} />
-        case IconRotateClockwise.name:
-            return <IconRotateClockwise {...other} />
-        case IconBolt.name:
-            return <IconBolt {...other} />
-        case IconCoffee.name:
-            return <IconCoffee {...other} />
-        case IconPlane.name:
-            return <IconPlane {...other} />
-        default:
-            return <IconQuestionMark {...other} />
+    const Icon = useMemo(() => {
+        const FoundIcon = ICONS.find((ICON) => {
+            return ICON.name === name
+        })
+
+        if (!FoundIcon) {
+            return IconQuestionMark
+        }
+
+        return FoundIcon
+    }, [name])
+
+    if (Icon.name === 'IconQuestionMark' && !name && Fallback) {
+        return Fallback
     }
+
+    return <Icon {...other} />
 }

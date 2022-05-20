@@ -2,20 +2,28 @@ import {
     Button,
     Modal,
 } from '@mantine/core'
-import { showNotification } from '@mantine/notifications'
-import { useToggle } from '@react-hookz/web'
-import { IconCloudUpload } from '@tabler/icons'
+import {
+    showNotification,
+    updateNotification,
+} from '@mantine/notifications'
+import {
+    IconCheck,
+    IconCloudUpload,
+} from '@tabler/icons'
 import {
     read,
     utils,
 } from 'xlsx'
 
+import { useBoolean } from '../../../utils'
 import { useHomeStore } from '../hooks'
 
 import { HomeFileUploadDropzone } from './HomeFileUploadDropzone'
 
+const LOADING_NOTIFICATION_ID = 'loading-notification-id'
+
 export const HomeFileUpload: React.FunctionComponent = () => {
-    const [isOpen, setIsOpen] = useToggle(false)
+    const [isOpen, isOpenActions] = useBoolean(false)
 
     const store = useHomeStore()
 
@@ -23,6 +31,28 @@ export const HomeFileUpload: React.FunctionComponent = () => {
         const reader = new FileReader()
 
         reader.readAsBinaryString(file)
+
+        reader.onloadstart = function() {
+            showNotification({
+                autoClose: false,
+                disallowClose: true,
+                id: LOADING_NOTIFICATION_ID,
+                loading: true,
+                message: 'This might take a second',
+                title: 'Loading File',
+            })
+        }
+
+        reader.onloadend = () => {
+            updateNotification({
+                autoClose: 2000,
+                color: 'teal',
+                icon: <IconCheck />,
+                id: LOADING_NOTIFICATION_ID,
+                message: 'You can now sort your transactions',
+                title: 'Loading Finished',
+            })
+        }
 
         reader.onload = function(event) {
             const data = event.target?.result
@@ -52,24 +82,20 @@ export const HomeFileUpload: React.FunctionComponent = () => {
             })
         }
 
-        setIsOpen(false)
+        isOpenActions.setFalse()
     }
 
     return (
         <>
             <Button
                 leftIcon={<IconCloudUpload size={16} />}
-                onClick={() => {
-                    setIsOpen(true)
-                }}
+                onClick={isOpenActions.setTrue}
             >
                 Upload
             </Button>
             <Modal
                 centered={true}
-                onClose={() => {
-                    setIsOpen(false)
-                }}
+                onClose={isOpenActions.setFalse}
                 opened={isOpen}
                 title="Upload Your Bank Report"
             >

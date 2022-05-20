@@ -1,1 +1,1 @@
-- [ ] Make reference unique
+- [ ] Fix category color app wide

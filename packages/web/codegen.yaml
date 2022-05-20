@@ -12,6 +12,12 @@ hooks:
     afterAllFileWrite:
         - prettier --write
 generates:
+    src/graphql/introspection.generated.json:
+        plugins:
+            - introspection
+        config:
+            minify: true
+            descriptions: false
     src/graphql/types.generated.ts:
         plugins:
             - typescript

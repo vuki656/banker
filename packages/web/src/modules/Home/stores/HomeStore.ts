@@ -13,6 +13,8 @@ export class HomeStore {
 
     public newTransactions: NewTransactionType[] = []
 
+    public newTransactionsAmount = 0
+
     public existingTransactions: TransactionType[] = []
 
     public currentTransaction: NewTransactionType | null = null
@@ -25,6 +27,14 @@ export class HomeStore {
         this.existingTransactions = transactions
 
         makeAutoObservable(this, undefined, { autoBind: true })
+    }
+
+    public get progress() {
+        if (this.newTransactions.length === 0) {
+            return null
+        }
+
+        return `${this.newTransactionsAmount - this.newTransactions.length} / ${this.newTransactionsAmount}`
     }
 
     public setCurrentTransaction() {
@@ -57,9 +67,11 @@ export class HomeStore {
             }
 
             this.newTransactions.shift()
-        } else {
-            this.currentTransaction = null
+
+            return
         }
+
+        this.currentTransaction = null
     }
 
     public updateCurrentTransactionCategory(category: CategoryType) {
@@ -165,13 +177,16 @@ export class HomeStore {
             return transaction
         })
 
-        this.newTransactions = fileTransactions.filter((fileTransaction) => {
+        const newTransactions = fileTransactions.filter((fileTransaction) => {
             return !this.existingTransactions.some((existingTransaction) => {
                 return existingTransaction.reference === fileTransaction.reference
             })
         })
 
-        if (this.newTransactions.length === 0) {
+        this.newTransactions = newTransactions
+        this.newTransactionsAmount = newTransactions.length
+
+        if (newTransactions.length === 0) {
             showNotification({
                 color: 'blue',
                 message: 'Info',

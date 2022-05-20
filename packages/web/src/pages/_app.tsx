@@ -21,6 +21,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { Sidebar } from '../components'
+import introspectionGeneratedTS from '../graphql/introspection.generated.json'
+import introspectionGeneratedJSON from '../graphql/types.generated'
 import { COOKIE_TOKEN_NAME } from '../utils'
 
 type ExtraAppProps = {
@@ -36,7 +38,7 @@ const App = (props: AppProps & ExtraAppProps) => {
 
     const router = useRouter()
 
-    const isNotAuthorized = router.pathname === '/' ||
+    const isNotAppRoute = router.pathname === '/' ||
         router.pathname.startsWith('/login') ||
         router.pathname.startsWith('/register')
 
@@ -66,7 +68,7 @@ const App = (props: AppProps & ExtraAppProps) => {
                             }}
                         />
                         <ApolloProvider client={apollo}>
-                            {isNotAuthorized ? (
+                            {isNotAppRoute ? (
                                 <Component {...pageProps} />
                             ) : (
                                 <AppShell
@@ -109,6 +111,17 @@ export default withApollo(({ ctx, initialState }) => {
         req: ctx?.req,
         res: ctx?.res,
     })
+
+    const cache = new InMemoryCache({
+        possibleTypes: introspectionGeneratedJSON.possibleTypes,
+        typePolicies: Object.fromEntries(introspectionGeneratedTS.__schema.types
+            .filter(({ kind }) => kind === 'OBJECT')
+            .map(({ name }) => [name, { merge: true }])),
+    })
+
+    if (initialState) {
+        cache.restore(initialState)
+    }
 
     return new ApolloClient({
         cache: new InMemoryCache().restore(initialState || {}),

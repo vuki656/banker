@@ -7,7 +7,8 @@ export type CategoryFormValueType = z.infer<typeof categoryFormValidation>
 
 export type CategoryFormProps = {
     formId: string
-    onSubmit(formValue: CategoryFormValueType): void
+    loading: boolean
+    onSubmit(formValue: CategoryFormValueType): Promise<void>
     submitButton: ReactElement
     value?: CategoryFormValueType
 }

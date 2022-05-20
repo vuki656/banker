@@ -1,11 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-    Box,
     Button,
     PasswordInput,
+    Stack,
     Text,
     TextInput,
-    useMantineTheme,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import {
@@ -23,11 +22,12 @@ import {
     extractFormFieldErrors,
 } from '../../utils'
 
-import type { LoginFormValuesType } from './Login.types'
+import type { LoginFormValueType } from './Login.types'
 import { loginFormValidationSchema } from './Login.validation'
 
+const ICON_SIZE = 17
+
 export const Login: React.FunctionComponent = () => {
-    const theme = useMantineTheme()
     const router = useRouter()
 
     const [loginUserMutation, { loading }] = useLoginUserMutation({
@@ -45,71 +45,62 @@ export const Login: React.FunctionComponent = () => {
         },
     })
 
-    const { formState, handleSubmit, register } = useForm<LoginFormValuesType>({
+    const { formState, handleSubmit, register } = useForm<LoginFormValueType>({
         resolver: zodResolver(loginFormValidationSchema),
     })
 
-    const onSubmit = (formValues: LoginFormValuesType) => {
+    const onSubmit = (formValue: LoginFormValueType) => {
         void loginUserMutation({
             variables: {
                 input: {
-                    email: formValues.email,
-                    password: formValues.password,
+                    email: formValue.email,
+                    password: formValue.password,
                 },
             },
         })
     }
 
     return (
-        <Box
-            style={{
-                alignItems: 'center',
-                display: 'flex',
-                height: '100%',
-                justifyContent: 'center',
-                rowGap: '10px',
-            }}
+        <Stack
+            align="center"
+            justify="center"
+            style={{ height: '100%' }}
         >
-            <Box
-                component="form"
-                onSubmit={handleSubmit(onSubmit)}
-                style={{
-                    border: `1px solid ${theme.colors.gray[3]}`,
-                    borderRadius: '5px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: '20px',
-                    rowGap: '10px',
-                }}
-            >
-                <Text
-                    style={{
-                        fontSize: '25px',
-                        marginBottom: '10px',
-                        textAlign: 'center',
-                    }}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Stack
+                    sx={(theme) => ({
+                        border: `1px solid ${theme.colors.gray[3]}`,
+                        borderRadius: '5px',
+                        padding: theme.spacing.xl,
+                    })}
                 >
-                    Login
-                </Text>
-                <TextInput
-                    {...register('email')}
-                    {...extractFormFieldErrors(formState.errors.email)}
-                    icon={<IconAt />}
-                    placeholder="Your email"
-                />
-                <PasswordInput
-                    {...register('password')}
-                    {...extractFormFieldErrors(formState.errors.password)}
-                    icon={<IconLock />}
-                    placeholder="Your password"
-                />
-                <Button
-                    loading={loading}
-                    type="submit"
-                >
-                    Login
-                </Button>
-            </Box>
-        </Box>
+                    <Text
+                        align="center"
+                        size="lg"
+                        weight="bold"
+                    >
+                        Login
+                    </Text>
+                    <TextInput
+                        {...register('email')}
+                        {...extractFormFieldErrors(formState.errors.email)}
+                        icon={<IconAt size={ICON_SIZE} />}
+                        placeholder="Your email"
+                    />
+                    <PasswordInput
+                        {...register('password')}
+                        {...extractFormFieldErrors(formState.errors.password)}
+                        icon={<IconLock size={ICON_SIZE} />}
+                        placeholder="Your password"
+                    />
+                    <Button
+                        loading={loading}
+                        type="submit"
+                    >
+                        Login
+                    </Button>
+                </Stack>
+            </form>
+        </Stack>
     )
 }

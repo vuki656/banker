@@ -22,7 +22,7 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
 
     const [isOpen, openActions] = useBoolean()
 
-    const [createCategoryMutation] = useCreateCategoryMutation({
+    const [createCategoryMutation, { loading }] = useCreateCategoryMutation({
         onCompleted: () => {
             showNotification({
                 color: 'green',
@@ -43,8 +43,8 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
         },
     })
 
-    const onSubmit = (formValue: CreateCategoryFormValueType) => {
-        void createCategoryMutation({
+    const onSubmit = async (formValue: CreateCategoryFormValueType) => {
+        await createCategoryMutation({
             variables: {
                 input: {
                     color: formValue.color,
@@ -75,6 +75,7 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
             >
                 <CategoryForm
                     formId={FORM_ID}
+                    loading={loading}
                     onSubmit={onSubmit}
                     submitButton={(
                         <Button
