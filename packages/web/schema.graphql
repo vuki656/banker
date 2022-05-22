@@ -5,25 +5,8 @@
 # ------------------------------------------------ #
 
 type Query {
-    currentUser: UserType
-    user(args: UserArgs!): UserType
     categories: [CategoryType!]!
     transactions: [TransactionType!]!
-}
-
-type UserType implements BaseType {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-}
-
-interface BaseType {
-    id: ID!
-}
-
-input UserArgs {
-    id: ID!
 }
 
 type CategoryType implements BaseType {
@@ -32,6 +15,10 @@ type CategoryType implements BaseType {
     color: String!
     icon: String!
     keywords: [KeywordType!]!
+}
+
+interface BaseType {
+    id: ID!
 }
 
 type KeywordType implements BaseType {
@@ -62,45 +49,11 @@ enum TransactionStatusEnum {
 }
 
 type Mutation {
-    changeUserPassword(input: ChangeUserPasswordInput!): ChangeUserPasswordPayload!
-    createUser(input: CreateUserInput!): CreateUserPayload!
-    updateUser(input: UpdateUserInput!): UpdateUserPayload!
     loginUser(input: LoginUserInput!): LoginUserPayload!
     createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
     updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
     deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
     createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
-}
-
-type ChangeUserPasswordPayload {
-    user: UserType!
-}
-
-input ChangeUserPasswordInput {
-    id: ID!
-    password: String!
-}
-
-type CreateUserPayload {
-    user: UserType!
-}
-
-input CreateUserInput {
-    firstName: String!
-    lastName: String!
-    password: String!
-    email: String!
-}
-
-type UpdateUserPayload {
-    user: UserType!
-}
-
-input UpdateUserInput {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
 }
 
 type LoginUserPayload {

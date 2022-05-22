@@ -38,9 +38,9 @@ const App = (props: AppProps & ExtraAppProps) => {
 
     const router = useRouter()
 
-    const isNotAppRoute = router.pathname === '/' ||
-        router.pathname.startsWith('/login') ||
-        router.pathname.startsWith('/register')
+    const isAppAppRoute = router.pathname !== '/' &&
+        !router.pathname.startsWith('/login') &&
+        !router.pathname.startsWith('/register')
 
     return (
         <>
@@ -62,22 +62,32 @@ const App = (props: AppProps & ExtraAppProps) => {
                     <NotificationsProvider>
                         <Global
                             styles={{
-                                'body, html, #__next': {
+                                '#__next': {
+                                    height: '100%',
+                                    width: '100%',
+                                },
+                                a: {
+                                    textDecoration: 'none',
+                                },
+                                body: {
+                                    margin: '0px',
+                                },
+                                html: {
+                                    fontSize: '16px',
+                                },
+                                'html, body': {
                                     height: '100%',
                                 },
                             }}
                         />
                         <ApolloProvider client={apollo}>
-                            {isNotAppRoute ? (
-                                <Component {...pageProps} />
-                            ) : (
+                            {isAppAppRoute ? (
                                 <AppShell
                                     navbar={<Sidebar />}
                                     padding="md"
                                     styles={(theme) => ({
                                         body: {
                                             height: '100%',
-                                            overflow: 'hidden',
                                         },
                                         main: {
                                             backgroundColor: theme.colors.gray[0],
@@ -90,8 +100,9 @@ const App = (props: AppProps & ExtraAppProps) => {
                                 >
                                     <Component {...pageProps} />
                                 </AppShell>
+                            ) : (
+                                <Component {...pageProps} />
                             )}
-
                         </ApolloProvider>
                     </NotificationsProvider>
                 </ModalsProvider>
