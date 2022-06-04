@@ -6,12 +6,13 @@
 /* eslint-disable @typescript-eslint/require-await */
 
 import { ApolloError } from 'apollo-server'
-import type { PluginDefinition } from 'apollo-server-core'
+import type { ApolloServerPlugin } from 'apollo-server-plugin-base'
 
 import { LoggerCategoriesEnum } from '../../shared/enums'
+import { ContextType } from '../../shared/typescript-types'
 import { logger } from '../../shared/utils'
 
-export const ApolloPluginLogger: PluginDefinition = {
+export const ApolloPluginLogger: ApolloServerPlugin<ContextType> = {
     async requestDidStart(requestContext) {
         const operationName = requestContext.request.operationName
 
@@ -29,11 +30,9 @@ export const ApolloPluginLogger: PluginDefinition = {
         }
 
         const user = {
-            accessRights: requestContext.context.user?.accessRights,
             firstName: requestContext.context.user?.firstName,
             id: requestContext.context.user?.id,
-            jiraOauthAccessToken: Boolean(requestContext.context.user?.jiraOauthAccessToken),
-            jiraOauthAccessTokenSecret: Boolean(requestContext.context.user?.jiraOauthAccessTokenSecret),
+            email: requestContext.context.user?.email,
             lastName: requestContext.context.user?.lastName,
         }
 
