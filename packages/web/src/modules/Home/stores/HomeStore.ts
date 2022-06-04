@@ -90,7 +90,7 @@ export class HomeStore {
         // Remove the first two rows as they are not transactions
         excelRows.splice(0, 2)
 
-        const fileTransactions = excelRows.map((excelRow) => {
+        const fileTransactions = excelRows.reduce<NewTransactionType[]>((accumulator, excelRow) => {
             const rawTransaction = Object.values(excelRow)
 
             const date = rawTransaction[0] as Date
@@ -165,6 +165,10 @@ export class HomeStore {
                 throw new TypeError('Amount not a number')
             }
 
+            if (amount <= 0) {
+                return accumulator
+            }
+
             const transaction: NewTransactionType = {
                 amount,
                 category: null,
@@ -174,8 +178,11 @@ export class HomeStore {
                 reference,
             }
 
-            return transaction
-        })
+            return [
+                ...accumulator,
+                transaction,
+            ]
+        }, [])
 
         const newTransactions = fileTransactions.filter((fileTransaction) => {
             return !this.existingTransactions.some((existingTransaction) => {
