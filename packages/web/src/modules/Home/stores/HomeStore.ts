@@ -165,6 +165,7 @@ export class HomeStore {
                 throw new TypeError('Amount not a number')
             }
 
+            // Transactions that are not expenses
             if (amount <= 0) {
                 return accumulator
             }
@@ -184,14 +185,25 @@ export class HomeStore {
             ]
         }, [])
 
+        // Filter out transactions that have already been entered
         const newTransactions = fileTransactions.filter((fileTransaction) => {
             return !this.existingTransactions.some((existingTransaction) => {
                 return existingTransaction.reference === fileTransaction.reference
             })
         })
 
-        this.newTransactions = newTransactions
-        this.newTransactionsAmount = newTransactions.length
+        // Filter out cancellations (money was charged then returned)
+        const newTransactionsWithoutCancellations = newTransactions.filter((newTransaction) => {
+            return !newTransactions.some((transaction) => {
+                return transaction
+                    .description
+                    .toLowerCase()
+                    .includes(newTransaction.reference.toLowerCase())
+            })
+        })
+
+        this.newTransactions = newTransactionsWithoutCancellations
+        this.newTransactionsAmount = newTransactionsWithoutCancellations.length
 
         if (newTransactions.length === 0) {
             showNotification({
