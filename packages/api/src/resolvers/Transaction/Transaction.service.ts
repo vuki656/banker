@@ -1,8 +1,10 @@
+import dayjs from 'dayjs'
 import { singleton } from 'tsyringe'
 
 import { orm } from '../../shared/orm'
 import { nullableConnect } from '../../shared/utils/nullableConnect'
 
+import type { TransactionsArgs } from './args'
 import type { CreateTransactionInput } from './inputs'
 import type { CreateTransactionPayload } from './payloads'
 import { TRANSACTION_DEFAULT_SELECT } from './Transaction.select'
@@ -34,10 +36,28 @@ export class TransactionService {
         }
     }
 
-    public async findAll(userId?: string): Promise<TransactionType[]> {
+    public async findAll(args?: TransactionsArgs | null, userId?: string): Promise<TransactionType[]> {
+        const startDate = args?.startDate ?? dayjs()
+            .subtract(30, 'year')
+            .toDate()
+
+        const endDate = args?.endDate ?? dayjs().toDate()
+
         return orm.transaction.findMany({
             select: TRANSACTION_DEFAULT_SELECT(),
             where: {
+                AND: [
+                    {
+                        date: {
+                            gte: startDate,
+                        },
+                    },
+                    {
+                        date: {
+                            lte: endDate,
+                        },
+                    },
+                ],
                 isDeleted: false,
                 user: {
                     id: userId,

@@ -919,7 +919,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@banker/api@workspace:packages/api"
   dependencies:
-    "@devoxa/prisma-relay-cursor-connection": ^2.2.1
     "@faker-js/faker": ^6.3.1
     "@graphql-codegen/cli": ^2.6.2
     "@graphql-codegen/gql-tag-operations-preset": ^1.4.0
@@ -931,7 +930,6 @@ __metadata:
     apollo-server: ^3.7.0
     bcrypt: ^5.0.1
     class-validator: ^0.13.2
-    date-fns: ^2.28.0
     dotenv: ^16.0.1
     envalid: ^7.3.1
     generate-template-files: ^3.2.0
@@ -966,6 +964,7 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": ^3.2.14
     "@hookform/resolvers": ^2.8.10
     "@mantine/core": ^4.2.5
+    "@mantine/dates": ^4.2.5
     "@mantine/dropzone": ^4.2.5
     "@mantine/hooks": ^4.2.5
     "@mantine/modals": ^4.2.5
@@ -977,7 +976,6 @@ __metadata:
     "@types/react-dom": 18.0.4
     chart.js: ^3.7.1
     cookies-next: ^2.0.4
-    date-fns: ^2.28.0
     graphql: ^16.5.0
     mobx: ^6.5.0
     mobx-react-lite: ^3.4.0
@@ -1355,17 +1353,6 @@ __metadata:
   dependencies:
     "@cspotcode/source-map-consumer": 0.8.0
   checksum: 9faddda7757cd778b5fd6812137b2cc265810043680d6399acc20441668fafcdc874053be9dccd0d9110087287bfad27eb3bf342f72bceca9aa9059f5d0c4be8
-  languageName: node
-  linkType: hard
-
-"@devoxa/prisma-relay-cursor-connection@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "@devoxa/prisma-relay-cursor-connection@npm:2.2.1"
-  dependencies:
-    graphql-fields: ^2.0.3
-  peerDependencies:
-    "@prisma/client": ^2.0.0 || ^3.0.0
-  checksum: 9fb0a1050e3f8fd4a12c69994558b3f952da50cd884fa74dc18c98486ddd1f1bf7ddf3a61b439fca31c4ad6067b2946ff28e59eae61366a8ddc4482bc04bc113
   languageName: node
   linkType: hard
 
@@ -2552,6 +2539,18 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: c6cc3ec1047b54cf31144c5d244958e88e7b9c673e7f056aaa857f764f3779ed5481bba9f0d7ee6cfff20f9975eb3a72bce7c7b8013995e64fac8beb76adce59
+  languageName: node
+  linkType: hard
+
+"@mantine/dates@npm:^4.2.5":
+  version: 4.2.7
+  resolution: "@mantine/dates@npm:4.2.7"
+  peerDependencies:
+    "@mantine/core": 4.2.7
+    "@mantine/hooks": 4.2.7
+    dayjs: ^1.10.5
+    react: ">=16.8.0"
+  checksum: f343252c768928be72a35aed6522d5e73b10c2934b76cbc4761695087870bafd34f4491dbc55bd47ee5e399f995041044a41f3a8a2aa3b67d233d68c59ca7931
   languageName: node
   linkType: hard
 
@@ -4485,6 +4484,7 @@ __metadata:
     "@types/node": 16.11.36
     "@types/uuid": ^8.3.4
     cspell: ^5.21.1
+    dayjs: ^1.11.2
     eslint: 8.15.0
     prettier: ^2.6.2
     typescript: 4.6.4
@@ -5499,17 +5499,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.28.0":
-  version: 2.28.0
-  resolution: "date-fns@npm:2.28.0"
-  checksum: a0516b2e4f99b8bffc6cc5193349f185f195398385bdcaf07f17c2c4a24473c99d933eb0018be4142a86a6d46cb0b06be6440ad874f15e795acbedd6fd727a1f
-  languageName: node
-  linkType: hard
-
 "dateformat@npm:^4.6.3":
   version: 4.6.3
   resolution: "dateformat@npm:4.6.3"
   checksum: c3aa0617c0a5b30595122bc8d1bee6276a9221e4d392087b41cbbdf175d9662ae0e50d0d6dcdf45caeac5153c4b5b0844265f8cd2b2245451e3da19e39e3b65d
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.2":
+  version: 1.11.2
+  resolution: "dayjs@npm:1.11.2"
+  checksum: 78f8bd04a9e5f5554aa06eacda65a7d59e162d39f621a46fd34fb3b51367c3662426d86b4e2f4ac535f81e0c4d5af3e8a83b37e672412eb556267d726c61f8f3
   languageName: node
   linkType: hard
 
@@ -7376,13 +7376,6 @@ __metadata:
   peerDependencies:
     graphql: ^15.0.0 || ^16.0.0
   checksum: 22f19ba2d80d73be33246540a5f20c87c1acc53965ac9de05cca12b004f6183f8e4083198c55554f949cdbb0c748eedeb7b9cfc606aea09f30bc7135daa00464
-  languageName: node
-  linkType: hard
-
-"graphql-fields@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "graphql-fields@npm:2.0.3"
-  checksum: 399028c03febc5f14778fd97152c5026dc7d19837df0c097f11200446650caf6c56c8e13bc11b42e5d9fca037ae2ef1ab5fbc70d2601db5fbc06cfc5bb2f8b8b
   languageName: node
   linkType: hard
 

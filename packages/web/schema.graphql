@@ -6,7 +6,7 @@
 
 type Query {
     categories: [CategoryType!]!
-    transactions: [TransactionType!]!
+    transactions(args: TransactionsArgs): [TransactionType!]!
 }
 
 type CategoryType implements BaseType {
@@ -46,6 +46,11 @@ enum TransactionStatusEnum {
     DISCARDED
     DONE
     SKIPPED
+}
+
+input TransactionsArgs {
+    startDate: DateTime
+    endDate: DateTime
 }
 
 type Mutation {

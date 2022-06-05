@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
 import type {
@@ -12,6 +13,12 @@ export class BreakdownStore {
 
     public categories: CategoryType[] = []
 
+    public rangeValue: [Date, Date] = [
+        dayjs().startOf('month')
+            .toDate(),
+        dayjs().toDate(),
+    ]
+
     constructor(
         categories: CategoryType[],
         transactions: TransactionType[]
@@ -20,6 +27,17 @@ export class BreakdownStore {
         this.categories = categories
 
         makeAutoObservable(this, undefined, { autoBind: true })
+    }
+
+    public setRange(range: [Date, Date]) {
+        this.rangeValue = range
+    }
+
+    public get range() {
+        return {
+            end: this.rangeValue[1],
+            start: this.rangeValue[0],
+        }
     }
 
     public get summaryData() {

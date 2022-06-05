@@ -9,7 +9,7 @@ import { ApolloError } from 'apollo-server'
 import type { ApolloServerPlugin } from 'apollo-server-plugin-base'
 
 import { LoggerCategoriesEnum } from '../../shared/enums'
-import { ContextType } from '../../shared/typescript-types'
+import type { ContextType } from '../../shared/typescript-types'
 import { logger } from '../../shared/utils'
 
 export const ApolloPluginLogger: ApolloServerPlugin<ContextType> = {
@@ -30,9 +30,9 @@ export const ApolloPluginLogger: ApolloServerPlugin<ContextType> = {
         }
 
         const user = {
+            email: requestContext.context.user?.email,
             firstName: requestContext.context.user?.firstName,
             id: requestContext.context.user?.id,
-            email: requestContext.context.user?.email,
             lastName: requestContext.context.user?.lastName,
         }
 

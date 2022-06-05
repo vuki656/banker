@@ -5,13 +5,14 @@ import {
     Legend,
     Tooltip,
 } from 'chart.js'
+import { observer } from 'mobx-react-lite'
 import { Doughnut } from 'react-chartjs-2'
 
 import { useBreakdownStore } from '../hooks'
 
 Chart.register(ArcElement, Tooltip, Legend)
 
-export const BreakdownPieChart: React.FunctionComponent = () => {
+export const BreakdownPieChart = observer(() => {
     const store = useBreakdownStore()
 
     return (
@@ -40,4 +41,4 @@ export const BreakdownPieChart: React.FunctionComponent = () => {
             />
         </Paper>
     )
-}
+})

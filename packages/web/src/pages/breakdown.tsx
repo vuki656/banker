@@ -1,11 +1,13 @@
+import dayjs from 'dayjs'
 import type { NextPage } from 'next'
-import type { ApolloPageContext } from 'next-with-apollo'
 import { createContext } from 'react'
 
 import type {
     CategoryType,
     GetCategoriesQuery,
+    GetCategoriesQueryVariables,
     GetTransactionsQuery,
+    GetTransactionsQueryVariables,
     TransactionType,
 } from '../graphql/types.generated'
 import {
@@ -14,6 +16,8 @@ import {
 } from '../graphql/types.generated'
 import { Breakdown } from '../modules/Breakdown'
 import { BreakdownStore } from '../modules/Breakdown/stores'
+
+import type { PageContext } from './_app'
 
 export const BreakdownStoreContext = createContext<BreakdownStore | null>(null)
 
@@ -34,18 +38,26 @@ const BreakdownPage: NextPage<BreakdownPageProps> = (props) => {
     )
 }
 
-BreakdownPage.getInitialProps = async (context: ApolloPageContext) => {
-    const transactionResponse = await context.apolloClient.query<GetTransactionsQuery>({
+BreakdownPage.getInitialProps = async (context: PageContext) => {
+    const transactionsResponse = await context.apolloClient.query<GetTransactionsQuery, GetTransactionsQueryVariables>({
         query: GetTransactionsDocument,
+        variables: {
+            args: {
+                endDate: dayjs().toISOString(),
+                startDate: dayjs()
+                    .startOf('month')
+                    .toISOString(),
+            },
+        },
     })
 
-    const categoriesResponse = await context.apolloClient.query<GetCategoriesQuery>({
+    const categoriesResponse = await context.apolloClient.query<GetCategoriesQuery, GetCategoriesQueryVariables>({
         query: GetCategoriesDocument,
     })
 
     return {
         categories: categoriesResponse.data.categories,
-        transactions: transactionResponse.data.transactions,
+        transactions: transactionsResponse.data.transactions,
     }
 }
 

@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import type { ApolloPageContext } from 'next-with-apollo'
 import { createContext } from 'react'
 
 import type {
     CategoryType,
     GetCategoriesQuery,
     GetTransactionsQuery,
+    GetTransactionsQueryVariables,
     TransactionType,
 } from '../graphql/types.generated'
 import {
@@ -16,6 +16,8 @@ import {
     Home,
     HomeStore,
 } from '../modules'
+
+import type { PageContext } from './_app'
 
 export const HomeStoreContext = createContext<HomeStore | null>(null)
 
@@ -36,12 +38,12 @@ const HomePage: NextPage<HomePageProps> = (props) => {
     )
 }
 
-HomePage.getInitialProps = async (context: ApolloPageContext) => {
+HomePage.getInitialProps = async (context: PageContext) => {
     const categoriesResponse = await context.apolloClient.query<GetCategoriesQuery>({
         query: GetCategoriesDocument,
     })
 
-    const transactionsResponse = await context.apolloClient.query<GetTransactionsQuery>({
+    const transactionsResponse = await context.apolloClient.query<GetTransactionsQuery, GetTransactionsQueryVariables>({
         query: GetTransactionsDocument,
     })
 

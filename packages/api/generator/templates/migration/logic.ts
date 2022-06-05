@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import dayjs from 'dayjs'
 import type { IConfigItem } from 'generate-template-files'
 import { CaseConverterEnum } from 'generate-template-files'
 
@@ -6,7 +6,7 @@ export const migrationTemplate: IConfigItem = {
     defaultCase: CaseConverterEnum.None,
     dynamicReplacers: [
         { slot: '__timestamp__', slotValue: String(Math.floor(Date.now() / 1000)) },
-        { slot: '__folder__', slotValue: format(new Date(), 'yyyy-MM-dd') },
+        { slot: '__folder__', slotValue: dayjs(new Date()).format('YYYY-MM-DD') },
     ],
     entry: {
         folderPath: './generator/templates/migration/template.json',

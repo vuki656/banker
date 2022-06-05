@@ -15,11 +15,9 @@
         "schema:build": "ts-node './src/server/generateSchemaFile.ts'"
     },
     "dependencies": {
-        "@devoxa/prisma-relay-cursor-connection": "^2.2.1",
         "@prisma/client": "^3.14.0",
         "apollo-server": "^3.7.0",
         "bcrypt": "^5.0.1",
-        "date-fns": "^2.28.0",
         "dotenv": "^16.0.1",
         "envalid": "^7.3.1",
         "graphql": "15.3.0",

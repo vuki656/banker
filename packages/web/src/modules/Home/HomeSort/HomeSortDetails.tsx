@@ -3,7 +3,7 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
-import { format } from 'date-fns'
+import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
@@ -49,7 +49,7 @@ export const HomeSortDetails = observer(() => {
                 {store.currentTransaction?.currency}
             </Text>
             <Text size="md">
-                {format(store.currentTransaction?.date ?? new Date(), 'dd/MM/yyyy')}
+                {dayjs(store.currentTransaction?.date).format('DD/MM/YYYY')}
             </Text>
         </>
     )

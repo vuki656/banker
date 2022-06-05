@@ -10,6 +10,7 @@ import {
 
 import type { ContextType } from '../../shared/typescript-types'
 
+import { TransactionsArgs } from './args'
 import { CreateTransactionInput } from './inputs'
 import { CreateTransactionPayload } from './payloads'
 import { TransactionService } from './Transaction.service'
@@ -23,8 +24,13 @@ export class TransactionResolver {
     @Query(() => [TransactionType])
     public async transactions(
         @Ctx() context: ContextType,
+        @Arg(
+            'args',
+            () => TransactionsArgs,
+            { nullable: true }
+        ) args?: TransactionsArgs | null,
     ): Promise<TransactionType[]> {
-        return this.service.findAll(context.user?.id)
+        return this.service.findAll(args, context.user?.id)
     }
 
     @Authorized()

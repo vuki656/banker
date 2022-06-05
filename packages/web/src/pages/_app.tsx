@@ -1,6 +1,7 @@
 import type { NormalizedCacheObject } from '@apollo/client'
 import {
     ApolloClient,
+
     ApolloProvider,
     InMemoryCache,
 } from '@apollo/client'
@@ -13,6 +14,7 @@ import {
 import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
 import { getCookie } from 'cookies-next'
+import type { ApolloPageContext } from 'next-with-apollo'
 import withApollo from 'next-with-apollo'
 import NextApp from 'next/app'
 import type { AppProps } from 'next/app'
@@ -24,6 +26,10 @@ import { Sidebar } from '../components'
 import introspectionGeneratedTS from '../graphql/introspection.generated.json'
 import introspectionGeneratedJSON from '../graphql/types.generated'
 import { COOKIE_TOKEN_NAME } from '../utils'
+
+export interface PageContext extends ApolloPageContext {
+    apolloClient: ApolloClient<unknown>
+}
 
 type ExtraAppProps = {
     apollo: ApolloClient<NormalizedCacheObject>

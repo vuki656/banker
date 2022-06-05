@@ -4,11 +4,12 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
+import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
 import { useBreakdownStore } from '../hooks'
 
-export const BreakdownSummary: React.FunctionComponent = () => {
+export const BreakdownSummary = observer(() => {
     const store = useBreakdownStore()
 
     return (
@@ -58,4 +59,4 @@ export const BreakdownSummary: React.FunctionComponent = () => {
             })}
         </Box>
     )
-}
+})
