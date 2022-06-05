@@ -11,9 +11,9 @@ import {
 import { showNotification } from '@mantine/notifications'
 import { IconFileAnalytics } from '@tabler/icons'
 
-import type { HomeFileUploadDropzoneProps } from './HomeFileUploadDropzone.types'
+import type { ImportFileUploadDropzoneProps } from './ImportFileUploadDropzone.types'
 
-export const HomeFileUploadDropzone: React.FunctionComponent<HomeFileUploadDropzoneProps> = (props) => {
+export const ImportFileUploadDropzone: React.FunctionComponent<ImportFileUploadDropzoneProps> = (props) => {
     const { onCompleted } = props
 
     const theme = useMantineTheme()

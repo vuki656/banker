@@ -13,32 +13,32 @@ import {
     GetTransactionsDocument,
 } from '../graphql/types.generated'
 import {
-    Home,
-    HomeStore,
+    Import,
+    ImportStore,
 } from '../modules'
 
 import type { PageContext } from './_app'
 
-export const HomeStoreContext = createContext<HomeStore | null>(null)
+export const ImportStoreContext = createContext<ImportStore | null>(null)
 
-type HomePageProps = {
+type ImportPageProps = {
     categories: CategoryType[]
     transactions: TransactionType[]
 }
 
-const HomePage: NextPage<HomePageProps> = (props) => {
+const ImportPage: NextPage<ImportPageProps> = (props) => {
     const { categories, transactions } = props
 
-    const store = new HomeStore(transactions, categories)
+    const store = new ImportStore(transactions, categories)
 
     return (
-        <HomeStoreContext.Provider value={store}>
-            <Home />
-        </HomeStoreContext.Provider>
+        <ImportStoreContext.Provider value={store}>
+            <Import />
+        </ImportStoreContext.Provider>
     )
 }
 
-HomePage.getInitialProps = async (context: PageContext) => {
+ImportPage.getInitialProps = async (context: PageContext) => {
     const categoriesResponse = await context.apolloClient.query<GetCategoriesQuery>({
         query: GetCategoriesDocument,
     })
@@ -53,4 +53,4 @@ HomePage.getInitialProps = async (context: PageContext) => {
     }
 }
 
-export default HomePage
+export default ImportPage

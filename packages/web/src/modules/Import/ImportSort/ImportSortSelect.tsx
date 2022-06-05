@@ -9,10 +9,10 @@ import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
 import type { CategoryType } from '../../../graphql/types.generated'
-import { useHomeStore } from '../hooks'
+import { useImportStore } from '../hooks'
 
-export const HomeSortSelect = observer(() => {
-    const store = useHomeStore()
+export const ImportSortSelect = observer(() => {
+    const store = useImportStore()
 
     const theme = useMantineTheme()
 

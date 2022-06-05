@@ -14,10 +14,10 @@ import {
     TransactionStatusEnum,
     useCreateTransactionMutation,
 } from '../../../graphql/types.generated'
-import { useHomeStore } from '../hooks'
+import { useImportStore } from '../hooks'
 
-export const HomeSortButtons = observer(() => {
-    const store = useHomeStore()
+export const ImportSortButtons = observer(() => {
+    const store = useImportStore()
 
     const [createTransactionMutation] = useCreateTransactionMutation({
         onError: () => {

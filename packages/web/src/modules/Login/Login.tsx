@@ -34,7 +34,7 @@ export const Login: React.FunctionComponent = () => {
         onCompleted: (response) => {
             setCookies(COOKIE_TOKEN_NAME, response.loginUser.token)
 
-            void router.push('/home')
+            void router.push('/breakdown')
         },
         onError: () => {
             showNotification({

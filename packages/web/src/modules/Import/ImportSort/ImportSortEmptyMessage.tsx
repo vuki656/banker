@@ -5,7 +5,7 @@ import {
 } from '@mantine/core'
 import { IconFileAnalytics } from '@tabler/icons'
 
-export const HomeSortEmptyMessage: React.FunctionComponent = () => {
+export const ImportSortEmptyMessage: React.FunctionComponent = () => {
     return (
         <Stack
             align="center"

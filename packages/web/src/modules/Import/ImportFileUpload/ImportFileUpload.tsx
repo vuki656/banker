@@ -16,16 +16,16 @@ import {
 } from 'xlsx'
 
 import { useBoolean } from '../../../utils'
-import { useHomeStore } from '../hooks'
+import { useImportStore } from '../hooks'
 
-import { HomeFileUploadDropzone } from './HomeFileUploadDropzone'
+import { ImportFileUploadDropzone } from './ImportFileUploadDropzone'
 
 const LOADING_NOTIFICATION_ID = 'loading-notification-id'
 
-export const HomeFileUpload: React.FunctionComponent = () => {
+export const ImportFileUpload: React.FunctionComponent = () => {
     const [isOpen, isOpenActions] = useBoolean(false)
 
-    const store = useHomeStore()
+    const store = useImportStore()
 
     const onCompleted = (file: File) => {
         const reader = new FileReader()
@@ -99,7 +99,7 @@ export const HomeFileUpload: React.FunctionComponent = () => {
                 opened={isOpen}
                 title="Upload Your Bank Report"
             >
-                <HomeFileUploadDropzone onCompleted={onCompleted} />
+                <ImportFileUploadDropzone onCompleted={onCompleted} />
             </Modal>
         </>
     )

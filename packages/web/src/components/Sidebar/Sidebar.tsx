@@ -7,7 +7,7 @@ import {
     IconChartBar,
     IconLogout,
     IconPackage,
-    IconReportMoney,
+    IconUpload,
 } from '@tabler/icons'
 import { removeCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
@@ -54,12 +54,12 @@ export const Sidebar: React.FunctionComponent = () => {
             >
                 <SidebarButton
                     color="blue"
-                    icon={<IconReportMoney size={ICON_SIZE} />}
-                    label="Home"
+                    icon={<IconUpload size={ICON_SIZE} />}
+                    label="Import"
                     onClick={() => {
-                        void router.push('/home')
+                        void router.push('/import')
                     }}
-                    selected={router.pathname === '/home'}
+                    selected={router.pathname === '/import'}
                 />
                 <SidebarButton
                     color="orange"

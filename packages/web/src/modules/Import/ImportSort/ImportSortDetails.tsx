@@ -7,10 +7,10 @@ import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
-import { useHomeStore } from '../hooks'
+import { useImportStore } from '../hooks'
 
-export const HomeSortDetails = observer(() => {
-    const store = useHomeStore()
+export const ImportSortDetails = observer(() => {
+    const store = useImportStore()
 
     return (
         <>

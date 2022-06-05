@@ -1,6 +1,7 @@
 import {
     Group,
     Header as MantineHeader,
+    Text,
 } from '@mantine/core'
 
 import type { HeaderProps } from './Header.types'
@@ -23,7 +24,9 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
                     paddingRight: '10px',
                 }}
             >
-                {title}
+                <Text weight="bold">
+                    {title}
+                </Text>
                 {action}
             </Group>
         </MantineHeader>

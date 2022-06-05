@@ -8,12 +8,12 @@ import { observer } from 'mobx-react-lite'
 
 import { Header } from '../../components'
 
-import { HomeFileUpload } from './HomeFileUpload'
-import { HomeSort } from './HomeSort'
-import { useHomeStore } from './hooks'
+import { useImportStore } from './hooks'
+import { ImportFileUpload } from './ImportFileUpload'
+import { ImportSort } from './ImportSort'
 
-export const Home = observer(() => {
-    const store = useHomeStore()
+export const Import = observer(() => {
+    const store = useImportStore()
 
     return (
         <Stack
@@ -21,11 +21,11 @@ export const Home = observer(() => {
             style={{ height: '100%' }}
         >
             <Header
-                action={<HomeFileUpload />}
+                action={<ImportFileUpload />}
                 title={(
                     <Group>
                         <Text>
-                            Home
+                            Import
                         </Text>
                         {store.progress
                             ? (
@@ -37,7 +37,7 @@ export const Home = observer(() => {
                     </Group>
                 )}
             />
-            <HomeSort />
+            <ImportSort />
         </Stack>
     )
 })

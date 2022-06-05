@@ -6,9 +6,9 @@ import type {
     TransactionType,
 } from '../../../graphql/types.generated'
 
-import type { NewTransactionType } from './HomeStore.types'
+import type { NewTransactionType } from './ImportStore.types'
 
-export class HomeStore {
+export class ImportStore {
     public categories: CategoryType[] = []
 
     public newTransactions: NewTransactionType[] = []
