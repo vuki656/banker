@@ -49,7 +49,7 @@ export const HomeSortDetails = observer(() => {
                 {store.currentTransaction?.currency}
             </Text>
             <Text size="md">
-                {dayjs(store.currentTransaction?.date).format('DD/MM/YYYY')}
+                {dayjs(store.currentTransaction?.date).format('DD.MM.YYYY')}
             </Text>
         </>
     )

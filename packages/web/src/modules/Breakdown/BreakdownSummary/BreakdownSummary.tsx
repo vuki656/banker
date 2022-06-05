@@ -17,6 +17,7 @@ export const BreakdownSummary = observer(() => {
             style={{
                 display: 'grid',
                 gap: '20px',
+                gridArea: 'summary',
                 gridTemplateColumns: 'repeat(6, 1fr)',
             }}
         >

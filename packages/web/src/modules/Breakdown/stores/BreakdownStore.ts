@@ -6,16 +6,18 @@ import type {
     TransactionType,
 } from '../../../graphql/types.generated'
 
-import type { BreakdownCardData } from './BreakdownStore.types'
+import type {
+    BreakdownBarChartData,
+    BreakdownSummaryCardData,
+} from './BreakdownStore.types'
 
 export class BreakdownStore {
     public transactions: TransactionType[] = []
 
     public categories: CategoryType[] = []
 
-    public rangeValue: [Date, Date] = [
-        dayjs().startOf('month')
-            .toDate(),
+    public rangeValue: [Date, Date] = [ // eslint-disable-next-line newline-per-chained-call
+        dayjs().startOf('month').toDate(),
         dayjs().toDate(),
     ]
 
@@ -41,7 +43,7 @@ export class BreakdownStore {
     }
 
     public get summaryData() {
-        const categories = this.categories.reduce<BreakdownCardData>((accumulator, category) => {
+        const categories = this.categories.reduce<BreakdownSummaryCardData>((accumulator, category) => {
             return {
                 ...accumulator,
                 [category.name]: {
@@ -74,8 +76,53 @@ export class BreakdownStore {
         }, categories)
     }
 
+    public get barChartData() {
+        const dates: dayjs.Dayjs[] = []
+
+        let currentDate = dayjs(this.range.start)
+
+        // Create a range of dayjs date objects from range start to range end date
+        while (currentDate.isBefore(this.range.end) || currentDate.isSame(this.range.end)) {
+            currentDate = currentDate.add(1, 'day')
+
+            dates.push(currentDate)
+        }
+
+        // Group transactions per category, and then for each date in range for that category
+        const data = this.categories.reduce<BreakdownBarChartData[]>((categoryAccumulator, category) => {
+            return [
+                ...categoryAccumulator,
+                {
+                    backgroundColor: category.color,
+                    data: dates.map((date) => {
+                        // Sum transactions only for current date and current category
+                        return this.transactions.reduce((transactionAmountAccumulator, transaction) => {
+                            const isSameDate = dayjs(transaction.date).isSame(date)
+                            const isSameCategory = transaction.category?.id === category.id
+
+                            if (isSameDate && isSameCategory) {
+                                return transactionAmountAccumulator + transaction.amount
+                            }
+
+                            return transactionAmountAccumulator
+                        }, 0)
+                    }),
+                    label: category.name,
+                },
+            ]
+        }, [])
+
+        const formattedDates = dates.map((date) => {
+            return dayjs(date).format('DD.MM.YY')
+        })
+
+        return {
+            data,
+            labels: formattedDates,
+        }
+    }
+
     public get pieChartData() {
-        // eslint-disable-next-line max-len
         const categories = this.categories.reduce<Record<string, { amount: number, color: string }>>((accumulator, category) => {
             return {
                 ...accumulator,

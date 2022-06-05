@@ -19,9 +19,8 @@ export const BreakdownPieChart = observer(() => {
         <Paper
             shadow="xs"
             style={{
-                height: '300px',
+                gridArea: 'pie',
                 padding: '20px',
-                width: '300px',
             }}
         >
             <Doughnut

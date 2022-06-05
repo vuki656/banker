@@ -16,5 +16,8 @@
     ],
     "parserOptions": {
         "project": "./tsconfig.json"
+    },
+    "rules": {
+        "max-len": "off"
     }
 }

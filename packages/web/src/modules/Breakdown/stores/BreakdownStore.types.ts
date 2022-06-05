@@ -1,5 +1,12 @@
 import type { CategoryType } from '../../../graphql/types.generated'
 
-export type BreakdownCardData = Record<string, CategoryType & {
+export type BreakdownSummaryCardData = Record<string, CategoryType & {
     amount: number
 }>
+
+export type BreakdownBarChartData = {
+    backgroundColor: string
+    data: any
+    label: string
+}
+
