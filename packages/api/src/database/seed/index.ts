@@ -3,13 +3,13 @@
 import 'reflect-metadata'
 import { orm } from '../../shared/orm'
 
+import { transactions } from './transactions'
 import { user } from './user'
 
-// Seeds in $transaction don't have any relations
-// Seeds in .then() required existing relations on seeds in $transaction
 void orm
     .$transaction([
         ...user,
+        ...transactions,
     ])
     .catch((error: unknown) => {
         console.log(error)
