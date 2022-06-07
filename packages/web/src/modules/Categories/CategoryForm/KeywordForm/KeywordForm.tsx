@@ -68,9 +68,8 @@ export const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props) =>
                 }}
             >
                 <Button
-                    color="dark"
                     onClick={onCancel}
-                    variant="outline"
+                    variant="subtle"
                 >
                     Cancel
                 </Button>

@@ -8,6 +8,7 @@ import * as React from 'react'
 
 import type { SidebarButtonProps } from './SidebarButton.types'
 
+// TODO: add the selected background color capability
 export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props) => {
     const {
         color,
@@ -22,11 +23,14 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
             {...other}
             sx={(theme) => ({
                 '&:hover': {
-                    backgroundColor: theme.colors.gray[0],
+                    backgroundColor: theme.colorScheme === 'dark'
+                        ? theme.colors.dark[6]
+                        : theme.colors.gray[0],
                 },
-                backgroundColor: selected ? theme.colors.gray[0] : theme.white,
                 borderRadius: theme.radius.sm,
-                color: theme.black,
+                color: theme.colorScheme === 'dark'
+                    ? theme.colors.dark[0]
+                    : theme.black,
                 display: 'block',
                 padding: theme.spacing.xs,
                 width: '100%',

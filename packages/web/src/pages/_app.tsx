@@ -6,8 +6,10 @@ import {
     InMemoryCache,
 } from '@apollo/client'
 import { getDataFromTree } from '@apollo/client/react/ssr'
+import type { ColorScheme } from '@mantine/core'
 import {
     AppShell,
+    ColorSchemeProvider,
     Global,
     MantineProvider,
 } from '@mantine/core'
@@ -21,6 +23,7 @@ import type { AppProps } from 'next/app'
 import getConfig from 'next/config'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 import { Sidebar } from '../components'
 import introspectionGeneratedTS from '../graphql/introspection.generated.json'
@@ -44,6 +47,18 @@ const App = (props: AppProps & ExtraAppProps) => {
 
     const router = useRouter()
 
+    const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
+
+    const toggleColorScheme = (value?: ColorScheme) => {
+        if (!value) {
+            setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
+
+            return
+        }
+
+        setColorScheme(value)
+    }
+
     const isAppAppRoute = router.pathname !== '/' &&
         !router.pathname.startsWith('/login') &&
         !router.pathname.startsWith('/register')
@@ -56,63 +71,72 @@ const App = (props: AppProps & ExtraAppProps) => {
                     name="viewport"
                 />
             </Head>
-            <MantineProvider
-                theme={{
-                    colorScheme: 'light',
-                    fontFamily: 'montserrat',
-                }}
-                withGlobalStyles={true}
-                withNormalizeCSS={true}
+            <ColorSchemeProvider
+                colorScheme={colorScheme}
+                toggleColorScheme={toggleColorScheme}
             >
-                <ModalsProvider>
-                    <NotificationsProvider>
-                        <Global
-                            styles={{
-                                '#__next': {
-                                    height: '100%',
-                                    width: '100%',
-                                },
-                                a: {
-                                    textDecoration: 'none',
-                                },
-                                body: {
-                                    margin: '0px',
-                                },
-                                html: {
-                                    fontSize: '16px',
-                                },
-                                'html, body': {
-                                    height: '100%',
-                                },
-                            }}
-                        />
-                        <ApolloProvider client={apollo}>
-                            {isAppAppRoute ? (
-                                <AppShell
-                                    navbar={<Sidebar />}
-                                    padding="md"
-                                    styles={(theme) => ({
-                                        body: {
-                                            height: '100%',
-                                        },
-                                        main: {
-                                            backgroundColor: theme.colors.gray[0],
-                                            padding: 0,
-                                        },
-                                        root: {
-                                            height: '100%',
-                                        },
-                                    })}
-                                >
+                <MantineProvider
+                    theme={{
+                        colorScheme,
+                        fontFamily: 'montserrat',
+                    }}
+                    withGlobalStyles={true}
+                    withNormalizeCSS={true}
+                >
+                    <ModalsProvider>
+                        <NotificationsProvider>
+                            <Global
+                                styles={{
+                                    '#__next': {
+                                        height: '100%',
+                                        width: '100%',
+                                    },
+                                    a: {
+                                        textDecoration: 'none',
+                                    },
+                                    body: {
+                                        margin: '0px',
+                                    },
+                                    html: {
+                                        fontSize: '16px',
+                                    },
+                                    'html, body': {
+                                        height: '100%',
+                                    },
+                                }}
+                            />
+                            <ApolloProvider client={apollo}>
+                                {isAppAppRoute ? (
+                                    <AppShell
+                                        navbar={<Sidebar />}
+                                        padding="md"
+                                        styles={(theme) => ({
+                                            body: {
+                                                height: '100%',
+                                            },
+                                            main: {
+                                                main: {
+                                                    backgroundColor: theme.colorScheme === 'dark'
+                                                        ? theme.colors.dark[8]
+                                                        : theme.colors.gray[0],
+                                                },
+                                                padding: 0,
+                                            },
+                                            root: {
+                                                height: '100%',
+                                            },
+                                        })}
+                                    >
+                                        <Component {...pageProps} />
+                                    </AppShell>
+                                ) : (
                                     <Component {...pageProps} />
-                                </AppShell>
-                            ) : (
-                                <Component {...pageProps} />
-                            )}
-                        </ApolloProvider>
-                    </NotificationsProvider>
-                </ModalsProvider>
-            </MantineProvider>
+                                )}
+                            </ApolloProvider>
+                        </NotificationsProvider>
+                    </ModalsProvider>
+                </MantineProvider>
+            </ColorSchemeProvider>
         </>
     )
 }

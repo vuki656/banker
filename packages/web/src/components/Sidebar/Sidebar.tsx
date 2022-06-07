@@ -1,12 +1,17 @@
 import {
+    ActionIcon,
+    Group,
     Navbar,
     Text,
+    useMantineColorScheme,
     useMantineTheme,
 } from '@mantine/core'
 import {
     IconChartBar,
     IconLogout,
+    IconMoon,
     IconPackage,
+    IconSun,
     IconUpload,
 } from '@tabler/icons'
 import { removeCookies } from 'cookies-next'
@@ -22,6 +27,8 @@ export const Sidebar: React.FunctionComponent = () => {
     const theme = useMantineTheme()
     const router = useRouter()
 
+    const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+
     const onLogout = async () => {
         await router.push('/')
 
@@ -35,18 +42,35 @@ export const Sidebar: React.FunctionComponent = () => {
             width={{ base: 300 }}
         >
             <Navbar.Section mt="xs">
-                <Text
+                <Group
+                    align="center"
+                    position="apart"
                     style={{
                         borderBottom: `1px solid ${theme.colors.gray[2]}`,
-                        fontSize: '30px',
-                        fontWeight: 600,
                         paddingBottom: theme.spacing.lg,
                         paddingLeft: theme.spacing.xs,
                         paddingRight: theme.spacing.xs,
                     }}
                 >
-                    Banker
-                </Text>
+                    <Text
+                        style={{
+                            fontSize: '30px',
+                            fontWeight: 600,
+                        }}
+                    >
+                        Banker
+                    </Text>
+                    <ActionIcon
+                        color={colorScheme === 'dark' ? 'yellow' : 'blue'}
+                        onClick={() => {
+                            toggleColorScheme()
+                        }}
+                        title="Toggle color scheme"
+                        variant="outline"
+                    >
+                        {colorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />}
+                    </ActionIcon>
+                </Group>
             </Navbar.Section>
             <Navbar.Section
                 grow={true}

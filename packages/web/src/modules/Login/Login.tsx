@@ -1,10 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
     Button,
+    Paper,
     PasswordInput,
     Stack,
     Text,
     TextInput,
+    useMantineTheme,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import {
@@ -28,6 +30,7 @@ import { loginFormValidationSchema } from './Login.validation'
 const ICON_SIZE = 17
 
 export const Login: React.FunctionComponent = () => {
+    const theme = useMantineTheme()
     const router = useRouter()
 
     const [loginUserMutation, { loading }] = useLoginUserMutation({
@@ -64,16 +67,18 @@ export const Login: React.FunctionComponent = () => {
         <Stack
             align="center"
             justify="center"
-            style={{ height: '100%' }}
+            style={{
+                backgroundColor: theme.colorScheme === 'dark'
+                    ? theme.colors.dark[8]
+                    : theme.colors.gray[0],
+                height: '100%',
+            }}
         >
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack
-                    sx={(theme) => ({
-                        border: `1px solid ${theme.colors.gray[3]}`,
-                        borderRadius: '5px',
-                        padding: theme.spacing.xl,
-                    })}
-                >
+            <Paper
+                p="xl"
+                shadow="sm"
+            >
+                <Stack>
                     <Text
                         align="center"
                         size="lg"
@@ -95,12 +100,12 @@ export const Login: React.FunctionComponent = () => {
                     />
                     <Button
                         loading={loading}
-                        type="submit"
+                        onClick={handleSubmit(onSubmit)}
                     >
                         Login
                     </Button>
                 </Stack>
-            </form>
+            </Paper>
         </Stack>
     )
 }

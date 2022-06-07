@@ -15,7 +15,10 @@ export const ImportSort = observer(() => {
         <Stack
             align="center"
             justify="center"
-            style={{ height: '100%', overflow: 'auto' }}
+            style={{
+                height: '100%',
+                overflow: 'auto',
+            }}
         >
             {store.currentTransaction ? (
                 <Stack

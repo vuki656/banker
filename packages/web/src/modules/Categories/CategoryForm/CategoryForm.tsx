@@ -55,11 +55,11 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
             component="form"
             id={formId}
             onSubmit={form.handleSubmit(onSubmit)}
-            style={{
+            sx={(theme) => ({
                 display: 'flex',
                 flexDirection: 'column',
-                rowGap: '25px',
-            }}
+                rowGap: theme.spacing.md,
+            })}
         >
             <TextInput
                 {...form.register('name')}
@@ -87,11 +87,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                 <CategoryFormColors />
                 <CategoryFormKeywords />
             </FormProvider>
-            {React.cloneElement(submitButton, {
-                style: {
-                    marginTop: '10px',
-                },
-            })}
+            {submitButton}
         </Box>
 
     )
