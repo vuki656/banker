@@ -10,7 +10,7 @@ config:
         Upload: 'unknown'
 hooks:
     afterAllFileWrite:
-        - prettier --write
+        - ../../node_modules/.bin/prettier --write
 generates:
     src/graphql/introspection.generated.json:
         plugins:
