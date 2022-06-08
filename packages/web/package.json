@@ -7,7 +7,8 @@
         "start": "next start",
         "build": "next build",
         "codegen": "graphql-codegen --config ./codegen.yaml",
-        "production:start": "pm2 start yarn --interpreter bash --name client -- start"
+        "production:start": "pm2 start yarn --interpreter bash --name client -- start",
+        "production:build": "yarn codegen && yarn build"
     },
     "dependencies": {
         "@apollo/client": "3.6.6",
