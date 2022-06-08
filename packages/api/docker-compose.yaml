@@ -23,3 +23,14 @@ services:
         command:
             'update --username=${DB_USERNAME} --password=${DB_PASSWORD} --url=${DB_DOCKER_URL}
             --liquibase-schema-name=public --changelogFile="./master.json"'
+    production-migrations:
+        container_name: banker-migrations-production
+        depends_on:
+            database:
+                condition: service_healthy
+        image: liquibase/liquibase:4.10.0
+        volumes:
+            - ./src/database/migrations:/liquibase/changelog
+        command:
+            'update --username="banker-user" --password="992837972" --url="jdbc:postgresql://192.168.0.18:5432/banker?currentSchema=banker"
+            --liquibase-schema-name=public --changelogFile="./master.json"'
