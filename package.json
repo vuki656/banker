@@ -17,12 +17,12 @@
         "lint:clean": "rm -rf ./eslintcache && rm .cspellcache"
     },
     "dependencies": {
-        "dayjs": "^1.11.2",
+        "dayjs": "^1.11.3",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
         "@rimac-technology/eslint-config": "^25.0.0",
-        "@types/node": "16.11.38",
+        "@types/node": "16.11.39",
         "@types/uuid": "^8.3.4",
         "cspell": "^6.1.1",
         "eslint": "8.17.0",

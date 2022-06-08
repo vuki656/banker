@@ -6,7 +6,8 @@
         "dev": "next dev",
         "start": "next start",
         "build": "next build",
-        "codegen": "graphql-codegen --config ./codegen.yaml"
+        "codegen": "graphql-codegen --config ./codegen.yaml",
+        "production:start": "pm2 start yarn --interpreter bash --name client -- start"
     },
     "dependencies": {
         "@apollo/client": "3.6.6",
@@ -28,7 +29,7 @@
         "next": "12.1.6",
         "next-with-apollo": "^5.3.0",
         "react": "18.1.0",
-        "react-chartjs-2": "^4.1.0",
+        "react-chartjs-2": "^4.2.0",
         "react-dom": "18.1.0",
         "react-hook-form": "^7.31.3",
         "react-virtual": "^2.10.4",
@@ -39,11 +40,11 @@
         "@graphql-codegen/cli": "^2.6.2",
         "@graphql-codegen/fragment-matcher": "^3.2.1",
         "@graphql-codegen/introspection": "^2.1.1",
-        "@graphql-codegen/near-operation-file-preset": "^2.2.12",
-        "@graphql-codegen/typescript": "^2.4.11",
-        "@graphql-codegen/typescript-operations": "2.4.0",
-        "@graphql-codegen/typescript-react-apollo": "^3.2.14",
-        "@types/react": "18.0.11",
+        "@graphql-codegen/near-operation-file-preset": "^2.2.13",
+        "@graphql-codegen/typescript": "^2.5.0",
+        "@graphql-codegen/typescript-operations": "2.4.1",
+        "@graphql-codegen/typescript-react-apollo": "^3.2.15",
+        "@types/react": "18.0.12",
         "@types/react-dom": "18.0.5"
     }
 }
