@@ -50,7 +50,8 @@ export class ImportStore {
                 const foundKeyword = category.keywords.find((keyword) => {
                     return nextTransaction
                         .description
-                        .includes(keyword.name)
+                        .toLowerCase()
+                        .includes(keyword.name.toLowerCase())
                 })
 
                 if (foundKeyword) {
