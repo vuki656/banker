@@ -1,7 +1,7 @@
-import type { NormalizedCacheObject } from '@apollo/client'
+import { createHttpLink, NormalizedCacheObject } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context';
 import {
     ApolloClient,
-
     ApolloProvider,
     InMemoryCache,
 } from '@apollo/client'
@@ -147,12 +147,21 @@ App.getInitialProps = async (appContext: any) => {
     return { ...appProps }
 }
 
-export default withApollo(({ ctx, initialState }) => {
-    const token = getCookie(COOKIE_TOKEN_NAME, {
-        req: ctx?.req,
-        res: ctx?.res,
-    })
+const httpLink = createHttpLink({
+    uri: getConfig().publicRuntimeConfig.API_URL,
+})
 
+const authLink = setContext(() => {
+    const token = getCookie(COOKIE_TOKEN_NAME)
+
+    return {
+        headers: {
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    }
+})
+
+export default withApollo((client) => {
     const cache = new InMemoryCache({
         possibleTypes: introspectionGeneratedJSON.possibleTypes,
         typePolicies: Object.fromEntries(introspectionGeneratedTS.__schema.types
@@ -160,16 +169,13 @@ export default withApollo(({ ctx, initialState }) => {
             .map(({ name }) => [name, { merge: true }])),
     })
 
-    if (initialState) {
-        cache.restore(initialState)
+    if (client.initialState) {
+        cache.restore(client.initialState)
     }
 
     return new ApolloClient({
-        cache: new InMemoryCache().restore(initialState || {}),
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        },
+        cache,
+        link: authLink.concat(httpLink),
         ssrMode: typeof window === 'undefined',
-        uri: getConfig().publicRuntimeConfig.API_URL,
     })
 }, { getDataFromTree })(App)
