@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/client'
 import {
     ActionIcon,
     Group,
@@ -26,11 +27,14 @@ const ICON_SIZE = 16
 export const Sidebar: React.FunctionComponent = () => {
     const theme = useMantineTheme()
     const router = useRouter()
+    const apolloClient = useApolloClient()
 
     const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
     const onLogout = async () => {
         await router.push('/')
+
+        await apolloClient.clearStore()
 
         removeCookies(COOKIE_TOKEN_NAME)
     }
