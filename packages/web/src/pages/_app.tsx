@@ -50,13 +50,13 @@ const App = (props: AppProps & ExtraAppProps) => {
     const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
 
     const toggleColorScheme = (value?: ColorScheme) => {
-        if (!value) {
-            setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
+        if (value) {
+            setColorScheme(value)
 
             return
         }
 
-        setColorScheme(value)
+        setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
     }
 
     const isAppAppRoute = router.pathname !== '/' &&
