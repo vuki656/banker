@@ -103,6 +103,8 @@ export const Sidebar: React.FunctionComponent = () => {
                     }}
                     selected={router.pathname.startsWith('/breakdown')}
                 />
+            </Navbar.Section>
+            <Navbar.Section>
                 <SidebarButton
                     color="red"
                     icon={<IconLogout size={ICON_SIZE} />}

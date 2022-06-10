@@ -16,7 +16,7 @@ const config: Configuration = {
     module: {
         rules: [
             {
-                exclude: /node_modules/,
+                exclude: /node_modules/u,
                 loader: 'ts-loader',
                 options: {
                     configFile: 'tsconfig.json',

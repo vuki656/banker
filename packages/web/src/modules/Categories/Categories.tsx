@@ -24,11 +24,7 @@ export const Categories: React.FunctionComponent = () => {
                 action={<CreateCategory onSubmit={refetch} />}
                 title="Categories"
             />
-            <Stack
-                sx={(theme) => ({
-                    padding: theme.spacing.md,
-                })}
-            >
+            <Stack p="md">
                 {data?.categories.map((category) => {
                     return (
                         <Category

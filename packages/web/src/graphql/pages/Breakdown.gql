@@ -1,0 +1,8 @@
+query ImportPageData($transactionsArgs: TransactionsArgs) {
+    categories {
+        ...CategoryPayload
+    }
+    transactions(args: $transactionsArgs) {
+        ...TransactionPayload
+    }
+}

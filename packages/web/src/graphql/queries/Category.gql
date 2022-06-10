@@ -3,3 +3,4 @@ query GetCategories {
         ...CategoryPayload
     }
 }
+

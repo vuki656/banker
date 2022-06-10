@@ -12,7 +12,9 @@
         "**/*.prisma",
         "**/*.graphql",
         "**/*.gql",
-        "**/*.generated.ts"
+        "**/*.generated.ts",
+        "dist/*",
+        ".next"
     ],
     "parserOptions": {
         "project": "./tsconfig.json"

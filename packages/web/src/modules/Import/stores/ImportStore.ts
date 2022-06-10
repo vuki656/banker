@@ -19,14 +19,16 @@ export class ImportStore {
 
     public currentTransaction: NewTransactionType | null = null
 
-    constructor(
-        transactions: TransactionType[],
-        categories: CategoryType[]
-    ) {
-        this.categories = categories
-        this.existingTransactions = transactions
-
+    constructor() {
         makeAutoObservable(this, undefined, { autoBind: true })
+    }
+
+    public setExistingTransactions(transactions: TransactionType[]) {
+        this.existingTransactions = transactions
+    }
+
+    public setCategories(categories: CategoryType[]) {
+        this.categories = categories
     }
 
     public get progress() {
@@ -193,7 +195,9 @@ export class ImportStore {
             })
         })
 
+        // TODO: check if this removes both the transaction cancellation and the transaction itself
         // Filter out cancellations (money was charged then returned)
+        // Logic is if the description has another transaction ID in it, it is a cancellation
         const newTransactionsWithoutCancellations = newTransactions.filter((newTransaction) => {
             return !newTransactions.some((transaction) => {
                 return transaction

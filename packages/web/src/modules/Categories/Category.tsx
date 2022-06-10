@@ -8,6 +8,7 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
+import { useHover } from '@mantine/hooks'
 import { useModals } from '@mantine/modals'
 import { showNotification } from '@mantine/notifications'
 import {
@@ -34,6 +35,7 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
     } = props
 
     const { closeModal, openConfirmModal, openModal } = useModals()
+    const { hovered, ref } = useHover()
 
     const [updateCategoryMutation, { loading: updateLoading }] = useUpdateCategoryMutation({
         onCompleted: () => {
@@ -142,7 +144,10 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
     }
 
     return (
-        <Paper shadow="xs">
+        <Paper
+            ref={ref}
+            shadow="xs"
+        >
             <Group
                 p="sm"
                 position="apart"
@@ -180,20 +185,24 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
                         </Group>
                     </Stack>
                 </Group>
-                <Group spacing="xs">
-                    <ActionIcon
-                        onClick={onUpdate(value)}
-                        variant="outline"
-                    >
-                        <IconPencil size={16} />
-                    </ActionIcon>
-                    <ActionIcon
-                        onClick={onDelete(value)}
-                        variant="outline"
-                    >
-                        <IconTrash size={16} />
-                    </ActionIcon>
-                </Group>
+                {hovered ? (
+                    <Group spacing="xs">
+                        <ActionIcon
+                            color="blue"
+                            onClick={onUpdate(value)}
+                            variant="default"
+                        >
+                            <IconPencil size={16} />
+                        </ActionIcon>
+                        <ActionIcon
+                            color="blue"
+                            onClick={onDelete(value)}
+                            variant="default"
+                        >
+                            <IconTrash size={16} />
+                        </ActionIcon>
+                    </Group>
+                ) : null}
             </Group>
         </Paper>
     )

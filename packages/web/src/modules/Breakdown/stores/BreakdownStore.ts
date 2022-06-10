@@ -21,13 +21,7 @@ export class BreakdownStore {
         dayjs().toDate(),
     ]
 
-    constructor(
-        categories: CategoryType[],
-        transactions: TransactionType[]
-    ) {
-        this.transactions = transactions
-        this.categories = categories
-
+    constructor() {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
@@ -35,10 +29,18 @@ export class BreakdownStore {
         this.rangeValue = range
     }
 
+    public setCategories(categories: CategoryType[]) {
+        this.categories = categories
+    }
+
+    public setTransactions(transactions: TransactionType[]) {
+        this.transactions = transactions
+    }
+
     public get range() {
         return {
-            end: this.rangeValue[1],
-            start: this.rangeValue[0],
+            endDate: this.rangeValue[1],
+            startDate: this.rangeValue[0],
         }
     }
 
@@ -79,10 +81,10 @@ export class BreakdownStore {
     public get barChartData() {
         const dates: dayjs.Dayjs[] = []
 
-        let currentDate = dayjs(this.range.start)
+        let currentDate = dayjs(this.range.startDate)
 
         // Create a range of dayjs date objects from range start to range end date
-        while (currentDate.isBefore(this.range.end) || currentDate.isSame(this.range.end)) {
+        while (currentDate.isBefore(this.range.endDate) || currentDate.isSame(this.range.endDate)) {
             currentDate = currentDate.add(1, 'day')
 
             dates.push(currentDate)

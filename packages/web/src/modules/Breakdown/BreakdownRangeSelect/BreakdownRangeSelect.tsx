@@ -5,38 +5,24 @@ import {
     Stack,
 } from '@mantine/core'
 import { RangeCalendar } from '@mantine/dates'
-import { showNotification } from '@mantine/notifications'
 import { IconCalendar } from '@tabler/icons'
 import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 
-import { useGetTransactionsLazyQuery } from '../../../graphql/types.generated'
 import { useBoolean } from '../../../utils'
 import { useBreakdownStore } from '../hooks'
 
-export const BreakdownRangeSelect = observer(() => {
+import type { BreakdownRangeSelectProps } from './BreakdownRangeSelect.types'
+
+export const BreakdownRangeSelect = observer<BreakdownRangeSelectProps>((props) => {
+    const {
+        loading,
+        onSubmit,
+    } = props
+
     const store = useBreakdownStore()
 
     const [isOpen, isOpenActions] = useBoolean()
-
-    const [getTransactions, { loading }] = useGetTransactionsLazyQuery({
-        onCompleted: (response) => {
-            store.transactions = response.transactions
-        },
-        onError: () => {
-            showNotification({
-                color: 'red',
-                message: 'Unable to get transactions',
-                title: 'Error',
-            })
-        },
-        variables: {
-            args: {
-                endDate: store.range.end.toISOString(),
-                startDate: store.range.start.toISOString(),
-            },
-        },
-    })
 
     const onDateChange = (newDateRange: [Date, Date | null]) => {
         const startDate = newDateRange[0]
@@ -50,7 +36,7 @@ export const BreakdownRangeSelect = observer(() => {
 
         isOpenActions.setFalse()
 
-        void getTransactions()
+        onSubmit()
     }
 
     const onThisMonthClick = () => {
@@ -63,7 +49,7 @@ export const BreakdownRangeSelect = observer(() => {
 
         isOpenActions.setFalse()
 
-        void getTransactions()
+        onSubmit()
     }
 
     const onLastMonthClick = () => {
@@ -80,7 +66,7 @@ export const BreakdownRangeSelect = observer(() => {
 
         isOpenActions.setFalse()
 
-        void getTransactions()
+        onSubmit()
     }
 
     const onLastThreeMonthsClick = () => {
@@ -96,7 +82,7 @@ export const BreakdownRangeSelect = observer(() => {
 
         isOpenActions.setFalse()
 
-        void getTransactions()
+        onSubmit()
     }
 
     const onLastSixMonthsClick = () => {
@@ -112,7 +98,7 @@ export const BreakdownRangeSelect = observer(() => {
 
         isOpenActions.setFalse()
 
-        void getTransactions()
+        onSubmit()
     }
 
     const onLastTwelveMonthsClick = () => {
@@ -128,7 +114,7 @@ export const BreakdownRangeSelect = observer(() => {
 
         isOpenActions.setFalse()
 
-        void getTransactions()
+        onSubmit()
     }
 
     return (
@@ -138,7 +124,7 @@ export const BreakdownRangeSelect = observer(() => {
                 onClick={isOpenActions.setTrue}
                 rightIcon={<IconCalendar size={16} />}
             >
-                {`${dayjs(store.range.start).format('DD.MM.YYYY')} - ${dayjs(store.range.end).format('DD.MM.YYYY')}`}
+                {`${dayjs(store.range.startDate).format('DD.MM.YYYY')} - ${dayjs(store.range.endDate).format('DD.MM.YYYY')}`}
             </Button>
             <Modal
                 onClose={isOpenActions.setFalse}
