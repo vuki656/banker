@@ -1,10 +1,12 @@
-import { createHttpLink, NormalizedCacheObject } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context';
+import type { NormalizedCacheObject } from '@apollo/client'
 import {
     ApolloClient,
+
     ApolloProvider,
+    createHttpLink,
     InMemoryCache,
 } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { getDataFromTree } from '@apollo/client/react/ssr'
 import type { ColorScheme } from '@mantine/core'
 import {
@@ -15,7 +17,7 @@ import {
 } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
-import { getCookie } from 'cookies-next'
+import { getCookie, setCookies } from 'cookies-next'
 import type { ApolloPageContext } from 'next-with-apollo'
 import withApollo from 'next-with-apollo'
 import NextApp from 'next/app'
@@ -28,7 +30,7 @@ import { useState } from 'react'
 import { Sidebar } from '../components'
 import introspectionGeneratedTS from '../graphql/introspection.generated.json'
 import introspectionGeneratedJSON from '../graphql/types.generated'
-import { COOKIE_TOKEN_NAME } from '../utils'
+import { COOKIE_COLORSCHEME_NAME, COOKIE_TOKEN_NAME } from '../utils'
 
 export interface PageContext extends ApolloPageContext {
     apolloClient: ApolloClient<unknown>
@@ -36,6 +38,7 @@ export interface PageContext extends ApolloPageContext {
 
 type ExtraAppProps = {
     apollo: ApolloClient<NormalizedCacheObject>
+    colorScheme: ColorScheme
 }
 
 const App = (props: AppProps & ExtraAppProps) => {
@@ -43,20 +46,23 @@ const App = (props: AppProps & ExtraAppProps) => {
         Component,
         apollo,
         pageProps,
+        colorScheme
     } = props
 
     const router = useRouter()
 
-    const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
+    const [currentColorScheme, setCurrentColorScheme] = useState<ColorScheme>(colorScheme)
 
-    const toggleColorScheme = (value?: ColorScheme) => {
-        if (value) {
-            setColorScheme(value)
+    const toggleColorScheme = (newColorScheme?: ColorScheme) => {
+        let nextColorScheme = newColorScheme
 
-            return
+        if (!nextColorScheme) {
+            nextColorScheme = currentColorScheme === 'dark' ? 'light' : 'dark'
         }
 
-        setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
+        setCurrentColorScheme(nextColorScheme)
+
+        setCookies(COOKIE_COLORSCHEME_NAME, nextColorScheme, { maxAge: 60 * 60 * 24 * 30 })
     }
 
     const isAppAppRoute = router.pathname !== '/' &&
@@ -72,12 +78,12 @@ const App = (props: AppProps & ExtraAppProps) => {
                 />
             </Head>
             <ColorSchemeProvider
-                colorScheme={colorScheme}
+                colorScheme={currentColorScheme}
                 toggleColorScheme={toggleColorScheme}
             >
                 <MantineProvider
                     theme={{
-                        colorScheme,
+                        colorScheme: currentColorScheme,
                         fontFamily: 'montserrat',
                     }}
                     withGlobalStyles={true}
@@ -141,10 +147,13 @@ const App = (props: AppProps & ExtraAppProps) => {
     )
 }
 
-App.getInitialProps = async (appContext: any) => {
-    const appProps = await NextApp.getInitialProps(appContext)
+App.getInitialProps = async (appProps: any) => {
+    const initialProps = await NextApp.getInitialProps(appProps)
 
-    return { ...appProps }
+    return { 
+        ...initialProps,
+        colorScheme: getCookie(COOKIE_COLORSCHEME_NAME, appProps.ctx) ?? 'light',
+    }
 }
 
 const httpLink = createHttpLink({
