@@ -19,12 +19,18 @@ export const Categories: React.FunctionComponent = () => {
     })
 
     return (
-        <Stack spacing={0}>
+        <Stack
+            spacing={0}
+            style={{ flex: 1 }}
+        >
             <Header
                 action={<CreateCategory onSubmit={refetch} />}
                 title="Categories"
             />
-            <Stack p="md">
+            <Stack
+                p="md"
+                style={{ overflow: 'auto' }}
+            >
                 {data?.categories.map((category) => {
                     return (
                         <Category

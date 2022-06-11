@@ -15,7 +15,6 @@ import {
 } from '@tabler/icons'
 import { setCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
-import * as React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useLoginUserMutation } from '../../graphql/types.generated'

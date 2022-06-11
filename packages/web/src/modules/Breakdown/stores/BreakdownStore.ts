@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
+import type { RangeSelectValue } from '../../../components'
 import type {
     CategoryType,
     TransactionType,
@@ -16,7 +17,7 @@ export class BreakdownStore {
 
     public categories: CategoryType[] = []
 
-    public rangeValue: [Date, Date] = [ // eslint-disable-next-line newline-per-chained-call
+    public rangeValue: RangeSelectValue = [ // eslint-disable-next-line newline-per-chained-call
         dayjs().startOf('month').toDate(),
         dayjs().toDate(),
     ]
@@ -25,7 +26,7 @@ export class BreakdownStore {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
-    public setRange(range: [Date, Date]) {
+    public setRange(range: RangeSelectValue) {
         this.rangeValue = range
     }
 

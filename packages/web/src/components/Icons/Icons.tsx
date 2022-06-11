@@ -2,12 +2,16 @@ import {
     IconBolt,
     IconCar,
     IconCoffee,
+    IconCoin,
     IconHome,
     IconPizza,
     IconPlane,
     IconQuestionMark,
     IconRotateClockwise,
     IconShoppingCart,
+    IconShirt,
+    IconBuildingBank,
+    IconCash
 } from '@tabler/icons'
 import { useMemo } from 'react'
 
@@ -22,11 +26,15 @@ export const ICONS = [
     IconPizza,
     IconPlane,
     IconBolt,
+    IconCoin,
+    IconShirt,
+    IconBuildingBank,
+    IconCash
 ]
 
 export const Icons: React.FunctionComponent<IconsProps> = (props) => {
     const {
-        fallback: Fallback,
+        fallback: FallbackIcon,
         name,
         ...other
     } = props
@@ -43,8 +51,8 @@ export const Icons: React.FunctionComponent<IconsProps> = (props) => {
         return FoundIcon
     }, [name])
 
-    if (Icon.name === 'IconQuestionMark' && !name && Fallback) {
-        return Fallback
+    if (Icon.name === 'IconQuestionMark' && !name && FallbackIcon) {
+        return FallbackIcon
     }
 
     return <Icon {...other} />

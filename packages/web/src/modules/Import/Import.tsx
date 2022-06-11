@@ -28,7 +28,7 @@ export const Import = observer(() => {
     return (
         <Stack
             spacing={0}
-            style={{ height: '100%' }}
+            style={{flex: 1}}
         >
             <Header
                 action={<ImportFileUpload />}

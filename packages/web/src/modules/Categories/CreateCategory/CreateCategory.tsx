@@ -4,7 +4,6 @@ import {
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import { IconPlus } from '@tabler/icons'
-import * as React from 'react'
 
 import { useCreateCategoryMutation } from '../../../graphql/types.generated'
 import { useBoolean } from '../../../utils'

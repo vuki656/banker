@@ -3,12 +3,14 @@ import {
     Stack,
 } from '@mantine/core'
 
-import { Header } from '../../components'
+import {
+    Header,
+    RangeSelect,
+} from '../../components'
 import { useBreakdownPageDataQuery } from '../../graphql/types.generated'
 
 import { BreakdownBarChart } from './BreakdownBarChart'
 import { BreakdownPieChart } from './BreakdownPieChart'
-import { BreakdownRangeSelect } from './BreakdownRangeSelect'
 import { BreakdownSummary } from './BreakdownSummary'
 import { useBreakdownStore } from './hooks'
 
@@ -31,12 +33,13 @@ export const Breakdown: React.FunctionComponent = () => {
     })
 
     return (
-        <Stack spacing={0}>
+        <Stack spacing={0} style={{flex: 1}}>
             <Header
                 action={(
-                    <BreakdownRangeSelect
+                    <RangeSelect
                         loading={loading}
                         onSubmit={refetch}
+                        value={store.range}
                     />
                 )}
                 title="Breakdown"
@@ -52,6 +55,7 @@ export const Breakdown: React.FunctionComponent = () => {
                     gridTemplateColumns: '300px 1fr',
                     gridTemplateRows: 'auto 1fr',
                     padding: '20px',
+                    overflow: 'auto'
                 }}
             >
                 <BreakdownSummary />

@@ -7,20 +7,18 @@ import {
 import { RangeCalendar } from '@mantine/dates'
 import { IconCalendar } from '@tabler/icons'
 import dayjs from 'dayjs'
-import { observer } from 'mobx-react-lite'
+import type { FunctionComponent } from 'react'
 
-import { useBoolean } from '../../../utils'
-import { useBreakdownStore } from '../hooks'
+import { useBoolean } from '../../utils'
 
-import type { BreakdownRangeSelectProps } from './BreakdownRangeSelect.types'
+import type { RangeSelectProps } from './RangeSelect.types'
 
-export const BreakdownRangeSelect = observer<BreakdownRangeSelectProps>((props) => {
+export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
     const {
         loading,
         onSubmit,
+        value,
     } = props
-
-    const store = useBreakdownStore()
 
     const [isOpen, isOpenActions] = useBoolean()
 
@@ -32,89 +30,80 @@ export const BreakdownRangeSelect = observer<BreakdownRangeSelectProps>((props) 
             return
         }
 
-        store.setRange([startDate, endDate])
+        onSubmit({
+            endDate,
+            startDate,
+        })
 
         isOpenActions.setFalse()
-
-        onSubmit()
     }
 
     const onThisMonthClick = () => {
-        store.setRange([
-            dayjs()
+        onSubmit({
+            endDate: dayjs().toDate(),
+            startDate: dayjs()
                 .startOf('month')
                 .toDate(),
-            dayjs().toDate(),
-        ])
+        })
 
         isOpenActions.setFalse()
-
-        onSubmit()
     }
 
     const onLastMonthClick = () => {
-        store.setRange([
-            dayjs()
-                .subtract(1, 'month')
-                .startOf('month')
-                .toDate(),
-            dayjs()
+        onSubmit({
+            endDate: dayjs()
                 .subtract(1, 'month')
                 .endOf('month')
                 .toDate(),
-        ])
+            startDate: dayjs()
+                .subtract(1, 'month')
+                .startOf('month')
+                .toDate(),
+        })
 
         isOpenActions.setFalse()
-
-        onSubmit()
     }
 
     const onLastThreeMonthsClick = () => {
-        store.setRange([
-            dayjs()
+        onSubmit({
+            endDate: dayjs()
+                .endOf('month')
+                .toDate(),
+            startDate: dayjs()
                 .subtract(2, 'month')
                 .startOf('month')
                 .toDate(),
-            dayjs()
-                .endOf('month')
-                .toDate(),
-        ])
+        })
 
         isOpenActions.setFalse()
-
-        onSubmit()
     }
 
     const onLastSixMonthsClick = () => {
-        store.setRange([
-            dayjs()
+        onSubmit({
+            endDate: dayjs()
+                .endOf('month')
+                .toDate(),
+            startDate: dayjs()
                 .subtract(5, 'month')
                 .startOf('month')
                 .toDate(),
-            dayjs()
-                .endOf('month')
-                .toDate(),
-        ])
+        })
 
         isOpenActions.setFalse()
-
-        onSubmit()
     }
 
     const onLastTwelveMonthsClick = () => {
-        store.setRange([
-            dayjs()
+        onSubmit({
+            endDate: dayjs()
+                .endOf('month')
+                .toDate(),
+            startDate: dayjs()
                 .subtract(11, 'month')
                 .startOf('month')
                 .toDate(),
-            dayjs()
-                .endOf('month')
-                .toDate(),
-        ])
+        })
 
         isOpenActions.setFalse()
-
-        onSubmit()
     }
 
     return (
@@ -124,7 +113,7 @@ export const BreakdownRangeSelect = observer<BreakdownRangeSelectProps>((props) 
                 onClick={isOpenActions.setTrue}
                 rightIcon={<IconCalendar size={16} />}
             >
-                {`${dayjs(store.range.startDate).format('DD.MM.YYYY')} - ${dayjs(store.range.endDate).format('DD.MM.YYYY')}`}
+                {`${dayjs(value.startDate).format('DD.MM.YYYY')} - ${dayjs(value.endDate).format('DD.MM.YYYY')}`}
             </Button>
             <Modal
                 onClose={isOpenActions.setFalse}
@@ -174,7 +163,7 @@ export const BreakdownRangeSelect = observer<BreakdownRangeSelectProps>((props) 
                         amountOfMonths={2}
                         maxDate={dayjs().toDate()}
                         onChange={onDateChange}
-                        value={store.range}
+                        value={[value.startDate, value.endDate]}
                     />
                 </Group>
             </Modal>

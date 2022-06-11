@@ -9,6 +9,7 @@ import {
 } from '@mantine/core'
 import {
     IconChartBar,
+    IconList,
     IconLogout,
     IconMoon,
     IconPackage,
@@ -43,6 +44,9 @@ export const Sidebar: React.FunctionComponent = () => {
         <Navbar
             height="100%"
             p="xs"
+            style={{
+                minWidth: '240px',
+            }}
             width={{ base: 300 }}
         >
             <Navbar.Section mt="xs">
@@ -106,6 +110,15 @@ export const Sidebar: React.FunctionComponent = () => {
                         void router.push('/breakdown')
                     }}
                     selected={router.pathname.startsWith('/breakdown')}
+                />
+                <SidebarButton
+                    color="red"
+                    icon={<IconList size={ICON_SIZE} />}
+                    label="Transactions"
+                    onClick={() => {
+                        void router.push('/transactions')
+                    }}
+                    selected={router.pathname.startsWith('/transactions')}
                 />
             </Navbar.Section>
             <Navbar.Section>

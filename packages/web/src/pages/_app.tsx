@@ -17,7 +17,10 @@ import {
 } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
-import { getCookie, setCookies } from 'cookies-next'
+import {
+    getCookie,
+    setCookies,
+} from 'cookies-next'
 import type { ApolloPageContext } from 'next-with-apollo'
 import withApollo from 'next-with-apollo'
 import NextApp from 'next/app'
@@ -30,7 +33,10 @@ import { useState } from 'react'
 import { Sidebar } from '../components'
 import introspectionGeneratedTS from '../graphql/introspection.generated.json'
 import introspectionGeneratedJSON from '../graphql/types.generated'
-import { COOKIE_COLORSCHEME_NAME, COOKIE_TOKEN_NAME } from '../utils'
+import {
+    COOKIE_COLORSCHEME_NAME,
+    COOKIE_TOKEN_NAME,
+} from '../utils'
 
 export interface PageContext extends ApolloPageContext {
     apolloClient: ApolloClient<unknown>
@@ -45,8 +51,8 @@ const App = (props: AppProps & ExtraAppProps) => {
     const {
         Component,
         apollo,
+        colorScheme,
         pageProps,
-        colorScheme
     } = props
 
     const router = useRouter()
@@ -121,12 +127,16 @@ const App = (props: AppProps & ExtraAppProps) => {
                                                 height: '100%',
                                             },
                                             main: {
+                                                display: 'flex',
+                                                flex: 1,
                                                 main: {
                                                     backgroundColor: theme.colorScheme === 'dark'
                                                         ? theme.colors.dark[8]
                                                         : theme.colors.gray[0],
                                                 },
+                                                overflowX: 'hidden',
                                                 padding: 0,
+                                                zIndex: 1,
                                             },
                                             root: {
                                                 height: '100%',
@@ -150,7 +160,7 @@ const App = (props: AppProps & ExtraAppProps) => {
 App.getInitialProps = async (appProps: any) => {
     const initialProps = await NextApp.getInitialProps(appProps)
 
-    return { 
+    return {
         ...initialProps,
         colorScheme: getCookie(COOKIE_COLORSCHEME_NAME, appProps.ctx) ?? 'light',
     }
