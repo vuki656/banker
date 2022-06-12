@@ -2,8 +2,9 @@ import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
 import type { RangeSelectValue } from '../../../components'
-import type {
+import {
     CategoryType,
+    TransactionStatusEnum,
     TransactionType,
 } from '../../../graphql/types.generated'
 
@@ -13,7 +14,7 @@ import type {
 } from './BreakdownStore.types'
 
 export class BreakdownStore {
-    public transactions: TransactionType[] = []
+    public transactionsValue: TransactionType[] = []
 
     public categories: CategoryType[] = []
 
@@ -35,7 +36,13 @@ export class BreakdownStore {
     }
 
     public setTransactions(transactions: TransactionType[]) {
-        this.transactions = transactions
+        this.transactionsValue = transactions
+    }
+
+    public get transactions() {
+        return this.transactionsValue.filter((transaction) => {
+            return transaction.status === TransactionStatusEnum.Done
+        })
     }
 
     public get total() {
