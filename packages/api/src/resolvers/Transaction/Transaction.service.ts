@@ -7,10 +7,12 @@ import { nullableConnect } from '../../shared/utils/nullableConnect'
 import type { TransactionsArgs } from './args'
 import type {
     CreateTransactionInput,
+    DeleteTransactionInput,
     UpdateTransactionInput,
 } from './inputs'
 import type {
     CreateTransactionPayload,
+    DeleteTransactionPayload,
     UpdateTransactionPayload,
 } from './payloads'
 import { TRANSACTION_DEFAULT_SELECT } from './Transaction.select'
@@ -68,6 +70,19 @@ export class TransactionService {
         }
     }
 
+    public async deleteOne(input: DeleteTransactionInput): Promise<DeleteTransactionPayload> {
+        const deletedTransaction = await orm.transaction.delete({
+            select: TRANSACTION_DEFAULT_SELECT(),
+            where: {
+                id: input.id,
+            },
+        })
+
+        return {
+            transaction: deletedTransaction,
+        }
+    }
+
     public async findAll(args?: TransactionsArgs | null, userId?: string): Promise<TransactionType[]> {
         const startDate = args?.startDate ?? dayjs()
             .subtract(30, 'year')
@@ -76,6 +91,9 @@ export class TransactionService {
         const endDate = args?.endDate ?? dayjs().toDate()
 
         return orm.transaction.findMany({
+            orderBy: {
+                date: 'asc',
+            },
             select: TRANSACTION_DEFAULT_SELECT(),
             where: {
                 AND: [

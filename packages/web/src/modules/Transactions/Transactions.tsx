@@ -6,7 +6,6 @@ import {
     ThemeIcon,
     UnstyledButton,
 } from '@mantine/core'
-import { useHover } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
@@ -25,8 +24,6 @@ import { TransactionUpdateDialog } from './TransactionUpdateDialog'
 
 export const Transactions = observer(() => {
     const store = useTransactionsStore()
-
-    const { hovered, ref } = useHover()
 
     const [dialogValue, setDialogValue] = useState<TransactionType | null>()
 
@@ -90,17 +87,12 @@ export const Transactions = observer(() => {
                                 onClick={() => {
                                     setDialogValue(transaction)
                                 }}
-                                // @ts-expect-error
-                                ref={ref}
-                                sx={(theme) => ({
-                                    backgroundColor: hovered ? theme.colors.gray[0] : theme.white,
-                                    borderRadius: theme.radius.sm,
-                                    boxShadow: theme.shadows.xs,
-                                })}
                             >
                                 <Box
                                     sx={(theme) => ({
                                         alignItems: 'center',
+                                        borderRadius: theme.radius.sm,
+                                        boxShadow: theme.shadows.xs,
                                         columnGap: theme.spacing.md,
                                         display: 'grid',
                                         gridTemplateColumns: '0.2fr 0.2fr 0.1fr 0.5fr',
@@ -127,18 +119,18 @@ export const Transactions = observer(() => {
                                         </Text>
                                     </Group>
                                     <Text size="sm">
-                                        {dayjs(transaction.date).format('MM:HH DD.MM.YYYY')}
+                                        {dayjs(transaction.date).format('DD.MM.YYYY')}
                                     </Text>
                                     <Text
                                         size="sm"
                                         sx={(theme) => {
                                             let color = theme.colors.green
 
-                                            if (transaction.amount > 100) {
+                                            if (transaction.amount >= 100) {
                                                 color = theme.colors.orange
                                             }
 
-                                            if (transaction.amount > 500) {
+                                            if (transaction.amount >= 500) {
                                                 color = theme.colors.red
                                             }
 

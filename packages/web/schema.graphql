@@ -60,6 +60,7 @@ type Mutation {
     deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
     createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
     updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
+    deleteTransaction(input: DeleteTransactionInput!): DeleteTransactionPayload!
 }
 
 type LoginUserPayload {
@@ -132,4 +133,12 @@ input UpdateTransactionInput {
     date: String!
     description: String!
     categoryId: ID
+}
+
+type DeleteTransactionPayload {
+    transaction: TransactionType!
+}
+
+input DeleteTransactionInput {
+    id: ID!
 }

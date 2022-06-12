@@ -5,6 +5,7 @@ import {
     Modal,
     NumberInput,
     Select,
+    SimpleGrid,
     Stack,
     Textarea,
 } from '@mantine/core'
@@ -16,6 +17,7 @@ import {
 } from 'react-hook-form'
 
 import {
+    useDeleteTransactionMutation,
     useGetCategoriesQuery,
     useUpdateTransactionMutation,
 } from '../../../graphql/types.generated'
@@ -33,10 +35,29 @@ import { transactionUpdateValidation } from './TransactionUpdateDialog.validatio
 export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateDialogProps> = (props) => {
     const {
         isOpen,
-        onCancel,
+        onCancel: onCancelProp,
         onSubmit: onSubmitProp,
         value,
     } = props
+
+    const [deleteTransactionMutation, { loading: deleteLoading }] = useDeleteTransactionMutation({
+        onCompleted: () => {
+            onSubmitProp()
+
+            showNotification({
+                color: 'green',
+                message: 'Transaction deleted',
+                title: 'Success',
+            })
+        },
+        onError: () => {
+            showNotification({
+                color: 'red',
+                message: 'Failed to delete transaction',
+                title: 'Error',
+            })
+        },
+    })
 
     const { data: categoriesData } = useGetCategoriesQuery({
         onError: () => {
@@ -48,7 +69,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
         },
     })
 
-    const [updateTransactionMutation, { loading }] = useUpdateTransactionMutation({
+    const [updateTransactionMutation, { loading: updateLoading }] = useUpdateTransactionMutation({
         onCompleted: () => {
             onSubmitProp()
 
@@ -61,7 +82,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
         onError: () => {
             showNotification({
                 color: 'red',
-                message: 'Failed to update categories',
+                message: 'Failed to update transaction',
                 title: 'Error',
             })
         },
@@ -72,6 +93,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
         formState,
         handleSubmit,
         register,
+        reset,
     } = useForm<TransactionUpdateFormValue>({
         defaultValues: {
             amount: value.amount,
@@ -96,6 +118,22 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                 },
             },
         })
+    }
+
+    const onDelete = () => {
+        void deleteTransactionMutation({
+            variables: {
+                input: {
+                    id: value.id,
+                },
+            },
+        })
+    }
+
+    const onCancel = () => {
+        reset()
+
+        onCancelProp()
     }
 
     return (
@@ -208,12 +246,27 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                     minRows={4}
                     {...register('description')}
                 />
-                <Button
-                    loading={loading}
-                    onClick={handleSubmit(onSubmit)}
-                >
-                    Save
-                </Button>
+                <SimpleGrid cols={3}>
+                    <Button
+                        color="red"
+                        loading={deleteLoading}
+                        onClick={onDelete}
+                    >
+                        Delete
+                    </Button>
+                    <Button
+                        onClick={onCancel}
+                        variant="default"
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        loading={updateLoading}
+                        onClick={handleSubmit(onSubmit)}
+                    >
+                        Save
+                    </Button>
+                </SimpleGrid>
             </Stack>
         </Modal>
     )
