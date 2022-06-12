@@ -6,6 +6,8 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "PGPASSWORD",
+        "psql",
         "dinero",
         "chartjs",
         "konzum",

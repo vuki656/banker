@@ -9,7 +9,7 @@
         "generate": "ts-node ./generator",
         "database:setup": "docker-compose run --rm migrations",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
-        "database:seed": "prisma db seed",
+        "database:seed": "PGPASSWORD=password psql -h localhost -U username -d banker < ./src/database/dump.sql",
         "database:migrate": "docker-compose run --no-deps --rm migrations",
         "production:migrate": "docker-compose run --no-deps --rm production-migrations",
         "production:start": "pm2 start yarn --interpreter bash --name api -- start",
