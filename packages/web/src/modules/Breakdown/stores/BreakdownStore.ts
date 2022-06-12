@@ -45,6 +45,12 @@ export class BreakdownStore {
         }
     }
 
+    public get total() {
+        return this.transactions.reduce((accumulator, value) => {
+            return accumulator + value.amount
+        }, 0)
+    }
+
     public get summaryData() {
         const categories = this.categories.reduce<BreakdownSummaryCardData>((accumulator, category) => {
             return {

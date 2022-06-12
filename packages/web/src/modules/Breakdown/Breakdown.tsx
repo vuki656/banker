@@ -1,6 +1,9 @@
 import {
+    Badge,
     Box,
+    Group,
     Stack,
+    Text,
 } from '@mantine/core'
 
 import {
@@ -45,7 +48,18 @@ export const Breakdown: React.FunctionComponent = () => {
                         value={store.range}
                     />
                 )}
-                title="Breakdown"
+                title={(
+                    <Group>
+                        <Text>
+                            Breakdown
+                        </Text>
+                        <Badge>
+                            {store.total}
+                            {' '}
+                            HRK
+                        </Badge>
+                    </Group>
+                )}
             />
             <Box
                 style={{
