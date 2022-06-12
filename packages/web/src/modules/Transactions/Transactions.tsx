@@ -17,9 +17,13 @@ import {
     RangeSelect,
 } from '../../components'
 import type { TransactionType } from '../../graphql/types.generated'
-import { useGetTransactionsQuery } from '../../graphql/types.generated'
+import {
+    useGetCategoriesQuery,
+    useGetTransactionsQuery,
+} from '../../graphql/types.generated'
 
 import { useTransactionsStore } from './hooks'
+import { TransactionsCategorySelect } from './TransactionsCategorySelect'
 import { TransactionsStatusSelect } from './TransactionStatusSelect'
 import { TransactionUpdateDialog } from './TransactionUpdateDialog'
 
@@ -27,6 +31,20 @@ export const Transactions = observer(() => {
     const store = useTransactionsStore()
 
     const [dialogValue, setDialogValue] = useState<TransactionType | null>()
+
+    useGetCategoriesQuery({
+        onCompleted: (data) => {
+            store.setCategories(data.categories)
+        },
+        onError: () => {
+            showNotification({
+                color: 'red',
+                message: 'Failed to get transactions',
+                title: 'Error',
+            })
+        },
+        ssr: false,
+    })
 
     const { loading, refetch } = useGetTransactionsQuery({
         onCompleted: (data) => {
@@ -75,6 +93,7 @@ export const Transactions = observer(() => {
                     )}
                 />
                 <TransactionsStatusSelect />
+                <TransactionsCategorySelect />
                 <Stack
                     p="md"
                     style={{

@@ -2,11 +2,11 @@ import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
 import type { RangeSelectValue } from '../../../components'
-import {
+import type {
     CategoryType,
-    TransactionStatusEnum,
     TransactionType,
 } from '../../../graphql/types.generated'
+import { TransactionStatusEnum } from '../../../graphql/types.generated'
 
 import type {
     BreakdownBarChartData,

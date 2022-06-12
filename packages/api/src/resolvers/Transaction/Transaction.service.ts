@@ -73,10 +73,10 @@ export class TransactionService {
 
     public async deleteOne(input: DeleteTransactionInput): Promise<DeleteTransactionPayload> {
         const deletedTransaction = await orm.transaction.update({
-            select: TRANSACTION_DEFAULT_SELECT(),
             data: {
                 status: TransactionStatusEnum.DISCARDED,
             },
+            select: TRANSACTION_DEFAULT_SELECT(),
             where: {
                 id: input.id,
             },
@@ -96,7 +96,7 @@ export class TransactionService {
 
         return orm.transaction.findMany({
             orderBy: {
-                date: 'asc',
+                date: 'desc',
             },
             select: TRANSACTION_DEFAULT_SELECT(),
             where: {

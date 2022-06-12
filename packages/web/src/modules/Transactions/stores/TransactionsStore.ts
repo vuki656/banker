@@ -2,13 +2,20 @@ import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
 import type { RangeSelectValue } from '../../../components'
-import type { TransactionType } from '../../../graphql/types.generated'
+import type {
+    CategoryType,
+    TransactionType,
+} from '../../../graphql/types.generated'
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
 
 export class TransactionsStore {
     public status = TransactionStatusEnum.Done
 
     public transactionsValue: TransactionType[] = []
+
+    public categories: CategoryType[] = []
+
+    public categoryFilter: string | null = null
 
     public range: RangeSelectValue = {
         endDate: dayjs().toDate(),
@@ -22,6 +29,10 @@ export class TransactionsStore {
 
     public get transactions() {
         return this.transactionsValue.filter((transaction) => {
+            if (this.categoryFilter) {
+                return transaction.status === this.status && this.categoryFilter === transaction.category?.id
+            }
+
             return transaction.status === this.status
         })
     }
@@ -36,5 +47,13 @@ export class TransactionsStore {
 
     public setStatus(newStatus: TransactionStatusEnum) {
         this.status = newStatus
+    }
+
+    public setCategories(categories: CategoryType[]) {
+        this.categories = categories
+    }
+
+    public setCategoryFilter(categoryId: string | null) {
+        this.categoryFilter = categoryId
     }
 }
