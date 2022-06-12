@@ -20,7 +20,7 @@ import {
 import type { TransactionType } from '../../graphql/types.generated'
 import { useGetTransactionsQuery } from '../../graphql/types.generated'
 
-import { useTransactionsStore } from './hooks/useTransactionsStore'
+import { useTransactionsStore } from './hooks'
 import { TransactionUpdateDialog } from './TransactionUpdateDialog'
 
 export const Transactions = observer(() => {

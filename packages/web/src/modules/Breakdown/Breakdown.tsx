@@ -6,6 +6,7 @@ import {
     Text,
 } from '@mantine/core'
 
+import type { RangeSelectValue } from '../../components'
 import {
     Header,
     RangeSelect,
@@ -35,6 +36,12 @@ export const Breakdown: React.FunctionComponent = () => {
         },
     })
 
+    const onRangeChange = (formValue: RangeSelectValue) => {
+        store.setRange(formValue)
+
+        void refetch()
+    }
+
     return (
         <Stack
             spacing={0}
@@ -44,7 +51,7 @@ export const Breakdown: React.FunctionComponent = () => {
                 action={(
                     <RangeSelect
                         loading={loading}
-                        onSubmit={refetch}
+                        onSubmit={onRangeChange}
                         value={store.range}
                     />
                 )}

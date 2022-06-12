@@ -17,17 +17,17 @@ export class BreakdownStore {
 
     public categories: CategoryType[] = []
 
-    public rangeValue: RangeSelectValue = [ // eslint-disable-next-line newline-per-chained-call
-        dayjs().startOf('month').toDate(),
-        dayjs().toDate(),
-    ]
+    public range: RangeSelectValue = {
+        endDate: dayjs().toDate(), // eslint-disable-next-line newline-per-chained-call
+        startDate: dayjs().startOf('month').toDate(),
+    }
 
     constructor() {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
     public setRange(range: RangeSelectValue) {
-        this.rangeValue = range
+        this.range = range
     }
 
     public setCategories(categories: CategoryType[]) {
@@ -36,13 +36,6 @@ export class BreakdownStore {
 
     public setTransactions(transactions: TransactionType[]) {
         this.transactions = transactions
-    }
-
-    public get range() {
-        return {
-            endDate: this.rangeValue[1],
-            startDate: this.rangeValue[0],
-        }
     }
 
     public get total() {
