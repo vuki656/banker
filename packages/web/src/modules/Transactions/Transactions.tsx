@@ -1,19 +1,14 @@
 import {
-    Box,
     Group,
     Stack,
     Text,
-    ThemeIcon,
-    UnstyledButton,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
 import {
     Header,
-    Icons,
     RangeSelect,
 } from '../../components'
 import type { TransactionType } from '../../graphql/types.generated'
@@ -23,6 +18,7 @@ import {
 } from '../../graphql/types.generated'
 
 import { useTransactionsStore } from './hooks'
+import { Transaction } from './Transaction/Transaction'
 import { TransactionsCategorySelect } from './TransactionsCategorySelect'
 import { TransactionsStatusSelect } from './TransactionStatusSelect'
 import { TransactionUpdateDialog } from './TransactionUpdateDialog'
@@ -103,80 +99,13 @@ export const Transactions = observer(() => {
                 >
                     {store.transactions.map((transaction) => {
                         return (
-                            <UnstyledButton
+                            <Transaction
                                 key={transaction.id}
                                 onClick={() => {
                                     setDialogValue(transaction)
                                 }}
-                            >
-                                <Box
-                                    sx={(theme) => ({
-                                        alignItems: 'center',
-                                        borderRadius: theme.radius.sm,
-                                        boxShadow: theme.shadows.xs,
-                                        columnGap: theme.spacing.md,
-                                        display: 'grid',
-                                        gridTemplateColumns: '0.2fr 0.2fr 0.1fr 0.5fr',
-                                        padding: theme.spacing.xs,
-                                    })}
-                                >
-                                    <Group>
-                                        <ThemeIcon
-                                            color={transaction.category?.color}
-                                            size="md"
-                                            variant="light"
-                                        >
-                                            <Icons
-                                                name={transaction.category?.icon}
-                                                size={21}
-                                            />
-                                        </ThemeIcon>
-                                        <Text
-                                            color={transaction.category?.color}
-                                            size="sm"
-                                            weight={500}
-                                        >
-                                            {transaction.category?.name}
-                                        </Text>
-                                    </Group>
-                                    <Text size="sm">
-                                        {dayjs(transaction.date).format('DD.MM.YYYY')}
-                                    </Text>
-                                    <Text
-                                        size="sm"
-                                        sx={(theme) => {
-                                            let color = theme.colors.green
-
-                                            if (transaction.amount >= 100) {
-                                                color = theme.colors.orange
-                                            }
-
-                                            if (transaction.amount >= 500) {
-                                                color = theme.colors.red
-                                            }
-
-                                            return {
-                                                color,
-                                            }
-                                        }}
-                                        weight="bold"
-                                    >
-                                        {`${transaction.amount} ${transaction.currency}`}
-                                    </Text>
-                                    <Text
-                                        color="dimmed"
-                                        size="sm"
-                                        style={{
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap',
-                                        }}
-                                        weight={500}
-                                    >
-                                        {transaction.description}
-                                    </Text>
-                                </Box>
-                            </UnstyledButton>
+                                value={transaction}
+                            />
                         )
                     })}
                 </Stack>
@@ -195,7 +124,6 @@ export const Transactions = observer(() => {
                     value={dialogValue}
                 />
             ) : null}
-
         </>
     )
 })

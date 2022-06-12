@@ -19,7 +19,7 @@ export const TransactionsStatusSelect = observer(() => {
                 borderBottom: `1px solid ${theme.colors.gray[2]}`,
                 padding: theme.spacing.sm,
             })}
-            value={store.status}
+            value={store.statusFilter}
             variant="filled"
         >
             <Chip value={TransactionStatusEnum.Done}>
