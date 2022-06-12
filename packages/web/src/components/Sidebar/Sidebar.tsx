@@ -5,7 +5,6 @@ import {
     Navbar,
     Text,
     useMantineColorScheme,
-    useMantineTheme,
 } from '@mantine/core'
 import {
     IconChartBar,
@@ -26,7 +25,6 @@ import { SidebarButton } from './SidebarButton'
 const ICON_SIZE = 16
 
 export const Sidebar: React.FunctionComponent = () => {
-    const theme = useMantineTheme()
     const router = useRouter()
     const apolloClient = useApolloClient()
 
@@ -53,12 +51,12 @@ export const Sidebar: React.FunctionComponent = () => {
                 <Group
                     align="center"
                     position="apart"
-                    style={{
+                    sx={(theme) => ({
                         borderBottom: `1px solid ${theme.colors.gray[2]}`,
                         paddingBottom: theme.spacing.lg,
                         paddingLeft: theme.spacing.xs,
                         paddingRight: theme.spacing.xs,
-                    }}
+                    })}
                 >
                     <Text
                         style={{

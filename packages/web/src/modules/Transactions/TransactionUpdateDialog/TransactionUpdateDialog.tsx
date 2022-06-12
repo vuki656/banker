@@ -252,7 +252,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                         loading={deleteLoading}
                         onClick={onDelete}
                     >
-                        Delete
+                        Discard
                     </Button>
                     <Button
                         onClick={onCancel}

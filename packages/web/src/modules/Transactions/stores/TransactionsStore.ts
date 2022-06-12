@@ -3,9 +3,12 @@ import { makeAutoObservable } from 'mobx'
 
 import type { RangeSelectValue } from '../../../components'
 import type { TransactionType } from '../../../graphql/types.generated'
+import { TransactionStatusEnum } from '../../../graphql/types.generated'
 
 export class TransactionsStore {
-    public transactions: TransactionType[] = []
+    public status = TransactionStatusEnum.Done
+
+    public transactionsValue: TransactionType[] = []
 
     public range: RangeSelectValue = {
         endDate: dayjs().toDate(),
@@ -17,11 +20,21 @@ export class TransactionsStore {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
+    public get transactions() {
+        return this.transactionsValue.filter((transaction) => {
+            return transaction.status === this.status
+        })
+    }
+
     public setRange(newRange: RangeSelectValue) {
         this.range = newRange
     }
 
     public setTransactions(transactions: TransactionType[]) {
-        this.transactions = transactions
+        this.transactionsValue = transactions
+    }
+
+    public setStatus(newStatus: TransactionStatusEnum) {
+        this.status = newStatus
     }
 }

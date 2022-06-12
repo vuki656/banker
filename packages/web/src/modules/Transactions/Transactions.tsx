@@ -20,6 +20,7 @@ import type { TransactionType } from '../../graphql/types.generated'
 import { useGetTransactionsQuery } from '../../graphql/types.generated'
 
 import { useTransactionsStore } from './hooks'
+import { TransactionsStatusSelect } from './TransactionStatusSelect'
 import { TransactionUpdateDialog } from './TransactionUpdateDialog'
 
 export const Transactions = observer(() => {
@@ -73,6 +74,7 @@ export const Transactions = observer(() => {
                         </Group>
                     )}
                 />
+                <TransactionsStatusSelect />
                 <Stack
                     p="md"
                     style={{

@@ -5,6 +5,7 @@ import { orm } from '../../shared/orm'
 import { nullableConnect } from '../../shared/utils/nullableConnect'
 
 import type { TransactionsArgs } from './args'
+import { TransactionStatusEnum } from './enums'
 import type {
     CreateTransactionInput,
     DeleteTransactionInput,
@@ -71,8 +72,11 @@ export class TransactionService {
     }
 
     public async deleteOne(input: DeleteTransactionInput): Promise<DeleteTransactionPayload> {
-        const deletedTransaction = await orm.transaction.delete({
+        const deletedTransaction = await orm.transaction.update({
             select: TRANSACTION_DEFAULT_SELECT(),
+            data: {
+                status: TransactionStatusEnum.DISCARDED,
+            },
             where: {
                 id: input.id,
             },
