@@ -1,6 +1,8 @@
 import {
     IconBolt,
+    IconBuildingBank,
     IconCar,
+    IconCash,
     IconCoffee,
     IconCoin,
     IconHome,
@@ -8,10 +10,8 @@ import {
     IconPlane,
     IconQuestionMark,
     IconRotateClockwise,
-    IconShoppingCart,
     IconShirt,
-    IconBuildingBank,
-    IconCash
+    IconShoppingCart,
 } from '@tabler/icons'
 import { useMemo } from 'react'
 
@@ -29,7 +29,7 @@ export const ICONS = [
     IconCoin,
     IconShirt,
     IconBuildingBank,
-    IconCash
+    IconCash,
 ]
 
 export const Icons: React.FunctionComponent<IconsProps> = (props) => {

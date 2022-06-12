@@ -1,1 +1,1 @@
-export { categoryFormValidation as createCategoryFormValidation, } from '../CategoryForm'
+export { categoryValidation as createCategoryFormValidation, } from '../CategoryForm'

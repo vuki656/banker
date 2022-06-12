@@ -5,3 +5,11 @@ mutation CreateTransaction($input: CreateTransactionInput!) {
         }
     }
 }
+
+mutation UpdateTransaction($input: UpdateTransactionInput!) {
+    updateTransaction(input: $input) {
+        transaction {
+            ...TransactionPayload
+        }
+    }
+}

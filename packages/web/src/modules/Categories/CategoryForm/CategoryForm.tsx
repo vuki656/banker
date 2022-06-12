@@ -17,7 +17,7 @@ import type {
     CategoryFormProps,
     CategoryFormValueType,
 } from './CategoryForm.types'
-import { categoryFormValidation } from './CategoryForm.validation'
+import { categoryValidation } from './CategoryForm.validation'
 import { CategoryFormColors } from './CategoryFormColors'
 import { CategoryFormKeywords } from './CategoryFormKeywords'
 
@@ -38,7 +38,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
 
     const form = useForm<CategoryFormValueType>({
         defaultValues: value,
-        resolver: zodResolver(categoryFormValidation),
+        resolver: zodResolver(categoryValidation),
     })
 
     const colorField = useController({ control: form.control, name: 'color' })

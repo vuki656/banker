@@ -11,8 +11,14 @@ import {
 import type { ContextType } from '../../shared/typescript-types'
 
 import { TransactionsArgs } from './args'
-import { CreateTransactionInput } from './inputs'
-import { CreateTransactionPayload } from './payloads'
+import {
+    CreateTransactionInput,
+    UpdateTransactionInput,
+} from './inputs'
+import {
+    CreateTransactionPayload,
+    UpdateTransactionPayload,
+} from './payloads'
 import { TransactionService } from './Transaction.service'
 import { TransactionType } from './types'
 
@@ -40,5 +46,13 @@ export class TransactionResolver {
         @Ctx() context: ContextType,
     ): Promise<CreateTransactionPayload> {
         return this.service.createOne(input, context.user?.id)
+    }
+
+    @Authorized()
+    @Mutation(() => UpdateTransactionPayload)
+    public async updateTransaction(
+        @Arg('input', () => UpdateTransactionInput) input: UpdateTransactionInput,
+    ): Promise<UpdateTransactionPayload> {
+        return this.service.updateOne(input)
     }
 }

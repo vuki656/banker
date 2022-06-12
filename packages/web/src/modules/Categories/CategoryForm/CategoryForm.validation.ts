@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const categoryFormValidation = z.object({
+export const categoryValidation = z.object({
     color: z
         .string()
         .min(1, 'Required'),

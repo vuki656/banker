@@ -59,6 +59,7 @@ type Mutation {
     updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
     deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
     createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
+    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
 }
 
 type LoginUserPayload {
@@ -118,4 +119,17 @@ input CreateTransactionInput {
     date: String!
     status: TransactionStatusEnum!
     categoryId: String
+}
+
+type UpdateTransactionPayload {
+    transaction: TransactionType!
+}
+
+input UpdateTransactionInput {
+    id: ID!
+    amount: Float!
+    currency: String!
+    date: String!
+    description: String!
+    categoryId: ID
 }

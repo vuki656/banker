@@ -14,7 +14,8 @@
         "**/*.gql",
         "**/*.generated.ts",
         "dist/*",
-        ".next"
+        ".next",
+        "dump.sql"
     ],
     "parserOptions": {
         "project": "./tsconfig.json"

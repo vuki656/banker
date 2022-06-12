@@ -33,7 +33,10 @@ export const Breakdown: React.FunctionComponent = () => {
     })
 
     return (
-        <Stack spacing={0} style={{flex: 1}}>
+        <Stack
+            spacing={0}
+            style={{ flex: 1 }}
+        >
             <Header
                 action={(
                     <RangeSelect
@@ -54,8 +57,8 @@ export const Breakdown: React.FunctionComponent = () => {
                     `,
                     gridTemplateColumns: '300px 1fr',
                     gridTemplateRows: 'auto 1fr',
+                    overflow: 'auto',
                     padding: '20px',
-                    overflow: 'auto'
                 }}
             >
                 <BreakdownSummary />

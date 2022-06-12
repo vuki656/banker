@@ -5,8 +5,14 @@ import { orm } from '../../shared/orm'
 import { nullableConnect } from '../../shared/utils/nullableConnect'
 
 import type { TransactionsArgs } from './args'
-import type { CreateTransactionInput } from './inputs'
-import type { CreateTransactionPayload } from './payloads'
+import type {
+    CreateTransactionInput,
+    UpdateTransactionInput,
+} from './inputs'
+import type {
+    CreateTransactionPayload,
+    UpdateTransactionPayload,
+} from './payloads'
 import { TRANSACTION_DEFAULT_SELECT } from './Transaction.select'
 import type { TransactionType } from './types'
 
@@ -33,6 +39,32 @@ export class TransactionService {
 
         return {
             transaction: createdTransaction,
+        }
+    }
+
+    public async updateOne(input: UpdateTransactionInput): Promise<UpdateTransactionPayload> {
+        const updatedTransaction = await orm.transaction.update({
+            data: {
+                amount: input.amount,
+                category: input.categoryId ? {
+                    connect: {
+                        id: input.categoryId,
+                    },
+                } : {
+                    disconnect: true,
+                },
+                currency: input.currency,
+                date: input.date,
+                description: input.description,
+            },
+            select: TRANSACTION_DEFAULT_SELECT(),
+            where: {
+                id: input.id,
+            },
+        })
+
+        return {
+            transaction: updatedTransaction,
         }
     }
 

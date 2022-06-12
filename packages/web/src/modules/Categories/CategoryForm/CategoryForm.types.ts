@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react'
 import type { z } from 'zod'
 
-import type { categoryFormValidation } from './CategoryForm.validation'
+import type { categoryValidation } from './CategoryForm.validation'
 
-export type CategoryFormValueType = z.infer<typeof categoryFormValidation>
+export type CategoryFormValueType = z.infer<typeof categoryValidation>
 
 export type CategoryFormProps = {
     formId: string
