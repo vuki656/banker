@@ -185,18 +185,17 @@ ALTER TABLE public.databasechangeloglock OWNER TO "banker-user";
 --
 
 COPY banker.categories (id, name, icon, color, user_fk, is_deleted) FROM stdin;
-f817c82a-9d68-44f2-8d6c-4ad8d8655305	wef	C	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	t
 d7e723e3-566f-41f6-b5ee-9fc11378bd13	Transport	IconCar	dark	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-e73616ca-7c4e-4105-808e-f9ffef14e515	Rent	IconCar	green	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-778a317e-d02c-44c0-9e3d-8c6ff156064d	Withdrawls	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-972fcd3d-a29b-4b9c-b965-dce6c7ddb774	Bars	IconCar	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-4487ee24-7867-4dec-beb5-08d3e6e3ba79	Subscriptions	IconCar	red	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	Bank Fees	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-00515f3e-9df1-495b-8c74-a19ff094edae	Clothes 	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-a24f655e-6508-409c-a580-4e4a28895f64	Utilities	IconCar	yellow	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-a6e0d1b4-0363-484e-aa8f-e006851aa91d	Loans	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-f9280f8a-49ed-40ad-8fba-208382c36613	Groceries	IconCar	pink	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-0d69125c-d5c4-4fa2-b722-722714bb894d	Restaurants	IconCar	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+e73616ca-7c4e-4105-808e-f9ffef14e515	Rent	IconHome	green	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+778a317e-d02c-44c0-9e3d-8c6ff156064d	Withdrawls	IconCash	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+972fcd3d-a29b-4b9c-b965-dce6c7ddb774	Bars	IconCoffee	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+4487ee24-7867-4dec-beb5-08d3e6e3ba79	Subscriptions	IconRotateClockwise	red	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	Bank Fees	IconCoin	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+00515f3e-9df1-495b-8c74-a19ff094edae	Clothes 	IconShirt	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+a24f655e-6508-409c-a580-4e4a28895f64	Utilities	IconBolt	yellow	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+a6e0d1b4-0363-484e-aa8f-e006851aa91d	Loans	IconBuildingBank	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+f9280f8a-49ed-40ad-8fba-208382c36613	Groceries	IconShoppingCart	pink	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+0d69125c-d5c4-4fa2-b722-722714bb894d	Restaurants	IconPizza	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
 \.
 
 
