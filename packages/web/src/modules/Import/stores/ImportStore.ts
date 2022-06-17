@@ -169,9 +169,9 @@ export class ImportStore {
             }
 
             // Transactions that are not expenses
-            if (amount <= 0) {
-                return accumulator
-            }
+            // if (amount <= 0) {
+            //     return accumulator
+            // }
 
             const transaction: NewTransactionType = {
                 amount,
@@ -188,29 +188,41 @@ export class ImportStore {
             ]
         }, [])
 
-        // Filter out transactions that have already been entered
-        const newTransactions = fileTransactions.filter((fileTransaction) => {
-            return !this.existingTransactions.some((existingTransaction) => {
+        // Remove existing transactions and cancellations
+        let transactions = fileTransactions.reduceRight<NewTransactionType[]>((accumulator, fileTransaction) => {
+            const isEntered = this.existingTransactions.some((existingTransaction) => {
                 return existingTransaction.reference === fileTransaction.reference
             })
-        })
 
-        // TODO: check if this removes both the transaction cancellation and the transaction itself
-        // Filter out cancellations (money was charged then returned)
-        // Logic is if the description has another transaction ID in it, it is a cancellation
-        const newTransactionsWithoutCancellations = newTransactions.filter((newTransaction) => {
-            return !newTransactions.some((transaction) => {
-                return transaction
-                    .description
-                    .toLowerCase()
-                    .includes(newTransaction.reference.toLowerCase())
+            if (isEntered) {
+                return accumulator
+            }
+
+            const cancelationTransaction = accumulator.find((transaction) => {
+                return transaction.description.toLowerCase().includes(fileTransaction.reference.toLowerCase())
             })
+
+            if (cancelationTransaction) {
+                return accumulator.filter((transaction) => {
+                    return transaction.reference !== cancelationTransaction.reference
+                })
+            }
+
+            return [
+                ...accumulator,
+                fileTransaction
+            ]
+        }, [])
+
+        // Remove transactions that aren't negative
+        transactions = transactions.filter((transaction) => {
+            return transaction.amount > 0
         })
 
-        this.newTransactions = newTransactionsWithoutCancellations
-        this.newTransactionsAmount = newTransactionsWithoutCancellations.length
+        this.newTransactions = transactions
+        this.newTransactionsAmount = transactions.length
 
-        if (newTransactions.length === 0) {
+        if (transactions.length === 0) {
             showNotification({
                 color: 'blue',
                 message: 'Info',

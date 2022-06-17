@@ -16,7 +16,6 @@ model Category {
     userFk       String        @map("user_fk") @db.Uuid
     isDeleted    Boolean       @default(false) @map("is_deleted")
     user         User          @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
-    keywords     Keyword[]
     transactions Transaction[]
 
     @@map("categories")
@@ -36,11 +35,10 @@ model User {
 }
 
 model Keyword {
-    id         String   @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
-    name       String   @db.VarChar(200)
-    categoryFk String   @map("category_fk") @db.Uuid
-    isDeleted  Boolean  @default(false) @map("is_deleted")
-    category   Category @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__categories")
+    id         String  @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
+    name       String  @db.VarChar(200)
+    categoryFk String  @map("category_fk") @db.Uuid
+    isDeleted  Boolean @default(false) @map("is_deleted")
 
     @@map("keywords")
 }
