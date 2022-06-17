@@ -6,6 +6,7 @@
         "cacheLocation": "./.cspellcache"
     },
     "ignoreWords": [
+        "datetime",
         "PGPASSWORD",
         "psql",
         "dinero",
