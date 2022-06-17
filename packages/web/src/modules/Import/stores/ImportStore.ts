@@ -23,15 +23,15 @@ export class ImportStore {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
-    public setExistingTransactions(transactions: TransactionType[]) {
+    public setExistingTransactions(transactions: TransactionType[]): void {
         this.existingTransactions = transactions
     }
 
-    public setCategories(categories: CategoryType[]) {
+    public setCategories(categories: CategoryType[]): void {
         this.categories = categories
     }
 
-    public get progress() {
+    public get progress(): string | null {
         if (this.newTransactions.length === 0) {
             return null
         }
@@ -39,7 +39,7 @@ export class ImportStore {
         return `${this.newTransactionsAmount - this.newTransactions.length} / ${this.newTransactionsAmount}`
     }
 
-    public setCurrentTransaction() {
+    public setCurrentTransaction(): void {
         if (this.newTransactions.length > 0) {
             const nextTransaction = this.newTransactions[0]
             let matchedKeyword = ''
@@ -77,13 +77,13 @@ export class ImportStore {
         this.currentTransaction = null
     }
 
-    public updateCurrentTransactionCategory(category: CategoryType) {
+    public updateCurrentTransactionCategory(category: CategoryType): void {
         if (this.currentTransaction) {
             this.currentTransaction.category = category
         }
     }
 
-    public discardTransaction() {
+    public discardTransaction(): void {
         this.newTransactions.shift()
 
         this.setCurrentTransaction()
@@ -210,7 +210,7 @@ export class ImportStore {
 
             return [
                 ...accumulator,
-                fileTransaction
+                fileTransaction,
             ]
         }, [])
 
@@ -233,5 +233,11 @@ export class ImportStore {
         }
 
         this.setCurrentTransaction()
+    }
+
+    public updateTransactionAmount(newAmount: number): void {
+        if (this.currentTransaction) {
+            this.currentTransaction.amount = newAmount
+        }
     }
 }

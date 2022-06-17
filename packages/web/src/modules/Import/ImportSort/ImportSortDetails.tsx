@@ -1,4 +1,5 @@
 import {
+    Group,
     Highlight,
     Text,
     ThemeIcon,
@@ -8,6 +9,8 @@ import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
 import { useImportStore } from '../hooks'
+
+import { ImportSortEditAmountDialog } from './ImportSortEditAmountDialog'
 
 export const ImportSortDetails = observer(() => {
     const store = useImportStore()
@@ -40,14 +43,20 @@ export const ImportSortDetails = observer(() => {
                     {store.currentTransaction?.description ?? 'N/A'}
                 </Highlight>
             </Text>
-            <Text
-                size="xl"
-                weight="bold"
-            >
-                {store.currentTransaction?.amount}
-                {' '}
-                {store.currentTransaction?.currency}
-            </Text>
+            <Group>
+                <Text
+                    size="xl"
+                    weight="bold"
+                >
+                    {store.currentTransaction?.amount}
+                    {' '}
+                    {store.currentTransaction?.currency}
+                </Text>
+                <ImportSortEditAmountDialog
+                    onSubmit={store.updateTransactionAmount}
+                    value={store.currentTransaction?.amount}
+                />
+            </Group>
             <Text size="md">
                 {dayjs(store.currentTransaction?.date).format('DD.MM.YYYY')}
             </Text>

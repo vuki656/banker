@@ -1,4 +1,5 @@
 export * from './Sidebar'
+export * from './MoneyInput'
 export * from './Icons'
 export * from './Header'
 export * from './IconPicker'

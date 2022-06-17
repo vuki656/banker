@@ -1,4 +1,4 @@
-import { TransactionType } from "../../../graphql/types.generated"
+import type { TransactionType } from '../../../graphql/types.generated'
 
 export type TransactionProps = {
     onClick(): void

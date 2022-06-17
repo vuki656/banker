@@ -1,14 +1,21 @@
-import { UnstyledButton, Box, Group, ThemeIcon, Text } from '@mantine/core'
+import {
+    Box,
+    Group,
+    Text,
+    ThemeIcon,
+    UnstyledButton,
+} from '@mantine/core'
 import dayjs from 'dayjs'
 import * as React from 'react'
+
 import { Icons } from '../../../components'
 
 import type { TransactionProps } from './Transaction.types'
 
 export const Transaction: React.FunctionComponent<TransactionProps> = (props) => {
     const {
+        onClick,
         value,
-        onClick
     } = props
 
     return (
@@ -41,7 +48,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                         <Icons
                             name={value.category?.icon}
                             size={21}
-                            />
+                        />
                     </ThemeIcon>
                     <Text
                         color={value.category?.color}

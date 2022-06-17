@@ -3,7 +3,6 @@ import {
     Box,
     Button,
     Modal,
-    NumberInput,
     Select,
     SimpleGrid,
     Stack,
@@ -16,6 +15,7 @@ import {
     useForm,
 } from 'react-hook-form'
 
+import { MoneyInput } from '../../../components'
 import {
     useDeleteTransactionMutation,
     useGetCategoriesQuery,
@@ -160,25 +160,13 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                         name="amount"
                         render={(controller) => {
                             return (
-                                <NumberInput
+                                <MoneyInput
                                     {...extractFormFieldErrors(formState.errors.amount)}
-                                    formatter={(newValue) => {
-                                        if (Number.isNaN(Number.parseFloat(newValue ?? ''))) {
-                                            return ''
-                                        }
-
-                                        // eslint-disable-next-line unicorn/no-unsafe-regex
-                                        return `${newValue}`.replace(/\B(?=(\d{3})+(?!\d))/gu, ',')
-                                    }}
                                     label="Amount"
                                     onChange={(newValue) => {
                                         controller.field.onChange(newValue)
                                     }}
-                                    parser={(newValue) => {
-                                        return newValue?.replace(/\$\s?|(,*)/gu, '')
-                                    }}
                                     placeholder="Enter an amount"
-                                    precision={2}
                                     value={controller.field.value}
                                 />
                             )
