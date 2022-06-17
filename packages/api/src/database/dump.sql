@@ -185,17 +185,19 @@ ALTER TABLE public.databasechangeloglock OWNER TO "banker-user";
 --
 
 COPY banker.categories (id, name, icon, color, user_fk, is_deleted) FROM stdin;
+f817c82a-9d68-44f2-8d6c-4ad8d8655305	wef	IconCar	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	t
 d7e723e3-566f-41f6-b5ee-9fc11378bd13	Transport	IconCar	dark	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-e73616ca-7c4e-4105-808e-f9ffef14e515	Rent	IconHome	green	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-778a317e-d02c-44c0-9e3d-8c6ff156064d	Withdrawls	IconCash	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-972fcd3d-a29b-4b9c-b965-dce6c7ddb774	Bars	IconCoffee	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-4487ee24-7867-4dec-beb5-08d3e6e3ba79	Subscriptions	IconRotateClockwise	red	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	Bank Fees	IconCoin	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-00515f3e-9df1-495b-8c74-a19ff094edae	Clothes 	IconShirt	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-a24f655e-6508-409c-a580-4e4a28895f64	Utilities	IconBolt	yellow	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-a6e0d1b4-0363-484e-aa8f-e006851aa91d	Loans	IconBuildingBank	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-f9280f8a-49ed-40ad-8fba-208382c36613	Groceries	IconShoppingCart	pink	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
-0d69125c-d5c4-4fa2-b722-722714bb894d	Restaurants	IconPizza	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+e73616ca-7c4e-4105-808e-f9ffef14e515	Rent	IconCar	green	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+778a317e-d02c-44c0-9e3d-8c6ff156064d	Withdrawls	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+972fcd3d-a29b-4b9c-b965-dce6c7ddb774	Bars	IconCar	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+4487ee24-7867-4dec-beb5-08d3e6e3ba79	Subscriptions	IconCar	red	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	Bank Fees	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+00515f3e-9df1-495b-8c74-a19ff094edae	Clothes 	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+a24f655e-6508-409c-a580-4e4a28895f64	Utilities	IconCar	yellow	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+a6e0d1b4-0363-484e-aa8f-e006851aa91d	Loans	IconCar	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+0d69125c-d5c4-4fa2-b722-722714bb894d	Restaurants	IconCar	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+f9280f8a-49ed-40ad-8fba-208382c36613	Groceries	IconCar	pink	5620c83c-3b66-40f3-a39a-75fd72dbd161	f
+2d60f7b9-413a-4660-8671-f4ccb0f3d755	test	IconCar	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	t
 \.
 
 
@@ -217,21 +219,13 @@ c173ca70-cb7c-4857-b23f-d22d606850f0	elektra	a24f655e-6508-409c-a580-4e4a28895f6
 5cf6e5c0-bd7f-443b-bebf-c1027737a9f0	hrvatski telekom	a24f655e-6508-409c-a580-4e4a28895f64	f
 1535885d-1579-450e-b7bf-524bde8b620d	jadranka	e73616ca-7c4e-4105-808e-f9ffef14e515	f
 7713b420-86bb-4c99-9198-ea0fd2828269	podizanje gotovog novca	778a317e-d02c-44c0-9e3d-8c6ff156064d	f
-403a9288-6444-43d2-8763-420b01b4597f	coco zagreb	f9280f8a-49ed-40ad-8fba-208382c36613	f
 2ef8d4b1-ee3e-4ac3-9974-bd0bb4350c2a	avant gastro	972fcd3d-a29b-4b9c-b965-dce6c7ddb774	f
-7ed9afb6-1aed-40f9-b570-cf8a57946ab8	ina zagreb	f9280f8a-49ed-40ad-8fba-208382c36613	f
-8724648f-1e4a-48c6-af2a-59ba3eeadb26	inovine	f9280f8a-49ed-40ad-8fba-208382c36613	f
-af682f12-6e38-4718-9955-b166d5ba7eda	konzum	f9280f8a-49ed-40ad-8fba-208382c36613	f
-eaeefd1c-e3a2-4193-ae0a-a514c1c532df	spar	f9280f8a-49ed-40ad-8fba-208382c36613	f
-1fe02a93-dd5a-4e49-86e6-8d368dc58af3	tisak	f9280f8a-49ed-40ad-8fba-208382c36613	f
 e9e3fcd0-f568-446d-8494-bde3544eb821	glovo prime	4487ee24-7867-4dec-beb5-08d3e6e3ba79	f
 b970a185-d6b1-4ab9-afa8-9525774845ac	netflix	4487ee24-7867-4dec-beb5-08d3e6e3ba79	f
 e7eada08-a0ae-4312-86dd-4abf0b612edb	youtube music	4487ee24-7867-4dec-beb5-08d3e6e3ba79	f
 ee86428d-d90d-45e9-b70d-1886b92a71ab	hbo max	4487ee24-7867-4dec-beb5-08d3e6e3ba79	f
 42784392-d125-4fcd-8ac1-36f13867455f	naknada za podizanje	5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	f
 8b76768c-8bb9-427f-b4c8-9bfe8e20db9a	naknada za kreditni transfer	5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	f
-b3634c17-65c7-4b63-9299-c7e35d324923	tobacco	f9280f8a-49ed-40ad-8fba-208382c36613	f
-a5205b92-1a9c-449e-bed1-e43034e9f961	kaufland	f9280f8a-49ed-40ad-8fba-208382c36613	f
 96f27c0c-e4ee-4967-84ca-89d3d1050a87	ali kebaba	0d69125c-d5c4-4fa2-b722-722714bb894d	f
 f29cd981-11fb-418a-abfe-4348980d1ce6	batak	0d69125c-d5c4-4fa2-b722-722714bb894d	f
 0a2a6284-ed2d-444e-8b0f-d7ebe3d49c9f	burger king	0d69125c-d5c4-4fa2-b722-722714bb894d	f
@@ -242,6 +236,14 @@ f29cd981-11fb-418a-abfe-4348980d1ce6	batak	0d69125c-d5c4-4fa2-b722-722714bb894d	
 255896ad-2c36-4240-b3b3-63fe26aab168	pasta fasta	0d69125c-d5c4-4fa2-b722-722714bb894d	f
 d33cc62c-3a55-4d89-b3e8-f1bda58f1353	wolt	0d69125c-d5c4-4fa2-b722-722714bb894d	f
 08af95b6-c03f-49cf-b80e-7555a0cd77c0	kfc	0d69125c-d5c4-4fa2-b722-722714bb894d	f
+e66cbc72-31a7-4ba1-8fc0-5b6b06111b99	coco zagreb	f9280f8a-49ed-40ad-8fba-208382c36613	f
+2b5a9c03-c5aa-4ee1-9a14-7561c9ad159a	ina zagreb	f9280f8a-49ed-40ad-8fba-208382c36613	f
+ec1714e0-9c52-4a67-9cf4-9823a08c3c62	inovine	f9280f8a-49ed-40ad-8fba-208382c36613	f
+810b9bda-4a94-44df-b71e-093b5c73c1d0	kaufland	f9280f8a-49ed-40ad-8fba-208382c36613	f
+8bb41872-49d8-48a9-be3f-bc8117a58beb	konzum	f9280f8a-49ed-40ad-8fba-208382c36613	f
+aba39043-cc06-495c-a617-7bbb463c900a	spar	f9280f8a-49ed-40ad-8fba-208382c36613	f
+dc298f17-c1fc-450e-b236-a25f7cbbe7ff	tisak	f9280f8a-49ed-40ad-8fba-208382c36613	f
+d103f7cc-7c87-45c9-9827-de3aa4939d96	tobacco	f9280f8a-49ed-40ad-8fba-208382c36613	f
 \.
 
 
