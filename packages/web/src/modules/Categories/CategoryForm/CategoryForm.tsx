@@ -4,6 +4,7 @@ import {
     SimpleGrid,
     Stack,
     TextInput,
+    useMantineTheme,
 } from '@mantine/core'
 import {
     Controller,
@@ -31,6 +32,8 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
         onUpdate: onSubmitProp,
         value,
     } = props
+
+    const theme = useMantineTheme();
 
     const form = useForm<CategoryFormType>({
         defaultValues: {
@@ -72,7 +75,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                     return (
                         <IconPicker
                             {...extractFormFieldErrors(controller.formState.errors.icon)}
-                            color={colorField.field.value}
+                            color={theme.colors[colorField.field.value][6]}
                             onChange={controller.field.onChange}
                             required={true}
                             value={controller.field.value}
