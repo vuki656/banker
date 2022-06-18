@@ -4,7 +4,6 @@ import {
     ThemeIcon,
     UnstyledButton,
 } from '@mantine/core'
-import dayjs from 'dayjs'
 import * as React from 'react'
 
 import { Icons } from '../../../components'

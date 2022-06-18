@@ -4,7 +4,6 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
-import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'

@@ -32,7 +32,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
         value,
     } = props
 
-    const theme = useMantineTheme();
+    const theme = useMantineTheme()
 
     const form = useForm<CategoryFormType>({
         defaultValues: {
@@ -86,11 +86,11 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                 <CategoryFormColors />
                 <CategoryFormKeywords />
             </FormProvider>
-            <SimpleGrid 
-                cols={value ? 3 : 2} 
-                sx={(theme) => ({
-                    marginTop: theme.spacing.xl
-                })}
+            <SimpleGrid
+                cols={value ? 3 : 2}
+                style={{
+                    marginTop: theme.spacing.xl,
+                }}
             >
                 {value ? (
                     <Button

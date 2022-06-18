@@ -1,4 +1,7 @@
-import { LoadingOverlay, Modal } from '@mantine/core'
+import {
+    LoadingOverlay,
+    Modal,
+} from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import * as React from 'react'
 

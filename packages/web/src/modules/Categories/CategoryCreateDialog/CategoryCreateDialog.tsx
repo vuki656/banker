@@ -19,7 +19,7 @@ export const CategoryCreateDialog: React.FunctionComponent<CategoryCreateDialogP
 
     const [isOpen, openActions] = useBoolean()
 
-    const [createCategoryMutation, { loading }] = useCreateCategoryMutation({
+    const [createCategoryMutation] = useCreateCategoryMutation({
         onCompleted: () => {
             showNotification({
                 color: 'green',
@@ -71,9 +71,6 @@ export const CategoryCreateDialog: React.FunctionComponent<CategoryCreateDialogP
                 title="Create Category"
             >
                 <CategoryForm
-                    loading={{
-                        update: loading,
-                    }}
                     onCancel={openActions.setFalse}
                     onUpdate={onSubmit}
                 />

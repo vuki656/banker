@@ -9,7 +9,10 @@ import { IconCalendar } from '@tabler/icons'
 import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 
-import { formatDate, useBoolean } from '../../utils'
+import {
+    formatDate,
+    useBoolean,
+} from '../../utils'
 
 import type { RangeSelectProps } from './RangeSelect.types'
 
