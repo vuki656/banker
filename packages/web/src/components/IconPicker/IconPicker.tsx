@@ -6,6 +6,7 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
+import { cloneElement } from 'react'
 
 import { useBoolean } from '../../utils'
 import {
@@ -74,8 +75,8 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                             return (
                                 <ThemeIcon
                                     color={color}
-                                    key={Icon.name}
-                                    onClick={onIconSelect(Icon.name)}
+                                    key={Icon.key}
+                                    onClick={onIconSelect(String(Icon.key))}
                                     size="lg"
                                     style={{
                                         cursor: 'pointer',
@@ -87,7 +88,7 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                                     })}
                                     variant="light"
                                 >
-                                    <Icon size={20} />
+                                    {cloneElement(Icon, { size: 20 })}
                                 </ThemeIcon>
                             )
                         })}
