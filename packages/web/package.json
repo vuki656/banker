@@ -9,7 +9,7 @@
         "codegen": "graphql-codegen --config ./codegen.yaml",
         "production:start": "pm2 start yarn --interpreter bash --name client -- start",
         "production:kill": "pm2 stop client 2> /dev/null || true && pm2 delete client 2> /dev/null ||true",
-        "production:restart": "yarn codegen && yarn build && yarn production:kill && yarn production:start"
+        "production:restart": "yarn && yarn codegen && yarn build && yarn production:kill && yarn production:start"
     },
     "dependencies": {
         "@apollo/client": "3.6.8",

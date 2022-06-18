@@ -14,7 +14,7 @@
         "production:migrate": "docker-compose run --no-deps --rm production-migrations",
         "production:start": "pm2 start yarn --interpreter bash --name api -- start",
         "production:kill": "pm2 stop api 2> /dev/null || true && pm2 delete api 2> /dev/null || true",
-        "production:restart": "yarn orm:generate && yarn build && yarn production:kill && yarn production:start",
+        "production:restart": "yarn && yarn orm:generate && yarn build && yarn production:kill && yarn production:start",
         "orm:generate": "prisma generate",
         "schema:build": "ts-node './src/server/generateSchemaFile.ts'"
     },
