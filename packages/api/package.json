@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "nodemon",
         "start": "NODE_ENV=production node 'dist/index.js'",
-        "build": "yarn orm:generate && rm -rf ./dist && webpack",
+        "build": "webpack",
         "generate": "ts-node ./generator",
         "database:setup": "docker-compose run --rm migrations",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
@@ -13,6 +13,8 @@
         "database:migrate": "docker-compose run --no-deps --rm migrations",
         "production:migrate": "docker-compose run --no-deps --rm production-migrations",
         "production:start": "pm2 start yarn --interpreter bash --name api -- start",
+        "production:kill": "pm2 stop api && pm2 delete api",
+        "production:restart": "yarn orm:generate && yarn build && yarn production:kill && yarn production:start",
         "orm:generate": "prisma generate",
         "schema:build": "ts-node './src/server/generateSchemaFile.ts'"
     },
