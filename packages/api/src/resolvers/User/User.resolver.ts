@@ -5,8 +5,14 @@ import {
     Resolver,
 } from 'type-graphql'
 
-import { LoginUserInput } from './inputs'
-import { LoginUserPayload } from './payloads'
+import {
+    LoginUserInput,
+    UpdateUserInput,
+} from './inputs'
+import {
+    LoginUserPayload,
+    UpdateUserPayload,
+} from './payloads'
 import { UserType } from './types'
 import { UserService } from './User.service'
 
@@ -16,8 +22,15 @@ export class UserResolver {
 
     @Mutation(() => LoginUserPayload)
     public async loginUser(
-        @Arg('input', () => LoginUserInput) credentials: LoginUserInput,
+        @Arg('input', () => LoginUserInput) input: LoginUserInput,
     ): Promise<LoginUserPayload> {
-        return this.service.login(credentials)
+        return this.service.login(input)
+    }
+
+    @Mutation(() => UpdateUserPayload)
+    public async updateUser(
+        @Arg('input', () => UpdateUserInput) input: UpdateUserInput,
+    ): Promise<UpdateUserPayload> {
+        return this.service.updateOne(input)
     }
 }

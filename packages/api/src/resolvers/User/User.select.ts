@@ -8,6 +8,7 @@ const makeUserSelect = <TSelect extends Prisma.UserSelect>(
 
 export const USER_DEFAULT_SELECT = () => {
     return makeUserSelect({
+        currency: true,
         email: true,
         firstName: true,
         id: true,

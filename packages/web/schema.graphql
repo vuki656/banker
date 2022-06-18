@@ -55,6 +55,7 @@ input TransactionsArgs {
 
 type Mutation {
     loginUser(input: LoginUserInput!): LoginUserPayload!
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
     createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
     updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
     deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
@@ -65,11 +66,32 @@ type Mutation {
 
 type LoginUserPayload {
     token: String!
+    user: UserType!
+}
+
+type UserType implements BaseType {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    currency: String!
 }
 
 input LoginUserInput {
     email: String!
     password: String!
+}
+
+type UpdateUserPayload {
+    user: UserType!
+}
+
+input UpdateUserInput {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    currency: String!
 }
 
 type CreateCategoryPayload {

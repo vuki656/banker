@@ -18,22 +18,29 @@ import {
 import { removeCookies } from 'cookies-next'
 import { useRouter } from 'next/router'
 
-import { COOKIE_TOKEN_NAME } from '../../utils'
+import {
+    COOKIE_TOKEN_NAME,
+    useCurrentUser,
+} from '../../utils'
 
 import { SidebarButton } from './SidebarButton'
+import { SidebarUpdateUserDialog } from './SidebarUpdateUserDialog'
 
 const ICON_SIZE = 16
 
 export const Sidebar: React.FunctionComponent = () => {
     const router = useRouter()
     const apolloClient = useApolloClient()
-
     const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+
+    const { unload } = useCurrentUser()
 
     const onLogout = async () => {
         await router.push('/')
 
         await apolloClient.clearStore()
+
+        unload()
 
         removeCookies(COOKIE_TOKEN_NAME)
     }
@@ -126,6 +133,7 @@ export const Sidebar: React.FunctionComponent = () => {
                     label="Logout"
                     onClick={onLogout}
                 />
+                <SidebarUpdateUserDialog />
             </Navbar.Section>
         </Navbar>
     )

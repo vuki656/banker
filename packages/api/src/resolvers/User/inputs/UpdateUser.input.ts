@@ -1,12 +1,14 @@
 import {
     Field,
-    ObjectType,
+    ID,
+    InputType,
 } from 'type-graphql'
 
-import { BaseType } from '../../../shared/typegraphql-types'
+@InputType()
+export class UpdateUserInput {
+    @Field(() => ID)
+    public id: string
 
-@ObjectType({ implements: BaseType })
-export class UserType extends BaseType {
     @Field(() => String)
     public firstName: string
 

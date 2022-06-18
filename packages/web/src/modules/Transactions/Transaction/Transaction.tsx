@@ -4,7 +4,6 @@ import {
     ThemeIcon,
     UnstyledButton,
 } from '@mantine/core'
-import * as React from 'react'
 
 import { Icons } from '../../../components'
 import { formatDate } from '../../../utils'

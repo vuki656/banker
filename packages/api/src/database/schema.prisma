@@ -15,7 +15,7 @@ model Category {
     color        String        @db.VarChar(200)
     userFk       String        @map("user_fk") @db.Uuid
     isDeleted    Boolean       @default(false) @map("is_deleted")
-    created_at   DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp(6)
+    createdAt    DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     user         User          @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
     keywords     Keyword[]
     transactions Transaction[]
@@ -30,7 +30,8 @@ model User {
     password     String        @db.VarChar(500)
     email        String        @unique @db.VarChar(300)
     isDeleted    Boolean       @default(false) @map("is_deleted")
-    created_at   DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp(6)
+    createdAt    DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
+    currency     String        @default("HRK") @db.VarChar(3)
     categories   Category[]
     transactions Transaction[]
 
@@ -42,7 +43,7 @@ model Keyword {
     name       String   @db.VarChar(200)
     categoryFk String   @map("category_fk") @db.Uuid
     isDeleted  Boolean  @default(false) @map("is_deleted")
-    created_at DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp(6)
+    createdAt  DateTime @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     category   Category @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__categories")
 
     @@map("keywords")
@@ -59,7 +60,7 @@ model Transaction {
     isDeleted   Boolean           @default(false) @map("is_deleted")
     status      TransactionStatus
     categoryFk  String?           @map("category_fk") @db.Uuid
-    created_at  DateTime          @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp(6)
+    createdAt   DateTime          @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     category    Category?         @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_transactions__categories")
     user        User              @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_transactions__users")
 

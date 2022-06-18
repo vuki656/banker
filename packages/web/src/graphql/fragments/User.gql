@@ -1,0 +1,7 @@
+fragment UserPayload on UserType {
+    id
+    firstName
+    lastName
+    email
+    currency
+}

@@ -6,10 +6,7 @@ import {
 import { UserType } from '../types'
 
 @ObjectType()
-export class LoginUserPayload {
-    @Field(() => String)
-    public token: string
-
+export class UpdateUserPayload {
     @Field(() => UserType)
     public user: UserType
 }

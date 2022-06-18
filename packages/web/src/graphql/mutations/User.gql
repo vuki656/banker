@@ -1,5 +1,16 @@
 mutation LoginUser($input: LoginUserInput!) {
     loginUser(input: $input) {
         token
+        user {
+            ...UserPayload
+        }
+    }
+}
+
+mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+        user {
+            ...UserPayload
+        }
     }
 }

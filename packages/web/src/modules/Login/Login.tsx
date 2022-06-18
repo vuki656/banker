@@ -23,6 +23,7 @@ import {
     COOKIE_TOKEN_NAME,
     extractFormFieldErrors,
 } from '../../utils'
+import { useCurrentUser } from '../../utils/useCurrentUser/useCurrentUser'
 
 import type { LoginFormValueType } from './Login.types'
 import { loginFormValidationSchema } from './Login.validation'
@@ -32,6 +33,8 @@ const ICON_SIZE = 17
 export const Login: React.FunctionComponent = () => {
     const theme = useMantineTheme()
     const router = useRouter()
+
+    const { load } = useCurrentUser()
 
     const [loginUserMutation, { loading }] = useLoginUserMutation({
         onCompleted: (response) => {
@@ -44,6 +47,8 @@ export const Login: React.FunctionComponent = () => {
                         .toDate(),
                 }
             )
+
+            load(response.loginUser.user)
 
             void router.push('/breakdown')
         },

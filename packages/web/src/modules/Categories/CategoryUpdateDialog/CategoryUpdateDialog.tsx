@@ -3,7 +3,6 @@ import {
     Modal,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import * as React from 'react'
 
 import {
     useDeleteCategoryMutation,

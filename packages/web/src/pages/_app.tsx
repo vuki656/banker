@@ -36,6 +36,7 @@ import introspectionGeneratedJSON from '../graphql/types.generated'
 import {
     COOKIE_COLORSCHEME_NAME,
     COOKIE_TOKEN_NAME,
+    CurrentUserProvider,
 } from '../utils'
 
 export interface PageContext extends ApolloPageContext {
@@ -118,36 +119,38 @@ const App = (props: AppProps & ExtraAppProps) => {
                                 }}
                             />
                             <ApolloProvider client={apollo}>
-                                {isAppAppRoute ? (
-                                    <AppShell
-                                        navbar={<Sidebar />}
-                                        padding="md"
-                                        styles={(theme) => ({
-                                            body: {
-                                                height: '100%',
-                                            },
-                                            main: {
-                                                display: 'flex',
-                                                flex: 1,
-                                                main: {
-                                                    backgroundColor: theme.colorScheme === 'dark'
-                                                        ? theme.colors.dark[8]
-                                                        : theme.colors.gray[0],
+                                <CurrentUserProvider>
+                                    {isAppAppRoute ? (
+                                        <AppShell
+                                            navbar={<Sidebar />}
+                                            padding="md"
+                                            styles={(theme) => ({
+                                                body: {
+                                                    height: '100%',
                                                 },
-                                                overflowX: 'hidden',
-                                                padding: 0,
-                                                zIndex: 1,
-                                            },
-                                            root: {
-                                                height: '100%',
-                                            },
-                                        })}
-                                    >
+                                                main: {
+                                                    display: 'flex',
+                                                    flex: 1,
+                                                    main: {
+                                                        backgroundColor: theme.colorScheme === 'dark'
+                                                            ? theme.colors.dark[8]
+                                                            : theme.colors.gray[0],
+                                                    },
+                                                    overflowX: 'hidden',
+                                                    padding: 0,
+                                                    zIndex: 1,
+                                                },
+                                                root: {
+                                                    height: '100%',
+                                                },
+                                            })}
+                                        >
+                                            <Component {...pageProps} />
+                                        </AppShell>
+                                    ) : (
                                         <Component {...pageProps} />
-                                    </AppShell>
-                                ) : (
-                                    <Component {...pageProps} />
-                                )}
+                                    )}
+                                </CurrentUserProvider>
                             </ApolloProvider>
                         </NotificationsProvider>
                     </ModalsProvider>

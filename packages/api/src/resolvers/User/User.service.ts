@@ -7,8 +7,14 @@ import { env } from '../../shared/env'
 import { orm } from '../../shared/orm'
 import type { TokenDataType } from '../../shared/typescript-types'
 
-import type { LoginUserInput } from './inputs'
-import type { LoginUserPayload } from './payloads'
+import type {
+    LoginUserInput,
+    UpdateUserInput,
+} from './inputs'
+import type {
+    LoginUserPayload,
+    UpdateUserPayload,
+} from './payloads'
 import { USER_DEFAULT_SELECT } from './User.select'
 
 @singleton()
@@ -48,6 +54,26 @@ export class UserService {
 
         return {
             token,
+            user,
+        }
+    }
+
+    public async updateOne(input: UpdateUserInput): Promise<UpdateUserPayload> {
+        const updatedUser = await orm.user.update({
+            data: {
+                currency: input.currency,
+                email: input.email,
+                firstName: input.firstName,
+                lastName: input.lastName,
+            },
+            select: USER_DEFAULT_SELECT(),
+            where: {
+                id: input.id,
+            },
+        })
+
+        return {
+            user: updatedUser,
         }
     }
 }
