@@ -101,15 +101,6 @@ export const Sidebar: React.FunctionComponent = () => {
                     selected={router.pathname.startsWith('/categories')}
                 />
                 <SidebarButton
-                    color="green"
-                    icon={<IconChartBar size={ICON_SIZE} />}
-                    label="Breakdown"
-                    onClick={() => {
-                        void router.push('/breakdown')
-                    }}
-                    selected={router.pathname.startsWith('/breakdown')}
-                />
-                <SidebarButton
                     color="red"
                     icon={<IconList size={ICON_SIZE} />}
                     label="Transactions"
@@ -117,6 +108,15 @@ export const Sidebar: React.FunctionComponent = () => {
                         void router.push('/transactions')
                     }}
                     selected={router.pathname.startsWith('/transactions')}
+                />
+                <SidebarButton
+                    color="green"
+                    icon={<IconChartBar size={ICON_SIZE} />}
+                    label="Breakdown"
+                    onClick={() => {
+                        void router.push('/breakdown')
+                    }}
+                    selected={router.pathname.startsWith('/breakdown')}
                 />
             </Navbar.Section>
             <Navbar.Section>

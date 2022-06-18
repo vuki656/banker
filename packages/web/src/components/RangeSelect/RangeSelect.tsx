@@ -106,6 +106,17 @@ export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
         isOpenActions.setFalse()
     }
 
+    const onLastThirtyDaysClick = () => {
+        onSubmit({
+            endDate: dayjs().toDate(),
+            startDate: dayjs()
+                .subtract(30, 'days')
+                .toDate(),
+        })
+
+        isOpenActions.setFalse()
+    }
+
     return (
         <>
             <Button
@@ -123,6 +134,13 @@ export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
             >
                 <Group spacing="xl">
                     <Stack>
+                        <Button
+                            color="blue"
+                            onClick={onLastThirtyDaysClick}
+                            variant="subtle"
+                        >
+                            Last 30 Days
+                        </Button>
                         <Button
                             color="blue"
                             onClick={onThisMonthClick}

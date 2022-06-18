@@ -17,7 +17,7 @@ import { cloneElement } from 'react'
 
 import type { IconsProps } from './Icons.props'
 
-export const ICONS = [
+export const ICON_LIST = [
     <IconCar key="IconCar" />,
     <IconHome key="IconHome" />,
     <IconShoppingCart key="IconShoppingCart" />,
@@ -39,7 +39,7 @@ export const Icons: React.FunctionComponent<IconsProps> = (props) => {
         ...other
     } = props
 
-    const FoundIcon = ICONS.find((Icon) => {
+    const FoundIcon = ICON_LIST.find((Icon) => {
         return String(Icon.key) === name
     })
 

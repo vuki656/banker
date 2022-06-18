@@ -11,7 +11,7 @@ import { cloneElement } from 'react'
 import { useBoolean } from '../../utils'
 import {
     Icons,
-    ICONS,
+    ICON_LIST,
 } from '../Icons'
 
 import type { IconPickerProps } from './IconPicker.types'
@@ -71,7 +71,7 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                     withArrow={true}
                 >
                     <Group align="center">
-                        {ICONS.map((Icon) => {
+                        {ICON_LIST.map((Icon) => {
                             return (
                                 <ThemeIcon
                                     color={color}
