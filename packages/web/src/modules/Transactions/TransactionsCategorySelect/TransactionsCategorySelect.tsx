@@ -20,11 +20,9 @@ export const TransactionsCategorySelect = observer(() => {
         >
             <Chip
                 checked={false}
-                color="red"
                 onClick={() => {
                     store.setCategoryFilter(null)
                 }}
-                variant="filled"
             >
                 Clear
             </Chip>
