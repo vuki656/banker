@@ -1,5 +1,6 @@
 import {
     Group,
+    LoadingOverlay,
     Stack,
     Text,
 } from '@mantine/core'
@@ -28,7 +29,7 @@ export const Transactions = observer(() => {
 
     const [dialogValue, setDialogValue] = useState<TransactionType | null>()
 
-    useGetCategoriesQuery({
+    const { loading: getCategoriesLoading } = useGetCategoriesQuery({
         onCompleted: (data) => {
             store.setCategories(data.categories)
         },
@@ -42,7 +43,7 @@ export const Transactions = observer(() => {
         ssr: false,
     })
 
-    const { loading, refetch } = useGetTransactionsQuery({
+    const { loading: getTransactionsLoading, refetch } = useGetTransactionsQuery({
         onCompleted: (data) => {
             store.setTransactions(data.transactions)
         },
@@ -72,10 +73,10 @@ export const Transactions = observer(() => {
                     overflow: 'hidden',
                 }}
             >
+                <LoadingOverlay visible={getTransactionsLoading || getCategoriesLoading} />
                 <Header
                     action={(
                         <RangeSelect
-                            loading={loading}
                             onSubmit={store.setRange}
                             value={store.range}
                         />

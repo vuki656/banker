@@ -4,7 +4,6 @@ export type RangeSelectValue = {
 }
 
 export type RangeSelectProps = {
-    loading: boolean
     onSubmit(value: RangeSelectValue): void
     value: RangeSelectValue
 }

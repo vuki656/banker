@@ -1,4 +1,4 @@
-import { Stack } from '@mantine/core'
+import { LoadingOverlay, Stack } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import { useState } from 'react'
 
@@ -13,7 +13,7 @@ import { CategoryUpdateDialog } from './CategoryUpdateDialog'
 export const Categories: React.FunctionComponent = () => {
     const [dialogValue, setDialogValue] = useState<CategoryType | null>()
 
-    const { data, refetch } = useGetCategoriesQuery({
+    const { data, refetch, loading } = useGetCategoriesQuery({
         onError: () => {
             showNotification({
                 color: 'red',
@@ -29,6 +29,7 @@ export const Categories: React.FunctionComponent = () => {
                 spacing={0}
                 style={{ flex: 1 }}
             >
+                <LoadingOverlay visible={loading} />
                 <Header
                     action={<CategoryCreateDialog onSubmit={refetch} />}
                     title="Categories"

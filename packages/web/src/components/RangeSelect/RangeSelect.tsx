@@ -15,7 +15,6 @@ import type { RangeSelectProps } from './RangeSelect.types'
 
 export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
     const {
-        loading,
         onSubmit,
         value,
     } = props
@@ -120,7 +119,6 @@ export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
     return (
         <>
             <Button
-                loading={loading}
                 onClick={isOpenActions.setTrue}
                 rightIcon={<IconCalendar size={16} />}
             >

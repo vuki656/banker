@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
     Box,
     Button,
+    LoadingOverlay,
     Modal,
     Select,
     SimpleGrid,
@@ -146,6 +147,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
             title="Update Transaction"
             withCloseButton={true}
         >
+            <LoadingOverlay visible={updateLoading || deleteLoading} />
             <Stack>
                 <Box
                     sx={(theme) => ({
@@ -237,7 +239,6 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                 <SimpleGrid cols={3}>
                     <Button
                         color="red"
-                        loading={deleteLoading}
                         onClick={onDelete}
                     >
                         Discard
@@ -248,10 +249,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                     >
                         Cancel
                     </Button>
-                    <Button
-                        loading={updateLoading}
-                        onClick={handleSubmit(onSubmit)}
-                    >
+                    <Button onClick={handleSubmit(onSubmit)}>
                         Save
                     </Button>
                 </SimpleGrid>

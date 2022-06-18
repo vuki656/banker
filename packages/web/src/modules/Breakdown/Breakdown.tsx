@@ -2,6 +2,7 @@ import {
     Badge,
     Box,
     Group,
+    LoadingOverlay,
     Stack,
     Text,
 } from '@mantine/core'
@@ -47,10 +48,10 @@ export const Breakdown: React.FunctionComponent = () => {
             spacing={0}
             style={{ flex: 1 }}
         >
+            <LoadingOverlay visible={loading} />
             <Header
                 action={(
                     <RangeSelect
-                        loading={loading}
                         onSubmit={onRangeChange}
                         value={store.range}
                     />

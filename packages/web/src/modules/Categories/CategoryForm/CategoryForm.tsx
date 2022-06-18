@@ -26,7 +26,6 @@ import { CategoryFormKeywords } from './CategoryFormKeywords'
 
 export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) => {
     const {
-        loading,
         onCancel: onCancelProp,
         onDelete,
         onUpdate: onSubmitProp,
@@ -75,7 +74,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                     return (
                         <IconPicker
                             {...extractFormFieldErrors(controller.formState.errors.icon)}
-                            color={theme.colors[colorField.field.value][6]}
+                            color={theme.colors[colorField.field.value]?.[6]}
                             onChange={controller.field.onChange}
                             required={true}
                             value={controller.field.value}
@@ -87,11 +86,15 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                 <CategoryFormColors />
                 <CategoryFormKeywords />
             </FormProvider>
-            <SimpleGrid cols={value ? 3 : 2}>
+            <SimpleGrid 
+                cols={value ? 3 : 2} 
+                sx={(theme) => ({
+                    marginTop: theme.spacing.xl
+                })}
+            >
                 {value ? (
                     <Button
                         color="red"
-                        loading={loading.delete}
                         onClick={onDelete}
                     >
                         Delete
@@ -103,10 +106,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                 >
                     Cancel
                 </Button>
-                <Button
-                    loading={loading.update}
-                    onClick={form.handleSubmit(onSubmit)}
-                >
+                <Button onClick={form.handleSubmit(onSubmit)}>
                     Save
                 </Button>
             </SimpleGrid>

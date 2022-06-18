@@ -1,4 +1,4 @@
-import { Modal } from '@mantine/core'
+import { LoadingOverlay, Modal } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import * as React from 'react'
 
@@ -91,11 +91,8 @@ export const CategoryUpdateDialog: React.FunctionComponent<CategoryUpdateDialogP
             title="Update Category"
             withCloseButton={true}
         >
+            <LoadingOverlay visible={deleteLoading || updateLoading} />
             <CategoryForm
-                loading={{
-                    delete: deleteLoading,
-                    update: updateLoading,
-                }}
                 onCancel={onCancel}
                 onDelete={onDelete}
                 onUpdate={onSubmit}
