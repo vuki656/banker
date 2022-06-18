@@ -18,7 +18,7 @@ import {
 
 import { MoneyInput } from '../../../components'
 import {
-    useDeleteTransactionMutation,
+    useDiscardTransactionMutation,
     useGetCategoriesQuery,
     useUpdateTransactionMutation,
 } from '../../../graphql/types.generated'
@@ -41,7 +41,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
         value,
     } = props
 
-    const [deleteTransactionMutation, { loading: deleteLoading }] = useDeleteTransactionMutation({
+    const [discardTransactionMutation, { loading: deleteLoading }] = useDiscardTransactionMutation({
         onCompleted: () => {
             onSubmitProp()
 
@@ -122,7 +122,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
     }
 
     const onDelete = () => {
-        void deleteTransactionMutation({
+        void discardTransactionMutation({
             variables: {
                 input: {
                     id: value.id,

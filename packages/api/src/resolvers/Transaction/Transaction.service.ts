@@ -8,12 +8,12 @@ import type { TransactionsArgs } from './args'
 import { TransactionStatusEnum } from './enums'
 import type {
     CreateTransactionInput,
-    DeleteTransactionInput,
+    DiscardTransactionInput,
     UpdateTransactionInput,
 } from './inputs'
 import type {
     CreateTransactionPayload,
-    DeleteTransactionPayload,
+    DiscardTransactionPayload,
     UpdateTransactionPayload,
 } from './payloads'
 import { TRANSACTION_DEFAULT_SELECT } from './Transaction.select'
@@ -71,8 +71,8 @@ export class TransactionService {
         }
     }
 
-    public async deleteOne(input: DeleteTransactionInput): Promise<DeleteTransactionPayload> {
-        const deletedTransaction = await orm.transaction.update({
+    public async discardOne(input: DiscardTransactionInput): Promise<DiscardTransactionPayload> {
+        const discardedTransaction = await orm.transaction.update({
             data: {
                 status: TransactionStatusEnum.DISCARDED,
             },
@@ -83,7 +83,7 @@ export class TransactionService {
         })
 
         return {
-            transaction: deletedTransaction,
+            transaction: discardedTransaction,
         }
     }
 

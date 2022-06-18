@@ -13,12 +13,12 @@ import type { ContextType } from '../../shared/typescript-types'
 import { TransactionsArgs } from './args'
 import {
     CreateTransactionInput,
-    DeleteTransactionInput,
+    DiscardTransactionInput,
     UpdateTransactionInput,
 } from './inputs'
 import {
     CreateTransactionPayload,
-    DeleteTransactionPayload,
+    DiscardTransactionPayload,
     UpdateTransactionPayload,
 } from './payloads'
 import { TransactionService } from './Transaction.service'
@@ -59,10 +59,10 @@ export class TransactionResolver {
     }
 
     @Authorized()
-    @Mutation(() => DeleteTransactionPayload)
-    public async deleteTransaction(
-        @Arg('input', () => DeleteTransactionInput) input: DeleteTransactionInput,
-    ): Promise<DeleteTransactionPayload> {
-        return this.service.deleteOne(input)
+    @Mutation(() => DiscardTransactionPayload)
+    public async discardTransaction(
+        @Arg('input', () => DiscardTransactionInput) input: DiscardTransactionInput,
+    ): Promise<DiscardTransactionPayload> {
+        return this.service.discardOne(input)
     }
 }

@@ -14,8 +14,8 @@ mutation UpdateTransaction($input: UpdateTransactionInput!) {
     }
 }
 
-mutation DeleteTransaction($input: DeleteTransactionInput!) {
-    deleteTransaction(input: $input) {
+mutation DiscardTransaction($input: DiscardTransactionInput!) {
+    discardTransaction(input: $input) {
         transaction {
             ...TransactionPayload
         }

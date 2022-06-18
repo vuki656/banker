@@ -6,7 +6,7 @@ import {
 import { TransactionType } from '../types'
 
 @ObjectType()
-export class DeleteTransactionPayload {
+export class DiscardTransactionPayload {
     @Field(() => TransactionType)
     public transaction: TransactionType
 }
