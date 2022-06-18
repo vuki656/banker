@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
     Box,
+    Button,
     TextInput,
 } from '@mantine/core'
 import {
@@ -32,8 +33,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
     const {
         value = DEFAULT_VALUE,
         onSubmit: onSubmitProp,
-        submitButton,
-        formId,
+        loading,
     } = props
 
     const form = useForm<CategoryFormValueType>({
@@ -51,9 +51,6 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
 
     return (
         <Box
-            component="form"
-            id={formId}
-            onSubmit={form.handleSubmit(onSubmit)}
             sx={(theme) => ({
                 display: 'flex',
                 flexDirection: 'column',
@@ -86,7 +83,12 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                 <CategoryFormColors />
                 <CategoryFormKeywords />
             </FormProvider>
-            {submitButton}
+            <Button
+                loading={loading}
+                onClick={form.handleSubmit(onSubmit)}
+            >
+                Save
+            </Button>
         </Box>
 
     )

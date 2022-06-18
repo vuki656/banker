@@ -14,8 +14,6 @@ import type {
     CreateCategoryProps,
 } from './CreateCategory.types'
 
-const FORM_ID = 'create-category-form-id'
-
 export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (props) => {
     const { onSubmit: onSubmitProp } = props
 
@@ -73,17 +71,8 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
                 title="Create Category"
             >
                 <CategoryForm
-                    formId={FORM_ID}
                     loading={loading}
                     onSubmit={onSubmit}
-                    submitButton={(
-                        <Button
-                            form={FORM_ID}
-                            type="submit"
-                        >
-                            Create
-                        </Button>
-                    )}
                 />
             </Modal>
         </>

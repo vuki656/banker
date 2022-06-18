@@ -26,8 +26,6 @@ import {
 import type { CategoryProps } from './Category.types'
 import { CategoryForm } from './CategoryForm'
 
-const UPDATE_FORM_ID = 'update-category-form-id'
-
 export const Category: React.FunctionComponent<CategoryProps> = (props) => {
     const {
         onSubmit,
@@ -107,7 +105,6 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
                 centered: true,
                 children: (
                     <CategoryForm
-                        formId={UPDATE_FORM_ID}
                         loading={updateLoading}
                         onSubmit={async (formValue) => {
                             await updateCategoryMutation({
@@ -124,15 +121,6 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
 
                             closeModal(id)
                         }}
-                        submitButton={(
-                            <Button
-                                id={UPDATE_FORM_ID}
-                                loading={updateLoading}
-                                type="submit"
-                            >
-                                Update
-                            </Button>
-                        )}
                         value={category}
                     />
                 ),
