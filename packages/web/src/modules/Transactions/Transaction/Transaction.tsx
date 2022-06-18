@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import * as React from 'react'
 
 import { Icons } from '../../../components'
+import { formatDate } from '../../../utils'
 
 import type { TransactionProps } from './Transaction.types'
 
@@ -55,7 +56,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                 </Text>
             </Group>
             <Text size="sm">
-                {dayjs(value.date).format('DD.MM.YYYY')}
+                {formatDate(value.date)}
             </Text>
             <Text
                 size="sm"

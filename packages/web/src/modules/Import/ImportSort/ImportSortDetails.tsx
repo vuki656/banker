@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
+import { formatDate } from '../../../utils'
 import { useImportStore } from '../hooks'
 
 import { ImportSortEditAmountDialog } from './ImportSortEditAmountDialog'
@@ -58,7 +59,7 @@ export const ImportSortDetails = observer(() => {
                 />
             </Group>
             <Text size="md">
-                {dayjs(store.currentTransaction?.date).format('DD.MM.YYYY')}
+                {formatDate(store.currentTransaction?.date)}
             </Text>
         </>
     )

@@ -9,7 +9,7 @@ import { IconCalendar } from '@tabler/icons'
 import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 
-import { useBoolean } from '../../utils'
+import { formatDate, useBoolean } from '../../utils'
 
 import type { RangeSelectProps } from './RangeSelect.types'
 
@@ -124,7 +124,7 @@ export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
                 onClick={isOpenActions.setTrue}
                 rightIcon={<IconCalendar size={16} />}
             >
-                {`${dayjs(value.startDate).format('DD.MM.YYYY')} - ${dayjs(value.endDate).format('DD.MM.YYYY')}`}
+                {`${formatDate(value.startDate)} - ${formatDate(value.endDate)}`}
             </Button>
             <Modal
                 onClose={isOpenActions.setFalse}
