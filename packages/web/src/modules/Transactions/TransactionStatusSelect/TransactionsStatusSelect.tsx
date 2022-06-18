@@ -13,7 +13,7 @@ export const TransactionsStatusSelect = observer(() => {
     return (
         <Chips
             onChange={(status) => {
-                store.setStatus(status as TransactionStatusEnum)
+                store.setStatusFilter(status as TransactionStatusEnum)
             }}
             sx={(theme) => ({
                 borderBottom: `1px solid ${theme.colors.gray[2]}`,

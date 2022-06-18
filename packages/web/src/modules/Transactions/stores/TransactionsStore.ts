@@ -46,7 +46,7 @@ export class TransactionsStore {
         this.transactionsValue = transactions
     }
 
-    public setStatus(newStatus: TransactionStatusEnum) {
+    public setStatusFilter(newStatus: TransactionStatusEnum) {
         this.statusFilter = newStatus
     }
 
