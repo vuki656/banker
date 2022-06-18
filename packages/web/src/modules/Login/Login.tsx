@@ -14,6 +14,7 @@ import {
     IconLock,
 } from '@tabler/icons'
 import { setCookies } from 'cookies-next'
+import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
@@ -34,7 +35,15 @@ export const Login: React.FunctionComponent = () => {
 
     const [loginUserMutation, { loading }] = useLoginUserMutation({
         onCompleted: (response) => {
-            setCookies(COOKIE_TOKEN_NAME, response.loginUser.token)
+            setCookies(
+                COOKIE_TOKEN_NAME,
+                response.loginUser.token,
+                {
+                    expires: dayjs()
+                        .add(2, 'months')
+                        .toDate(),
+                }
+            )
 
             void router.push('/breakdown')
         },
