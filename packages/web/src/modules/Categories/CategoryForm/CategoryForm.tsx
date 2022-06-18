@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
-    Box,
     Button,
+    SimpleGrid,
+    Stack,
     TextInput,
 } from '@mantine/core'
 import {
@@ -16,47 +17,47 @@ import { extractFormFieldErrors } from '../../../utils'
 
 import type {
     CategoryFormProps,
-    CategoryFormValueType,
+    CategoryFormType,
 } from './CategoryForm.types'
 import { categoryValidation } from './CategoryForm.validation'
 import { CategoryFormColors } from './CategoryFormColors'
 import { CategoryFormKeywords } from './CategoryFormKeywords'
 
-const DEFAULT_VALUE: CategoryFormValueType = {
-    color: 'orange',
-    icon: '',
-    keywords: [],
-    name: '',
-}
-
 export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) => {
     const {
-        value = DEFAULT_VALUE,
-        onSubmit: onSubmitProp,
         loading,
+        onCancel: onCancelProp,
+        onDelete,
+        onUpdate: onSubmitProp,
+        value,
     } = props
 
-    const form = useForm<CategoryFormValueType>({
-        defaultValues: value,
+    const form = useForm<CategoryFormType>({
+        defaultValues: {
+            color: value?.color ?? 'red',
+            icon: value?.icon ?? '',
+            keywords: value?.keywords ?? [],
+            name: value?.name ?? '',
+        },
         resolver: zodResolver(categoryValidation),
     })
 
     const colorField = useController({ control: form.control, name: 'color' })
 
-    const onSubmit = async (formValue: CategoryFormValueType) => {
+    const onSubmit = async (formValue: CategoryFormType) => {
         await onSubmitProp(formValue)
 
-        form.reset(DEFAULT_VALUE)
+        form.reset()
+    }
+
+    const onCancel = () => {
+        form.reset()
+
+        onCancelProp()
     }
 
     return (
-        <Box
-            sx={(theme) => ({
-                display: 'flex',
-                flexDirection: 'column',
-                rowGap: theme.spacing.md,
-            })}
-        >
+        <Stack>
             <TextInput
                 {...form.register('name')}
                 {...extractFormFieldErrors(form.formState.errors.name)}
@@ -83,13 +84,29 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                 <CategoryFormColors />
                 <CategoryFormKeywords />
             </FormProvider>
-            <Button
-                loading={loading}
-                onClick={form.handleSubmit(onSubmit)}
-            >
-                Save
-            </Button>
-        </Box>
-
+            <SimpleGrid cols={value ? 3 : 2}>
+                {value ? (
+                    <Button
+                        color="red"
+                        loading={loading.delete}
+                        onClick={onDelete}
+                    >
+                        Delete
+                    </Button>
+                ) : null}
+                <Button
+                    onClick={onCancel}
+                    variant="default"
+                >
+                    Cancel
+                </Button>
+                <Button
+                    loading={loading.update}
+                    onClick={form.handleSubmit(onSubmit)}
+                >
+                    Save
+                </Button>
+            </SimpleGrid>
+        </Stack>
     )
 }

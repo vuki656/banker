@@ -10,8 +10,8 @@ import { cloneElement } from 'react'
 
 import { useBoolean } from '../../utils'
 import {
-    Icons,
     ICON_LIST,
+    Icons,
 } from '../Icons'
 
 import type { IconPickerProps } from './IconPicker.types'

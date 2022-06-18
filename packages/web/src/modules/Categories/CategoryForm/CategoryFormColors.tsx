@@ -5,19 +5,14 @@ import {
     useMantineTheme,
 } from '@mantine/core'
 import { IconCheck } from '@tabler/icons'
-import {
-    useController,
-    useFormContext,
-} from 'react-hook-form'
+import { useController } from 'react-hook-form'
 
-import type { CategoryFormValueType } from './CategoryForm.types'
+import type { CategoryFormType } from './CategoryForm.types'
 
 export const CategoryFormColors: React.FunctionComponent = () => {
     const theme = useMantineTheme()
 
-    const { control } = useFormContext<CategoryFormValueType>()
-
-    const colorField = useController({ control, name: 'color' })
+    const colorField = useController<CategoryFormType>({ name: 'color' })
 
     return (
         <InputWrapper
@@ -44,13 +39,12 @@ export const CategoryFormColors: React.FunctionComponent = () => {
                                     },
                                 }}
                             >
-                                {colorField.field.value === color
-                                    ? (
-                                        <IconCheck
-                                            color="#ffffff"
-                                            size={15}
-                                        />
-                                    ) : null}
+                                {colorField.field.value === color ? (
+                                    <IconCheck
+                                        color="#ffffff"
+                                        size={15}
+                                    />
+                                ) : null}
                             </ColorSwatch>
                         )
                     })}

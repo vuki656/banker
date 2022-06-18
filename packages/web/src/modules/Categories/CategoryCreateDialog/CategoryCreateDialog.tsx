@@ -10,11 +10,11 @@ import { useBoolean } from '../../../utils'
 import { CategoryForm } from '../CategoryForm'
 
 import type {
-    CreateCategoryFormValueType,
-    CreateCategoryProps,
-} from './CreateCategory.types'
+    CategoryCreateDialogProps,
+    CreateCategoryFormType,
+} from './CategoryCreateDialog.types'
 
-export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (props) => {
+export const CategoryCreateDialog: React.FunctionComponent<CategoryCreateDialogProps> = (props) => {
     const { onSubmit: onSubmitProp } = props
 
     const [isOpen, openActions] = useBoolean()
@@ -40,7 +40,7 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
         },
     })
 
-    const onSubmit = async (formValue: CreateCategoryFormValueType) => {
+    const onSubmit = async (formValue: CreateCategoryFormType) => {
         await createCategoryMutation({
             variables: {
                 input: {
@@ -71,8 +71,11 @@ export const CreateCategory: React.FunctionComponent<CreateCategoryProps> = (pro
                 title="Create Category"
             >
                 <CategoryForm
-                    loading={loading}
-                    onSubmit={onSubmit}
+                    loading={{
+                        update: loading,
+                    }}
+                    onCancel={openActions.setFalse}
+                    onUpdate={onSubmit}
                 />
             </Modal>
         </>

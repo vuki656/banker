@@ -18,13 +18,13 @@ import {
 import type { KeywordType } from '../../../graphql/types.generated'
 import { useBoolean } from '../../../utils'
 
-import type { CategoryFormValueType } from './CategoryForm.types'
+import type { CategoryFormType } from './CategoryForm.types'
 import { KeywordForm } from './KeywordForm'
 
 export const CategoryFormKeywords: React.FunctionComponent = () => {
     const [isKeywordDialogOpen, isKeywordDialogOpenActions] = useBoolean(false)
 
-    const { control } = useFormContext<CategoryFormValueType>()
+    const { control } = useFormContext<CategoryFormType>()
 
     const keywordsField = useController({ control, name: 'keywords' })
 
@@ -52,7 +52,6 @@ export const CategoryFormKeywords: React.FunctionComponent = () => {
             <InputWrapper
                 error={keywordsField.fieldState.error?.message}
                 label="Keywords"
-                required={true}
             >
                 <Group
                     align="center"
