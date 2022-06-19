@@ -7,9 +7,13 @@ import {
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
+import { useCurrentUser } from '../../../utils'
+import { formatCurrency } from '../../../utils/formatCurrency'
 import { useBreakdownStore } from '../hooks'
 
 export const BreakdownSummary = observer(() => {
+    const { user } = useCurrentUser()
+
     const store = useBreakdownStore()
 
     return (
@@ -51,9 +55,7 @@ export const BreakdownSummary = observer(() => {
                             {categoryValue.name}
                         </Text>
                         <Text>
-                            {categoryValue.amount.toFixed(2)}
-                            {' '}
-                            HRK
+                            {formatCurrency(categoryValue.amount, user?.currency)}
                         </Text>
                     </Paper>
                 )

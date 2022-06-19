@@ -13,6 +13,7 @@ import {
     useMantineTheme,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
+import { useRouter } from 'next/router'
 import {
     Controller,
     useForm,
@@ -30,6 +31,7 @@ import type { UserFormType } from './SidebarUpdateUserDialog.validation'
 import { userValidation } from './SidebarUpdateUserDialog.validation'
 
 export const SidebarUpdateUserDialog: React.FunctionComponent = () => {
+    const router = useRouter()
     const theme = useMantineTheme()
 
     const { user } = useCurrentUser()
@@ -37,7 +39,7 @@ export const SidebarUpdateUserDialog: React.FunctionComponent = () => {
     const [isOpen, openActions] = useBoolean()
 
     const [updateUserMutation, { loading }] = useUpdateUserMutation({
-        onCompleted: () => {
+        onCompleted: (response) => {
             showNotification({
                 color: 'green',
                 message: 'Details updated',
@@ -45,6 +47,10 @@ export const SidebarUpdateUserDialog: React.FunctionComponent = () => {
             })
 
             openActions.setFalse()
+
+            if (user?.currency !== response.updateUser.user.currency) {
+                router.reload()
+            }
         },
         onError: () => {
             showNotification({

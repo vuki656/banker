@@ -13,6 +13,8 @@ import {
     RangeSelect,
 } from '../../components'
 import { useBreakdownPageDataQuery } from '../../graphql/types.generated'
+import { useCurrentUser } from '../../utils'
+import { formatCurrency } from '../../utils/formatCurrency'
 
 import { BreakdownBarChart } from './BreakdownBarChart'
 import { BreakdownPieChart } from './BreakdownPieChart'
@@ -20,6 +22,8 @@ import { BreakdownSummary } from './BreakdownSummary'
 import { useBreakdownStore } from './hooks'
 
 export const Breakdown: React.FunctionComponent = () => {
+    const { user } = useCurrentUser()
+
     const store = useBreakdownStore()
 
     const { loading, refetch } = useBreakdownPageDataQuery({
@@ -62,9 +66,7 @@ export const Breakdown: React.FunctionComponent = () => {
                             Breakdown
                         </Text>
                         <Badge>
-                            {store.total}
-                            {' '}
-                            HRK
+                            {formatCurrency(store.total, user?.currency)}
                         </Badge>
                     </Group>
                 )}

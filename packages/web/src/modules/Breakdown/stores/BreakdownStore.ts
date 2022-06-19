@@ -47,7 +47,7 @@ export class BreakdownStore {
 
     public get total() {
         return this.transactions.reduce((accumulator, value) => {
-            return accumulator + value.amount
+            return accumulator + value.amount.converted
         }, 0)
     }
 
@@ -79,7 +79,7 @@ export class BreakdownStore {
                 ...accumulator,
                 [transactionCategory.name]: {
                     ...transactionCategory,
-                    amount: category.amount + transaction.amount,
+                    amount: category.amount + transaction.amount.converted,
                 },
             }
         }, categories)
@@ -110,7 +110,7 @@ export class BreakdownStore {
                             const isSameCategory = transaction.category?.id === category.id
 
                             if (isSameDate && isSameCategory) {
-                                return transactionAmountAccumulator + transaction.amount
+                                return transactionAmountAccumulator + transaction.amount.converted
                             }
 
                             return transactionAmountAccumulator
@@ -157,7 +157,7 @@ export class BreakdownStore {
                 ...accumulator,
                 [transaction.category.name]: {
                     ...category,
-                    amount: category.amount + transaction.amount,
+                    amount: category.amount + transaction.amount.converted,
                 },
             }
         }, categories)

@@ -97,7 +97,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
         reset,
     } = useForm<TransactionUpdateFormValue>({
         defaultValues: {
-            amount: value.amount,
+            amount: value.amount.original,
             categoryId: value.category?.id ?? '',
             currency: value.currency,
             date: value.date,

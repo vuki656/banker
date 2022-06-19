@@ -32,5 +32,6 @@ services:
         volumes:
             - ./src/database/migrations:/liquibase/changelog
         command:
-            'update --username="banker-user" --password="992837972" --url="jdbc:postgresql://192.168.0.18:5432/banker?currentSchema=banker"
-            --liquibase-schema-name=public --changelogFile="./master.json"'
+            'update --username="banker-user" --password="992837972"
+            --url="jdbc:postgresql://192.168.0.18:5432/banker?currentSchema=banker" --liquibase-schema-name=public
+            --changelogFile="./master.json"'

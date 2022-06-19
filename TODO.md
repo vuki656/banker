@@ -1,1 +1,0 @@
-- [ ] Fix category color app wide

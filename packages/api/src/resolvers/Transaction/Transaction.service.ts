@@ -2,7 +2,10 @@ import dayjs from 'dayjs'
 import { singleton } from 'tsyringe'
 
 import { orm } from '../../shared/orm'
-import { nullableConnect } from '../../shared/utils/nullableConnect'
+import {
+    convertTransaction,
+    nullableConnect,
+} from '../../shared/utils'
 
 import type { TransactionsArgs } from './args'
 import { TransactionStatusEnum } from './enums'
@@ -40,12 +43,14 @@ export class TransactionService {
             select: TRANSACTION_DEFAULT_SELECT(),
         })
 
+        const convertedTransaction = await convertTransaction(createdTransaction, userId)
+
         return {
-            transaction: createdTransaction,
+            transaction: convertedTransaction,
         }
     }
 
-    public async updateOne(input: UpdateTransactionInput): Promise<UpdateTransactionPayload> {
+    public async updateOne(input: UpdateTransactionInput, userId?: string): Promise<UpdateTransactionPayload> {
         const updatedTransaction = await orm.transaction.update({
             data: {
                 amount: input.amount,
@@ -66,12 +71,14 @@ export class TransactionService {
             },
         })
 
+        const convertedTransaction = await convertTransaction(updatedTransaction, userId)
+
         return {
-            transaction: updatedTransaction,
+            transaction: convertedTransaction,
         }
     }
 
-    public async discardOne(input: DiscardTransactionInput): Promise<DiscardTransactionPayload> {
+    public async discardOne(input: DiscardTransactionInput, userId?: string): Promise<DiscardTransactionPayload> {
         const discardedTransaction = await orm.transaction.update({
             data: {
                 status: TransactionStatusEnum.DISCARDED,
@@ -82,8 +89,10 @@ export class TransactionService {
             },
         })
 
+        const convertedTransaction = await convertTransaction(discardedTransaction, userId)
+
         return {
-            transaction: discardedTransaction,
+            transaction: convertedTransaction,
         }
     }
 
@@ -94,7 +103,7 @@ export class TransactionService {
 
         const endDate = args?.endDate ?? dayjs().toDate()
 
-        return orm.transaction.findMany({
+        const transactions = await orm.transaction.findMany({
             orderBy: {
                 date: 'desc',
             },
@@ -118,5 +127,11 @@ export class TransactionService {
                 },
             },
         })
+
+        const actions = transactions.map(async (transaction) => {
+            return convertTransaction(transaction, userId)
+        })
+
+        return Promise.all(actions)
     }
 }

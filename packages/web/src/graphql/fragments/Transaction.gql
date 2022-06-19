@@ -1,11 +1,14 @@
 fragment TransactionPayload on TransactionType {
     id
     reference
-    amount
     description
-    currency
     date
     status
+    currency
+    amount {
+        original
+        converted
+    }
     category {
         ...CategoryPayload
     }

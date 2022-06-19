@@ -6,7 +6,11 @@ import {
 } from '@mantine/core'
 
 import { Icons } from '../../../components'
-import { formatDate } from '../../../utils'
+import {
+    formatDate,
+    useCurrentUser,
+} from '../../../utils'
+import { formatCurrency } from '../../../utils/formatCurrency'
 
 import type { TransactionProps } from './Transaction.types'
 
@@ -15,6 +19,8 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
         onClick,
         value,
     } = props
+
+    const { user } = useCurrentUser()
 
     return (
         <UnstyledButton
@@ -61,11 +67,11 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                 sx={(theme) => {
                     let color = theme.colors.green
 
-                    if (value.amount >= 100) {
+                    if (value.amount.converted >= 100) {
                         color = theme.colors.orange
                     }
 
-                    if (value.amount >= 500) {
+                    if (value.amount.converted >= 500) {
                         color = theme.colors.red
                     }
 
@@ -75,7 +81,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                 }}
                 weight="bold"
             >
-                {`${value.amount} ${value.currency}`}
+                {formatCurrency(value.amount.converted, user?.currency)}
             </Text>
             <Text
                 color="dimmed"

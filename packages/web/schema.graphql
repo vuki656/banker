@@ -30,10 +30,10 @@ type TransactionType implements BaseType {
     id: ID!
     reference: String!
     description: String!
-    currency: String!
     date: DateTime!
     category: CategoryType
-    amount: Float!
+    currency: String!
+    amount: AmountType!
     status: TransactionStatusEnum!
 }
 
@@ -41,6 +41,11 @@ type TransactionType implements BaseType {
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
+
+type AmountType {
+    original: Float!
+    converted: Float!
+}
 
 enum TransactionStatusEnum {
     DISCARDED

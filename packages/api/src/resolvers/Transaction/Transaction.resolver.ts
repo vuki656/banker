@@ -54,15 +54,17 @@ export class TransactionResolver {
     @Mutation(() => UpdateTransactionPayload)
     public async updateTransaction(
         @Arg('input', () => UpdateTransactionInput) input: UpdateTransactionInput,
+        @Ctx() context: ContextType,
     ): Promise<UpdateTransactionPayload> {
-        return this.service.updateOne(input)
+        return this.service.updateOne(input, context.user?.id)
     }
 
     @Authorized()
     @Mutation(() => DiscardTransactionPayload)
     public async discardTransaction(
         @Arg('input', () => DiscardTransactionInput) input: DiscardTransactionInput,
+        @Ctx() context: ContextType,
     ): Promise<DiscardTransactionPayload> {
-        return this.service.discardOne(input)
+        return this.service.discardOne(input, context.user?.id)
     }
 }

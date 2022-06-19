@@ -1082,6 +1082,7 @@ __metadata:
     "@types/react-dom": 18.0.5
     chart.js: ^3.8.0
     cookies-next: ^2.0.4
+    currency.js: ^2.0.4
     graphql: ^16.5.0
     mobx: ^6.6.0
     mobx-react-lite: ^3.4.0
@@ -6000,6 +6001,13 @@ __metadata:
   version: 3.0.11
   resolution: "csstype@npm:3.0.11"
   checksum: 95e56abfe9ca219ae065acb4e43f61771a03170eed919127f558dfa168240867aba7629c8d98a201a0dd06d9a5ce82686f0570031c928516c61816adbc7c877f
+  languageName: node
+  linkType: hard
+
+"currency.js@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "currency.js@npm:2.0.4"
+  checksum: 327b0f5c329df8fba3071ab76ef301cd6ddf967304f52f69934c4e2aee07fcf30130a8cd136d3a8803f5932b1fdc195a2dcc68b16630ad0f10f86c0608920446
   languageName: node
   linkType: hard
 

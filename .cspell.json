@@ -5,7 +5,9 @@
         "cacheStrategy": "content",
         "cacheLocation": "./.cspellcache"
     },
+    "ignorePaths": ["dump.sql"],
     "ignoreWords": [
+        "cashify",
         "datetime",
         "PGPASSWORD",
         "psql",
