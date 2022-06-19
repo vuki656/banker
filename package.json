@@ -5,7 +5,7 @@
     "scripts": {
         "api:restart": "yarn workspace @banker/api production:restart",
         "web:restart": "yarn workspace @banker/web production:restart",
-        "restart": "yarn api:restart & yarn web:restart",
+        "restart": "yarn api:restart && yarn web:restart",
         "lint": "yarn lint:source && yarn lint:config && yarn lint:spell",
         "lint:fix": "eslint './packages/**/*' --fix --quiet",
         "lint:source": "eslint './packages/**/*' --quiet --cache --cache-strategy='content' --cache-location='.eslintcache/'",
