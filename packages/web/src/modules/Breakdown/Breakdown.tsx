@@ -86,8 +86,8 @@ export const Breakdown: React.FunctionComponent = () => {
                 }}
             >
                 <BreakdownSummary />
-                <BreakdownPieChart />
-                <BreakdownBarChart />
+                {/* <BreakdownPieChart /> */}
+                {/* <BreakdownBarChart /> */}
             </Box>
         </Stack>
     )

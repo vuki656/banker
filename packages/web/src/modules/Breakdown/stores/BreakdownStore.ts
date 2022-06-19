@@ -1,3 +1,4 @@
+import currency from 'currency.js'
 import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
@@ -9,10 +10,7 @@ import type {
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
 import { formatDate } from '../../../utils'
 
-import type {
-    BreakdownBarChartData,
-    BreakdownSummaryCardData,
-} from './BreakdownStore.types'
+import type { BreakdownBarChartData, BreakdownSummaryCardData, SummaryData } from './BreakdownStore.types'
 
 export class BreakdownStore {
     public transactionsValue: TransactionType[] = []
@@ -53,113 +51,118 @@ export class BreakdownStore {
     }
 
     public get summaryData() {
-        const categories = this.categories.reduce<BreakdownSummaryCardData>((accumulator, category) => {
-            return {
-                ...accumulator,
-                [category.name]: {
-                    ...category,
-                    amount: 0,
-                },
-            }
-        }, {})
-
-        return this.transactions.reduce((accumulator, transaction) => {
-            const transactionCategory = transaction.category
-
-            if (!transactionCategory) {
-                return accumulator
-            }
-
-            const category = accumulator[transactionCategory.name]
-
-            if (!category) {
-                return accumulator
-            }
-
-            return {
-                ...accumulator,
-                [transactionCategory.name]: {
-                    ...transactionCategory,
-                    amount: category.amount + transaction.amount.converted,
-                },
-            }
-        }, categories)
-    }
-
-    public get barChartData() {
-        const dates: Date[] = []
-
-        let currentDate = dayjs(this.range.startDate)
-
-        // Create a range of dayjs date objects from range start to range end date
-        while (currentDate.isBefore(this.range.endDate) || currentDate.isSame(this.range.endDate)) {
-            currentDate = currentDate.add(1, 'day')
-
-            dates.push(currentDate.toDate())
-        }
-
-        const categories = this.categories.reduce((accumulator, category) => {
-            return {
-                ...accumulator,
-                [category.name]: 0
-            }
-        }, {})
-
-        // FIXME: all data points have the same amount
-        // TODO: types
-        // Group transactions per category, and then for each date in range for that category
-        return dates.map((date) => {
-            const dateCategories = this.transactions.reduce<Record<any, any>>((accumulator, transaction) => {
-                const categoryName = transaction.category?.name
-
-                if (!categoryName) {
-                    return accumulator
-                }
-
-                const totalCategorySum = accumulator[categoryName] + transaction.amount.converted
-
-                return {
-                    ...accumulator,
-                    [categoryName]: totalCategorySum,
-                }
-            }, categories)
-
-            return {
-                name: formatDate(date),
-                ...dateCategories,
-            }
-        })
-    }
-
-    public get pieChartData() {
-        const categories = this.categories.reduce<Record<string, { amount: number, color: string }>>((accumulator, category) => {
-            return {
-                ...accumulator,
-                [category.name]: {
-                    amount: 0,
-                    color: category.color,
-                },
-            }
-        }, {})
-
-        return this.transactions.reduce((accumulator, transaction) => {
+        return this.transactions.reduce<SummaryData[]>((accumulator, transaction) => {
             if (!transaction.category) {
                 return accumulator
             }
 
-            const category = accumulator[transaction.category.name]
+            const transactionCategory = accumulator.find((category) => {
+                return category.id === transaction.category?.id
+            })
 
-            if (!category) {
-                return accumulator
-            }
-
-            return {
+            /// TODO: you need to add to existing instead of creating a new one every time
+            return [
                 ...accumulator,
-                [transaction.category.name]: {
-                    ...category,
-                    amount: category.amount + transaction.amount.converted,
-                },
-            }
-        }, categories)
+                {
+                    id: transaction.category.id,
+                    name: transaction.category.name,
+                    icon: transaction.category.icon,
+                    color: transaction.category.color,
+                    total: currency(transaction.amount.converted)
+                        .add(transactionCategory?.total ?? 0)
+                        .value
+                }
+            ]
+        }, [])
+    }
+
+    public get barChartData() {
+        return []
+        // const dates: Date[] = []
+        //
+        // let currentDate = dayjs(this.range.startDate)
+        //
+        // // Create a range of dayjs date objects from range start to range end date
+        // while (currentDate.isBefore(this.range.endDate) || currentDate.isSame(this.range.endDate)) {
+        //     currentDate = currentDate.add(1, 'day')
+        //
+        //     dates.push(currentDate.toDate())
+        // }
+        //
+        // const categories = this.categories.reduce<Record<string, number>>((accumulator, category) => {
+        //     return {
+        //         ...accumulator,
+        //         [category.name]: 0,
+        //     }
+        // }, {})
+        //
+        // // TODO: types
+        // // Group transactions per category, and then for each date in range for that category
+        // return dates.map((date) => {
+        //     const dateCategories = this.transactions.reduce<BreakdownBarChartData>((accumulator, transaction) => {
+        //         const categoryName = transaction.category?.name
+        //
+        //         if (!categoryName) {
+        //             return accumulator
+        //         }
+        //
+        //         if (!dayjs(transaction.date).isSame(date)) {
+        //             return accumulator
+        //         }
+        //
+        //         const currentCategorySum = accumulator[categoryName]
+        //
+        //         if (!currentCategorySum) {
+        //             throw new Error("Attempting to sum into a non existing category")
+        //         }
+        //
+        //         const totalCategorySum = currency(currentCategorySum)
+        //             .add(transaction.amount.converted)
+        //             .value
+        //
+        //         return {
+        //             ...accumulator,
+        //             [categoryName]: totalCategorySum,
+        //         }
+        //     }, categories)
+        //
+        //     return {
+        //         name: formatDate(date),
+        //         ...dateCategories,
+        //     }
+        // })
+    }
+
+    public get pieChartData() {
+        return []
+        // const categories = this.categories.reduce<Record<string, { amount: number, color: string }>>((accumulator, category) => {
+        //     return {
+        //         ...accumulator,
+        //         [category.name]: {
+        //             amount: 0,
+        //             color: category.color,
+        //         },
+        //     }
+        // }, {})
+        //
+        // return this.transactions.reduce((accumulator, transaction) => {
+        //     if (!transaction.category) {
+        //         return accumulator
+        //     }
+        //
+        //     const category = accumulator[transaction.category.name]
+        //
+        //     if (!category) {
+        //         return accumulator
+        //     }
+        //
+        //     return {
+        //         ...accumulator,
+        //         [transaction.category.name]: {
+        //             ...category,
+        //             amount: category.amount + transaction.amount.converted,
+        //         },
+        //     }
+        // }, categories)
     }
 }

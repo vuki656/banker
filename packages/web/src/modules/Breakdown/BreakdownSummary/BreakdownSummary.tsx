@@ -22,13 +22,13 @@ export const BreakdownSummary = observer(() => {
                 display: 'grid',
                 gap: '20px',
                 gridArea: 'summary',
-                gridTemplateColumns: 'repeat(6, 1fr)',
+                gridTemplateColumns: 'repeat(8, 1fr)',
             }}
         >
-            {Object.entries(store.summaryData).map(([categoryName, categoryValue]) => {
+            {store.summaryData.map((category) => {
                 return (
                     <Paper
-                        key={categoryName}
+                        key={category.id}
                         shadow="xs"
                         style={{
                             alignItems: 'center',
@@ -40,11 +40,11 @@ export const BreakdownSummary = observer(() => {
                         }}
                     >
                         <ThemeIcon
-                            color={categoryValue.color}
+                            color={category.color}
                             size={70}
                             variant="light"
                         >
-                            <Icons name={categoryValue.icon} />
+                            <Icons name={category.icon} />
                         </ThemeIcon>
                         <Text
                             style={{
@@ -52,10 +52,10 @@ export const BreakdownSummary = observer(() => {
                                 fontWeight: 'bold',
                             }}
                         >
-                            {categoryValue.name}
+                            {category.name}
                         </Text>
                         <Text>
-                            {formatCurrency(categoryValue.amount, user?.currency)}
+                            {formatCurrency(category.total, user?.currency)}
                         </Text>
                     </Paper>
                 )
