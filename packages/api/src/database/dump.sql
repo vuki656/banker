@@ -140,7 +140,8 @@ CREATE TABLE banker.users (
     password character varying(500) NOT NULL,
     email character varying(300) NOT NULL,
     is_deleted boolean DEFAULT false NOT NULL,
-    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
+    created_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL,
+    currency character varying(3) DEFAULT 'HRK'::character varying NOT NULL
 );
 
 
@@ -191,17 +192,17 @@ ALTER TABLE public.databasechangeloglock OWNER TO "banker-user";
 COPY banker.categories (id, name, icon, color, user_fk, is_deleted, created_at) FROM stdin;
 f817c82a-9d68-44f2-8d6c-4ad8d8655305	wef	IconCar	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	t	2022-06-17 21:28:24.666555
 2d60f7b9-413a-4660-8671-f4ccb0f3d755	test	IconCar	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	t	2022-06-17 21:28:24.666555
-5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	Bank Fees	IconCoin	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 972fcd3d-a29b-4b9c-b965-dce6c7ddb774	Bars	IconCoffee	blue	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
-00515f3e-9df1-495b-8c74-a19ff094edae	Clothes 	IconShirt	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 a6e0d1b4-0363-484e-aa8f-e006851aa91d	Loans	IconBuildingBank	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 e73616ca-7c4e-4105-808e-f9ffef14e515	Rent	IconHome	green	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 0d69125c-d5c4-4fa2-b722-722714bb894d	Restaurants	IconPizza	orange	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 4487ee24-7867-4dec-beb5-08d3e6e3ba79	Subscriptions	IconRotateClockwise	red	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 d7e723e3-566f-41f6-b5ee-9fc11378bd13	Transport	IconCar	dark	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 a24f655e-6508-409c-a580-4e4a28895f64	Utilities	IconBolt	yellow	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
-778a317e-d02c-44c0-9e3d-8c6ff156064d	Withdrawls	IconCash	gray	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 f9280f8a-49ed-40ad-8fba-208382c36613	Groceries	IconShoppingCart	pink	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
+5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	Bank Fees	IconCoin	cyan	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
+00515f3e-9df1-495b-8c74-a19ff094edae	Clothes 	IconShirt	lime	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
+778a317e-d02c-44c0-9e3d-8c6ff156064d	Withdrawls	IconCash	pink	5620c83c-3b66-40f3-a39a-75fd72dbd161	f	2022-06-17 21:28:24.666555
 \.
 
 
@@ -211,10 +212,11 @@ f9280f8a-49ed-40ad-8fba-208382c36613	Groceries	IconShoppingCart	pink	5620c83c-3b
 
 COPY banker.keywords (id, name, category_fk, is_deleted, created_at) FROM stdin;
 f37ec2bb-6816-4ecb-a8d2-15ff750632a6	wef	f817c82a-9d68-44f2-8d6c-4ad8d8655305	f	2022-06-17 21:28:24.666555
-08b7452f-6ebf-43bb-a592-c7e0661ae204	naknada za kreditni transfer	5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	f	2022-06-18 09:22:49.857895
-560738c2-493c-4b7f-8a3a-cdcbc3f377b1	naknada za podizanje	5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	f	2022-06-18 09:22:49.857895
+0f07f0c6-0f6c-4046-9bba-5b35d796b5c8	naknada za kreditni transfer	5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	f	2022-06-19 07:09:38.270343
+b15d108a-093c-436a-97be-3706518dfb9f	naknada za podizanje	5471b4e7-47bd-4a9f-b00e-900a88d7b9e0	f	2022-06-19 07:09:38.270343
+3f4ec804-6e8c-4ca9-afe9-513d56c66e63	c & a	00515f3e-9df1-495b-8c74-a19ff094edae	f	2022-06-19 07:09:42.479915
+3c9441c4-1b2e-4b55-b834-745e5c6418e2	podizanje gotovog novca	778a317e-d02c-44c0-9e3d-8c6ff156064d	f	2022-06-19 07:09:48.223295
 f06bd59c-694e-4c7b-b252-8aa15c7f7b1f	avant gastro	972fcd3d-a29b-4b9c-b965-dce6c7ddb774	f	2022-06-18 09:22:56.151007
-66baea23-02c1-4f1e-bed5-50d49cef3e58	c & a	00515f3e-9df1-495b-8c74-a19ff094edae	f	2022-06-18 09:23:01.087119
 f8296c58-1a21-4436-bb00-468fe43bc7b0	jadranka	e73616ca-7c4e-4105-808e-f9ffef14e515	f	2022-06-18 09:23:16.510113
 60800917-896c-419e-a4ac-50f6a50217f8	ali kebaba	0d69125c-d5c4-4fa2-b722-722714bb894d	f	2022-06-18 09:23:20.645988
 5d927bf5-adda-4231-8f36-f7f4ad83ad50	batak	0d69125c-d5c4-4fa2-b722-722714bb894d	f	2022-06-18 09:23:20.645988
@@ -239,7 +241,6 @@ ca4be03d-a0be-4b24-928b-931715fba00a	kfc	0d69125c-d5c4-4fa2-b722-722714bb894d	f	
 e7a7e718-f369-42ac-9940-3466f6a8aad0	hrvatski telekom	a24f655e-6508-409c-a580-4e4a28895f64	f	2022-06-18 09:23:43.109225
 9fc734c4-0efb-47c9-90f3-b9bb7ac5e95f	toplinarstvo	a24f655e-6508-409c-a580-4e4a28895f64	f	2022-06-18 09:23:43.109225
 ff5d568f-b31b-48bf-a179-057962f323bc	zagrebački holding	a24f655e-6508-409c-a580-4e4a28895f64	f	2022-06-18 09:23:43.109225
-579e145e-615b-4617-84c0-b675b2cf7bf0	podizanje gotovog novca	778a317e-d02c-44c0-9e3d-8c6ff156064d	f	2022-06-18 09:23:48.672326
 42ffb76f-7f24-49e1-97e8-304318834ade	coco zagreb	f9280f8a-49ed-40ad-8fba-208382c36613	f	2022-06-18 09:24:57.296415
 4af22964-7344-4834-a028-ecafb1090f3a	ina zagreb	f9280f8a-49ed-40ad-8fba-208382c36613	f	2022-06-18 09:24:57.296415
 0dc4d40d-6619-4268-a2e8-79721045b004	inovine	f9280f8a-49ed-40ad-8fba-208382c36613	f	2022-06-18 09:24:57.296415
@@ -863,8 +864,8 @@ efcae805-2da8-4300-9ed2-d184207c805b	B160221600162456	25	Kupovina keks pay zagre
 -- Data for Name: users; Type: TABLE DATA; Schema: banker; Owner: banker-user
 --
 
-COPY banker.users (id, first_name, last_name, password, email, is_deleted, created_at) FROM stdin;
-5620c83c-3b66-40f3-a39a-75fd72dbd161	Domagoj	Vukovic	$2a$04$4glLmb.j3a4uTW8rJQajYOumR0AthqFxUEL6HWIXsAav.icqhdrNy	off.vukovic@gmail.com	f	2022-06-17 21:28:24.666555
+COPY banker.users (id, first_name, last_name, password, email, is_deleted, created_at, currency) FROM stdin;
+5620c83c-3b66-40f3-a39a-75fd72dbd161	Domagoj	Vukovic	$2a$04$4glLmb.j3a4uTW8rJQajYOumR0AthqFxUEL6HWIXsAav.icqhdrNy	off.vukovic@gmail.com	f	2022-06-17 21:28:24.666555	HRK
 \.
 
 
@@ -879,6 +880,7 @@ COPY public.databasechangelog (id, author, filename, dateexecuted, orderexecuted
 1652641653	off.vukovic@gmail.com	1652641653-create-keywords-table.migration.json	2022-06-08 17:51:25.706819	4	EXECUTED	8:6d87cfaafeed984f7fadba5a83ccc982	createTable tableName=keywords; addForeignKeyConstraint baseTableName=keywords, constraintName=FK_keywords__categories, referencedTableName=categories	Create keywords table	\N	4.10.0	\N	\N	4710685446
 1652861781	off.vukovic@gmail.com	1652861781-create-transactions-table.migration.json	2022-06-08 17:51:25.848449	5	EXECUTED	8:63597e1a5608b69c9961be771b801e49	sql; createTable tableName=transactions; addForeignKeyConstraint baseTableName=transactions, constraintName=FK_transactions__users, referencedTableName=users; addForeignKeyConstraint baseTableName=transactions, constraintName=FK_transactions__cate...	Create transactions table	\N	4.10.0	\N	\N	4710685446
 1655501134	off.vukovic@gmail.com	1655501134-add-created-at-columns.migration.json	2022-06-17 21:28:24.702089	6	EXECUTED	8:ba1f19c27f081243b079a7eff44692dd	addColumn tableName=users; addColumn tableName=categories; addColumn tableName=keywords; addColumn tableName=transactions	Add created at columns	\N	4.10.0	\N	\N	5501304414
+1655574120	off.vukovic@gmail.com	1655574120-add-user-currency.migration.json	2022-06-19 07:20:29.230994	7	EXECUTED	8:0eea78f60a57dea87b70ef328427639f	addColumn tableName=users	Add user currency	\N	4.11.0	\N	\N	5623228946
 \.
 
 
