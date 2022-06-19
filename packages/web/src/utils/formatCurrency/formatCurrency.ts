@@ -1,5 +1,12 @@
 import currency from 'currency.js'
 
 export const formatCurrency = (amount: number, userCurrency?: string) => {
-    return `${currency(amount, { precision: 2 }).toString()} ${userCurrency}`
+    const formattedAmount = currency(amount, { precision: 2 })
+        .format({
+            decimal: ',',
+            separator: '.',
+            symbol: '',
+        })
+
+    return `${formattedAmount} ${userCurrency}`
 }
