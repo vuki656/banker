@@ -1,29 +1,24 @@
-import { Paper } from '@mantine/core'
-import {
-    BarElement,
-    CategoryScale,
-    Chart,
-    Legend,
-    LinearScale,
-    Title,
-    Tooltip,
-} from 'chart.js'
+import { Paper, useMantineTheme } from '@mantine/core'
 import { observer } from 'mobx-react-lite'
-import { Bar } from 'react-chartjs-2'
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Legend,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from 'recharts'
 
 import { useBreakdownStore } from '../hooks'
 
-Chart.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
-)
-
 export const BreakdownBarChart = observer(() => {
+    const theme = useMantineTheme()
+
     const store = useBreakdownStore()
+
+    console.log(store.barChartData)
 
     return (
         <Paper
@@ -33,23 +28,38 @@ export const BreakdownBarChart = observer(() => {
                 padding: '20px',
             }}
         >
-            <Bar
-                data={{
-                    datasets: store.barChartData.data,
-                    labels: store.barChartData.labels,
-                }}
-                options={{
-                    responsive: true,
-                    scales: {
-                        x: {
-                            stacked: true,
-                        },
-                        y: {
-                            stacked: true,
-                        },
-                    },
-                }}
-            />
+            <ResponsiveContainer
+                height="100%"
+                width="100%"
+            >
+                <BarChart
+                    data={store.barChartData}
+                    height={300}
+                    margin={{
+                        bottom: 5,
+                        left: 20,
+                        right: 30,
+                        top: 20,
+                    }}
+                    width={500}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    {store.categories.map((category) => {
+                        return (
+                            <Bar
+                                dataKey={category.name}
+                                fill={theme.colors[category.color]?.[6]}
+                                key={category.id}
+                                stackId="stack"
+                            />
+                        )
+                    })}
+                </BarChart>
+            </ResponsiveContainer>
         </Paper>
     )
 })

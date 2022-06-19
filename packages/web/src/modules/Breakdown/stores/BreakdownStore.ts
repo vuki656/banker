@@ -7,6 +7,7 @@ import type {
     TransactionType,
 } from '../../../graphql/types.generated'
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
+import { formatDate } from '../../../utils'
 
 import type {
     BreakdownBarChartData,
@@ -86,7 +87,7 @@ export class BreakdownStore {
     }
 
     public get barChartData() {
-        const dates: dayjs.Dayjs[] = []
+        const dates: Date[] = []
 
         let currentDate = dayjs(this.range.startDate)
 
@@ -94,41 +95,40 @@ export class BreakdownStore {
         while (currentDate.isBefore(this.range.endDate) || currentDate.isSame(this.range.endDate)) {
             currentDate = currentDate.add(1, 'day')
 
-            dates.push(currentDate)
+            dates.push(currentDate.toDate())
         }
 
+        const categories = this.categories.reduce((accumulator, category) => {
+            return {
+                ...accumulator,
+                [category.name]: 0
+            }
+        }, {})
+
+        // FIXME: all data points have the same amount
+        // TODO: types
         // Group transactions per category, and then for each date in range for that category
-        const data = this.categories.reduce<BreakdownBarChartData[]>((categoryAccumulator, category) => {
-            return [
-                ...categoryAccumulator,
-                {
-                    backgroundColor: category.color,
-                    data: dates.map((date) => {
-                        // Sum transactions only for current date and current category
-                        return this.transactions.reduce((transactionAmountAccumulator, transaction) => {
-                            const isSameDate = dayjs(transaction.date).isSame(date)
-                            const isSameCategory = transaction.category?.id === category.id
+        return dates.map((date) => {
+            const dateCategories = this.transactions.reduce<Record<any, any>>((accumulator, transaction) => {
+                const categoryName = transaction.category?.name
 
-                            if (isSameDate && isSameCategory) {
-                                return transactionAmountAccumulator + transaction.amount.converted
-                            }
+                if (!categoryName) {
+                    return accumulator
+                }
 
-                            return transactionAmountAccumulator
-                        }, 0)
-                    }),
-                    label: category.name,
-                },
-            ]
-        }, [])
+                const totalCategorySum = accumulator[categoryName] + transaction.amount.converted
 
-        const formattedDates = dates.map((date) => {
-            return dayjs(date).format('DD.MM.YY')
+                return {
+                    ...accumulator,
+                    [categoryName]: totalCategorySum,
+                }
+            }, categories)
+
+            return {
+                name: formatDate(date),
+                ...dateCategories,
+            }
         })
-
-        return {
-            data,
-            labels: formattedDates,
-        }
     }
 
     public get pieChartData() {

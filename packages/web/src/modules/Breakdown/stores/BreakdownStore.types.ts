@@ -5,8 +5,7 @@ export type BreakdownSummaryCardData = Record<string, CategoryType & {
 }>
 
 export type BreakdownBarChartData = {
-    backgroundColor: string
     data: any
-    label: string
+    name: string
 }
 
