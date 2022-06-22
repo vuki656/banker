@@ -5,8 +5,21 @@
 # ------------------------------------------------ #
 
 type Query {
+    currentUser: UserType
     categories: [CategoryType!]!
     transactions(args: TransactionsArgs): [TransactionType!]!
+}
+
+type UserType implements BaseType {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    currency: String!
+}
+
+interface BaseType {
+    id: ID!
 }
 
 type CategoryType implements BaseType {
@@ -15,10 +28,6 @@ type CategoryType implements BaseType {
     color: String!
     icon: String!
     keywords: [KeywordType!]!
-}
-
-interface BaseType {
-    id: ID!
 }
 
 type KeywordType implements BaseType {
@@ -72,14 +81,6 @@ type Mutation {
 type LoginUserPayload {
     token: String!
     user: UserType!
-}
-
-type UserType implements BaseType {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    currency: String!
 }
 
 input LoginUserInput {

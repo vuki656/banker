@@ -3,7 +3,7 @@ import {
     useState,
 } from 'react'
 
-import type { UserType } from '../../graphql/types.generated'
+import { useGetCurrentUserQuery, UserType } from '../../graphql/types.generated'
 
 import type {
     CurrentUserContextProps,
@@ -16,6 +16,13 @@ export const CurrentUserProvider: React.FunctionComponent<CurrentUserContextProp
     const { children } = props
 
     const [currentUser, setCurrentUser] = useState<UserType | null>(null)
+
+    useGetCurrentUserQuery({
+        fetchPolicy: "network-only",
+        onCompleted: (response) => {
+            setCurrentUser(response.currentUser)
+        }
+    })
 
     const load = (user: UserType) => {
         setCurrentUser(user)

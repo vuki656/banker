@@ -66,7 +66,7 @@ export const Breakdown: React.FunctionComponent = () => {
                             Breakdown
                         </Text>
                         <Badge>
-                            {formatCurrency(store.total, user?.currency)}
+                            {user ? formatCurrency(store.total, user?.currency) : "N/A"}
                         </Badge>
                     </Group>
                 )}
@@ -85,7 +85,7 @@ export const Breakdown: React.FunctionComponent = () => {
                     padding: '20px',
                 }}
             >
-                <BreakdownSummary />
+                {/* <BreakdownSummary /> */}
                 {/* <BreakdownPieChart /> */}
                 {/* <BreakdownBarChart /> */}
             </Box>

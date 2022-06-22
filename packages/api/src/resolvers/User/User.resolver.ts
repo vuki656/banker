@@ -1,9 +1,13 @@
 import { container } from 'tsyringe'
 import {
     Arg,
+    Ctx,
     Mutation,
+    Query,
     Resolver,
 } from 'type-graphql'
+
+import { ContextType } from '../../shared/typescript-types'
 
 import {
     LoginUserInput,
@@ -19,6 +23,15 @@ import { UserService } from './User.service'
 @Resolver(() => UserType)
 export class UserResolver {
     private service = container.resolve(UserService)
+
+    @Query(() => UserType, { nullable: true })
+    public async currentUser(
+        @Ctx() context: ContextType,
+    ): Promise<UserType | null> {
+        console.log('context: ', context.user)
+
+        return context.user
+    }
 
     @Mutation(() => LoginUserPayload)
     public async loginUser(

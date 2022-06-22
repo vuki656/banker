@@ -14,6 +14,7 @@ import {
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import {
     Controller,
     useForm,
@@ -77,6 +78,15 @@ export const SidebarUpdateUserDialog: React.FunctionComponent = () => {
         resolver: zodResolver(userValidation),
     })
 
+    useEffect(() => {
+        reset({
+            currency: user?.currency ?? 'HRK',
+            email: user?.email ?? '',
+            firstName: user?.firstName ?? '',
+            lastName: user?.lastName ?? '',
+        })
+    }, [user])
+
     const onCancel = () => {
         reset()
 
@@ -120,18 +130,29 @@ export const SidebarUpdateUserDialog: React.FunctionComponent = () => {
                 }}
             >
                 <Group spacing={3}>
-                    <Text
-                        size="sm"
-                        weight={500}
-                    >
-                        {`${user?.firstName} ${user?.lastName}`}
-                    </Text>
-                    <Text
-                        color="dimmed"
-                        size="xs"
-                    >
-                        {user?.email}
-                    </Text>
+                    {user ? (
+                        <>
+                            <Text
+                                size="sm"
+                                weight={500}
+                            >
+                                {`${user.firstName} ${user.lastName}`}
+                            </Text>
+                            <Text
+                                color="dimmed"
+                                size="xs"
+                            >
+                                {user.email}
+                            </Text>
+                        </>
+                    ) : (
+                        <Text
+                            size="sm"
+                            weight={500}
+                        >
+                            N/A
+                        </Text>
+                    )}
                 </Group>
             </UnstyledButton>
             <Modal
