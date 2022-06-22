@@ -1,8 +1,6 @@
 import type { CategoryType } from '../../../graphql/types.generated'
 
-export type SummaryData = {
-    id: string
-    name: string
+export type SummaryData = CategoryType & {
     total: number
 }
 

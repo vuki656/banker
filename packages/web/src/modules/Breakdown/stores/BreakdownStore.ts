@@ -51,29 +51,27 @@ export class BreakdownStore {
     }
 
     public get summaryData() {
-        return this.transactions.reduce<SummaryData[]>((accumulator, transaction) => {
-            if (!transaction.category) {
-                return accumulator
+        const categories = this.categories.map<SummaryData>((category) => {
+            return {
+                ...category,
+                total: 0
             }
+        })
 
-            const transactionCategory = accumulator.find((category) => {
-                return category.id === transaction.category?.id
-            })
-
-            /// TODO: you need to add to existing instead of creating a new one every time
-            return [
-                ...accumulator,
-                {
-                    id: transaction.category.id,
-                    name: transaction.category.name,
-                    icon: transaction.category.icon,
-                    color: transaction.category.color,
-                    total: currency(transaction.amount.converted)
-                        .add(transactionCategory?.total ?? 0)
-                        .value
+        return this.transactions.reduce<SummaryData[]>((accumulator, transaction) => {
+            return accumulator.map((category) => {
+                if (category.id === transaction.category?.id) {
+                    return {
+                        ...category,
+                        total: currency(transaction.amount.converted)
+                            .add(category.total)
+                            .value
+                    }
                 }
-            ]
-        }, [])
+
+                return category
+            })
+        }, categories)
     }
 
     public get barChartData() {

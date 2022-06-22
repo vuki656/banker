@@ -85,7 +85,7 @@ export const Breakdown: React.FunctionComponent = () => {
                     padding: '20px',
                 }}
             >
-                {/* <BreakdownSummary /> */}
+                <BreakdownSummary />
                 {/* <BreakdownPieChart /> */}
                 {/* <BreakdownBarChart /> */}
             </Box>
