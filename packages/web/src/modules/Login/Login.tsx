@@ -1,3 +1,4 @@
+import { useApolloClient } from '@apollo/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
     Button,
@@ -33,11 +34,14 @@ const ICON_SIZE = 17
 export const Login: React.FunctionComponent = () => {
     const theme = useMantineTheme()
     const router = useRouter()
+    const apolloClient = useApolloClient()
 
     const { load } = useCurrentUser()
 
     const [loginUserMutation, { loading }] = useLoginUserMutation({
-        onCompleted: (response) => {
+        onCompleted: async (response) => {
+            await apolloClient.clearStore()
+
             setCookies(
                 COOKIE_TOKEN_NAME,
                 response.loginUser.token,
