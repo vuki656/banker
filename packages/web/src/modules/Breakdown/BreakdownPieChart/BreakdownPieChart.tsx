@@ -1,18 +1,20 @@
-import { Paper } from '@mantine/core'
 import {
-    ArcElement,
-    Chart,
-    Legend,
-    Tooltip,
-} from 'chart.js'
+    Paper,
+    useMantineTheme,
+} from '@mantine/core'
 import { observer } from 'mobx-react-lite'
-import { Doughnut } from 'react-chartjs-2'
+import {
+    Cell,
+    Pie,
+    PieChart,
+    Tooltip,
+} from 'recharts'
 
 import { useBreakdownStore } from '../hooks'
 
-Chart.register(ArcElement, Tooltip, Legend)
-
 export const BreakdownPieChart = observer(() => {
+    const theme = useMantineTheme()
+
     const store = useBreakdownStore()
 
     return (
@@ -23,21 +25,28 @@ export const BreakdownPieChart = observer(() => {
                 padding: '20px',
             }}
         >
-            <Doughnut
-                data={{
-                    datasets: [
-                        {
-                            backgroundColor: Object.values(store.pieChartData).map((dataPoint) => {
-                                return dataPoint.color
-                            }),
-                            data: Object.values(store.pieChartData).map((dataPoint) => {
-                                return dataPoint.amount
-                            }),
-                        },
-                    ],
-                    labels: Object.keys(store.pieChartData),
-                }}
-            />
+            <PieChart
+                height={400}
+                width={800}
+            >
+                <Tooltip />
+                <Pie
+                    cx={120}
+                    cy={200}
+                    data={store.pieChartData}
+                    dataKey="total"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                >
+                    {store.pieChartData.map((category, index) => (
+                        <Cell
+                            fill={theme.colors[category.color]?.[6]}
+                            key={`cell-${index}`}
+                        />
+                    ))}
+                </Pie>
+            </PieChart>
         </Paper>
     )
 })

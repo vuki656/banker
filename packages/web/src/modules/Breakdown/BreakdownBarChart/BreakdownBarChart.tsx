@@ -1,4 +1,7 @@
-import { Paper, useMantineTheme } from '@mantine/core'
+import {
+    Paper,
+    useMantineTheme,
+} from '@mantine/core'
 import { observer } from 'mobx-react-lite'
 import {
     Bar,
@@ -17,8 +20,6 @@ export const BreakdownBarChart = observer(() => {
     const theme = useMantineTheme()
 
     const store = useBreakdownStore()
-
-    console.log(store.barChartData)
 
     return (
         <Paper

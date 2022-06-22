@@ -7,7 +7,7 @@ import {
     Resolver,
 } from 'type-graphql'
 
-import { ContextType } from '../../shared/typescript-types'
+import type { ContextType } from '../../shared/typescript-types'
 
 import {
     LoginUserInput,
@@ -25,11 +25,9 @@ export class UserResolver {
     private service = container.resolve(UserService)
 
     @Query(() => UserType, { nullable: true })
-    public async currentUser(
+    public currentUser(
         @Ctx() context: ContextType,
-    ): Promise<UserType | null> {
-        console.log('context: ', context.user)
-
+    ): UserType | null {
         return context.user
     }
 

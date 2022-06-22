@@ -8,9 +8,8 @@ import type {
     TransactionType,
 } from '../../../graphql/types.generated'
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
-import { formatDate } from '../../../utils'
 
-import type { BreakdownBarChartData, BreakdownSummaryCardData, SummaryData } from './BreakdownStore.types'
+import type { SummaryData } from './BreakdownStore.types'
 
 export class BreakdownStore {
     public transactionsValue: TransactionType[] = []
@@ -54,7 +53,7 @@ export class BreakdownStore {
         const categories = this.categories.map<SummaryData>((category) => {
             return {
                 ...category,
-                total: 0
+                total: 0,
             }
         })
 
@@ -65,7 +64,7 @@ export class BreakdownStore {
                         ...category,
                         total: currency(transaction.amount.converted)
                             .add(category.total)
-                            .value
+                            .value,
                     }
                 }
 
@@ -132,35 +131,26 @@ export class BreakdownStore {
     }
 
     public get pieChartData() {
-        return []
-        // const categories = this.categories.reduce<Record<string, { amount: number, color: string }>>((accumulator, category) => {
-        //     return {
-        //         ...accumulator,
-        //         [category.name]: {
-        //             amount: 0,
-        //             color: category.color,
-        //         },
-        //     }
-        // }, {})
-        //
-        // return this.transactions.reduce((accumulator, transaction) => {
-        //     if (!transaction.category) {
-        //         return accumulator
-        //     }
-        //
-        //     const category = accumulator[transaction.category.name]
-        //
-        //     if (!category) {
-        //         return accumulator
-        //     }
-        //
-        //     return {
-        //         ...accumulator,
-        //         [transaction.category.name]: {
-        //             ...category,
-        //             amount: category.amount + transaction.amount.converted,
-        //         },
-        //     }
-        // }, categories)
+        const categories = this.categories.map<SummaryData>((category) => {
+            return {
+                ...category,
+                total: 0,
+            }
+        })
+
+        return this.transactions.reduce<SummaryData[]>((accumulator, transaction) => {
+            return accumulator.map((category) => {
+                if (category.id === transaction.category?.id) {
+                    return {
+                        ...category,
+                        total: currency(transaction.amount.converted)
+                            .add(category.total)
+                            .value,
+                    }
+                }
+
+                return category
+            })
+        }, categories)
     }
 }
