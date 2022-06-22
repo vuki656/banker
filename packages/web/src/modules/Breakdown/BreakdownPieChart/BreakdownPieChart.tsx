@@ -27,7 +27,7 @@ export const BreakdownPieChart = observer(() => {
         >
             <PieChart
                 height={400}
-                width={800}
+                width={400}
             >
                 <Tooltip />
                 <Pie

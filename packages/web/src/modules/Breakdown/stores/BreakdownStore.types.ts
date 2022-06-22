@@ -4,10 +4,10 @@ export type SummaryData = CategoryType & {
     total: number
 }
 
-export type BreakdownSummaryCardData = Record<string, CategoryType & {
-    amount: number
-}>
+export type PieChartData = CategoryType & {
+    total: number
+}
 
-export type BreakdownBarChartData = Record<string, number> & {
-    name: string
+export type BarChartData = CategoryType & {
+    total: number
 }

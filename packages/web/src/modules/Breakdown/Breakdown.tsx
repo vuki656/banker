@@ -15,6 +15,7 @@ import {
 import { useBreakdownPageDataQuery } from '../../graphql/types.generated'
 import { useCurrentUser } from '../../utils'
 import { formatCurrency } from '../../utils/formatCurrency'
+import { BreakdownBarChart } from './BreakdownBarChart'
 
 import { BreakdownPieChart } from './BreakdownPieChart'
 import { BreakdownSummary } from './BreakdownSummary'
@@ -86,7 +87,7 @@ export const Breakdown: React.FunctionComponent = () => {
             >
                 <BreakdownSummary />
                 <BreakdownPieChart />
-                {/* <BreakdownBarChart /> */}
+                <BreakdownBarChart />
             </Box>
         </Stack>
     )
