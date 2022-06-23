@@ -1,3 +1,6 @@
+import { useApolloClient } from '@apollo/client'
+import { removeCookies } from 'cookies-next'
+import router from 'next/router'
 import {
     createContext,
     useState,
@@ -5,6 +8,7 @@ import {
 
 import type { UserType } from '../../graphql/types.generated'
 import { useGetCurrentUserQuery } from '../../graphql/types.generated'
+import { COOKIE_TOKEN_NAME } from '../constants'
 
 import type {
     CurrentUserContextProps,
@@ -16,11 +20,25 @@ export const CurrentUserContext = createContext<CurrentUserContextValue | null>(
 export const CurrentUserProvider: React.FunctionComponent<CurrentUserContextProps> = (props) => {
     const { children } = props
 
+    const apolloClient = useApolloClient()
+
     const [currentUser, setCurrentUser] = useState<UserType | null>(null)
 
     useGetCurrentUserQuery({
         fetchPolicy: 'network-only',
-        onCompleted: (response) => {
+        onCompleted: async (response) => {
+            if (!response.currentUser) {
+                await router.push('/')
+
+                await apolloClient.clearStore()
+
+                setCurrentUser(null)
+
+                removeCookies(COOKIE_TOKEN_NAME)
+
+                return
+            }
+
             setCurrentUser(response.currentUser)
         },
     })
