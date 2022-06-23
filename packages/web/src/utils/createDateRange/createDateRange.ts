@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 
 export const createDateRange = (start: Date, end: Date) => {
     const dates: Date[] = []
