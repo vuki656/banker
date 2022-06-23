@@ -1,4 +1,5 @@
 export * from './extractFormFieldError'
+export * from './createDateRange'
 export * from './useCurrentUser'
 export * from './date'
 export * from './constants'

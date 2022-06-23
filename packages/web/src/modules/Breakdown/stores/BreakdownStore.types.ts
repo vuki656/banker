@@ -1,13 +1,13 @@
 import type { CategoryType } from '../../../graphql/types.generated'
 
-export type SummaryData = CategoryType & {
+export type SummaryDataType = CategoryType & {
     total: number
 }
 
-export type PieChartData = CategoryType & {
+export type PieChartDataType = CategoryType & {
     total: number
 }
 
-export type BarChartData = CategoryType & {
-    total: number
+export type BarChartDataType = Record<string, number | string> & {
+    date: string
 }

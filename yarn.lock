@@ -1089,7 +1089,6 @@ __metadata:
     "@tabler/icons": ^1.70.0
     "@types/react": 18.0.14
     "@types/react-dom": 18.0.5
-    chart.js: ^3.8.0
     cookies-next: ^2.0.4
     currency.js: ^2.0.4
     graphql: ^16.5.0
@@ -1098,7 +1097,6 @@ __metadata:
     next: 12.1.7-canary.33
     next-with-apollo: ^5.3.0
     react: 18.2.0
-    react-chartjs-2: ^4.2.0
     react-dom: 18.2.0
     react-hook-form: ^7.32.2
     react-virtual: ^2.10.4
@@ -5372,13 +5370,6 @@ __metadata:
   version: 0.7.0
   resolution: "chardet@npm:0.7.0"
   checksum: 6fd5da1f5d18ff5712c1e0aed41da200d7c51c28f11b36ee3c7b483f3696dabc08927fc6b227735eb8f0e1215c9a8abd8154637f3eff8cada5959df7f58b024d
-  languageName: node
-  linkType: hard
-
-"chart.js@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "chart.js@npm:3.8.0"
-  checksum: 0360212bf5d534effc8475a1aa705ba7257a315af368b5e8eecf476f0bd57a6bb80ad740e870d552f2d11e134dd1497ccef02950d7e626c21a400ff00ecf59af
   languageName: node
   linkType: hard
 
@@ -11675,16 +11666,6 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
-  languageName: node
-  linkType: hard
-
-"react-chartjs-2@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "react-chartjs-2@npm:4.2.0"
-  peerDependencies:
-    chart.js: ^3.5.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: cd266387d23a32d4590f390075fbecf8570678a9d9fb2d71881072dd557eee88777bf3659c19c07967f813c945aa2b34e44a2e820eaaa89b38035f58e7befcf6
   languageName: node
   linkType: hard
 

@@ -8,9 +8,16 @@ import type {
     TransactionType,
 } from '../../../graphql/types.generated'
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
-import { formatDate } from '../../../utils'
+import {
+    createDateRange,
+    formatDate,
+} from '../../../utils'
 
-import type { PieChartData, SummaryData } from './BreakdownStore.types'
+import type {
+    BarChartDataType,
+    PieChartDataType,
+    SummaryDataType,
+} from './BreakdownStore.types'
 
 export class BreakdownStore {
     public transactionsValue: TransactionType[] = []
@@ -18,7 +25,7 @@ export class BreakdownStore {
     public categories: CategoryType[] = []
 
     public range: RangeSelectValue = {
-        endDate: dayjs().toDate(), 
+        endDate: dayjs().toDate(),
         startDate: dayjs()
             .startOf('month')
             .toDate(),
@@ -28,39 +35,39 @@ export class BreakdownStore {
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
-    public setRange(range: RangeSelectValue) {
+    public setRange(range: RangeSelectValue): void {
         this.range = range
     }
 
-    public setCategories(categories: CategoryType[]) {
+    public setCategories(categories: CategoryType[]): void {
         this.categories = categories
     }
 
-    public setTransactions(transactions: TransactionType[]) {
+    public setTransactions(transactions: TransactionType[]): void {
         this.transactionsValue = transactions
     }
 
-    public get transactions() {
+    public get transactions(): TransactionType[] {
         return this.transactionsValue.filter((transaction) => {
             return transaction.status === TransactionStatusEnum.Done
         })
     }
 
-    public get total() {
+    public get total(): number {
         return this.transactions.reduce((accumulator, transaction) => {
             return accumulator + transaction.amount.converted
         }, 0)
     }
 
-    public get summaryData() {
-        const categories = this.categories.map<SummaryData>((category) => {
+    public get summaryData(): SummaryDataType[] {
+        const categories = this.categories.map<SummaryDataType>((category) => {
             return {
                 ...category,
                 total: 0,
             }
         })
 
-        return this.transactions.reduce<SummaryData[]>((accumulator, transaction) => {
+        return this.transactions.reduce<SummaryDataType[]>((accumulator, transaction) => {
             return accumulator.map((category) => {
                 if (category.id === transaction.category?.id) {
                     return {
@@ -77,28 +84,52 @@ export class BreakdownStore {
     }
 
     public get barChartData() {
-        const dates: Date[] = []
+        const dates = createDateRange(this.range.startDate, this.range.endDate)
 
-        let currentDate = dayjs(this.range.startDate)
+        return dates.reduce<BarChartDataType[]>((dateAccumulator, date) => {
+            const dateTransactions = this.transactions.filter((transaction) => {
+                return dayjs(transaction.date).isSame(date)
+            })
 
-        while (currentDate.isBefore(this.range.endDate) || currentDate.isSame(this.range.endDate)) {
-            currentDate = currentDate.add(1, 'day')
+            const categorizedDateTransactions = dateTransactions.reduce<Record<string, number>>(
+                (transactionAccumulator, transaction) => {
+                    const categoryName = transaction.category?.name
 
-            dates.push(currentDate.toDate())
-        }
+                    if (!categoryName) {
+                        return transactionAccumulator
+                    }
 
-        return []
+                    const currentCategorySum = transactionAccumulator[categoryName] ?? 0
+
+                    return {
+                        ...transactionAccumulator,
+                        [categoryName]: currency(currentCategorySum)
+                            .add(transaction.amount.converted)
+                            .value,
+                    }
+                },
+                {}
+            )
+
+            return [
+                ...dateAccumulator,
+                {
+                    ...categorizedDateTransactions,
+                    date: formatDate(date),
+                },
+            ]
+        }, [])
     }
 
-    public get pieChartData() {
-        const categories = this.categories.map<PieChartData>((category) => {
+    public get pieChartData(): PieChartDataType[] {
+        const categories = this.categories.map<PieChartDataType>((category) => {
             return {
                 ...category,
                 total: 0,
             }
         })
 
-        return this.transactions.reduce<PieChartData[]>((accumulator, transaction) => {
+        return this.transactions.reduce<PieChartDataType[]>((accumulator, transaction) => {
             return accumulator.map((category) => {
                 if (category.id === transaction.category?.id) {
                     return {
