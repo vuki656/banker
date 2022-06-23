@@ -19,7 +19,7 @@ export const ApolloPluginLogger: ApolloServerPlugin<ContextType> = {
         // Don't log when using playground or current user
         if (
             operationName === 'IntrospectionQuery' ||
-            operationName === 'CurrentUser'
+            operationName === 'GetCurrentUser'
         ) {
             return
         }
