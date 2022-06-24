@@ -45,7 +45,7 @@ export const BreakdownBarChart = observer(() => {
                     width={500}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
