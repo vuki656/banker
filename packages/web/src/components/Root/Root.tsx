@@ -8,7 +8,6 @@ export const Root: React.FunctionComponent<RootProps> = (props) => {
     const { children } = props
 
     return (
-
         <AppShell
             navbar={<Sidebar />}
             padding="md"
