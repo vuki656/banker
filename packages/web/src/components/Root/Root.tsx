@@ -16,13 +16,11 @@ export const Root: React.FunctionComponent<RootProps> = (props) => {
                     height: '100%',
                 },
                 main: {
+                    backgroundColor: theme.colorScheme === 'dark'
+                        ? theme.colors.dark[8]
+                        : theme.colors.gray[0],
                     display: 'flex',
                     flex: 1,
-                    main: {
-                        backgroundColor: theme.colorScheme === 'dark'
-                            ? theme.colors.dark[8]
-                            : theme.colors.gray[0],
-                    },
                     overflowX: 'hidden',
                     padding: 0,
                     zIndex: 1,
