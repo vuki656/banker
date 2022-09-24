@@ -18,7 +18,7 @@ export const BreakdownSummary = observer(() => {
 
     return (
         <Box
-            style={{
+            sx={{
                 display: 'grid',
                 gap: '20px',
                 gridArea: 'summary',
@@ -30,7 +30,7 @@ export const BreakdownSummary = observer(() => {
                     <Paper
                         key={category.id}
                         shadow="xs"
-                        style={{
+                        sx={{
                             alignItems: 'center',
                             display: 'flex',
                             flexDirection: 'column',
@@ -47,7 +47,7 @@ export const BreakdownSummary = observer(() => {
                             <Icons name={category.icon} />
                         </ThemeIcon>
                         <Text
-                            style={{
+                            sx={{
                                 fontSize: '20px',
                                 fontWeight: 'bold',
                             }}

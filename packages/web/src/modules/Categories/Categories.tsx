@@ -30,7 +30,7 @@ export const Categories: React.FunctionComponent = () => {
         <>
             <Stack
                 spacing={0}
-                style={{ flex: 1 }}
+                sx={{ flex: 1 }}
             >
                 <LoadingOverlay visible={loading} />
                 <Header
@@ -39,7 +39,7 @@ export const Categories: React.FunctionComponent = () => {
                 />
                 <Stack
                     p="md"
-                    style={{ overflow: 'auto' }}
+                    sx={{ overflow: 'auto' }}
                 >
                     {data?.categories.map((category) => {
                         return (

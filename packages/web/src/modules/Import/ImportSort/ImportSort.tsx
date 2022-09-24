@@ -15,7 +15,7 @@ export const ImportSort = observer(() => {
         <Stack
             align="center"
             justify="center"
-            style={{
+            sx={{
                 height: '100%',
                 overflow: 'auto',
             }}

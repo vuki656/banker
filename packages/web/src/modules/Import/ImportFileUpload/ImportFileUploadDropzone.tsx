@@ -43,7 +43,7 @@ export const ImportFileUploadDropzone: React.FunctionComponent<ImportFileUploadD
             onReject={() => {
                 showErrorNotification()
             }}
-            style={{
+            sx={{
                 textAlign: 'center',
             }}
         >

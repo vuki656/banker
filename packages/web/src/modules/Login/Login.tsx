@@ -84,7 +84,7 @@ export const Login: React.FunctionComponent = () => {
         <Stack
             align="center"
             justify="center"
-            style={{
+            sx={{
                 backgroundColor: theme.colorScheme === 'dark'
                     ? theme.colors.dark[8]
                     : theme.colors.gray[0],

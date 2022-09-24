@@ -49,7 +49,7 @@ export const Sidebar: React.FunctionComponent = () => {
         <Navbar
             height="100%"
             p="xs"
-            style={{
+            sx={{
                 minWidth: '240px',
             }}
             width={{ base: 300 }}
@@ -66,7 +66,7 @@ export const Sidebar: React.FunctionComponent = () => {
                     })}
                 >
                     <Text
-                        style={{
+                        sx={{
                             fontSize: '30px',
                             fontWeight: 600,
                         }}

@@ -20,7 +20,7 @@ export const BreakdownPieChart = observer(() => {
     return (
         <Paper
             shadow="xs"
-            style={{
+            sx={{
                 gridArea: 'pie',
                 padding: '20px',
             }}

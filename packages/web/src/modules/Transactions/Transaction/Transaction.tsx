@@ -86,7 +86,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
             <Text
                 color="dimmed"
                 size="sm"
-                style={{
+                sx={{
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',

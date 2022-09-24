@@ -26,7 +26,7 @@ export const ImportSortSelect = observer(() => {
         <Group
             align="center"
             position="center"
-            style={{
+            sx={{
                 padding: theme.spacing.md,
                 width: '80%',
             }}

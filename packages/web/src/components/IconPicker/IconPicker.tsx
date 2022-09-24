@@ -78,10 +78,8 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                                     key={Icon.key}
                                     onClick={onIconSelect(String(Icon.key))}
                                     size="lg"
-                                    style={{
-                                        cursor: 'pointer',
-                                    }}
                                     sx={(theme) => ({
+                                        cursor: 'pointer',
                                         '&:hover': {
                                             border: `1px solid ${theme.colors.gray[3]}`,
                                         },

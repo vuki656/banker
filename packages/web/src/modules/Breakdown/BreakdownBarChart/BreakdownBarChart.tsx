@@ -24,7 +24,7 @@ export const BreakdownBarChart = observer(() => {
     return (
         <Paper
             shadow="xs"
-            style={{
+            sx={{
                 gridArea: 'bar',
                 padding: '20px',
             }}

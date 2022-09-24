@@ -168,11 +168,6 @@ export class ImportStore {
                 throw new TypeError('Amount not a number')
             }
 
-            // Transactions that are not expenses
-            // if (amount <= 0) {
-            //     return accumulator
-            // }
-
             const transaction: NewTransactionType = {
                 amount,
                 category: null,

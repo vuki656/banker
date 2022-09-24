@@ -61,7 +61,7 @@ export const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props) =>
                 />
             </InputWrapper>
             <Box
-                style={{
+                sx={{
                     columnGap: '10px',
                     display: 'flex',
                     justifyContent: 'flex-end',

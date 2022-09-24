@@ -50,7 +50,7 @@ export const Breakdown: React.FunctionComponent = () => {
     return (
         <Stack
             spacing={0}
-            style={{ flex: 1 }}
+            sx={{ flex: 1 }}
         >
             <LoadingOverlay visible={loading} />
             <Header
@@ -72,7 +72,7 @@ export const Breakdown: React.FunctionComponent = () => {
                 )}
             />
             <Box
-                style={{
+                sx={{
                     display: 'grid',
                     gap: '20px',
                     gridTemplateAreas: `

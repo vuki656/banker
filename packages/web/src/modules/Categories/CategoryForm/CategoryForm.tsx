@@ -88,7 +88,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
             </FormProvider>
             <SimpleGrid
                 cols={value ? 3 : 2}
-                style={{
+                sx={{
                     marginTop: theme.spacing.xl,
                 }}
             >

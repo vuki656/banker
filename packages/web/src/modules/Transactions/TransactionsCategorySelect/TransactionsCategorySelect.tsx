@@ -44,7 +44,7 @@ export const TransactionsCategorySelect = observer(() => {
                     return (
                         <Chip
                             key={category.id}
-                            style={{
+                            sx={{
                                 columnGap: '5px',
                                 display: 'flex',
                                 overflowX: 'auto',

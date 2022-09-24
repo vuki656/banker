@@ -67,7 +67,7 @@ export const Transactions = observer(() => {
         <>
             <Stack
                 spacing={0}
-                style={{
+                sx={{
                     flex: 1,
                     height: '100%',
                     overflow: 'hidden',
@@ -93,7 +93,7 @@ export const Transactions = observer(() => {
                 <TransactionsCategorySelect />
                 <Stack
                     p="md"
-                    style={{
+                    sx={{
                         flex: 1,
                         overflow: 'auto',
                     }}
