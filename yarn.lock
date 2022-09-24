@@ -1051,6 +1051,7 @@ __metadata:
     nodemon: ^2.0.18
     pino: ^8.1.0
     pino-pretty: ^8.1.0
+    prettier: ^2.7.1
     prettier-plugin-prisma: ^3.14.0
     prisma: ^3.15.2
     reflect-metadata: ^0.1.13
