@@ -1,6 +1,7 @@
 import {
     Badge,
     Group,
+    LoadingOverlay,
     Stack,
     Text,
 } from '@mantine/core'
@@ -16,7 +17,7 @@ import { ImportSort } from './ImportSort'
 export const Import = observer(() => {
     const store = useImportStore()
 
-    useImportPageDataQuery({
+    const { loading } = useImportPageDataQuery({
         fetchPolicy: 'cache-and-network',
         onCompleted: (data) => {
             store.setCategories(data.categories)
@@ -28,8 +29,12 @@ export const Import = observer(() => {
     return (
         <Stack
             spacing={0}
-            sx={{ flex: 1 }}
+            sx={{
+                flex: 1,
+                position: 'relative'
+            }}
         >
+            <LoadingOverlay visible={loading} />
             <Header
                 action={<ImportFileUpload />}
                 title={(
