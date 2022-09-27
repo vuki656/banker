@@ -53,6 +53,7 @@
         "datasource",
         "dbgenerated",
         "domagoj",
-        "vukovic"
+        "vukovic",
+        "sheetjs"
     ]
 }

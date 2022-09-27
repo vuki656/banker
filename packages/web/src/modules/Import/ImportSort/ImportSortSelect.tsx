@@ -8,12 +8,11 @@ import {
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
-import type { CategoryType } from '../../../graphql/types.generated'
+import { CategoryType } from '../../../graphql/types.generated'
 import { useImportStore } from '../hooks'
 
 export const ImportSortSelect = observer(() => {
     const store = useImportStore()
-
     const theme = useMantineTheme()
 
     const onCategoryClick = (category: CategoryType) => {

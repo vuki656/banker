@@ -23,8 +23,11 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
     } = props
 
     const [isOpen, isOpenActions] = useBoolean()
-
     const [value, setValue] = useState<number | undefined>(valueProp)
+
+    useEffect(() => {
+        setValue(valueProp)
+    }, [isOpen])
 
     const onCancel = () => {
         setValue(undefined)
@@ -44,16 +47,16 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
         isOpenActions.setFalse()
     }
 
-    useEffect(() => {
-        setValue(valueProp)
-    }, [isOpen])
-
     return (
         <>
-            <ActionIcon onClick={isOpenActions.setTrue}>
+            <ActionIcon
+                onClick={isOpenActions.setTrue}
+                variant="default"
+            >
                 <IconPencil size={17} />
             </ActionIcon>
             <Modal
+                centered={true}
                 onClose={isOpenActions.setFalse}
                 opened={isOpen}
                 title="Edit Amount"
@@ -67,8 +70,8 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
                     />
                     <SimpleGrid cols={2}>
                         <Button
-                            color="red"
                             onClick={onCancel}
+                            variant="subtle"
                         >
                             Cancel
                         </Button>

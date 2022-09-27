@@ -39,7 +39,7 @@ export const ImportSortDetails = observer(() => {
                 color="dimmed"
                 sx={{ maxWidth: '80%' }}
             >
-                <Highlight highlight={store.currentTransaction?.keyword ?? ''}>
+                <Highlight highlight={store.currentTransactionMatchedKeyword}>
                     {store.currentTransaction?.description ?? 'N/A'}
                 </Highlight>
             </Text>
@@ -53,7 +53,7 @@ export const ImportSortDetails = observer(() => {
                     {store.currentTransaction?.currency}
                 </Text>
                 <ImportSortEditAmountDialog
-                    onSubmit={store.updateTransactionAmount}
+                    onSubmit={store.updateCurrentTransactionAmount}
                     value={store.currentTransaction?.amount}
                 />
             </Group>
