@@ -70,27 +70,30 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                             Select
                         </Button>
                     </Popover.Target>
-                    <Group align="center">
-                        {ICON_LIST.map((Icon) => {
-                            return (
-                                <ThemeIcon
-                                    color={color}
-                                    key={Icon.key}
-                                    onClick={onIconSelect(String(Icon.key))}
-                                    size="lg"
-                                    sx={(theme) => ({
-                                        '&:hover': {
-                                            border: `1px solid ${theme.colors.gray[3]}`,
-                                        },
-                                        cursor: 'pointer',
-                                    })}
-                                    variant="light"
-                                >
-                                    {cloneElement(Icon, { size: 20 })}
-                                </ThemeIcon>
-                            )
-                        })}
-                    </Group>
+                    <Popover.Dropdown>
+                        <Group align="center">
+                            {ICON_LIST.map((Icon) => {
+                                return (
+                                    <ThemeIcon
+                                        color={color}
+                                        key={Icon.key}
+                                        onClick={onIconSelect(String(Icon.key))}
+                                        size="lg"
+                                        sx={(theme) => ({
+                                            '&:hover': {
+                                                border: `1px solid ${theme.colors.gray[3]}`,
+                                            },
+                                            backgroundColor: theme.white,
+                                            cursor: 'pointer',
+                                        })}
+                                        variant="light"
+                                    >
+                                        {cloneElement(Icon, { size: 20 })}
+                                    </ThemeIcon>
+                                )
+                            })}
+                        </Group>
+                    </Popover.Dropdown>
                 </Popover>
             </Group>
         </Input.Wrapper>
