@@ -71,6 +71,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@apollo/protobufjs@npm:1.2.4":
+  version: 1.2.4
+  resolution: "@apollo/protobufjs@npm:1.2.4"
+  dependencies:
+    "@protobufjs/aspromise": ^1.1.2
+    "@protobufjs/base64": ^1.1.2
+    "@protobufjs/codegen": ^2.0.4
+    "@protobufjs/eventemitter": ^1.1.0
+    "@protobufjs/fetch": ^1.1.0
+    "@protobufjs/float": ^1.0.2
+    "@protobufjs/inquire": ^1.1.0
+    "@protobufjs/path": ^1.1.2
+    "@protobufjs/pool": ^1.1.0
+    "@protobufjs/utf8": ^1.1.0
+    "@types/long": ^4.0.0
+    "@types/node": ^10.1.0
+    long: ^4.0.0
+  bin:
+    apollo-pbjs: bin/pbjs
+    apollo-pbts: bin/pbts
+  checksum: 261d48dbeb4f8958fce707a131d2c44cd4d24efaf6c8d6c4c05e91f673c301015d5dc267caf9c17df32de7ef3ea70b247360f476adee8eb3e96204d61c5b2a64
+  languageName: node
+  linkType: hard
+
 "@apollo/utils.dropunuseddefinitions@npm:^1.1.0":
   version: 1.1.0
   resolution: "@apollo/utils.dropunuseddefinitions@npm:1.1.0"
@@ -1134,16 +1158,16 @@ __metadata:
   resolution: "@banker/api@workspace:packages/api"
   dependencies:
     "@faker-js/faker": ^7.5.0
-    "@prisma/client": ^3.15.2
+    "@prisma/client": ^4.4.0
     "@types/bcrypt": ^5.0.0
     "@types/jest": ^29.1.1
     "@types/jsonwebtoken": ^8.5.9
     "@types/validator": ^13.7.7
     "@types/webpack-node-externals": ^2.5.3
-    apollo-server: ^3.9.0
+    apollo-server: ^3.10.2
     bcrypt: ^5.0.1
     class-validator: ^0.13.2
-    dotenv: ^16.0.1
+    dotenv: ^16.0.3
     envalid: ^7.3.1
     generate-template-files: ^3.2.1
     jest: 29.1.2
@@ -1153,7 +1177,7 @@ __metadata:
     pino-pretty: ^9.1.0
     prettier: ^2.7.1
     prettier-plugin-prisma: ^4.2.0
-    prisma: ^3.15.2
+    prisma: ^4.4.0
     reflect-metadata: ^0.1.13
     ts-jest: ^29.0.3
     ts-loader: ^9.4.1
@@ -1197,7 +1221,7 @@ __metadata:
     next-with-apollo: ^5.3.0
     react: 18.2.0
     react-dom: 18.2.0
-    react-hook-form: ^7.32.2
+    react-hook-form: ^7.36.1
     recharts: ^2.1.10
     xlsx: "https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz"
     zod: ^3.17.3
@@ -3268,31 +3292,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^3.15.2":
-  version: 3.15.2
-  resolution: "@prisma/client@npm:3.15.2"
+"@prisma/client@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@prisma/client@npm:4.4.0"
   dependencies:
-    "@prisma/engines-version": 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
+    "@prisma/engines-version": 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: ef7eaeba6c9b85b0c4ebd95ce87083ca0deb0a588b46a8fac1f9769228e550785c53eb991be774746a7e6bf36c4bcb199bffa20795737aa59384216273d981be
+  checksum: 7ecd1dbfd7158baef5365beaead3d863841812cd939b7b1f5287f163281119de311ffdeb422d1105b15c939b50ca3760bb459ede63a34d5f7acda510d7c30b03
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e":
-  version: 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
-  resolution: "@prisma/engines-version@npm:3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
-  checksum: f2ea2b3efe2ed90c1448b79e8718eefa7ee12f68dcee3fb9c322aee1cb8847602628436e7760b5ddc1e84da5fb799d464d9b4809a3989393842b75d933273abc
+"@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6":
+  version: 4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6
+  resolution: "@prisma/engines-version@npm:4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6"
+  checksum: 91ca927a69f53ffd05ee02b25666531997202642dbe92ae2c6df6a28a38726894e3728377c49d2327a323461d92f5b7eedae0795ab6ca50ed59ae28c2775b38a
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e":
-  version: 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
-  resolution: "@prisma/engines@npm:3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
-  checksum: 4be65608ab55f17e16791143dcdb7578f5461efb3de211e75cc256eb1b8282ffa7ed50a91c098d0267b6e5b47ad90d4aaeb1600958b1667652ee17bb75b16b8c
+"@prisma/engines@npm:4.4.0":
+  version: 4.4.0
+  resolution: "@prisma/engines@npm:4.4.0"
+  checksum: e5a62e6c905cbe325f8aa15afe698f8a0a47fe7fdc4d4affdc8df86fcdc6fdd2857ac498611217daf5f8304846a32e199d100165c748b4e8a959bbf0670507a1
   languageName: node
   linkType: hard
 
@@ -3773,14 +3797,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-serve-static-core@npm:4.17.29":
-  version: 4.17.29
-  resolution: "@types/express-serve-static-core@npm:4.17.29"
+"@types/express-serve-static-core@npm:4.17.30":
+  version: 4.17.30
+  resolution: "@types/express-serve-static-core@npm:4.17.30"
   dependencies:
     "@types/node": "*"
     "@types/qs": "*"
     "@types/range-parser": "*"
-  checksum: ec4194dc59276ec6dd906887fc377be0cadf4aaa4d535d9052ab9624937ef2b984a8d9da2c11c96979e21f3d9f78f1da93e767dbcec637f7f13d2e3003151145
+  checksum: c40d9027884ab9e97fa29d9d41d1b75a5966109312e26594cf03c61b278b5bf8e095f53589e47899b34a2e224291a44043617695c3e8bd22284f988e48582ee6
   languageName: node
   linkType: hard
 
@@ -4769,9 +4793,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apollo-server-core@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "apollo-server-core@npm:3.9.0"
+"apollo-reporting-protobuf@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "apollo-reporting-protobuf@npm:3.3.2"
+  dependencies:
+    "@apollo/protobufjs": 1.2.4
+  checksum: fcd7312991ac3510bf4b78fe67b81d9803179c019ef5741317f06c7a182b9826247e186a9074ca2baaa8cc53b00993ddf1c69e9b38a8f65ab4c9d698a51aa2a5
+  languageName: node
+  linkType: hard
+
+"apollo-server-core@npm:^3.10.2":
+  version: 3.10.2
+  resolution: "apollo-server-core@npm:3.10.2"
   dependencies:
     "@apollo/utils.keyvaluecache": ^1.0.1
     "@apollo/utils.logger": ^1.0.0
@@ -4782,11 +4815,11 @@ __metadata:
     "@graphql-tools/schema": ^8.0.0
     "@josephg/resolvable": ^1.0.0
     apollo-datasource: ^3.3.2
-    apollo-reporting-protobuf: ^3.3.1
+    apollo-reporting-protobuf: ^3.3.2
     apollo-server-env: ^4.2.1
     apollo-server-errors: ^3.3.1
-    apollo-server-plugin-base: ^3.6.1
-    apollo-server-types: ^3.6.1
+    apollo-server-plugin-base: ^3.6.2
+    apollo-server-types: ^3.6.2
     async-retry: ^1.2.1
     fast-json-stable-stringify: ^2.1.0
     graphql-tag: ^2.11.0
@@ -4797,7 +4830,7 @@ __metadata:
     whatwg-mimetype: ^3.0.0
   peerDependencies:
     graphql: ^15.3.0 || ^16.0.0
-  checksum: 161401b7081ff69415999dcfb010d410ef8b1f8ee63368b54dddd0a24b8803b4c269dde0844e0a4fc5963169101f12749d9d9ae3c5cf4f0ac7fdd60b43eda43c
+  checksum: 14b8ac9ef442993b5ef9354d6457cfeeaa1af09c8ece6041bfbf061e7c5d9983f20971ebf6ae2c9b8b8447ad5273943ea548a139ecf06c3559d380ed5c077bcb
   languageName: node
   linkType: hard
 
@@ -4819,64 +4852,64 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apollo-server-express@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "apollo-server-express@npm:3.9.0"
+"apollo-server-express@npm:^3.10.2":
+  version: 3.10.2
+  resolution: "apollo-server-express@npm:3.10.2"
   dependencies:
     "@types/accepts": ^1.3.5
     "@types/body-parser": 1.19.2
     "@types/cors": 2.8.12
     "@types/express": 4.17.13
-    "@types/express-serve-static-core": 4.17.29
+    "@types/express-serve-static-core": 4.17.30
     accepts: ^1.3.5
-    apollo-server-core: ^3.9.0
-    apollo-server-types: ^3.6.1
+    apollo-server-core: ^3.10.2
+    apollo-server-types: ^3.6.2
     body-parser: ^1.19.0
     cors: ^2.8.5
     parseurl: ^1.3.3
   peerDependencies:
     express: ^4.17.1
     graphql: ^15.3.0 || ^16.0.0
-  checksum: 04219816fe72e0852281765766e12393161e514c2b11f2b001dd53a3f238998477511d06229988c7804dcd073eda0702bf9f2c72b555f530d32722cbf56fb687
+  checksum: 8e0159c00b7b2dbcb043542cf37d62bcd1dfd958dc88fa4e3dd6b273632524cde01d26ded3438e04dd2f77783f29c5075ec2b5fa78df534ee2d87478bf20d602
   languageName: node
   linkType: hard
 
-"apollo-server-plugin-base@npm:^3.6.1":
-  version: 3.6.1
-  resolution: "apollo-server-plugin-base@npm:3.6.1"
+"apollo-server-plugin-base@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "apollo-server-plugin-base@npm:3.6.2"
   dependencies:
-    apollo-server-types: ^3.6.1
+    apollo-server-types: ^3.6.2
   peerDependencies:
     graphql: ^15.3.0 || ^16.0.0
-  checksum: 66932834602e73b2df94057e37a98263990adb75cd76ab6b6d40af56f3e68591d02f3f2859036c9111898840f10ab59f6d06806607b562404deb86704cce386a
+  checksum: 8430aa65619d96cd9e15e46b7352bca5abda3f7e4b19d3a289cf337263cdd5bc0d808d2ef110ff76358fea9cf63e62c63d0a8502f1555ee7bb8c784c64b52b6d
   languageName: node
   linkType: hard
 
-"apollo-server-types@npm:^3.6.1":
-  version: 3.6.1
-  resolution: "apollo-server-types@npm:3.6.1"
+"apollo-server-types@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "apollo-server-types@npm:3.6.2"
   dependencies:
     "@apollo/utils.keyvaluecache": ^1.0.1
     "@apollo/utils.logger": ^1.0.0
-    apollo-reporting-protobuf: ^3.3.1
+    apollo-reporting-protobuf: ^3.3.2
     apollo-server-env: ^4.2.1
   peerDependencies:
     graphql: ^15.3.0 || ^16.0.0
-  checksum: b637c7d040f3c8bc1121918b441180999ea71e142e2ab9626e341015905d0b89be630bdf848fb0a4f39be71f12ac702f49e5b060eb0f13314f0a9e5183a759ab
+  checksum: 410d7c0e6cfcc68dbc5f0182e07008235c6ecf5ab7d01d334a2af3c4deed3921cff12e32f54206d16aad88d5213f67f5f5302762ac92a6883b778800334e2016
   languageName: node
   linkType: hard
 
-"apollo-server@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "apollo-server@npm:3.9.0"
+"apollo-server@npm:^3.10.2":
+  version: 3.10.2
+  resolution: "apollo-server@npm:3.10.2"
   dependencies:
     "@types/express": 4.17.13
-    apollo-server-core: ^3.9.0
-    apollo-server-express: ^3.9.0
+    apollo-server-core: ^3.10.2
+    apollo-server-express: ^3.10.2
     express: ^4.17.1
   peerDependencies:
     graphql: ^15.3.0 || ^16.0.0
-  checksum: 11fb36801800da2284857f3fb490eb141536a9cf3b6a3e0506a8f46f062d4384f951652c4b4229fb85c06c108ee9b68328ff55cd74b9f3254a4359551a2ef1b4
+  checksum: 9f3c22ed1d4275a8bd5559b276dadab26758c3b4ae90b454d86aeccfa1a0da90d1201f627676e36ec84b8d581f767f24037d682a58615247b393930aca850324
   languageName: node
   linkType: hard
 
@@ -6656,10 +6689,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.0.1":
-  version: 16.0.1
-  resolution: "dotenv@npm:16.0.1"
-  checksum: f459ffce07b977b7f15d8cc4ee69cdff77d4dd8c5dc8c85d2d485ee84655352c2415f9dd09d42b5b5985ced3be186130871b34e2f3e2569ebc72fbc2e8096792
+"dotenv@npm:^16.0.3":
+  version: 16.0.3
+  resolution: "dotenv@npm:16.0.3"
+  checksum: afcf03f373d7a6d62c7e9afea6328e62851d627a4e73f2e12d0a8deae1cd375892004f3021883f8aec85932cd2834b091f568ced92b4774625b321db83b827f8
   languageName: node
   linkType: hard
 
@@ -11201,15 +11234,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^3.15.2":
-  version: 3.15.2
-  resolution: "prisma@npm:3.15.2"
+"prisma@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "prisma@npm:4.4.0"
   dependencies:
-    "@prisma/engines": 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
+    "@prisma/engines": 4.4.0
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: 2efdd77cadad51c7c2ff6fcfe0b594849733dffee73755b0e48cefd426e75f0cb5dbe134360a92e47865d331b11308878be91c009acf9f51ca57f86212492118
+  checksum: fb44f8b36d59c411711b2f5cecbe112a6487c387a7dd7ade350c73c0e9f821dfdb30cd6271c2f2b9b713fda3a31eec4b241c482754b26bfcb6df831ba521a58e
   languageName: node
   linkType: hard
 
@@ -11423,12 +11456,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.32.2":
-  version: 7.32.2
-  resolution: "react-hook-form@npm:7.32.2"
+"react-hook-form@npm:^7.36.1":
+  version: 7.36.1
+  resolution: "react-hook-form@npm:7.36.1"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
-  checksum: abe8ba146c313d206f99a01260457bc72af03b2c73d7bd4be5af11598140ec45ef1ef37bac64b80c4dbc298d6aa21af4caa259a133f305a04ddf583faa18e7d0
+  checksum: d41951685fe7d345997c1ac489ccc1a44d11cfa6021b0a39a449029ba3cd8e5824afe5f6464e8ff6fb7c01d1915627b53ec1e1bfee63a6b722b6855794dc0df9
   languageName: node
   linkType: hard
 
