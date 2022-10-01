@@ -3,10 +3,24 @@ import { Global } from '@mantine/core'
 export const GlobalStyles: React.FunctionComponent = () => {
     return (
         <Global
-            styles={{
+            styles={(theme) => ({
                 '#__next': {
                     height: '100%',
                     width: '100%',
+                },
+                '*::-webkit-scrollbar': {
+                    height: '7px',
+                    width: '7px',
+                },
+                '*::-webkit-scrollbar-thumb': {
+                    backgroundColor: theme.colors.blue[7],
+                    border: '3px solid transparent',
+                    borderRadius: '9px',
+                },
+                '*::-webkit-scrollbar-track': {
+                    background: theme.colorScheme === 'dark'
+                        ? theme.colors.dark[6]
+                        : theme.colors.gray[0],
                 },
                 a: {
                     textDecoration: 'none',
@@ -20,7 +34,7 @@ export const GlobalStyles: React.FunctionComponent = () => {
                 'html, body': {
                     height: '100%',
                 },
-            }}
+            })}
         />
     )
 }
