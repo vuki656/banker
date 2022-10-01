@@ -38,7 +38,6 @@
         "zod": "^3.17.3"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "^2.6.2",
         "@graphql-codegen/fragment-matcher": "^3.2.1",
         "@graphql-codegen/introspection": "^2.1.1",
         "@graphql-codegen/near-operation-file-preset": "^2.2.14",
