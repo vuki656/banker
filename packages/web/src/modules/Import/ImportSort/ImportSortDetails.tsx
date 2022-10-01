@@ -52,10 +52,7 @@ export const ImportSortDetails = observer(() => {
                     {' '}
                     {store.currentTransaction?.currency}
                 </Text>
-                <ImportSortEditAmountDialog
-                    onSubmit={store.updateCurrentTransactionAmount}
-                    value={store.currentTransaction?.amount}
-                />
+                <ImportSortEditAmountDialog />
             </Group>
             <Text size="md">
                 {formatDate(store.currentTransaction?.date)}

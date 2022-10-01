@@ -6,6 +6,7 @@ import {
     Stack,
 } from '@mantine/core'
 import { IconPencil } from '@tabler/icons'
+import { observer } from 'mobx-react-lite'
 import {
     useEffect,
     useState,
@@ -13,20 +14,16 @@ import {
 
 import { MoneyInput } from '../../../components'
 import { useBoolean } from '../../../utils'
+import { useImportStore } from '../hooks'
 
-import type { ImportSortEditAmountDialogProps } from './ImportSortEditAmountDialog.types'
-
-export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditAmountDialogProps> = (props) => {
-    const {
-        onSubmit: onSubmitProp,
-        value: valueProp,
-    } = props
+export const ImportSortEditAmountDialog = observer(() => {
+    const store = useImportStore()
 
     const [isOpen, isOpenActions] = useBoolean()
-    const [value, setValue] = useState<number | undefined>(valueProp)
+    const [value, setValue] = useState<number | undefined>()
 
     useEffect(() => {
-        setValue(valueProp)
+        setValue(store.currentTransaction?.amount)
     }, [isOpen])
 
     const onCancel = () => {
@@ -40,7 +37,7 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
             return
         }
 
-        onSubmitProp(value)
+        store.currentTransactionAmount = value
 
         setValue(undefined)
 
@@ -86,4 +83,4 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
             </Modal>
         </>
     )
-}
+})

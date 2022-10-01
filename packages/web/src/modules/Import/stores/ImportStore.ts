@@ -19,7 +19,7 @@ export class ImportStore {
 
     public existingTransactions = observable.map<string, TransactionType>([], { deep: false })
 
-    private _newTransactions = observable.array<NewTransactionType>([], { deep: false })
+    private _newTransactions = observable.array<NewTransactionType>([])
 
     private _totalNewTransactions = 0
 
@@ -78,6 +78,18 @@ export class ImportStore {
         return `${currentTransactionNumber} / ${this._totalNewTransactions}`
     }
 
+    public set currentTransactionAmount(value: number) {
+        if (this._newTransactions[0]) {
+            this._newTransactions[0].amount = value
+        }
+    }
+
+    public set currentTransactionCategory(value: CategoryType) {
+        if (this._newTransactions[0]) {
+            this._newTransactions[0].category = value
+        }
+    }
+
     public set newTransactions(newTransactions: NewTransactionType[]) {
         this._totalNewTransactions = newTransactions.length
 
@@ -91,17 +103,5 @@ export class ImportStore {
 
     public setNextTransaction() {
         this._newTransactions.shift()
-    }
-
-    public updateCurrentTransactionAmount(value: number) {
-        if (this._newTransactions[0]) {
-            this._newTransactions[0].amount = value
-        }
-    }
-
-    public updateCurrentTransactionCategory(value: CategoryType) {
-        if (this._newTransactions[0]) {
-            this._newTransactions[0].category = value
-        }
     }
 }
