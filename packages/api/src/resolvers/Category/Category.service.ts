@@ -17,21 +17,6 @@ import type { CategoryType } from './types'
 
 @singleton()
 export class CategoryService {
-    public async findAll(userId?: string): Promise<CategoryType[]> {
-        return orm.category.findMany({
-            orderBy: {
-                name: 'asc',
-            },
-            select: CATEGORY_DEFAULT_SELECT(),
-            where: {
-                isDeleted: false,
-                user: {
-                    id: userId,
-                },
-            },
-        })
-    }
-
     public async createOne(input: CreateCategoryInput, userId?: string): Promise<CreateCategoryPayload> {
         const createdCategory = await orm.category.create({
             data: {
@@ -59,6 +44,36 @@ export class CategoryService {
         return {
             category: createdCategory,
         }
+    }
+
+    public async deleteOne(input: DeleteCategoryInput): Promise<DeleteCategoryPayload> {
+        const deletedCategory = await orm.category.delete({
+            select: {
+                id: true,
+            },
+            where: {
+                id: input.id,
+            },
+        })
+
+        return {
+            id: deletedCategory.id,
+        }
+    }
+
+    public async findAll(userId?: string): Promise<CategoryType[]> {
+        return orm.category.findMany({
+            orderBy: {
+                name: 'asc',
+            },
+            select: CATEGORY_DEFAULT_SELECT(),
+            where: {
+                isDeleted: false,
+                user: {
+                    id: userId,
+                },
+            },
+        })
     }
 
     public async updateOne(input: UpdateCategoryInput): Promise<UpdateCategoryPayload> {
@@ -95,21 +110,6 @@ export class CategoryService {
 
         return {
             category,
-        }
-    }
-
-    public async deleteOne(input: DeleteCategoryInput): Promise<DeleteCategoryPayload> {
-        const deletedCategory = await orm.category.delete({
-            select: {
-                id: true,
-            },
-            where: {
-                id: input.id,
-            },
-        })
-
-        return {
-            id: deletedCategory.id,
         }
     }
 }

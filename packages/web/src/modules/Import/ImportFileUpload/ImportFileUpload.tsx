@@ -118,7 +118,7 @@ export const ImportFileUpload: React.FunctionComponent = () => {
                     return accumulator
                 }
 
-                /* 
+                /*
                  * Check if any of the processed transactions description have
                  * iterated transactions' reference code, if it does, we found
                  * a cancellation transaction and know which transaction is canceled
@@ -144,7 +144,7 @@ export const ImportFileUpload: React.FunctionComponent = () => {
 
                 return [
                     ...accumulator,
-                    uploadedTransaction
+                    uploadedTransaction,
                 ]
             },
             []

@@ -7,7 +7,6 @@ import {
 
 import type { SidebarButtonProps } from './SidebarButton.types'
 
-// TODO: add the selected background color capability
 export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props) => {
     const {
         color,

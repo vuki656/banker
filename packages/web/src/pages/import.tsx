@@ -1,16 +1,18 @@
 import type { NextPage } from 'next'
 import { createContext } from 'react'
 
-import {
+import type {
     CategoryType,
     GetCategoriesQuery,
     GetCategoriesQueryVariables,
-    GetTransactionsDocument,
     GetTransactionsQuery,
     GetTransactionsQueryVariables,
     TransactionType,
 } from '../graphql/types.generated'
-import { GetCategoriesDocument } from '../graphql/types.generated'
+import {
+    GetCategoriesDocument,
+    GetTransactionsDocument,
+} from '../graphql/types.generated'
 import {
     Import,
     ImportStore,
@@ -54,7 +56,7 @@ ImportPage.getInitialProps = async (context: PageContext) => {
 
     return {
         categories: categoriesResponse.data.categories,
-        transactions: transactionsResponse.data.transactions
+        transactions: transactionsResponse.data.transactions,
     }
 }
 

@@ -14,9 +14,6 @@ class KeywordType extends BaseType {
 @ObjectType({ implements: BaseType })
 export class CategoryType extends BaseType {
     @Field(() => String)
-    public name: string
-
-    @Field(() => String)
     public color: string
 
     @Field(() => String)
@@ -24,4 +21,7 @@ export class CategoryType extends BaseType {
 
     @Field(() => [KeywordType])
     public keywords: KeywordType[]
+
+    @Field(() => String)
+    public name: string
 }

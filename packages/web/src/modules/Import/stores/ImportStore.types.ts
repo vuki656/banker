@@ -1,12 +1,12 @@
-import { CategoryType } from "../../../graphql/types.generated"
+import type { CategoryType } from '../../../graphql/types.generated'
 
 export type NewTransactionType = {
     amount: number
+    category: CategoryType | null
     currency: string
     date: Date
     description: string
     reference: string
-    category: CategoryType | null
 }
 
 export type MatchedCategoryType = {

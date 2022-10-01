@@ -9,13 +9,9 @@ import type {
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
 
 export class TransactionsStore {
-    public statusFilter = TransactionStatusEnum.Done
+    public categories: CategoryType[] = []
 
     public categoryFilter: string | null = null
-
-    public transactionsValue: TransactionType[] = []
-
-    public categories: CategoryType[] = []
 
     public range: RangeSelectValue = {
         endDate: dayjs().toDate(),
@@ -23,6 +19,10 @@ export class TransactionsStore {
             .startOf('month')
             .toDate(),
     }
+
+    public statusFilter = TransactionStatusEnum.Done
+
+    public transactionsValue: TransactionType[] = []
 
     constructor() {
         makeAutoObservable(this, undefined, { autoBind: true })
@@ -38,23 +38,23 @@ export class TransactionsStore {
         })
     }
 
-    public setRange(newRange: RangeSelectValue) {
-        this.range = newRange
-    }
-
-    public setTransactions(transactions: TransactionType[]) {
-        this.transactionsValue = transactions
-    }
-
-    public setStatusFilter(newStatus: TransactionStatusEnum) {
-        this.statusFilter = newStatus
-    }
-
     public setCategories(categories: CategoryType[]) {
         this.categories = categories
     }
 
     public setCategoryFilter(categoryId: string | null) {
         this.categoryFilter = categoryId
+    }
+
+    public setRange(newRange: RangeSelectValue) {
+        this.range = newRange
+    }
+
+    public setStatusFilter(newStatus: TransactionStatusEnum) {
+        this.statusFilter = newStatus
+    }
+
+    public setTransactions(transactions: TransactionType[]) {
+        this.transactionsValue = transactions
     }
 }

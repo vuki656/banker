@@ -6,8 +6,8 @@ import {
 @InputType()
 export class TransactionsArgs {
     @Field(() => Date, { nullable: true })
-    public startDate?: Date | null
+    public endDate?: Date | null
 
     @Field(() => Date, { nullable: true })
-    public endDate?: Date | null
+    public startDate?: Date | null
 }

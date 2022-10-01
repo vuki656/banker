@@ -8,14 +8,14 @@ import { BaseType } from '../../../shared/typegraphql-types'
 @ObjectType({ implements: BaseType })
 export class UserType extends BaseType {
     @Field(() => String)
-    public firstName: string
-
-    @Field(() => String)
-    public lastName: string
+    public currency: string
 
     @Field(() => String)
     public email: string
 
     @Field(() => String)
-    public currency: string
+    public firstName: string
+
+    @Field(() => String)
+    public lastName: string
 }

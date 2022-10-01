@@ -20,8 +20,6 @@ import type {
 } from './BreakdownStore.types'
 
 export class BreakdownStore {
-    public transactionsValue: TransactionType[] = []
-
     public categories: CategoryType[] = []
 
     public range: RangeSelectValue = {
@@ -31,56 +29,10 @@ export class BreakdownStore {
             .toDate(),
     }
 
+    public transactionsValue: TransactionType[] = []
+
     constructor() {
         makeAutoObservable(this, undefined, { autoBind: true })
-    }
-
-    public setRange(range: RangeSelectValue): void {
-        this.range = range
-    }
-
-    public setCategories(categories: CategoryType[]): void {
-        this.categories = categories
-    }
-
-    public setTransactions(transactions: TransactionType[]): void {
-        this.transactionsValue = transactions
-    }
-
-    public get transactions(): TransactionType[] {
-        return this.transactionsValue.filter((transaction) => {
-            return transaction.status === TransactionStatusEnum.Done
-        })
-    }
-
-    public get total(): number {
-        return this.transactions.reduce((accumulator, transaction) => {
-            return accumulator + transaction.amount.converted
-        }, 0)
-    }
-
-    public get summaryData(): SummaryDataType[] {
-        const categories = this.categories.map<SummaryDataType>((category) => {
-            return {
-                ...category,
-                total: 0,
-            }
-        })
-
-        return this.transactions.reduce<SummaryDataType[]>((accumulator, transaction) => {
-            return accumulator.map((category) => {
-                if (category.id === transaction.category?.id) {
-                    return {
-                        ...category,
-                        total: currency(transaction.amount.converted)
-                            .add(category.total)
-                            .value,
-                    }
-                }
-
-                return category
-            })
-        }, categories)
     }
 
     public get barChartData() {
@@ -143,5 +95,53 @@ export class BreakdownStore {
                 return category
             })
         }, categories)
+    }
+
+    public get summaryData(): SummaryDataType[] {
+        const categories = this.categories.map<SummaryDataType>((category) => {
+            return {
+                ...category,
+                total: 0,
+            }
+        })
+
+        return this.transactions.reduce<SummaryDataType[]>((accumulator, transaction) => {
+            return accumulator.map((category) => {
+                if (category.id === transaction.category?.id) {
+                    return {
+                        ...category,
+                        total: currency(transaction.amount.converted)
+                            .add(category.total)
+                            .value,
+                    }
+                }
+
+                return category
+            })
+        }, categories)
+    }
+
+    public get total(): number {
+        return this.transactions.reduce((accumulator, transaction) => {
+            return accumulator + transaction.amount.converted
+        }, 0)
+    }
+
+    public get transactions(): TransactionType[] {
+        return this.transactionsValue.filter((transaction) => {
+            return transaction.status === TransactionStatusEnum.Done
+        })
+    }
+
+    public setCategories(categories: CategoryType[]): void {
+        this.categories = categories
+    }
+
+    public setRange(range: RangeSelectValue): void {
+        this.range = range
+    }
+
+    public setTransactions(transactions: TransactionType[]): void {
+        this.transactionsValue = transactions
     }
 }
