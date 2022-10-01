@@ -20,13 +20,13 @@
     "devDependencies": {
         "@graphql-codegen/cli": "^2.13.1",
         "@graphql-codegen/gql-tag-operations-preset": "^1.6.0",
-        "@rimac-technology/eslint-config": "^29.0.0",
-        "@types/node": "18.0.0",
+        "@rimac-technology/eslint-config": "^29.0.1",
+        "@types/node": "18.7.23",
         "@types/uuid": "^8.3.4",
-        "cspell": "^6.1.2",
+        "cspell": "^6.12.0",
         "eslint": "8.24.0",
         "prettier": "^2.7.1",
-        "typescript": "4.7.4"
+        "typescript": "4.8.4"
     },
     "packageManager": "yarn@3.2.0",
     "workspaces": [
