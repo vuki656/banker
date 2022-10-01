@@ -54,7 +54,7 @@ export const Login: React.FunctionComponent = () => {
 
             load(response.loginUser.user)
 
-            void router.push('/breakdown')
+            void router.push('/home')
         },
         onError: () => {
             showNotification({

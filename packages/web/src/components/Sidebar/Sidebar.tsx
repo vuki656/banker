@@ -118,8 +118,8 @@ export const Sidebar: React.FunctionComponent = () => {
                     <SidebarButton
                         color="green"
                         icon={<IconChartBar size={ICON_SIZE} />}
-                        label="Breakdown"
-                        selected={router.pathname.startsWith('/breakdown')}
+                        label="Home"
+                        selected={router.pathname.startsWith('/home')}
                     />
                 </Link>
             </Navbar.Section>
