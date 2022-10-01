@@ -1,6 +1,5 @@
 import {
     Chip,
-    Chips,
     Group,
 } from '@mantine/core'
 import { observer } from 'mobx-react-lite'
@@ -26,7 +25,7 @@ export const TransactionsCategorySelect = observer(() => {
             >
                 Clear
             </Chip>
-            <Chips
+            <Chip.Group
                 multiple={false}
                 onChange={(categoryId) => {
                     if (categoryId === store.categoryFilter) {
@@ -38,12 +37,12 @@ export const TransactionsCategorySelect = observer(() => {
                     store.setCategoryFilter(categoryId)
                 }}
                 value={store.categoryFilter ?? ''}
-                variant="filled"
             >
                 {store.categories.map((category) => {
                     return (
                         <Chip
                             key={category.id}
+                            variant="filled"
                             sx={{
                                 columnGap: '5px',
                                 display: 'flex',
@@ -55,7 +54,7 @@ export const TransactionsCategorySelect = observer(() => {
                         </Chip>
                     )
                 })}
-            </Chips>
+            </Chip.Group>
         </Group>
     )
 })

@@ -163,8 +163,6 @@ export const ImportFileUpload: React.FunctionComponent = () => {
         store.newTransactions = newTransactions
 
         isOpenActions.setFalse()
-
-        notifications.clean()
     }
 
     return (

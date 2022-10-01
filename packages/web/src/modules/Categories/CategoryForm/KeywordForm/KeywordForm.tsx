@@ -1,7 +1,7 @@
 import {
     Box,
     Button,
-    InputWrapper,
+    Input,
     Stack,
     TextInput,
 } from '@mantine/core'
@@ -50,7 +50,7 @@ export const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props) =>
 
     return (
         <Stack>
-            <InputWrapper
+            <Input.Wrapper
                 error={error}
                 label="Name"
             >
@@ -59,7 +59,7 @@ export const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props) =>
                     placeholder="Enter a name"
                     value={keyword}
                 />
-            </InputWrapper>
+            </Input.Wrapper>
             <Box
                 sx={{
                     columnGap: '10px',

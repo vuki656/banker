@@ -1,7 +1,7 @@
 import {
     Button,
     Group,
-    InputWrapper,
+    Input,
     Popover,
     Text,
     ThemeIcon,
@@ -36,7 +36,7 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
     }
 
     return (
-        <InputWrapper
+        <Input.Wrapper
             error={error}
             label="Icon"
             required={required}
@@ -59,17 +59,17 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                     onClose={openActions.setFalse}
                     opened={isOpen}
                     position="bottom"
-                    target={(
+                    width={260}
+                    withArrow={true}
+                >
+                    <Popover.Target>
                         <Button
                             onClick={openActions.toggle}
                             variant="default"
                         >
                             Select
                         </Button>
-                    )}
-                    width={260}
-                    withArrow={true}
-                >
+                    </Popover.Target>
                     <Group align="center">
                         {ICON_LIST.map((Icon) => {
                             return (
@@ -93,6 +93,6 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                     </Group>
                 </Popover>
             </Group>
-        </InputWrapper>
+        </Input.Wrapper>
     )
 }

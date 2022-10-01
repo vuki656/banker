@@ -11,6 +11,7 @@ export const Root: React.FunctionComponent<RootProps> = (props) => {
         <AppShell
             navbar={<Sidebar />}
             padding="md"
+            fixed={false}
             styles={(theme) => ({
                 body: {
                     height: '100%',
