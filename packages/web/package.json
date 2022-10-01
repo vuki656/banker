@@ -38,12 +38,12 @@
         "zod": "^3.17.3"
     },
     "devDependencies": {
-        "@graphql-codegen/fragment-matcher": "^3.2.1",
-        "@graphql-codegen/introspection": "^2.1.1",
-        "@graphql-codegen/near-operation-file-preset": "^2.2.14",
-        "@graphql-codegen/typescript": "^2.5.1",
-        "@graphql-codegen/typescript-operations": "2.4.2",
-        "@graphql-codegen/typescript-react-apollo": "^3.2.16",
+        "@graphql-codegen/fragment-matcher": "^3.3.1",
+        "@graphql-codegen/introspection": "^2.2.1",
+        "@graphql-codegen/near-operation-file-preset": "^2.4.1",
+        "@graphql-codegen/typescript": "^2.7.3",
+        "@graphql-codegen/typescript-operations": "2.5.3",
+        "@graphql-codegen/typescript-react-apollo": "^3.3.3",
         "@types/react": "18.0.14",
         "@types/react-dom": "18.0.5"
     }

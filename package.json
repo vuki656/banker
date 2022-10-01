@@ -18,8 +18,8 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "^2.6.2",
-        "@graphql-codegen/gql-tag-operations-preset": "^1.4.0",
+        "@graphql-codegen/cli": "^2.13.1",
+        "@graphql-codegen/gql-tag-operations-preset": "^1.6.0",
         "@rimac-technology/eslint-config": "^29.0.0",
         "@types/node": "18.0.0",
         "@types/uuid": "^8.3.4",
