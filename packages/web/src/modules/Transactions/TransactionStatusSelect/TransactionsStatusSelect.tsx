@@ -55,7 +55,7 @@ export const TransactionsStatusSelect = observer(() => {
                 },
             ]}
             onChange={(status: TransactionStatusEnum) => {
-                store.statusFilter(status)
+                store.setStatusFilter(status)
             }}
             value={store.statusFilter}
         />
