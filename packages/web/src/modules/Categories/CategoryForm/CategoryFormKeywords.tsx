@@ -1,4 +1,3 @@
-import { useTheme } from '@emotion/react'
 import {
     ActionIcon,
     Group,
@@ -18,14 +17,13 @@ import {
 } from 'react-hook-form'
 
 import type { KeywordType } from '../../../graphql/types.generated'
+import { toFirstCapitalCase } from '../../../utils'
 
 import type { CategoryFormType } from './CategoryForm.types'
 import { KeywordAddDialog } from './KeywordAddDialog'
 import { KeywordForm } from './KeywordForm'
 
 export const CategoryFormKeywords: React.FunctionComponent = () => {
-    const theme = useTheme()
-
     const [keywordToUpdate, setKeywordToUpdate] = useState<KeywordType | null>(null)
 
     const { control } = useFormContext<CategoryFormType>()
@@ -98,7 +96,7 @@ export const CategoryFormKeywords: React.FunctionComponent = () => {
                                     size="xs"
                                     weight={500}
                                 >
-                                    {keyword.name.charAt(0).toUpperCase() + keyword.name.slice(1)}
+                                    {toFirstCapitalCase(keyword.name)}
                                 </Text>
                                 <Group spacing="xs">
                                     <ActionIcon

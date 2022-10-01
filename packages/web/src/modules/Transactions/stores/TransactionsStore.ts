@@ -7,11 +7,10 @@ import type {
     TransactionType,
 } from '../../../graphql/types.generated'
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
+import type { TransactionsPageData } from '../../../pages/transactions'
 
 export class TransactionsStore {
     public categories: CategoryType[] = []
-
-    public categoryFilter: string | null = null
 
     public range: RangeSelectValue = {
         endDate: dayjs().toDate(),
@@ -22,28 +21,47 @@ export class TransactionsStore {
 
     public statusFilter = TransactionStatusEnum.Done
 
-    public transactionsValue: TransactionType[] = []
+    private _selectedCategoryId: string | null = null
 
-    constructor() {
+    private _transactions: TransactionType[] = []
+
+    constructor(data: TransactionsPageData) {
+        this.categories.push(...data.categories)
+
         makeAutoObservable(this, undefined, { autoBind: true })
     }
 
-    public get transactions() {
-        return this.transactionsValue.filter((transaction) => {
-            if (this.categoryFilter) {
-                return transaction.status === this.statusFilter && this.categoryFilter === transaction.category?.id
+    public get categorySelectItems() {
+        return this.categories.map((category) => {
+            return {
+                color: category.color,
+                icon: category.icon,
+                label: category.name,
+                value: category.id,
             }
-
-            return transaction.status === this.statusFilter
         })
     }
 
-    public setCategories(categories: CategoryType[]) {
-        this.categories = categories
+    public get transactions() {
+        return this._transactions.filter((transaction) => {
+            const statusFilter = transaction.status === this.statusFilter
+
+            if (this._selectedCategoryId) {
+                const categoryFilter = transaction.category?.id === this._selectedCategoryId
+
+                return statusFilter && categoryFilter
+            }
+
+            return statusFilter
+        })
     }
 
-    public setCategoryFilter(categoryId: string | null) {
-        this.categoryFilter = categoryId
+    public set categoryFilter(categoryId: string | null) {
+        this._selectedCategoryId = categoryId
+    }
+
+    public set transactions(transactions: TransactionType[]) {
+        this._transactions = transactions
     }
 
     public setRange(newRange: RangeSelectValue) {
@@ -52,9 +70,5 @@ export class TransactionsStore {
 
     public setStatusFilter(newStatus: TransactionStatusEnum) {
         this.statusFilter = newStatus
-    }
-
-    public setTransactions(transactions: TransactionType[]) {
-        this.transactionsValue = transactions
     }
 }

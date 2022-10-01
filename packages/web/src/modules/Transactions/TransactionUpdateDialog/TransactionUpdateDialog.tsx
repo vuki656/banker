@@ -19,13 +19,14 @@ import {
 import { MoneyInput } from '../../../components'
 import {
     useDiscardTransactionMutation,
-    useGetCategoriesQuery,
     useUpdateTransactionMutation,
 } from '../../../graphql/types.generated'
 import {
     CURRENCIES,
     extractFormFieldErrors,
 } from '../../../utils'
+import { useTransactionsStore } from '../hooks'
+import { TransactionCategorySelectItem } from '../TransactionCategorySelectItem'
 
 import type {
     TransactionUpdateDialogProps,
@@ -41,6 +42,8 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
         value,
     } = props
 
+    const store = useTransactionsStore()
+
     const [discardTransactionMutation, { loading: deleteLoading }] = useDiscardTransactionMutation({
         onCompleted: () => {
             onSubmitProp()
@@ -55,16 +58,6 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
             showNotification({
                 color: 'red',
                 message: 'Failed to delete transaction',
-                title: 'Error',
-            })
-        },
-    })
-
-    const { data: categoriesData } = useGetCategoriesQuery({
-        onError: () => {
-            showNotification({
-                color: 'red',
-                message: 'Failed to fetch categories',
                 title: 'Error',
             })
         },
@@ -197,12 +190,8 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                             <Select
                                 {...extractFormFieldErrors(formState.errors.categoryId)}
                                 clearable={true}
-                                data={categoriesData?.categories.map((category) => {
-                                    return {
-                                        label: category.name,
-                                        value: category.id,
-                                    }
-                                }) ?? []}
+                                data={store.categorySelectItems}
+                                itemComponent={TransactionCategorySelectItem}
                                 label="Category"
                                 onChange={(newValue) => {
                                     controller.field.onChange(newValue)
