@@ -121,6 +121,7 @@ export class TransactionService {
                 currency: input.currency,
                 date: input.date,
                 description: input.description,
+                status: input.status,
             },
             select: TRANSACTION_DEFAULT_SELECT(),
             where: {

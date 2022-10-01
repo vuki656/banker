@@ -18,12 +18,13 @@ import {
 
 import { MoneyInput } from '../../../components'
 import {
-    useDiscardTransactionMutation,
+    TransactionStatusEnum,
     useUpdateTransactionMutation,
 } from '../../../graphql/types.generated'
 import {
     CURRENCIES,
     extractFormFieldErrors,
+    toFirstCapitalCase,
 } from '../../../utils'
 import { useTransactionsStore } from '../hooks'
 import { TransactionCategorySelectItem } from '../TransactionCategorySelectItem'
@@ -44,26 +45,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
 
     const store = useTransactionsStore()
 
-    const [discardTransactionMutation, { loading: deleteLoading }] = useDiscardTransactionMutation({
-        onCompleted: () => {
-            onSubmitProp()
-
-            showNotification({
-                color: 'green',
-                message: 'Transaction deleted',
-                title: 'Success',
-            })
-        },
-        onError: () => {
-            showNotification({
-                color: 'red',
-                message: 'Failed to delete transaction',
-                title: 'Error',
-            })
-        },
-    })
-
-    const [updateTransactionMutation, { loading: updateLoading }] = useUpdateTransactionMutation({
+    const [updateTransactionMutation, { loading: loading }] = useUpdateTransactionMutation({
         onCompleted: () => {
             onSubmitProp()
 
@@ -95,6 +77,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
             currency: value.currency,
             date: value.date,
             description: value.description,
+            status: value.status,
         },
         resolver: zodResolver(transactionUpdateValidation),
     })
@@ -109,16 +92,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                     date: formValue.date,
                     description: formValue.description,
                     id: value.id,
-                },
-            },
-        })
-    }
-
-    const onDelete = () => {
-        void discardTransactionMutation({
-            variables: {
-                input: {
-                    id: value.id,
+                    status: formValue.status,
                 },
             },
         })
@@ -140,7 +114,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
             title="Update Transaction"
             withCloseButton={true}
         >
-            <LoadingOverlay visible={updateLoading || deleteLoading} />
+            <LoadingOverlay visible={loading} />
             <Stack>
                 <Box
                     sx={(theme) => ({
@@ -182,6 +156,28 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                         }}
                     />
                 </Box>
+                <Controller
+                    control={control}
+                    name="status"
+                    render={(controller) => {
+                        return (
+                            <Select
+                                {...extractFormFieldErrors(formState.errors.status)}
+                                data={Object.values(TransactionStatusEnum).map((name) => {
+                                    return {
+                                        label: toFirstCapitalCase(name),
+                                        value: name,
+                                    }
+                                })}
+                                label="Status"
+                                onChange={(newValue) => {
+                                    controller.field.onChange(newValue)
+                                }}
+                                value={controller.field.value}
+                            />
+                        )
+                    }}
+                />
                 <Controller
                     control={control}
                     name="categoryId"
@@ -226,12 +222,6 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                     {...register('description')}
                 />
                 <SimpleGrid cols={3}>
-                    <Button
-                        color="red"
-                        onClick={onDelete}
-                    >
-                        Discard
-                    </Button>
                     <Button
                         onClick={onCancel}
                         variant="default"

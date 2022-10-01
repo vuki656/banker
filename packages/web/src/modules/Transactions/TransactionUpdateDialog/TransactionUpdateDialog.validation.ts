@@ -1,6 +1,8 @@
 import { z } from 'zod'
+import { TransactionStatusEnum } from '../../../graphql/types.generated'
 
 export const transactionUpdateValidation = z.object({
+    status: z.nativeEnum(TransactionStatusEnum),
     amount: z
         .number({ invalid_type_error: 'Required' })
         .transform((value) => {
