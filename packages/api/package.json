@@ -24,7 +24,6 @@
         "bcrypt": "^5.0.1",
         "dotenv": "^16.0.1",
         "envalid": "^7.3.1",
-        "graphql": "15.3.0",
         "jsonwebtoken": "^8.5.1",
         "pino": "^8.6.1",
         "reflect-metadata": "^0.1.13",
