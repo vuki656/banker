@@ -42,13 +42,13 @@ export const TransactionsCategorySelect = observer(() => {
                     return (
                         <Chip
                             key={category.id}
-                            variant="filled"
                             sx={{
                                 columnGap: '5px',
                                 display: 'flex',
                                 overflowX: 'auto',
                             }}
                             value={category.id}
+                            variant="filled"
                         >
                             {category.name}
                         </Chip>

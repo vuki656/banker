@@ -5,13 +5,11 @@ import {
 import {
     showNotification,
     updateNotification,
-    useNotifications,
 } from '@mantine/notifications'
 import {
     IconCheck,
     IconCloudUpload,
 } from '@tabler/icons'
-import { v4 } from 'uuid'
 import {
     read,
     utils,
@@ -26,7 +24,6 @@ import { ImportFileUploadDropzone } from './ImportFileUploadDropzone'
 import type { ExcelRowType as ExcelRowType } from './ImportFileUploadDropzone.types'
 
 export const ImportFileUpload: React.FunctionComponent = () => {
-    const notifications = useNotifications()
     const store = useImportStore()
 
     const [isOpen, isOpenActions] = useBoolean(false)
@@ -43,7 +40,7 @@ export const ImportFileUpload: React.FunctionComponent = () => {
             showNotification({
                 autoClose: false,
                 disallowClose: true,
-                id: v4(),
+                id: 'progress',
                 loading: true,
                 message: 'This might take a second',
                 title: 'Loading File',
@@ -55,7 +52,7 @@ export const ImportFileUpload: React.FunctionComponent = () => {
                 autoClose: 2000,
                 color: 'teal',
                 icon: <IconCheck />,
-                id: v4(),
+                id: 'progress',
                 message: 'You can now sort your transactions',
                 title: 'Loading Finished',
             })

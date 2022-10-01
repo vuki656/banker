@@ -1,5 +1,4 @@
 import {
-    Group,
     Stack,
     Text,
     ThemeIcon,
@@ -57,7 +56,7 @@ export const ImportFileUploadDropzone: React.FunctionComponent<ImportFileUploadD
                     <IconFileAnalytics
                         color={theme.colors.green[8]}
                         size={30}
-                        />
+                    />
                 </ThemeIcon>
                 <Text
                     inline={true}
