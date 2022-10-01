@@ -11,7 +11,7 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
     const {
         color,
         icon,
-        label,
+        label, // eslint-disable-next-line @typescript-eslint/no-unused-vars
         selected = false,
         ...other
     } = props

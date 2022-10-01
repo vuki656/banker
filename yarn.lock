@@ -15,18 +15,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:3.6.9":
-  version: 3.6.9
-  resolution: "@apollo/client@npm:3.6.9"
+"@apollo/client@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@apollo/client@npm:3.7.0"
   dependencies:
     "@graphql-typed-document-node/core": ^3.1.1
-    "@wry/context": ^0.6.0
+    "@wry/context": ^0.7.0
     "@wry/equality": ^0.5.0
     "@wry/trie": ^0.3.0
     graphql-tag: ^2.12.6
     hoist-non-react-statics: ^3.3.2
     optimism: ^0.16.1
     prop-types: ^15.7.2
+    response-iterator: ^0.2.6
     symbol-observable: ^4.0.0
     ts-invariant: ^0.10.3
     tslib: ^2.3.0
@@ -35,15 +36,18 @@ __metadata:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
     graphql-ws: ^5.5.5
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     subscriptions-transport-ws: ^0.9.0 || ^0.11.0
   peerDependenciesMeta:
     graphql-ws:
       optional: true
     react:
       optional: true
+    react-dom:
+      optional: true
     subscriptions-transport-ws:
       optional: true
-  checksum: a3c037ef3465cb5d736d8495c9c2dcb9741e39d9c102f147b479af1923c5913f710981a311d1098b9969ebe87769b749c22274decb5977ad0619032e7ac2cf26
+  checksum: e6e2fb6c4f05509a0ec1c632fc8eeae7bd4831dbafd2db243bad1412b3c024476a3efb838e31568888cf6b07bd8833467343edac2309e58d60c7bf50f67d449c
   languageName: node
   linkType: hard
 
@@ -1194,14 +1198,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@banker/web@workspace:packages/web"
   dependencies:
-    "@apollo/client": 3.6.9
+    "@apollo/client": 3.7.0
     "@graphql-codegen/fragment-matcher": ^3.3.1
     "@graphql-codegen/introspection": ^2.2.1
     "@graphql-codegen/near-operation-file-preset": ^2.4.1
     "@graphql-codegen/typescript": ^2.7.3
     "@graphql-codegen/typescript-operations": 2.5.3
     "@graphql-codegen/typescript-react-apollo": ^3.3.3
-    "@hookform/resolvers": ^2.9.1
+    "@hookform/resolvers": ^2.9.8
     "@mantine/core": ^4.2.10
     "@mantine/dates": ^4.2.10
     "@mantine/dropzone": ^4.2.10
@@ -1209,13 +1213,13 @@ __metadata:
     "@mantine/modals": ^4.2.10
     "@mantine/next": ^4.2.10
     "@mantine/notifications": ^4.2.10
-    "@react-hookz/web": ^14.2.3
+    "@react-hookz/web": ^14.7.1
     "@tabler/icons": ^1.101.0
     "@types/react": 18.0.21
     "@types/react-dom": 18.0.6
-    cookies-next: ^2.0.5
+    cookies-next: ^2.1.1
     currency.js: ^2.0.4
-    mobx: ^6.6.0
+    mobx: ^6.6.2
     mobx-react-lite: ^3.4.0
     next: 12.3.1
     next-with-apollo: ^5.3.0
@@ -1224,7 +1228,7 @@ __metadata:
     react-hook-form: ^7.36.1
     recharts: ^2.1.10
     xlsx: "https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz"
-    zod: ^3.17.3
+    zod: ^3.19.1
   languageName: unknown
   linkType: soft
 
@@ -2515,12 +2519,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/resolvers@npm:^2.9.1":
-  version: 2.9.1
-  resolution: "@hookform/resolvers@npm:2.9.1"
+"@hookform/resolvers@npm:^2.9.8":
+  version: 2.9.8
+  resolution: "@hookform/resolvers@npm:2.9.8"
   peerDependencies:
     react-hook-form: ^7.0.0
-  checksum: 534fc126462c26b27b786a785d24fdf36f6c704d23bba3d614c1df676892862f6ff3d5bc179378b4d062a11c842f83d92501baea48c8df67d3dfe8330a6b546d
+  checksum: 3b8389a32baa784916d75565db3a13979cf776cc5552055f851c99283070f76e9b70d760a3222031b79610cde033d8417d63408a3e02577651f899b228d544ef
   languageName: node
   linkType: hard
 
@@ -3537,9 +3541,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-hookz/web@npm:^14.2.3":
-  version: 14.2.3
-  resolution: "@react-hookz/web@npm:14.2.3"
+"@react-hookz/web@npm:^14.7.1":
+  version: 14.7.1
+  resolution: "@react-hookz/web@npm:14.7.1"
   dependencies:
     "@react-hookz/deep-equal": ^1.0.2
   peerDependencies:
@@ -3549,7 +3553,7 @@ __metadata:
   peerDependenciesMeta:
     js-cookie:
       optional: true
-  checksum: 03a8e0fb2fe6431412ac19183bdd762771dab24cce1b6c5999803219d81a1c74d5f7ce34524c958cc844a1a4993f32c963d7ced01f95a9cad3ea0bf5446c76c9
+  checksum: 0d7d7130d3a74516ed5b6397b4782e39c5e5f55bc5d370547563679fdf4952297fd618d178e934712c5829b6d0a5f67a4d890ada08be2f45c28b51332d2690d6
   languageName: node
   linkType: hard
 
@@ -4555,6 +4559,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wry/context@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@wry/context@npm:0.7.0"
+  dependencies:
+    tslib: ^2.3.0
+  checksum: f4ff78023a0b949122037aae766232b7d2284dc415204d22d9ea6d7969ff8f5f29b18128bc9a40e68dc054c8a12b1bf5868a357fdb50c398c447290c3a5b0496
+  languageName: node
+  linkType: hard
+
 "@wry/equality@npm:^0.5.0":
   version: 0.5.2
   resolution: "@wry/equality@npm:0.5.2"
@@ -5259,12 +5272,12 @@ __metadata:
     "@types/node": 18.7.23
     "@types/uuid": ^8.3.4
     cspell: ^6.12.0
-    dayjs: ^1.11.3
+    dayjs: ^1.11.5
     eslint: 8.24.0
     graphql: 15.3.0
     prettier: ^2.7.1
     typescript: 4.8.4
-    uuid: ^8.3.2
+    uuid: ^9.0.0
   languageName: unknown
   linkType: soft
 
@@ -6020,14 +6033,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookies-next@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "cookies-next@npm:2.0.5"
+"cookies-next@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "cookies-next@npm:2.1.1"
   dependencies:
     "@types/cookie": ^0.4.1
     "@types/node": ^16.10.2
     cookie: ^0.4.0
-  checksum: 2250d91bfb495d4c182e984bd5c4b9e8981fd0c454c61300cc23b128fcbd3e8ed8eb6c47308edf0d12f1ff9d70e058dc94dd1be794f94eb7dbf09f5d83e3a8cb
+  checksum: c5fc2c72cf2d46d6fa804e5690b5038bab3d5c7e741a8472079bfbd6920010802962f7512d999ea430ebcbfc7c89c38e16f423479e4df7cb0bb782cc1a7f9004
   languageName: node
   linkType: hard
 
@@ -6393,10 +6406,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.11.3":
-  version: 1.11.3
-  resolution: "dayjs@npm:1.11.3"
-  checksum: c87e06b562a51ae6568cc5b840c7579d82a0f8af7163128c858fe512d3d71d07bd8e8e464b8cc41b8698a9e26b80ab2c082d14a1cd4c33df5692d77ccdfc5a43
+"dayjs@npm:^1.11.5":
+  version: 1.11.5
+  resolution: "dayjs@npm:1.11.5"
+  checksum: e3bbaa7b4883b31be4bf75a181f1447fbb19800c29b332852125aab96baeff3ac232dcba8b88c4ea17d3b636c99dac5fb9d1af4bb6ae26615698bbc4a852dffb
   languageName: node
   linkType: hard
 
@@ -10306,10 +10319,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mobx@npm:^6.6.0":
-  version: 6.6.0
-  resolution: "mobx@npm:6.6.0"
-  checksum: 369b8d6830ec286e9c856c80002c7a554d46bca739b7f76432cb56b3ce1fe0a7ed7e5a994b9793d30023beeff0dd16300a501e831fa97107104e4fedc7d4af8f
+"mobx@npm:^6.6.2":
+  version: 6.6.2
+  resolution: "mobx@npm:6.6.2"
+  checksum: b913abea51ed023d60c71eec0198e953c0b7faee93820be2e8f07037a789b3acf6fd89c340cb9d34e888532ebd34d34b10add7d129277a96026537e5ca48bda6
   languageName: node
   linkType: hard
 
@@ -11948,6 +11961,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"response-iterator@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "response-iterator@npm:0.2.6"
+  checksum: b0db3c0665a0d698d65512951de9623c086b9c84ce015a76076d4bd0bf733779601d0b41f0931d16ae38132fba29e1ce291c1f8e6550fc32daaa2dc3ab4f338d
+  languageName: node
+  linkType: hard
+
 "restore-cursor@npm:^3.1.0":
   version: 3.1.0
   resolution: "restore-cursor@npm:3.1.0"
@@ -13441,12 +13461,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.0.0, uuid@npm:^8.3.2":
+"uuid@npm:^8.0.0":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
   languageName: node
   linkType: hard
 
@@ -14049,9 +14078,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.17.3":
-  version: 3.17.3
-  resolution: "zod@npm:3.17.3"
-  checksum: f74b5d8a307cbed734e7a4a7f57a0c6b0a2d5062adee25e86eceaa1bec606621d6861804130f53342dec2d6e77fe9365f3a5118d55c81688f69f3de5fd3e59af
+"zod@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "zod@npm:3.19.1"
+  checksum: 56e420ea5845912324a8fc61833714a2aec84954e418b52660d76502183c6e62fef9447cbfa64349640c5ce190cf2c24267e006bb80f066183e2f3fa9fe11864
   languageName: node
   linkType: hard
