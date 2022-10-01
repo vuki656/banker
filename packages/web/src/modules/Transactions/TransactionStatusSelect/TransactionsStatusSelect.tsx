@@ -1,7 +1,4 @@
-import {
-    Chip,
-    Chips,
-} from '@mantine/core'
+import { Chip } from '@mantine/core'
 import { observer } from 'mobx-react-lite'
 
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
@@ -11,7 +8,7 @@ export const TransactionsStatusSelect = observer(() => {
     const store = useTransactionsStore()
 
     return (
-        <Chips
+        <Chip.Group
             onChange={(status) => {
                 store.setStatusFilter(status as TransactionStatusEnum)
             }}
@@ -20,17 +17,18 @@ export const TransactionsStatusSelect = observer(() => {
                 padding: theme.spacing.sm,
             })}
             value={store.statusFilter}
-            variant="filled"
         >
-            <Chip value={TransactionStatusEnum.Done}>
-                Done
-            </Chip>
-            <Chip value={TransactionStatusEnum.Skipped}>
-                Skipped
-            </Chip>
-            <Chip value={TransactionStatusEnum.Discarded}>
-                Discarded
-            </Chip>
-        </Chips>
+            {Object.values(TransactionStatusEnum).map((name) => {
+                return (
+                    <Chip
+                        key={name}
+                        value={name}
+                        variant="filled"
+                    >
+                        {name}
+                    </Chip>
+                )
+            })}
+        </Chip.Group>
     )
 })

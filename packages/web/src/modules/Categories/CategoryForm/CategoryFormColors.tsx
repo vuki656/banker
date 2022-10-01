@@ -1,7 +1,7 @@
 import {
     ColorSwatch,
     Group,
-    InputWrapper,
+    Input,
     useMantineTheme,
 } from '@mantine/core'
 import { IconCheck } from '@tabler/icons'
@@ -15,7 +15,7 @@ export const CategoryFormColors: React.FunctionComponent = () => {
     const colorField = useController<CategoryFormType>({ name: 'color' })
 
     return (
-        <InputWrapper
+        <Input.Wrapper
             error={colorField.fieldState.error?.message}
             label="Color"
             required={true}
@@ -49,6 +49,6 @@ export const CategoryFormColors: React.FunctionComponent = () => {
                         )
                     })}
             </Group>
-        </InputWrapper>
+        </Input.Wrapper>
     )
 }

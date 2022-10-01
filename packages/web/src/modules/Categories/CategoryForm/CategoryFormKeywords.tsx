@@ -2,7 +2,7 @@ import {
     ActionIcon,
     Badge,
     Group,
-    InputWrapper,
+    Input,
     Modal,
     Text,
 } from '@mantine/core'
@@ -49,7 +49,7 @@ export const CategoryFormKeywords: React.FunctionComponent = () => {
 
     return (
         <>
-            <InputWrapper
+            <Input.Wrapper
                 error={keywordsField.fieldState.error?.message}
                 label="Keywords"
             >
@@ -102,7 +102,7 @@ export const CategoryFormKeywords: React.FunctionComponent = () => {
                         <IconPlus />
                     </ActionIcon>
                 </Group>
-            </InputWrapper>
+            </Input.Wrapper>
             <Modal
                 centered={true}
                 onClose={isKeywordDialogOpenActions.setFalse}

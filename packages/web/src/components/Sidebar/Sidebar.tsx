@@ -16,6 +16,7 @@ import {
     IconUpload,
 } from '@tabler/icons'
 import { removeCookies } from 'cookies-next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import {
@@ -89,48 +90,44 @@ export const Sidebar: React.FunctionComponent = () => {
                 grow={true}
                 mt="md"
             >
-                <SidebarButton
-                    color="blue"
-                    icon={<IconUpload size={ICON_SIZE} />}
-                    label="Import"
-                    onClick={() => {
-                        void router.push('/import')
-                    }}
-                    selected={router.pathname === '/import'}
-                />
-                <SidebarButton
-                    color="orange"
-                    icon={<IconPackage size={ICON_SIZE} />}
-                    label="Categories"
-                    onClick={() => {
-                        void router.push('/categories')
-                    }}
-                    selected={router.pathname.startsWith('/categories')}
-                />
-                <SidebarButton
-                    color="red"
-                    icon={<IconList size={ICON_SIZE} />}
-                    label="Transactions"
-                    onClick={() => {
-                        void router.push('/transactions')
-                    }}
-                    selected={router.pathname.startsWith('/transactions')}
-                />
-                <SidebarButton
-                    color="green"
-                    icon={<IconChartBar size={ICON_SIZE} />}
-                    label="Breakdown"
-                    onClick={() => {
-                        void router.push('/breakdown')
-                    }}
-                    selected={router.pathname.startsWith('/breakdown')}
-                />
+                <Link href="/import">
+                    <SidebarButton
+                        color="blue"
+                        icon={<IconUpload size={ICON_SIZE} />}
+                        label="Import"
+                        selected={router.pathname === '/import'}
+                    />
+                </Link>
+                <Link href="/categories">
+                    <SidebarButton
+                        color="orange"
+                        icon={<IconPackage size={ICON_SIZE} />}
+                        label="Categories"
+                        selected={router.pathname.startsWith('/categories')}
+                    />
+                </Link>
+                <Link href="/transactions">
+                    <SidebarButton
+                        color="red"
+                        icon={<IconList size={ICON_SIZE} />}
+                        label="Transactions"
+                        selected={router.pathname.startsWith('/transactions')}
+                    />
+                </Link>
+                <Link href="/breakdown">
+                    <SidebarButton
+                        color="green"
+                        icon={<IconChartBar size={ICON_SIZE} />}
+                        label="Breakdown"
+                        selected={router.pathname.startsWith('/breakdown')}
+                    />
+                </Link>
             </Navbar.Section>
             <Navbar.Section>
                 <SidebarButton
                     color="red"
                     icon={<IconLogout size={ICON_SIZE} />}
-                    label="Logout"
+                    label="Logout" // @ts-expect-error
                     onClick={onLogout}
                 />
                 <SidebarUpdateUserDialog />
