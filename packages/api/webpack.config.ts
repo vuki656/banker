@@ -11,7 +11,7 @@ const config: Configuration = {
         nodeExternals({
             modulesDir: path.resolve(__dirname, '../../node_modules'),
         }),
-    ],
+    ] as Configuration['externals'],
     mode: 'production',
     module: {
         rules: [

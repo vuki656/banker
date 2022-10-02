@@ -1,8 +1,4 @@
-import {
-    ApolloClient,
-    ApolloProvider,
-    InMemoryCache,
-} from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { getDataFromTree } from '@apollo/client/react/ssr'
 import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
@@ -17,13 +13,12 @@ import {
     Root,
     ThemeRoot,
 } from '../components'
-import introspectionGeneratedTS from '../graphql/introspection.generated.json'
-import introspectionGeneratedJSON from '../graphql/types.generated'
 import type { AppProps } from '../utils'
 import {
     COOKIE_COLORSCHEME_NAME,
-    CurrentUserProvider,
-    link,
+
+    initApolloClient,
+    withCurrentUser,
 } from '../utils'
 
 const App = (props: AppProps) => {
@@ -53,15 +48,13 @@ const App = (props: AppProps) => {
                     <NotificationsProvider>
                         <GlobalStyles />
                         <ApolloProvider client={apollo}>
-                            <CurrentUserProvider>
-                                {isAppAppRoute ? (
-                                    <Root>
-                                        <Component {...pageProps} />
-                                    </Root>
-                                ) : (
+                            {isAppAppRoute ? (
+                                <Root>
                                     <Component {...pageProps} />
-                                )}
-                            </CurrentUserProvider>
+                                </Root>
+                            ) : (
+                                <Component {...pageProps} />
+                            )}
                         </ApolloProvider>
                     </NotificationsProvider>
                 </ModalsProvider>
@@ -79,27 +72,4 @@ App.getInitialProps = async (appProps: any) => {
     }
 }
 
-export default withApollo((client) => {
-    const typesPolicies = introspectionGeneratedTS.__schema.types
-        .filter((type) => {
-            return type.kind === 'OBJECT'
-        })
-        .map((type) => {
-            return [type.name, { merge: true }]
-        })
-
-    const cache = new InMemoryCache({
-        possibleTypes: introspectionGeneratedJSON.possibleTypes,
-        typePolicies: Object.fromEntries(typesPolicies),
-    })
-
-    if (client.initialState) {
-        cache.restore(client.initialState)
-    }
-
-    return new ApolloClient({
-        cache,
-        link,
-        ssrMode: typeof window === 'undefined',
-    })
-}, { getDataFromTree })(App)
+export default withApollo(initApolloClient, { getDataFromTree })(withCurrentUser(App))

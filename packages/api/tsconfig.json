@@ -11,7 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strictNullChecks": true,
-        "lib": ["dom", "ESNext", "esnext.asynciterable"]
+        "lib": ["ESNext", "esnext.asynciterable"]
     },
-    "exclude": ["node_modules", "generator"]
+    "exclude": ["generator"]
 }
