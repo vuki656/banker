@@ -4,10 +4,11 @@ import {
     ThemeIcon,
     UnstyledButton,
 } from '@mantine/core'
+import { forwardRef } from 'react'
 
 import type { SidebarButtonProps } from './SidebarButton.types'
 
-export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props) => {
+export const SidebarButton = forwardRef<HTMLButtonElement, SidebarButtonProps>((props, ref) => {
     const {
         color,
         icon,
@@ -19,6 +20,7 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
     return (
         <UnstyledButton
             {...other}
+            ref={ref}
             sx={(theme) => ({
                 '&:hover': {
                     backgroundColor: theme.colorScheme === 'dark'
@@ -50,4 +52,4 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
             </Group>
         </UnstyledButton>
     )
-}
+})
