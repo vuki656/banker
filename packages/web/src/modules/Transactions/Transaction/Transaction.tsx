@@ -84,7 +84,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                 }}
                 weight="bold"
             >
-                {formatCurrency(value.amount.converted, user?.currency)}
+                {formatCurrency(value.amount.converted, { currency: user?.currency })}
             </Text>
             <Text
                 color="dimmed"

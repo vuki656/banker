@@ -54,6 +54,8 @@
         "dbgenerated",
         "domagoj",
         "vukovic",
-        "sheetjs"
+        "sheetjs",
+        "nvmrc",
+        "nivo"
     ]
 }
