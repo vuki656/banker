@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "nodemon",
         "start": "NODE_ENV=production node 'dist/index.js'",
-        "build": "webpack",
+        "build": "yarn orm:generate && webpack",
         "generate": "ts-node ./generator",
         "database:setup": "docker-compose run --rm migrations",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",

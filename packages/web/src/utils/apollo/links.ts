@@ -39,7 +39,7 @@ export const initApolloClient = (options: InitApolloOptions<any>) => {
             headers: {
                 ...context.headers,
                 Authorization: `Bearer ${CookieManager.getCookie(
-                    typeof window === 'undefined' ? options.ctx : context, COOKIE_TOKEN_NAME, 
+                    typeof window === 'undefined' ? options.ctx : context, COOKIE_TOKEN_NAME,
                 )}`,
             },
         }))

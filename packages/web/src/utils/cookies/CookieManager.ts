@@ -6,10 +6,6 @@ export class CookieManager {
         return nextCookie(context)[name]
     }
 
-    public static setCookie(name: string, value: string) {
-        cookie.set(name, value)
-    }
-
     public static removeCookie(name: string) {
         cookie.remove(name)
     }
@@ -18,5 +14,9 @@ export class CookieManager {
         names.forEach((name) => {
             this.removeCookie(name)
         })
+    }
+
+    public static setCookie(name: string, value: string) {
+        cookie.set(name, value)
     }
 }

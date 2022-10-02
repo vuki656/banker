@@ -1,5 +1,10 @@
-import { NextComponentType } from "next";
-import { AppContext, AppInitialProps, AppProps } from "next/app";
-import { ExtraAppProps } from "../apollo";
+import type { NextComponentType } from 'next'
+import type {
+    AppContext,
+    AppInitialProps,
+    AppProps,
+} from 'next/app'
+
+import type { ExtraAppProps } from '../apollo'
 
 export type AppComponentType = NextComponentType<AppContext, AppInitialProps, AppProps & ExtraAppProps>

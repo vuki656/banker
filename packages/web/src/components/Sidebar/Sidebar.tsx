@@ -20,7 +20,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import {
-    COOKIE_TOKEN_NAME, useCurrentUser,
+    COOKIE_TOKEN_NAME,
+    useCurrentUser,
 } from '../../utils'
 
 import { SidebarButton } from './SidebarButton'

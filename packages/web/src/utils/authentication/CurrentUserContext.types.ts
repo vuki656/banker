@@ -1,5 +1,6 @@
 import type { ApolloPageContext } from 'next-with-apollo'
-import { UserType } from '../../graphql/types.generated'
+
+import type { UserType } from '../../graphql/types.generated'
 
 export interface CurrentUserPageContext extends ApolloPageContext {
     user: UserType | null
