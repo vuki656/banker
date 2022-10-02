@@ -15,13 +15,12 @@ import {
     IconSun,
     IconUpload,
 } from '@tabler/icons'
-import { removeCookies } from 'cookies-next'
+import { deleteCookie } from 'cookies-next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import {
-    COOKIE_TOKEN_NAME,
-    useCurrentUser,
+    COOKIE_TOKEN_NAME, useCurrentUser,
 } from '../../utils'
 
 import { SidebarButton } from './SidebarButton'
@@ -43,7 +42,7 @@ export const Sidebar: React.FunctionComponent = () => {
 
         unload()
 
-        removeCookies(COOKIE_TOKEN_NAME)
+        deleteCookie(COOKIE_TOKEN_NAME)
     }
 
     return (

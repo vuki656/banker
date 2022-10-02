@@ -16,6 +16,8 @@ export const server = new ApolloServer({
     introspection: env.isDev,
     plugins: [ApolloPluginLogger],
     schema: generateSchema(),
+    csrfPrevention: true,
+    cache: 'bounded',
 })
 
 export const startServer = async () => {
