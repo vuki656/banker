@@ -1,5 +1,4 @@
 import {
-    Badge,
     Group,
     Stack,
     Text,
@@ -26,6 +25,9 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
                         ? theme.colors.dark[6]
                         : theme.colors.gray[0],
                 },
+                backgroundColor: theme.colorScheme === 'dark'
+                    ? theme.colors.dark[6]
+                    : theme.white,
                 borderRadius: theme.radius.sm,
                 boxShadow: theme.shadows.xs,
             })}
@@ -48,19 +50,6 @@ export const Category: React.FunctionComponent<CategoryProps> = (props) => {
                     >
                         {value.name}
                     </Text>
-                    <Group spacing="xs">
-                        {value.keywords.map((keyword) => {
-                            return (
-                                <Badge
-                                    color="gray"
-                                    key={keyword.id}
-                                    size="xs"
-                                >
-                                    {keyword.name}
-                                </Badge>
-                            )
-                        })}
-                    </Group>
                 </Stack>
             </Group>
         </UnstyledButton>

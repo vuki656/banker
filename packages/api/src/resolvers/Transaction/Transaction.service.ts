@@ -50,34 +50,6 @@ export class TransactionService {
         }
     }
 
-    public async updateOne(input: UpdateTransactionInput, userId?: string): Promise<UpdateTransactionPayload> {
-        const updatedTransaction = await orm.transaction.update({
-            data: {
-                amount: input.amount,
-                category: input.categoryId ? {
-                    connect: {
-                        id: input.categoryId,
-                    },
-                } : {
-                    disconnect: true,
-                },
-                currency: input.currency,
-                date: input.date,
-                description: input.description,
-            },
-            select: TRANSACTION_DEFAULT_SELECT(),
-            where: {
-                id: input.id,
-            },
-        })
-
-        const convertedTransaction = await convertTransaction(updatedTransaction, userId)
-
-        return {
-            transaction: convertedTransaction,
-        }
-    }
-
     public async discardOne(input: DiscardTransactionInput, userId?: string): Promise<DiscardTransactionPayload> {
         const discardedTransaction = await orm.transaction.update({
             data: {
@@ -133,5 +105,34 @@ export class TransactionService {
         })
 
         return Promise.all(actions)
+    }
+
+    public async updateOne(input: UpdateTransactionInput, userId?: string): Promise<UpdateTransactionPayload> {
+        const updatedTransaction = await orm.transaction.update({
+            data: {
+                amount: input.amount,
+                category: input.categoryId ? {
+                    connect: {
+                        id: input.categoryId,
+                    },
+                } : {
+                    disconnect: true,
+                },
+                currency: input.currency,
+                date: input.date,
+                description: input.description,
+                status: input.status,
+            },
+            select: TRANSACTION_DEFAULT_SELECT(),
+            where: {
+                id: input.id,
+            },
+        })
+
+        const convertedTransaction = await convertTransaction(updatedTransaction, userId)
+
+        return {
+            transaction: convertedTransaction,
+        }
     }
 }

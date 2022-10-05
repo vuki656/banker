@@ -12,10 +12,10 @@ type Query {
 
 type UserType implements BaseType {
     id: ID!
+    currency: String!
+    email: String!
     firstName: String!
     lastName: String!
-    email: String!
-    currency: String!
 }
 
 interface BaseType {
@@ -24,10 +24,10 @@ interface BaseType {
 
 type CategoryType implements BaseType {
     id: ID!
-    name: String!
     color: String!
     icon: String!
     keywords: [KeywordType!]!
+    name: String!
 }
 
 type KeywordType implements BaseType {
@@ -37,24 +37,24 @@ type KeywordType implements BaseType {
 
 type TransactionType implements BaseType {
     id: ID!
-    reference: String!
-    description: String!
-    date: DateTime!
+    amount: AmountType!
     category: CategoryType
     currency: String!
-    amount: AmountType!
+    date: DateTime!
+    description: String!
+    reference: String!
     status: TransactionStatusEnum!
+}
+
+type AmountType {
+    converted: Float!
+    original: Float!
 }
 
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
-
-type AmountType {
-    original: Float!
-    converted: Float!
-}
 
 enum TransactionStatusEnum {
     DISCARDED
@@ -63,19 +63,19 @@ enum TransactionStatusEnum {
 }
 
 input TransactionsArgs {
-    startDate: DateTime
     endDate: DateTime
+    startDate: DateTime
 }
 
 type Mutation {
     loginUser(input: LoginUserInput!): LoginUserPayload!
     updateUser(input: UpdateUserInput!): UpdateUserPayload!
     createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
-    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
     deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
+    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
     createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
-    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
     discardTransaction(input: DiscardTransactionInput!): DiscardTransactionPayload!
+    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
 }
 
 type LoginUserPayload {
@@ -93,11 +93,11 @@ type UpdateUserPayload {
 }
 
 input UpdateUserInput {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
     currency: String!
+    email: String!
+    firstName: String!
+    id: ID!
+    lastName: String!
 }
 
 type CreateCategoryPayload {
@@ -105,26 +105,9 @@ type CreateCategoryPayload {
 }
 
 input CreateCategoryInput {
-    name: String!
     color: String!
     icon: String!
     keywords: [String!]!
-}
-
-type UpdateCategoryPayload {
-    category: CategoryType!
-}
-
-input UpdateCategoryInput {
-    id: ID!
-    name: String!
-    color: String!
-    icon: String!
-    keywords: [UpdateKeywordInput!]!
-}
-
-input UpdateKeywordInput {
-    id: ID!
     name: String!
 }
 
@@ -136,31 +119,35 @@ input DeleteCategoryInput {
     id: ID!
 }
 
+type UpdateCategoryPayload {
+    category: CategoryType!
+}
+
+input UpdateCategoryInput {
+    color: String!
+    icon: String!
+    id: ID!
+    keywords: [UpdateKeywordInput!]!
+    name: String!
+}
+
+input UpdateKeywordInput {
+    id: ID!
+    name: String!
+}
+
 type CreateTransactionPayload {
     transaction: TransactionType!
 }
 
 input CreateTransactionInput {
-    reference: String!
     amount: Float!
-    description: String!
-    currency: String!
-    date: String!
-    status: TransactionStatusEnum!
     categoryId: String
-}
-
-type UpdateTransactionPayload {
-    transaction: TransactionType!
-}
-
-input UpdateTransactionInput {
-    id: ID!
-    amount: Float!
     currency: String!
     date: String!
     description: String!
-    categoryId: ID
+    reference: String!
+    status: TransactionStatusEnum!
 }
 
 type DiscardTransactionPayload {
@@ -169,4 +156,18 @@ type DiscardTransactionPayload {
 
 input DiscardTransactionInput {
     id: ID!
+}
+
+type UpdateTransactionPayload {
+    transaction: TransactionType!
+}
+
+input UpdateTransactionInput {
+    amount: Float!
+    categoryId: ID
+    currency: String!
+    date: String!
+    description: String!
+    id: ID!
+    status: TransactionStatusEnum!
 }

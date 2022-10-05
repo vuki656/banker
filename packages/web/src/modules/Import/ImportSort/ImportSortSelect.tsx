@@ -13,12 +13,11 @@ import { useImportStore } from '../hooks'
 
 export const ImportSortSelect = observer(() => {
     const store = useImportStore()
-
     const theme = useMantineTheme()
 
     const onCategoryClick = (category: CategoryType) => {
         return () => {
-            store.updateCurrentTransactionCategory(category)
+            store.currentTransactionCategory = category
         }
     }
 
@@ -26,7 +25,7 @@ export const ImportSortSelect = observer(() => {
         <Group
             align="center"
             position="center"
-            style={{
+            sx={{
                 padding: theme.spacing.md,
                 width: '80%',
             }}

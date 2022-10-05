@@ -1,12 +1,11 @@
 import currency from 'currency.js'
 
-export const formatCurrency = (amount: number, userCurrency?: string) => {
-    const formattedAmount = currency(amount, { precision: 2 })
-        .format({
-            decimal: ',',
-            separator: '.',
-            symbol: '',
-        })
+import type { FormatCurrencyArgs } from './formatCurrency.types'
 
-    return `${formattedAmount} ${userCurrency}`
+export const formatCurrency = (amount: number, args?: FormatCurrencyArgs): string => {
+    const formattedAmount = currency(amount, { precision: args?.precision ?? 2 })
+        .format({ symbol: '' })
+        .toString()
+
+    return `${formattedAmount} ${args?.currency}`
 }

@@ -44,7 +44,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
         resolver: zodResolver(categoryValidation),
     })
 
-    const colorField = useController({ control: form.control, name: 'color' })
+    const { field: colorField } = useController({ control: form.control, name: 'color' })
 
     const onSubmit = async (formValue: CategoryFormType) => {
         await onSubmitProp(formValue)
@@ -74,7 +74,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
                     return (
                         <IconPicker
                             {...extractFormFieldErrors(controller.formState.errors.icon)}
-                            color={theme.colors[colorField.field.value]?.[6]}
+                            color={theme.colors[colorField.value]?.[6]}
                             onChange={controller.field.onChange}
                             required={true}
                             value={controller.field.value}
@@ -88,9 +88,7 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
             </FormProvider>
             <SimpleGrid
                 cols={value ? 3 : 2}
-                style={{
-                    marginTop: theme.spacing.xl,
-                }}
+                sx={{ marginTop: theme.spacing.xl }}
             >
                 {value ? (
                     <Button

@@ -1,0 +1,8 @@
+query GetHomePageData($transactionsArgs: TransactionsArgs) {
+    categories {
+        ...CategoryPayload
+    }
+    transactions(args: $transactionsArgs) {
+        ...TransactionPayload
+    }
+}

@@ -20,7 +20,7 @@ export const ImportSortDetails = observer(() => {
             <ThemeIcon
                 color={store.currentTransaction?.category?.color}
                 radius="xl"
-                style={{
+                sx={{
                     height: '200px',
                     width: '200px',
                 }}
@@ -31,15 +31,15 @@ export const ImportSortDetails = observer(() => {
                     size={100}
                 />
             </ThemeIcon>
-            <Text style={{ fontSize: '40px' }}>
+            <Text sx={{ fontSize: '40px' }}>
                 {store.currentTransaction?.category?.name ?? 'N/A'}
             </Text>
             <Text
                 align="center"
                 color="dimmed"
-                style={{ maxWidth: '80%' }}
+                sx={{ maxWidth: '80%' }}
             >
-                <Highlight highlight={store.currentTransaction?.keyword ?? ''}>
+                <Highlight highlight={store.currentTransactionMatchedKeyword}>
                     {store.currentTransaction?.description ?? 'N/A'}
                 </Highlight>
             </Text>
@@ -52,10 +52,7 @@ export const ImportSortDetails = observer(() => {
                     {' '}
                     {store.currentTransaction?.currency}
                 </Text>
-                <ImportSortEditAmountDialog
-                    onSubmit={store.updateTransactionAmount}
-                    value={store.currentTransaction?.amount}
-                />
+                <ImportSortEditAmountDialog />
             </Group>
             <Text size="md">
                 {formatDate(store.currentTransaction?.date)}

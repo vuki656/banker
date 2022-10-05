@@ -6,6 +6,10 @@ export type NewTransactionType = {
     currency: string
     date: Date
     description: string
-    keyword?: string | null
     reference: string
+}
+
+export type MatchedCategoryType = {
+    category: CategoryType | null
+    keyword: string
 }

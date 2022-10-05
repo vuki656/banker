@@ -1,61 +1,24 @@
-import {
-    Chip,
-    Chips,
-    Group,
-} from '@mantine/core'
+import { Select } from '@mantine/core'
 import { observer } from 'mobx-react-lite'
 
 import { useTransactionsStore } from '../hooks'
+import { TransactionCategorySelectItem } from '../TransactionCategorySelectItem'
 
 export const TransactionsCategorySelect = observer(() => {
     const store = useTransactionsStore()
 
     return (
-        <Group
-            spacing="xs"
-            sx={(theme) => ({
-                borderBottom: `1px solid ${theme.colors.gray[2]}`,
-                padding: theme.spacing.sm,
-            })}
-        >
-            <Chip
-                checked={false}
-                onClick={() => {
-                    store.setCategoryFilter(null)
-                }}
-            >
-                Clear
-            </Chip>
-            <Chips
-                multiple={false}
-                onChange={(categoryId) => {
-                    if (categoryId === store.categoryFilter) {
-                        store.setCategoryFilter(null)
-
-                        return
-                    }
-
-                    store.setCategoryFilter(categoryId)
-                }}
-                value={store.categoryFilter ?? ''}
-                variant="filled"
-            >
-                {store.categories.map((category) => {
-                    return (
-                        <Chip
-                            key={category.id}
-                            style={{
-                                columnGap: '5px',
-                                display: 'flex',
-                                overflowX: 'auto',
-                            }}
-                            value={category.id}
-                        >
-                            {category.name}
-                        </Chip>
-                    )
-                })}
-            </Chips>
-        </Group>
+        <Select
+            clearable={true}
+            data={store.categorySelectItems}
+            itemComponent={TransactionCategorySelectItem}
+            maxDropdownHeight={400}
+            nothingFound="No Category Found"
+            onChange={(selectedCategory) => {
+                store.categoryFilter = selectedCategory
+            }}
+            placeholder="Pick a Category"
+            searchable={true}
+        />
     )
 })

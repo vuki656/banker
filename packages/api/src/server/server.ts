@@ -12,7 +12,9 @@ import { generateSchema } from './generateSchema'
 import { ApolloPluginLogger } from './plugins'
 
 export const server = new ApolloServer({
+    cache: 'bounded',
     context,
+    csrfPrevention: true,
     introspection: env.isDev,
     plugins: [ApolloPluginLogger],
     schema: generateSchema(),

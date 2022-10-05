@@ -4,15 +4,15 @@ import {
     ThemeIcon,
     UnstyledButton,
 } from '@mantine/core'
+import { forwardRef } from 'react'
 
 import type { SidebarButtonProps } from './SidebarButton.types'
 
-// TODO: add the selected background color capability
-export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props) => {
+export const SidebarButton = forwardRef<HTMLButtonElement, SidebarButtonProps>((props, ref) => {
     const {
         color,
         icon,
-        label,
+        label, // eslint-disable-next-line @typescript-eslint/no-unused-vars
         selected = false,
         ...other
     } = props
@@ -20,6 +20,7 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
     return (
         <UnstyledButton
             {...other}
+            ref={ref}
             sx={(theme) => ({
                 '&:hover': {
                     backgroundColor: theme.colorScheme === 'dark'
@@ -51,4 +52,4 @@ export const SidebarButton: React.FunctionComponent<SidebarButtonProps> = (props
             </Group>
         </UnstyledButton>
     )
-}
+})

@@ -20,6 +20,9 @@ export const ImportSortButtons = observer(() => {
     const store = useImportStore()
 
     const [createTransactionMutation] = useCreateTransactionMutation({
+        onCompleted: () => {
+            store.setNextTransaction()
+        },
         onError: () => {
             showNotification({
                 color: 'red',
@@ -29,16 +32,16 @@ export const ImportSortButtons = observer(() => {
         },
     })
 
-    const onTransactionSave = async (status: TransactionStatusEnum) => {
-        if (!store.currentTransaction) {
+    const onTransactionSave = (status: TransactionStatusEnum) => {
+        if (!store.currentTransaction?.category) {
             throw new Error('No transaction to save')
         }
 
-        await createTransactionMutation({
+        void createTransactionMutation({
             variables: {
                 input: {
                     amount: store.currentTransaction.amount,
-                    categoryId: store.currentTransaction.category?.id,
+                    categoryId: store.currentTransaction.category.id,
                     currency: store.currentTransaction.currency,
                     date: store.currentTransaction.date.toISOString(),
                     description: store.currentTransaction.description,
@@ -47,21 +50,18 @@ export const ImportSortButtons = observer(() => {
                 },
             },
         })
-            .then(() => {
-                store.setCurrentTransaction()
-            })
     }
 
     const onSkipClick = () => {
-        void onTransactionSave(TransactionStatusEnum.Skipped)
+        onTransactionSave(TransactionStatusEnum.Skipped)
     }
 
     const onSaveClick = () => {
-        void onTransactionSave(TransactionStatusEnum.Done)
+        onTransactionSave(TransactionStatusEnum.Done)
     }
 
     const onDiscardClick = () => {
-        void onTransactionSave(TransactionStatusEnum.Discarded)
+        onTransactionSave(TransactionStatusEnum.Discarded)
     }
 
     return (
@@ -82,7 +82,7 @@ export const ImportSortButtons = observer(() => {
             </Button>
             <Button
                 color="green"
-                disabled={!store.currentTransaction?.category}
+                disabled={!store.isCurrentTransactionSetup}
                 leftIcon={<IconDeviceFloppy size={16} />}
                 onClick={onSaveClick}
             >

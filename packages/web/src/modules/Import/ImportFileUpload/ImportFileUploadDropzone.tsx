@@ -1,5 +1,5 @@
 import {
-    Group,
+    Stack,
     Text,
     ThemeIcon,
     useMantineTheme,
@@ -43,43 +43,35 @@ export const ImportFileUploadDropzone: React.FunctionComponent<ImportFileUploadD
             onReject={() => {
                 showErrorNotification()
             }}
-            style={{
+            sx={{
                 textAlign: 'center',
             }}
         >
-            {() => {
-                return (
-                    <Group
-                        direction="column"
-                        position="center"
-                        spacing="md"
-                    >
-                        <ThemeIcon
-                            color="green"
-                            size={50}
-                            variant="light"
-                        >
-                            <IconFileAnalytics
-                                color={theme.colors.green[8]}
-                                size={30}
-                            />
-                        </ThemeIcon>
-                        <Text
-                            inline={true}
-                            size="xl"
-                        >
-                            Drag your report here
-                        </Text>
-                        <Text
-                            color="dimmed"
-                            inline={true}
-                            size="sm"
-                        >
-                            Or click on the box to select the file on your PC
-                        </Text>
-                    </Group>
-                )
-            }}
+            <Stack spacing="md">
+                <ThemeIcon
+                    color="green"
+                    size={50}
+                    variant="light"
+                >
+                    <IconFileAnalytics
+                        color={theme.colors.green[8]}
+                        size={30}
+                    />
+                </ThemeIcon>
+                <Text
+                    inline={true}
+                    size="xl"
+                >
+                    Drag your report here
+                </Text>
+                <Text
+                    color="dimmed"
+                    inline={true}
+                    size="sm"
+                >
+                    Or click on the box to select the file on your PC
+                </Text>
+            </Stack>
         </Dropzone>
     )
 }

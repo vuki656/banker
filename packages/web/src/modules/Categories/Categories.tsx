@@ -26,11 +26,25 @@ export const Categories: React.FunctionComponent = () => {
         },
     })
 
+    const onUpdate = () => {
+        void refetch()
+
+        setDialogValue(null)
+    }
+
+    const onCancel = () => {
+        setDialogValue(null)
+    }
+
     return (
         <>
             <Stack
                 spacing={0}
-                style={{ flex: 1 }}
+                sx={{
+                    flex: 1,
+                    position: 'relative',
+                }}
+
             >
                 <LoadingOverlay visible={loading} />
                 <Header
@@ -39,7 +53,7 @@ export const Categories: React.FunctionComponent = () => {
                 />
                 <Stack
                     p="md"
-                    style={{ overflow: 'auto' }}
+                    sx={{ overflow: 'auto' }}
                 >
                     {data?.categories.map((category) => {
                         return (
@@ -57,14 +71,8 @@ export const Categories: React.FunctionComponent = () => {
             {dialogValue ? (
                 <CategoryUpdateDialog
                     isOpen={Boolean(dialogValue)}
-                    onCancel={() => {
-                        setDialogValue(null)
-                    }}
-                    onSubmit={() => {
-                        void refetch()
-
-                        setDialogValue(null)
-                    }}
+                    onCancel={onCancel}
+                    onSubmit={onUpdate}
                     value={dialogValue}
                 />
             ) : null}

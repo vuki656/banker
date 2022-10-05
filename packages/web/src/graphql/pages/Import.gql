@@ -1,8 +1,0 @@
-query BreakdownPageData($transactionsArgs: TransactionsArgs) {
-    categories {
-        ...CategoryPayload
-    }
-    transactions(args: $transactionsArgs) {
-        ...TransactionPayload
-    }
-}

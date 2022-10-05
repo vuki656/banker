@@ -23,8 +23,8 @@ import { useLoginUserMutation } from '../../graphql/types.generated'
 import {
     COOKIE_TOKEN_NAME,
     extractFormFieldErrors,
+    useCurrentUser,
 } from '../../utils'
-import { useCurrentUser } from '../../utils/useCurrentUser/useCurrentUser'
 
 import type { LoginFormValueType } from './Login.types'
 import { loginFormValidationSchema } from './Login.validation'
@@ -52,9 +52,8 @@ export const Login: React.FunctionComponent = () => {
                 }
             )
 
-            load(response.loginUser.user)
-
-            void router.push('/breakdown')
+            await load()
+            await router.push('/home')
         },
         onError: () => {
             showNotification({
@@ -84,7 +83,7 @@ export const Login: React.FunctionComponent = () => {
         <Stack
             align="center"
             justify="center"
-            style={{
+            sx={{
                 backgroundColor: theme.colorScheme === 'dark'
                     ? theme.colors.dark[8]
                     : theme.colors.gray[0],

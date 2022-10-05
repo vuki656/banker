@@ -5,13 +5,15 @@ import {
     InputType,
 } from 'type-graphql'
 
+import { TransactionStatusEnum } from '../enums'
+
 @InputType()
 export class UpdateTransactionInput {
-    @Field(() => ID)
-    public id: string
-
     @Field(() => Float)
     public amount: number
+
+    @Field(() => ID, { nullable: true })
+    public categoryId?: string | null
 
     @Field(() => String)
     public currency: string
@@ -22,6 +24,9 @@ export class UpdateTransactionInput {
     @Field(() => String)
     public description: string
 
-    @Field(() => ID, { nullable: true })
-    public categoryId?: string | null
+    @Field(() => ID)
+    public id: string
+
+    @Field(() => TransactionStatusEnum)
+    public status: TransactionStatusEnum
 }

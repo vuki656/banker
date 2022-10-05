@@ -1,7 +1,7 @@
 import {
     Button,
     Group,
-    InputWrapper,
+    Input,
     Popover,
     Text,
     ThemeIcon,
@@ -36,7 +36,7 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
     }
 
     return (
-        <InputWrapper
+        <Input.Wrapper
             error={error}
             label="Icon"
             required={required}
@@ -59,42 +59,43 @@ export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
                     onClose={openActions.setFalse}
                     opened={isOpen}
                     position="bottom"
-                    target={(
+                    width={260}
+                    withArrow={true}
+                >
+                    <Popover.Target>
                         <Button
                             onClick={openActions.toggle}
                             variant="default"
                         >
                             Select
                         </Button>
-                    )}
-                    width={260}
-                    withArrow={true}
-                >
-                    <Group align="center">
-                        {ICON_LIST.map((Icon) => {
-                            return (
-                                <ThemeIcon
-                                    color={color}
-                                    key={Icon.key}
-                                    onClick={onIconSelect(String(Icon.key))}
-                                    size="lg"
-                                    style={{
-                                        cursor: 'pointer',
-                                    }}
-                                    sx={(theme) => ({
-                                        '&:hover': {
-                                            border: `1px solid ${theme.colors.gray[3]}`,
-                                        },
-                                    })}
-                                    variant="light"
-                                >
-                                    {cloneElement(Icon, { size: 20 })}
-                                </ThemeIcon>
-                            )
-                        })}
-                    </Group>
+                    </Popover.Target>
+                    <Popover.Dropdown>
+                        <Group align="center">
+                            {ICON_LIST.map((Icon) => {
+                                return (
+                                    <ThemeIcon
+                                        color={color}
+                                        key={Icon.key}
+                                        onClick={onIconSelect(String(Icon.key))}
+                                        size="lg"
+                                        sx={(theme) => ({
+                                            '&:hover': {
+                                                border: `1px solid ${theme.colors.gray[3]}`,
+                                            },
+                                            backgroundColor: theme.white,
+                                            cursor: 'pointer',
+                                        })}
+                                        variant="light"
+                                    >
+                                        {cloneElement(Icon, { size: 20 })}
+                                    </ThemeIcon>
+                                )
+                            })}
+                        </Group>
+                    </Popover.Dropdown>
                 </Popover>
             </Group>
-        </InputWrapper>
+        </Input.Wrapper>
     )
 }

@@ -6,9 +6,6 @@ import {
 @InputType()
 export class CreateCategoryInput {
     @Field(() => String)
-    public name: string
-
-    @Field(() => String)
     public color: string
 
     @Field(() => String)
@@ -16,4 +13,7 @@ export class CreateCategoryInput {
 
     @Field(() => [String])
     public keywords: string[]
+
+    @Field(() => String)
+    public name: string
 }

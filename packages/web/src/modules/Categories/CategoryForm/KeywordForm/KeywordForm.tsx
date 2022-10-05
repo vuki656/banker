@@ -1,84 +1,81 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
     Box,
     Button,
-    InputWrapper,
+    Input,
     Stack,
     TextInput,
 } from '@mantine/core'
-import type { ChangeEvent } from 'react'
-import { useState } from 'react'
+import {
+    Controller,
+    useForm,
+} from 'react-hook-form'
 import { v4 as UUID } from 'uuid'
 
-import type { KeywordFormProps } from './KeywordForm.types'
+import { extractFormFieldErrors } from '../../../../utils'
+
+import type {
+    KeywordFormProps,
+    KeywordFormType,
+} from './KeywordForm.types'
+import { keywordValidation } from './KeywordForm.validation'
 
 export const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props) => {
     const {
-        onCancel: onCancelProp,
-        onSubmit: onSubmitProp,
+        onCancel,
+        onSubmit,
+        value,
     } = props
 
-    const [keyword, setKeyword] = useState('')
-    const [error, setError] = useState('')
-
-    const onSubmit = () => {
-        if (keyword.length === 0) {
-            setError('Required')
-
-            return
-        }
-
-        onSubmitProp({
-            id: UUID(),
-            name: keyword,
-        })
-
-        setKeyword('')
-        setError('')
-    }
-
-    const onCancel = () => {
-        onCancelProp()
-
-        setKeyword('')
-        setError('')
-    }
-
-    const onChange = (event: ChangeEvent<{ value: string }>) => {
-        setKeyword(event.target.value)
-        setError('')
-    }
+    const { control, handleSubmit } = useForm<KeywordFormType>({
+        defaultValues: {
+            id: value?.id ?? UUID(),
+            name: value?.name ?? '',
+        },
+        resolver: zodResolver(keywordValidation),
+    })
 
     return (
-        <Stack>
-            <InputWrapper
-                error={error}
-                label="Name"
-            >
-                <TextInput
-                    onChange={onChange}
-                    placeholder="Enter a name"
-                    value={keyword}
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack>
+                <Controller
+                    control={control}
+                    name="name"
+                    render={(controller) => {
+                        return (
+                            <Input.Wrapper
+                                {...extractFormFieldErrors(controller.fieldState.error)}
+                                label="Name"
+                            >
+                                <TextInput
+                                    onChange={(newValue) => {
+                                        controller.field.onChange(newValue)
+                                    }}
+                                    placeholder="Enter a name"
+                                    value={controller.field.value}
+                                />
+                            </Input.Wrapper>
+                        )
+                    }}
                 />
-            </InputWrapper>
-            <Box
-                style={{
-                    columnGap: '10px',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                }}
-            >
-                <Button
-                    onClick={onCancel}
-                    variant="subtle"
+                <Box
+                    sx={{
+                        columnGap: '10px',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                    }}
                 >
-                    Cancel
-                </Button>
-                <Button
-                    onClick={onSubmit}
-                >
-                    Add
-                </Button>
-            </Box>
-        </Stack>
+                    <Button
+                        onClick={onCancel}
+                        variant="subtle"
+                    >
+                        Cancel
+                    </Button>
+                    <Button type="submit">
+                        {value ? 'Update' : 'Add'}
+                    </Button>
+                </Box>
+            </Stack>
+        </form>
     )
 }

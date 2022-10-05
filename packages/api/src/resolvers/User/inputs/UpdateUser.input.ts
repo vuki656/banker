@@ -6,18 +6,18 @@ import {
 
 @InputType()
 export class UpdateUserInput {
-    @Field(() => ID)
-    public id: string
-
     @Field(() => String)
-    public firstName: string
-
-    @Field(() => String)
-    public lastName: string
+    public currency: string
 
     @Field(() => String)
     public email: string
 
     @Field(() => String)
-    public currency: string
+    public firstName: string
+
+    @Field(() => ID)
+    public id: string
+
+    @Field(() => String)
+    public lastName: string
 }

@@ -9,6 +9,7 @@ export const Root: React.FunctionComponent<RootProps> = (props) => {
 
     return (
         <AppShell
+            fixed={false}
             navbar={<Sidebar />}
             padding="md"
             styles={(theme) => ({
@@ -21,7 +22,7 @@ export const Root: React.FunctionComponent<RootProps> = (props) => {
                         : theme.colors.gray[0],
                     display: 'flex',
                     flex: 1,
-                    overflowX: 'hidden',
+                    overflow: 'hidden',
                     padding: 0,
                     zIndex: 1,
                 },

@@ -29,6 +29,24 @@ export class TransactionResolver {
     private service = container.resolve(TransactionService)
 
     @Authorized()
+    @Mutation(() => CreateTransactionPayload)
+    public async createTransaction(
+        @Arg('input', () => CreateTransactionInput) input: CreateTransactionInput,
+        @Ctx() context: ContextType,
+    ): Promise<CreateTransactionPayload> {
+        return this.service.createOne(input, context.user?.id)
+    }
+
+    @Authorized()
+    @Mutation(() => DiscardTransactionPayload)
+    public async discardTransaction(
+        @Arg('input', () => DiscardTransactionInput) input: DiscardTransactionInput,
+        @Ctx() context: ContextType,
+    ): Promise<DiscardTransactionPayload> {
+        return this.service.discardOne(input, context.user?.id)
+    }
+
+    @Authorized()
     @Query(() => [TransactionType])
     public async transactions(
         @Ctx() context: ContextType,
@@ -42,29 +60,11 @@ export class TransactionResolver {
     }
 
     @Authorized()
-    @Mutation(() => CreateTransactionPayload)
-    public async createTransaction(
-        @Arg('input', () => CreateTransactionInput) input: CreateTransactionInput,
-        @Ctx() context: ContextType,
-    ): Promise<CreateTransactionPayload> {
-        return this.service.createOne(input, context.user?.id)
-    }
-
-    @Authorized()
     @Mutation(() => UpdateTransactionPayload)
     public async updateTransaction(
         @Arg('input', () => UpdateTransactionInput) input: UpdateTransactionInput,
         @Ctx() context: ContextType,
     ): Promise<UpdateTransactionPayload> {
         return this.service.updateOne(input, context.user?.id)
-    }
-
-    @Authorized()
-    @Mutation(() => DiscardTransactionPayload)
-    public async discardTransaction(
-        @Arg('input', () => DiscardTransactionInput) input: DiscardTransactionInput,
-        @Ctx() context: ContextType,
-    ): Promise<DiscardTransactionPayload> {
-        return this.service.discardOne(input, context.user?.id)
     }
 }

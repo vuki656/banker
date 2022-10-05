@@ -32,11 +32,14 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                         : theme.colors.gray[0],
                 },
                 alignItems: 'center',
+                backgroundColor: theme.colorScheme === 'dark'
+                    ? theme.colors.dark[6]
+                    : theme.white,
                 borderRadius: theme.radius.sm,
                 boxShadow: theme.shadows.xs,
                 columnGap: theme.spacing.md,
                 display: 'grid',
-                gridTemplateColumns: '0.2fr 0.2fr 0.1fr 0.5fr',
+                gridTemplateColumns: '0.2fr 0.1fr 0.2fr 0.5fr',
                 padding: theme.spacing.xs,
             })}
         >
@@ -81,12 +84,12 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                 }}
                 weight="bold"
             >
-                {formatCurrency(value.amount.converted, user?.currency)}
+                {formatCurrency(value.amount.converted, { currency: user?.currency })}
             </Text>
             <Text
                 color="dimmed"
                 size="sm"
-                style={{
+                sx={{
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',

@@ -1,34 +1,36 @@
 import {
     ActionIcon,
-    Badge,
     Group,
-    InputWrapper,
+    Input,
     Modal,
+    Stack,
     Text,
 } from '@mantine/core'
 import {
-    IconPlus,
+    IconPencil,
     IconX,
 } from '@tabler/icons'
+import { useState } from 'react'
 import {
     useController,
     useFormContext,
 } from 'react-hook-form'
 
 import type { KeywordType } from '../../../graphql/types.generated'
-import { useBoolean } from '../../../utils'
+import { toFirstCapitalCase } from '../../../utils'
 
 import type { CategoryFormType } from './CategoryForm.types'
+import { KeywordAddDialog } from './KeywordAddDialog'
 import { KeywordForm } from './KeywordForm'
 
 export const CategoryFormKeywords: React.FunctionComponent = () => {
-    const [isKeywordDialogOpen, isKeywordDialogOpenActions] = useBoolean(false)
+    const [keywordToUpdate, setKeywordToUpdate] = useState<KeywordType | null>(null)
 
     const { control } = useFormContext<CategoryFormType>()
 
     const keywordsField = useController({ control, name: 'keywords' })
 
-    const onKeywordRemove = (id: string) => {
+    const onKeywordRemoveClick = (id: string) => {
         return () => {
             const filteredList = keywordsField.field.value.filter((keyword) => {
                 return keyword.id !== id
@@ -38,83 +40,102 @@ export const CategoryFormKeywords: React.FunctionComponent = () => {
         }
     }
 
-    const onKeywordAdd = (formValue: KeywordType) => {
-        keywordsField.field.onChange([
-            ...keywordsField.field.value,
-            formValue,
-        ])
+    const onKeywordUpdateClick = (keyword: KeywordType) => {
+        return () => {
+            setKeywordToUpdate(keyword)
+        }
+    }
 
-        isKeywordDialogOpenActions.setFalse()
+    const onKeywordUpdateSubmit = (updateKeyword: KeywordType) => {
+        const existingKeywords = keywordsField.field.value.filter((keyword) => {
+            return keyword.id !== updateKeyword.id
+        })
+
+        keywordsField.field.onChange([...existingKeywords, updateKeyword])
+
+        setKeywordToUpdate(null)
+    }
+
+    const onKeywordUpdateClose = () => {
+        setKeywordToUpdate(null)
     }
 
     return (
         <>
-            <InputWrapper
+            <Input.Wrapper
                 error={keywordsField.fieldState.error?.message}
-                label="Keywords"
-            >
-                <Group
-                    align="center"
-                    noWrap={true}
-                    position="apart"
-                >
+                label={(
                     <Group>
-                        {
-                            keywordsField.field.value.length > 0
-                                ? keywordsField.field.value.map((keyword) => {
-                                    return (
-                                        <Badge
-                                            color="gray"
-                                            key={keyword.name}
-                                            rightSection={(
-                                                <ActionIcon
-                                                    color="blue"
-                                                    onClick={onKeywordRemove(keyword.id)}
-                                                    radius="xl"
-                                                    size="xs"
-                                                    variant="transparent"
-                                                >
-                                                    <IconX size={10} />
-                                                </ActionIcon>
-                                            )}
-                                            size="sm"
-                                        >
-                                            {keyword.name}
-                                        </Badge>
-                                    )
-                                })
-                                : (
-                                    <Text
-                                        color="dimmed"
-                                        size="xs"
-                                    >
-                                        No keywords
-                                    </Text>
-                                )
-                        }
+                        <Text>
+                            Keyword
+                        </Text>
+                        <KeywordAddDialog />
                     </Group>
-                    <ActionIcon
-                        color="dark"
-                        onClick={isKeywordDialogOpenActions.setTrue}
-                        size={30}
-                        variant="default"
-                    >
-                        <IconPlus />
-                    </ActionIcon>
-                </Group>
-            </InputWrapper>
-            <Modal
-                centered={true}
-                onClose={isKeywordDialogOpenActions.setFalse}
-                opened={isKeywordDialogOpen}
-                title="Add Keyword"
-                zIndex={999}
+                )}
             >
-                <KeywordForm
-                    onCancel={isKeywordDialogOpenActions.setFalse}
-                    onSubmit={onKeywordAdd}
-                />
-            </Modal>
+                <Stack
+                    align="flex-start"
+                    sx={(theme) => ({
+                        maxHeight: '300px',
+                        overflow: 'auto',
+                        paddingTop: theme.spacing.md,
+                    })}
+                >
+                    {keywordsField.field.value.map((keyword) => {
+                        return (
+                            <Group
+                                key={keyword.id}
+                                position="apart"
+                                sx={(theme) => ({
+                                    borderBottom: `1px solid ${theme.colors.gray[3]}`,
+                                    paddingBottom: theme.spacing.xs,
+                                    width: '100%',
+                                })}
+                            >
+                                <Text
+                                    size="xs"
+                                    weight={500}
+                                >
+                                    {toFirstCapitalCase(keyword.name)}
+                                </Text>
+                                <Group spacing="xs">
+                                    <ActionIcon
+                                        color="gray"
+                                        onClick={onKeywordUpdateClick(keyword)}
+                                        size={20}
+                                        variant="subtle"
+                                    >
+                                        <IconPencil size="15px" />
+                                    </ActionIcon>
+                                    <ActionIcon
+                                        color="gray"
+                                        onClick={onKeywordRemoveClick(keyword.id)}
+                                        size={20}
+                                        variant="subtle"
+                                    >
+                                        <IconX size="15px" />
+                                    </ActionIcon>
+                                </Group>
+                            </Group>
+                        )
+                    })}
+                </Stack>
+            </Input.Wrapper>
+            {keywordToUpdate ? (
+                <Modal
+                    centered={true}
+                    onClose={onKeywordUpdateClose}
+                    opened={Boolean(keywordToUpdate)}
+                    title="Update Keyword"
+                    zIndex={999}
+                >
+                    <KeywordForm
+                        onCancel={onKeywordUpdateClose}
+                        onSubmit={onKeywordUpdateSubmit}
+                        value={keywordToUpdate}
+                    />
+                </Modal>
+            ) : null}
         </>
     )
 }

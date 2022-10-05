@@ -6,6 +6,7 @@ import {
     Stack,
 } from '@mantine/core'
 import { IconPencil } from '@tabler/icons'
+import { observer } from 'mobx-react-lite'
 import {
     useEffect,
     useState,
@@ -13,18 +14,17 @@ import {
 
 import { MoneyInput } from '../../../components'
 import { useBoolean } from '../../../utils'
+import { useImportStore } from '../hooks'
 
-import type { ImportSortEditAmountDialogProps } from './ImportSortEditAmountDialog.types'
-
-export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditAmountDialogProps> = (props) => {
-    const {
-        onSubmit: onSubmitProp,
-        value: valueProp,
-    } = props
+export const ImportSortEditAmountDialog = observer(() => {
+    const store = useImportStore()
 
     const [isOpen, isOpenActions] = useBoolean()
+    const [value, setValue] = useState<number | undefined>()
 
-    const [value, setValue] = useState<number | undefined>(valueProp)
+    useEffect(() => {
+        setValue(store.currentTransaction?.amount)
+    }, [isOpen])
 
     const onCancel = () => {
         setValue(undefined)
@@ -37,23 +37,23 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
             return
         }
 
-        onSubmitProp(value)
+        store.currentTransactionAmount = value
 
         setValue(undefined)
 
         isOpenActions.setFalse()
     }
 
-    useEffect(() => {
-        setValue(valueProp)
-    }, [isOpen])
-
     return (
         <>
-            <ActionIcon onClick={isOpenActions.setTrue}>
+            <ActionIcon
+                onClick={isOpenActions.setTrue}
+                variant="default"
+            >
                 <IconPencil size={17} />
             </ActionIcon>
             <Modal
+                centered={true}
                 onClose={isOpenActions.setFalse}
                 opened={isOpen}
                 title="Edit Amount"
@@ -67,8 +67,8 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
                     />
                     <SimpleGrid cols={2}>
                         <Button
-                            color="red"
                             onClick={onCancel}
+                            variant="subtle"
                         >
                             Cancel
                         </Button>
@@ -83,4 +83,4 @@ export const ImportSortEditAmountDialog: React.FunctionComponent<ImportSortEditA
             </Modal>
         </>
     )
-}
+})

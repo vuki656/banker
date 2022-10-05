@@ -44,18 +44,18 @@ export class CategoryResolver {
         return this.service.createOne(input, context.user?.id)
     }
 
+    @Mutation(() => DeleteCategoryPayload)
+    public async deleteCategory(
+        @Arg('input', () => DeleteCategoryInput) credentials: DeleteCategoryInput,
+    ): Promise<DeleteCategoryPayload> {
+        return this.service.deleteOne(credentials)
+    }
+
     @Authorized()
     @Mutation(() => UpdateCategoryPayload)
     public async updateCategory(
         @Arg('input', () => UpdateCategoryInput) input: UpdateCategoryInput,
     ): Promise<UpdateCategoryPayload> {
         return this.service.updateOne(input)
-    }
-
-    @Mutation(() => DeleteCategoryPayload)
-    public async deleteCategory(
-        @Arg('input', () => DeleteCategoryInput) credentials: DeleteCategoryInput,
-    ): Promise<DeleteCategoryPayload> {
-        return this.service.deleteOne(credentials)
     }
 }

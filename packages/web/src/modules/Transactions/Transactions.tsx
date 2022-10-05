@@ -1,10 +1,13 @@
 import {
+    Center,
     Group,
     LoadingOverlay,
     Stack,
     Text,
+    ThemeIcon,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
+import { IconList } from '@tabler/icons'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
@@ -13,10 +16,7 @@ import {
     RangeSelect,
 } from '../../components'
 import type { TransactionType } from '../../graphql/types.generated'
-import {
-    useGetCategoriesQuery,
-    useGetTransactionsQuery,
-} from '../../graphql/types.generated'
+import { useGetTransactionsQuery } from '../../graphql/types.generated'
 
 import { useTransactionsStore } from './hooks'
 import { Transaction } from './Transaction/Transaction'
@@ -29,9 +29,9 @@ export const Transactions = observer(() => {
 
     const [dialogValue, setDialogValue] = useState<TransactionType | null>()
 
-    const { loading: getCategoriesLoading } = useGetCategoriesQuery({
+    const { loading, refetch } = useGetTransactionsQuery({
         onCompleted: (data) => {
-            store.setCategories(data.categories)
+            store.transactions = data.transactions
         },
         onError: () => {
             showNotification({
@@ -40,21 +40,6 @@ export const Transactions = observer(() => {
                 title: 'Error',
             })
         },
-        ssr: false,
-    })
-
-    const { loading: getTransactionsLoading, refetch } = useGetTransactionsQuery({
-        onCompleted: (data) => {
-            store.setTransactions(data.transactions)
-        },
-        onError: () => {
-            showNotification({
-                color: 'red',
-                message: 'Failed to get transactions',
-                title: 'Error',
-            })
-        },
-        ssr: false,
         variables: {
             args: {
                 endDate: store.range.endDate.toISOString(),
@@ -67,13 +52,14 @@ export const Transactions = observer(() => {
         <>
             <Stack
                 spacing={0}
-                style={{
+                sx={{
                     flex: 1,
                     height: '100%',
                     overflow: 'hidden',
+                    position: 'relative',
                 }}
             >
-                <LoadingOverlay visible={getTransactionsLoading || getCategoriesLoading} />
+                <LoadingOverlay visible={loading} />
                 <Header
                     action={(
                         <RangeSelect
@@ -89,16 +75,41 @@ export const Transactions = observer(() => {
                         </Group>
                     )}
                 />
-                <TransactionsStatusSelect />
-                <TransactionsCategorySelect />
+                <Group
+                    sx={(theme) => ({
+                        borderBottom: `1px solid ${theme.colors.gray[2]}`,
+                        padding: theme.spacing.sm,
+                    })}
+                >
+                    <TransactionsStatusSelect />
+                    <TransactionsCategorySelect />
+                </Group>
                 <Stack
                     p="md"
-                    style={{
+                    sx={{
                         flex: 1,
                         overflow: 'auto',
                     }}
                 >
-                    {store.transactions.map((transaction) => {
+                    {store.transactions.length === 0 ? (
+                        <Center sx={{ height: '100%', width: '100%' }}>
+                            <Stack
+                                align="center"
+                                spacing="xs"
+                            >
+                                <ThemeIcon
+                                    color="red"
+                                    size={40}
+                                    variant="light"
+                                >
+                                    <IconList size={25} />
+                                </ThemeIcon>
+                                <Text color="dimmed">
+                                    No transactions. Select a different range.
+                                </Text>
+                            </Stack>
+                        </Center>
+                    ) : store.transactions.map((transaction) => {
                         return (
                             <Transaction
                                 key={transaction.id}

@@ -15,18 +15,18 @@ export class UpdateKeywordInput {
 
 @InputType()
 export class UpdateCategoryInput {
-    @Field(() => ID)
-    public id: string
-
-    @Field(() => String)
-    public name: string
-
     @Field(() => String)
     public color: string
 
     @Field(() => String)
     public icon: string
 
+    @Field(() => ID)
+    public id: string
+
     @Field(() => [UpdateKeywordInput])
     public keywords: UpdateKeywordInput[]
+
+    @Field(() => String)
+    public name: string
 }
