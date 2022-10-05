@@ -1,4 +1,5 @@
 export * from './extractFormFieldError'
+export * from './formatCurrency'
 export * from './string'
 export * from './createDateRange'
 export * from './apollo'

@@ -1,4 +1,4 @@
-query BreakdownPageData($transactionsArgs: TransactionsArgs) {
+query GetHomePageData($transactionsArgs: TransactionsArgs) {
     categories {
         ...CategoryPayload
     }

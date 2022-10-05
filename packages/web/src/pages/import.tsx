@@ -39,7 +39,7 @@ const ImportPage: NextPage<ImportPageData> = (props) => {
     )
 }
 
-ImportPage.getInitialProps = async (context: PageContext) => {
+ImportPage.getInitialProps = async (context: PageContext): Promise<ImportPageData> => {
     const categoriesResponse = await context.apolloClient.query<
         GetCategoriesQuery,
         GetCategoriesQueryVariables

@@ -35,3 +35,6 @@ packages/api/schema.graphql
 
 # API Build
 dist
+
+# IDEA
+.idea

@@ -90,6 +90,14 @@ export const Sidebar: React.FunctionComponent = () => {
                 grow={true}
                 mt="md"
             >
+                <Link href="/home">
+                    <SidebarButton
+                        color="green"
+                        icon={<IconChartBar size={ICON_SIZE} />}
+                        label="Home"
+                        selected={router.pathname.startsWith('/home')}
+                    />
+                </Link>
                 <Link href="/import">
                     <SidebarButton
                         color="blue"
@@ -112,14 +120,6 @@ export const Sidebar: React.FunctionComponent = () => {
                         icon={<IconList size={ICON_SIZE} />}
                         label="Transactions"
                         selected={router.pathname.startsWith('/transactions')}
-                    />
-                </Link>
-                <Link href="/breakdown">
-                    <SidebarButton
-                        color="green"
-                        icon={<IconChartBar size={ICON_SIZE} />}
-                        label="Home"
-                        selected={router.pathname.startsWith('/home')}
                     />
                 </Link>
             </Navbar.Section>

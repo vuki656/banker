@@ -31,7 +31,7 @@ const TransactionsPage: NextPage<TransactionsPageData> = (props) => {
     )
 }
 
-TransactionsPage.getInitialProps = async (context: PageContext) => {
+TransactionsPage.getInitialProps = async (context: PageContext): Promise<TransactionsPageData> => {
     const categoriesResponse = await context.apolloClient.query<
         GetCategoriesQuery,
         GetCategoriesQueryVariables
