@@ -1,11 +1,14 @@
 import {
     IconBolt,
     IconBuildingBank,
+    IconBusinessplan,
     IconCar,
     IconCash,
     IconCoffee,
     IconCoin,
+    IconDevicesPc,
     IconHome,
+    IconMovie,
     IconPizza,
     IconPlane,
     IconPlayerStop,
@@ -32,6 +35,9 @@ export const ICON_LIST = [
     <IconBuildingBank key="IconBuildingBank" />,
     <IconCash key="IconCash" />,
     <IconPlayerStop key="IconPlayerStop" />,
+    <IconMovie key="IconMovie" />,
+    <IconBusinessplan key="IconBusinessplan" />,
+    <IconDevicesPc key="IconDevicesPc" />,
 ]
 
 export const Icons: React.FunctionComponent<IconsProps> = (props) => {
