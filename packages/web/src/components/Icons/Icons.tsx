@@ -8,6 +8,7 @@ import {
     IconHome,
     IconPizza,
     IconPlane,
+    IconPlayerStop,
     IconQuestionMark,
     IconRotateClockwise,
     IconShirt,
@@ -30,6 +31,7 @@ export const ICON_LIST = [
     <IconShirt key="IconShirt" />,
     <IconBuildingBank key="IconBuildingBank" />,
     <IconCash key="IconCash" />,
+    <IconPlayerStop key="IconPlayerStop" />,
 ]
 
 export const Icons: React.FunctionComponent<IconsProps> = (props) => {
