@@ -57,7 +57,7 @@ export const ImportSortButtons = observer(() => {
             variables: {
                 input: {
                     amount: store.currentTransaction.amount,
-                    categoryId: store.currentTransaction?.category?.id,
+                    categoryId: store.currentTransaction.category?.id,
                     currency: store.currentTransaction.currency,
                     date: store.currentTransaction.date.toISOString(),
                     description: store.currentTransaction.description,
