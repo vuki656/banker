@@ -20,7 +20,7 @@
         "uuid": "^9.0.0"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "^2.13.4",
+        "@graphql-codegen/cli": "^2.13.5",
         "@graphql-codegen/gql-tag-operations-preset": "^1.6.0",
         "@rimac-technology/eslint-config": "^29.0.1",
         "@types/node": "18.8.2",
