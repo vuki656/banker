@@ -44,6 +44,7 @@ ImportPage.getInitialProps = async (context: PageContext): Promise<ImportPageDat
         GetCategoriesQuery,
         GetCategoriesQueryVariables
     >({
+        fetchPolicy: 'network-only',
         query: GetCategoriesDocument,
     })
 
@@ -51,6 +52,7 @@ ImportPage.getInitialProps = async (context: PageContext): Promise<ImportPageDat
         GetTransactionsQuery,
         GetTransactionsQueryVariables
     >({
+        fetchPolicy: 'network-only',
         query: GetTransactionsDocument,
     })
 

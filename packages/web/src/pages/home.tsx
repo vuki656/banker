@@ -52,6 +52,7 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
         GetTransactionsQuery,
         GetTransactionsQueryVariables
     >({
+        fetchPolicy: 'network-only',
         query: GetTransactionsDocument,
         variables: {
             args: {
@@ -71,6 +72,7 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
         GetTransactionsQuery,
         GetTransactionsQueryVariables
     >({
+        fetchPolicy: 'network-only',
         query: GetTransactionsDocument,
         variables: {
             args: {
