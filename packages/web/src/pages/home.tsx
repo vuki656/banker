@@ -58,7 +58,6 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
             args: {
                 endDate: dayjs()
                     .subtract(1, 'month')
-                    .endOf('month')
                     .toString(),
                 startDate: dayjs()
                     .subtract(1, 'month')
