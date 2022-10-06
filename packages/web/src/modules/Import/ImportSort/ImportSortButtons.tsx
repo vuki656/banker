@@ -33,15 +33,31 @@ export const ImportSortButtons = observer(() => {
     })
 
     const onTransactionSave = (status: TransactionStatusEnum) => {
-        if (!store.currentTransaction?.category) {
-            throw new Error('No transaction to save')
+        if (!store.currentTransaction?.category && status === TransactionStatusEnum.Done) {
+            showNotification({
+                color: 'red',
+                message: 'No category selected for transaction',
+                title: 'Error',
+            })
+
+            return
+        }
+
+        if (!store.currentTransaction) {
+            showNotification({
+                color: 'red',
+                message: 'No transaction to save',
+                title: 'Error',
+            })
+
+            return
         }
 
         void createTransactionMutation({
             variables: {
                 input: {
                     amount: store.currentTransaction.amount,
-                    categoryId: store.currentTransaction.category.id,
+                    categoryId: store.currentTransaction.category?.id,
                     currency: store.currentTransaction.currency,
                     date: store.currentTransaction.date.toISOString(),
                     description: store.currentTransaction.description,

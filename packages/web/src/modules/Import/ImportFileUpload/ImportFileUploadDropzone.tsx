@@ -47,7 +47,10 @@ export const ImportFileUploadDropzone: React.FunctionComponent<ImportFileUploadD
                 textAlign: 'center',
             }}
         >
-            <Stack spacing="md">
+            <Stack
+                align="center"
+                spacing="md"
+            >
                 <ThemeIcon
                     color="green"
                     size={50}

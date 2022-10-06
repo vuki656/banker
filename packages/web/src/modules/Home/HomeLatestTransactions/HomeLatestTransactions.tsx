@@ -38,7 +38,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
             </Text>
             <Stack
                 align="center"
-                justify="center"
+                justify={store.currentMonthTransactions.length === 0 ? 'center' : 'flex-start'}
                 mt={30}
                 spacing={30}
             >

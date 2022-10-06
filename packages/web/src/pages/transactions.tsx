@@ -36,6 +36,7 @@ TransactionsPage.getInitialProps = async (context: PageContext): Promise<Transac
         GetCategoriesQuery,
         GetCategoriesQueryVariables
     >({
+        fetchPolicy: 'network-only',
         query: GetCategoriesDocument,
     })
 
