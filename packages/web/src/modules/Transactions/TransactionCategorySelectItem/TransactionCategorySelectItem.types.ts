@@ -1,4 +1,4 @@
-import type { CategoryType } from '../../../graphql/types.generated'
+import type { CategoryType } from '../../../shared/types'
 
 export type TransactionCategorySelectItemProps =
     Pick<CategoryType, 'color' | 'icon'> &

@@ -16,7 +16,7 @@ import {
     useFormContext,
 } from 'react-hook-form'
 
-import type { KeywordType } from '../../../graphql/types.generated'
+import type { KeywordType } from '../../../shared/types'
 import { toFirstCapitalCase } from '../../../utils'
 
 import type { CategoryFormType } from './CategoryForm.types'

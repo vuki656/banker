@@ -3,19 +3,23 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import type {
-    CategoryType,
     GetCategoriesQuery,
     GetCategoriesQueryVariables,
     GetTransactionsQuery,
     GetTransactionsQueryVariables,
-    TransactionType,
 } from '../graphql/types.generated'
 import {
     GetCategoriesDocument,
     GetTransactionsDocument,
 } from '../graphql/types.generated'
-import { Home } from '../modules'
-import { HomeStore } from '../modules/Home/stores'
+import {
+    Home,
+    HomeStore,
+} from '../modules'
+import type {
+    CategoryType,
+    TransactionType,
+} from '../shared/types'
 import type { PageContext } from '../utils'
 
 export const HomeStoreContext = createContext<HomeStore | null>(null)

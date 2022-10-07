@@ -8,7 +8,7 @@ import {
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
-import type { CategoryType } from '../../../graphql/types.generated'
+import type { CategoryType } from '../../../shared/types'
 import { useImportStore } from '../hooks'
 
 export const ImportSortSelect = observer(() => {

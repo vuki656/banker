@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import type {
-    CategoryType,
     GetCategoriesQuery,
     GetCategoriesQueryVariables,
 } from '../graphql/types.generated'
@@ -11,6 +10,7 @@ import {
     Transactions,
     TransactionsStore,
 } from '../modules'
+import type { CategoryType } from '../shared/types'
 import type { PageContext } from '../utils'
 
 export const TransactionsStoreContext = createContext<TransactionsStore | null>(null)
