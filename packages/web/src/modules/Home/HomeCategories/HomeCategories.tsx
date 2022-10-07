@@ -7,8 +7,8 @@ import {
 import type { FunctionComponent } from 'react'
 
 import { Icons } from '../../../components'
-import { useCurrentUser } from '../../../utils'
-import { formatCurrency } from '../../../utils/formatCurrency'
+import { useCurrentUser } from '../../../shared/auth'
+import { formatCurrency } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
 
 export const HomeCategories: FunctionComponent = () => {

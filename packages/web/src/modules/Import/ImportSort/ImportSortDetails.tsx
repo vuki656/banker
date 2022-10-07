@@ -7,7 +7,7 @@ import {
 import { observer } from 'mobx-react-lite'
 
 import { Icons } from '../../../components'
-import { formatDate } from '../../../utils'
+import { formatDate } from '../../../shared/utils'
 import { useImportStore } from '../hooks'
 
 import { ImportSortEditAmountDialog } from './ImportSortEditAmountDialog'

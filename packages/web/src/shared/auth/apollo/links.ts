@@ -10,10 +10,10 @@ import isomorphicFetch from 'isomorphic-fetch'
 import type { InitApolloOptions } from 'next-with-apollo'
 import getConfig from 'next/config'
 
-import introspectionGeneratedTS from '../../graphql/introspection.generated.json'
-import introspectionGeneratedJSON from '../../graphql/types.generated'
+import introspectionGeneratedTS from '../../../graphql/introspection.generated.json'
+import introspectionGeneratedJSON from '../../../graphql/types.generated'
+import { COOKIE_TOKEN_NAME } from '../../constants'
 import { createUnAuthRedirect } from '../authentication/utils/auth'
-import { COOKIE_TOKEN_NAME } from '../constants'
 import { CookieManager } from '../cookies'
 
 export const initApolloClient = (options: InitApolloOptions<any>) => {

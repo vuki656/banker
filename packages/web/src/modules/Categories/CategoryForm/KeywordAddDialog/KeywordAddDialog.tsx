@@ -9,8 +9,8 @@ import {
     useFormContext,
 } from 'react-hook-form'
 
+import { useBoolean } from '../../../../shared/hooks'
 import type { KeywordType } from '../../../../shared/types'
-import { useBoolean } from '../../../../utils'
 import type { CategoryFormType } from '../CategoryForm.types'
 import { KeywordForm } from '../KeywordForm'
 

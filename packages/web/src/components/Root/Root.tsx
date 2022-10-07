@@ -4,7 +4,7 @@ import { Sidebar } from '../Sidebar'
 
 import type { RootProps } from './Root.types'
 
-export const Root: React.FunctionComponent<RootProps> = (props) => {
+export const Root = (props: RootProps) => {
     const { children } = props
 
     return (

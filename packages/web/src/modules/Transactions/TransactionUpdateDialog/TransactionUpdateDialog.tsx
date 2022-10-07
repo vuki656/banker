@@ -21,11 +21,11 @@ import {
     TransactionStatusEnum,
     useUpdateTransactionMutation,
 } from '../../../graphql/types.generated'
+import { CURRENCIES } from '../../../shared/constants'
 import {
-    CURRENCIES,
     extractFormFieldErrors,
     toFirstCapitalCase,
-} from '../../../utils'
+} from '../../../shared/utils'
 import { useTransactionsStore } from '../hooks'
 import { TransactionCategorySelectItem } from '../TransactionCategorySelectItem'
 

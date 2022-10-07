@@ -6,7 +6,7 @@ import { showNotification } from '@mantine/notifications'
 import { IconPlus } from '@tabler/icons'
 
 import { useCreateCategoryMutation } from '../../../graphql/types.generated'
-import { useBoolean } from '../../../utils'
+import { useBoolean } from '../../../shared/hooks'
 import { CategoryForm } from '../CategoryForm'
 
 import type {

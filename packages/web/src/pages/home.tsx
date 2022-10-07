@@ -16,11 +16,11 @@ import {
     Home,
     HomeStore,
 } from '../modules'
+import type { PageContext } from '../shared/auth'
 import type {
     CategoryType,
     TransactionType,
 } from '../shared/types'
-import type { PageContext } from '../utils'
 
 export const HomeStoreContext = createContext<HomeStore | null>(null)
 

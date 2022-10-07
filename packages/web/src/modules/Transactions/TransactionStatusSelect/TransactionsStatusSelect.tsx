@@ -11,7 +11,7 @@ import {
 import { observer } from 'mobx-react-lite'
 
 import { TransactionStatusEnum } from '../../../graphql/types.generated'
-import { toFirstCapitalCase } from '../../../utils'
+import { toFirstCapitalCase } from '../../../shared/utils'
 import { useTransactionsStore } from '../hooks'
 
 export const TransactionsStatusSelect = observer(() => {

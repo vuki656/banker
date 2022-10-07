@@ -1,7 +1,7 @@
 import type { NumberInputProps } from '@mantine/core'
 import { NumberInput } from '@mantine/core'
 
-export const MoneyInput: React.FunctionComponent<NumberInputProps> = (props) => {
+export const MoneyInput = (props: NumberInputProps) => {
     const { ...other } = props
 
     return (

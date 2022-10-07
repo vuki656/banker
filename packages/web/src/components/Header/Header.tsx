@@ -2,18 +2,15 @@ import {
     Group,
     Header as MantineHeader,
     Text,
-    useMantineTheme,
 } from '@mantine/core'
 
 import type { HeaderProps } from './Header.types'
 
-export const Header: React.FunctionComponent<HeaderProps> = (props) => {
+export const Header = (props: HeaderProps) => {
     const {
         action,
         title,
     } = props
-
-    const theme = useMantineTheme()
 
     return (
         <MantineHeader
@@ -22,7 +19,9 @@ export const Header: React.FunctionComponent<HeaderProps> = (props) => {
         >
             <Group
                 position="apart"
-                px={theme.spacing.md}
+                sx={(theme) => ({
+                    padding: theme.spacing.md,
+                })}
             >
                 <Text weight="bold">
                     {title}

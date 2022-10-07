@@ -8,7 +8,7 @@ import {
 } from '@mantine/core'
 import { cloneElement } from 'react'
 
-import { useBoolean } from '../../utils'
+import { useBoolean } from '../../shared/hooks'
 import {
     ICON_LIST,
     Icons,
@@ -16,7 +16,7 @@ import {
 
 import type { IconPickerProps } from './IconPicker.types'
 
-export const IconPicker: React.FunctionComponent<IconPickerProps> = (props) => {
+export const IconPicker = (props: IconPickerProps) => {
     const {
         color,
         error,
