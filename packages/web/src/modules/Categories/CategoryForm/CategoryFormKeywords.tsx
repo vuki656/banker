@@ -17,7 +17,7 @@ import {
 } from 'react-hook-form'
 
 import type { KeywordType } from '../../../shared/types'
-import { toFirstCapitalCase } from '../../../utils'
+import { toFirstCapitalCase } from '../../../shared/utils'
 
 import type { CategoryFormType } from './CategoryForm.types'
 import { KeywordAddDialog } from './KeywordAddDialog'

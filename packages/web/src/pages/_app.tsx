@@ -13,13 +13,12 @@ import {
     Root,
     ThemeRoot,
 } from '../components'
-import type { AppProps } from '../utils'
+import type { AppProps } from '../shared/auth'
 import {
-    COOKIE_COLORSCHEME_NAME,
-
     initApolloClient,
     withCurrentUser,
-} from '../utils'
+} from '../shared/auth'
+import { COOKIE_COLORSCHEME_NAME } from '../shared/constants'
 
 const App = (props: AppProps) => {
     const {

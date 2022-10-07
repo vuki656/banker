@@ -10,8 +10,8 @@ import {
     Transactions,
     TransactionsStore,
 } from '../modules'
+import type { PageContext } from '../shared/auth'
 import type { CategoryType } from '../shared/types'
-import type { PageContext } from '../utils'
 
 export const TransactionsStoreContext = createContext<TransactionsStore | null>(null)
 

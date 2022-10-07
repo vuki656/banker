@@ -9,10 +9,8 @@ import { ResponsiveLine } from '@nivo/line'
 import { IconTimeline } from '@tabler/icons'
 import type { FunctionComponent } from 'react'
 
-import {
-    formatCurrency,
-    useCurrentUser,
-} from '../../../utils'
+import { useCurrentUser } from '../../../shared/auth'
+import { formatCurrency } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
 
 export const HomeHistoryChart: FunctionComponent = () => {

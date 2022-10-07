@@ -6,11 +6,11 @@ import {
 } from '@mantine/core'
 
 import { Icons } from '../../../components'
+import { useCurrentUser } from '../../../shared/auth'
 import {
+    formatCurrency,
     formatDate,
-    useCurrentUser,
-} from '../../../utils'
-import { formatCurrency } from '../../../utils/formatCurrency'
+} from '../../../shared/utils'
 
 import type { TransactionProps } from './Transaction.types'
 

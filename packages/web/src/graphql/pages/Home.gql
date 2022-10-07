@@ -1,26 +1,33 @@
-query GetHomePageData($transactionsArgs: TransactionsArgs) {
-    categories {
-        id
-        name
-        color
-        icon
+fragment HomePageCategoryPayload on CategoryType {
+    id
+    name
+    color
+    icon
+}
+
+fragment HomePageTransactionPayload on TransactionType {
+    id
+    reference
+    description
+    date
+    status
+    currency
+    amount {
+        ...AmountPayload
     }
-    transactions(args: $transactionsArgs) {
-        id
-        reference
-        description
-        date
-        status
-        currency
-        amount {
-            original
-            converted
-        }
-        category {
-            id
-            name
-            color
-            icon
-        }
+    category {
+        ...HomePageCategoryPayload
+    }
+}
+
+query GetHomePageData($currentMonthArgs: TransactionsArgs!, $previousMonthArgs: TransactionsArgs!) {
+    categories {
+        ...CategoryPayload
+    }
+    currentMonthTransactions: transactions(args: $currentMonthArgs) {
+        ...HomePageTransactionPayload
+    }
+    previousMonthTransactions: transactions(args: $previousMonthArgs) {
+        ...HomePageTransactionPayload
     }
 }

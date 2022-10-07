@@ -20,11 +20,9 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { useLoginUserMutation } from '../../graphql/types.generated'
-import {
-    COOKIE_TOKEN_NAME,
-    extractFormFieldErrors,
-    useCurrentUser,
-} from '../../utils'
+import { useCurrentUser } from '../../shared/auth'
+import { COOKIE_TOKEN_NAME } from '../../shared/constants'
+import { extractFormFieldErrors } from '../../shared/utils'
 
 import type { LoginFormValueType } from './Login.types'
 import { loginFormValidationSchema } from './Login.validation'

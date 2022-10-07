@@ -13,7 +13,7 @@ import {
 } from 'react'
 
 import { MoneyInput } from '../../../components'
-import { useBoolean } from '../../../utils'
+import { useBoolean } from '../../../shared/hooks'
 import { useImportStore } from '../hooks'
 
 export const ImportSortEditAmountDialog = observer(() => {

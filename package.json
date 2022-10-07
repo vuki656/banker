@@ -23,7 +23,7 @@
         "@graphql-codegen/cli": "^2.13.5",
         "@graphql-codegen/gql-tag-operations-preset": "^1.6.0",
         "@rimac-technology/eslint-config": "^29.0.1",
-        "@types/node": "18.8.2",
+        "@types/node": "18.8.3",
         "@types/uuid": "^8.3.4",
         "cspell": "^6.12.0",
         "eslint": "8.24.0",

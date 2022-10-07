@@ -14,7 +14,7 @@ import {
 } from 'react-hook-form'
 
 import { IconPicker } from '../../../components'
-import { extractFormFieldErrors } from '../../../utils'
+import { extractFormFieldErrors } from '../../../shared/utils'
 
 import type {
     CategoryFormProps,

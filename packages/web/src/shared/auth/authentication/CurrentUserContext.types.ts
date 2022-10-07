@@ -1,6 +1,6 @@
 import type { ApolloPageContext } from 'next-with-apollo'
 
-import type { UserType } from '../../shared/types'
+import type { UserType } from '../../types'
 
 export interface CurrentUserPageContext extends ApolloPageContext {
     user: UserType | null
