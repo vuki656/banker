@@ -3,11 +3,11 @@ import {
     observable,
 } from 'mobx'
 
+import type { ImportPageData } from '../../../pages/import'
 import type {
     CategoryType,
     TransactionType,
-} from '../../../graphql/types.generated'
-import type { ImportPageData } from '../../../pages/import'
+} from '../../../shared/types'
 
 import type {
     MatchedCategoryType,
