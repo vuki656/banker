@@ -20,7 +20,7 @@ export const Header = (props: HeaderProps) => {
             <Group
                 position="apart"
                 sx={(theme) => ({
-                    padding: theme.spacing.md,
+                    padding: `0px ${theme.spacing.md}px`,
                 })}
             >
                 <Text weight="bold">
