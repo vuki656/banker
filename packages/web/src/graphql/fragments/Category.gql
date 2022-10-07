@@ -4,7 +4,6 @@ fragment CategoryPayload on CategoryType {
     color
     icon
     keywords {
-        id
-        name
+        ...KeywordPayload
     }
 }

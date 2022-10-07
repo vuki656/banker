@@ -1,0 +1,4 @@
+fragment AmountPayload on AmountType {
+    original
+    converted
+}

@@ -10,9 +10,9 @@ import React from 'react'
 import type {
     GetCurrentUserQuery,
     GetCurrentUserQueryVariables,
-    UserType,
-} from '../../graphql/types.generated'
-import { GetCurrentUserDocument } from '../../graphql/types.generated'
+} from '../../../graphql/types.generated'
+import { GetCurrentUserDocument } from '../../../graphql/types.generated'
+import type { UserType } from '../../types'
 import type { ExtraAppProps } from '../apollo'
 
 import { CurrentUserContext } from './CurrentUserContext'

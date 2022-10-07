@@ -15,7 +15,7 @@ import {
     utils,
 } from 'xlsx'
 
-import { useBoolean } from '../../../utils'
+import { useBoolean } from '../../../shared/hooks'
 import { useImportStore } from '../hooks'
 import type { NewTransactionType } from '../stores/ImportStore.types'
 import { validateTransaction } from '../stores/validateTransaction'

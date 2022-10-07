@@ -3,20 +3,19 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import type {
-    CategoryType,
-    GetCategoriesQuery,
-    GetCategoriesQueryVariables,
-    GetTransactionsQuery,
-    GetTransactionsQueryVariables,
-    TransactionType,
+    GetHomePageDataQuery,
+    GetHomePageDataQueryVariables,
 } from '../graphql/types.generated'
+import { GetHomePageDataDocument } from '../graphql/types.generated'
 import {
-    GetCategoriesDocument,
-    GetTransactionsDocument,
-} from '../graphql/types.generated'
-import { Home } from '../modules'
-import { HomeStore } from '../modules/Home/stores'
-import type { PageContext } from '../utils'
+    Home,
+    HomeStore,
+} from '../modules'
+import type { PageContext } from '../shared/auth'
+import type {
+    CategoryType,
+    TransactionType,
+} from '../shared/types'
 
 export const HomeStoreContext = createContext<HomeStore | null>(null)
 
@@ -41,43 +40,24 @@ const HomePage: NextPage<HomePageData> = (props) => {
 }
 
 HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> => {
-    const categoriesResponse = await context.apolloClient.query<
-        GetCategoriesQuery,
-        GetCategoriesQueryVariables
+    const response = await context.apolloClient.query<
+        GetHomePageDataQuery,
+        GetHomePageDataQueryVariables
     >({
-        query: GetCategoriesDocument,
-    })
-
-    const pastMonthTransactionsResponse = await context.apolloClient.query<
-        GetTransactionsQuery,
-        GetTransactionsQueryVariables
-    >({
-        fetchPolicy: 'network-only',
-        query: GetTransactionsDocument,
+        query: GetHomePageDataDocument,
         variables: {
-            args: {
-                endDate: dayjs()
-                    .subtract(1, 'month')
-                    .endOf('month')
-                    .toString(),
+            currentMonthArgs: {
+                endDate: dayjs().toString(),
                 startDate: dayjs()
-                    .subtract(1, 'month')
                     .startOf('month')
                     .toString(),
             },
-        },
-    })
-
-    const currentMonthTransactionsResponse = await context.apolloClient.query<
-        GetTransactionsQuery,
-        GetTransactionsQueryVariables
-    >({
-        fetchPolicy: 'network-only',
-        query: GetTransactionsDocument,
-        variables: {
-            args: {
-                endDate: dayjs().toString(),
+            previousMonthArgs: {
+                endDate: dayjs()
+                    .subtract(1, 'month')
+                    .toString(),
                 startDate: dayjs()
+                    .subtract(1, 'month')
                     .startOf('month')
                     .toString(),
             },
@@ -85,9 +65,9 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
     })
 
     return {
-        categories: categoriesResponse.data.categories,
-        currentMonthTransactions: currentMonthTransactionsResponse.data.transactions,
-        previousMonthTransactions: pastMonthTransactionsResponse.data.transactions,
+        categories: response.data.categories,
+        currentMonthTransactions: response.data.currentMonthTransactions,
+        previousMonthTransactions: response.data.previousMonthTransactions,
     }
 }
 

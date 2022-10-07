@@ -6,7 +6,7 @@ import {
 import { setCookies } from 'cookies-next'
 import { useState } from 'react'
 
-import { COOKIE_COLORSCHEME_NAME } from '../../utils'
+import { COOKIE_COLORSCHEME_NAME } from '../../shared/constants'
 
 import type { ThemeRootProps } from './ThemeRoot.types'
 

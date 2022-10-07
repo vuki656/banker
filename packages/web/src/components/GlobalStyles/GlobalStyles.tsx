@@ -1,6 +1,6 @@
 import { Global } from '@mantine/core'
 
-export const GlobalStyles: React.FunctionComponent = () => {
+export const GlobalStyles = () => {
     return (
         <Global
             styles={(theme) => ({

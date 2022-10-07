@@ -2,12 +2,12 @@ import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
 import type { RangeSelectValue } from '../../../components'
+import { TransactionStatusEnum } from '../../../graphql/types.generated'
+import type { TransactionsPageData } from '../../../pages/transactions'
 import type {
     CategoryType,
     TransactionType,
-} from '../../../graphql/types.generated'
-import { TransactionStatusEnum } from '../../../graphql/types.generated'
-import type { TransactionsPageData } from '../../../pages/transactions'
+} from '../../../shared/types'
 
 export class TransactionsStore {
     public categories: CategoryType[] = []

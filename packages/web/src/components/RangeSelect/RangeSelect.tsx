@@ -7,16 +7,13 @@ import {
 import { RangeCalendar } from '@mantine/dates'
 import { IconCalendar } from '@tabler/icons'
 import dayjs from 'dayjs'
-import type { FunctionComponent } from 'react'
 
-import {
-    formatDate,
-    useBoolean,
-} from '../../utils'
+import { useBoolean } from '../../shared/hooks'
+import { formatDate } from '../../shared/utils'
 
 import type { RangeSelectProps } from './RangeSelect.types'
 
-export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
+export const RangeSelect = (props: RangeSelectProps) => {
     const {
         onSubmit,
         value,
@@ -188,4 +185,4 @@ export const RangeSelect: FunctionComponent<RangeSelectProps> = ((props) => {
             </Modal>
         </>
     )
-})
+}

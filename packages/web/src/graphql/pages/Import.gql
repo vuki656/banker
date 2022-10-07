@@ -1,0 +1,29 @@
+query GetImportPageData($transactionsArgs: TransactionsArgs) {
+    categories {
+        id
+        name
+        color
+        icon
+        keywords {
+            ...KeywordPayload
+        }
+    }
+    transactions(args: $transactionsArgs) {
+        id
+        reference
+        description
+        date
+        status
+        currency
+        amount {
+            original
+            converted
+        }
+        category {
+            id
+            name
+            color
+            icon
+        }
+    }
+}

@@ -21,12 +21,10 @@ import {
 } from 'react-hook-form'
 
 import { useUpdateUserMutation } from '../../../graphql/types.generated'
-import {
-    CURRENCIES,
-    extractFormFieldErrors,
-    useBoolean,
-    useCurrentUser,
-} from '../../../utils'
+import { useCurrentUser } from '../../../shared/auth'
+import { CURRENCIES } from '../../../shared/constants'
+import { useBoolean } from '../../../shared/hooks'
+import { extractFormFieldErrors } from '../../../shared/utils'
 
 import type { UserFormType } from './SidebarUpdateUserDialog.validation'
 import { userValidation } from './SidebarUpdateUserDialog.validation'

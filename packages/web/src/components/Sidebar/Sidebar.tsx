@@ -19,10 +19,8 @@ import { deleteCookie } from 'cookies-next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import {
-    COOKIE_TOKEN_NAME,
-    useCurrentUser,
-} from '../../utils'
+import { useCurrentUser } from '../../shared/auth'
+import { COOKIE_TOKEN_NAME } from '../../shared/constants'
 
 import { SidebarButton } from './SidebarButton'
 import { SidebarUpdateUserDialog } from './SidebarUpdateUserDialog'

@@ -14,10 +14,8 @@ import {
 import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 
-import {
-    formatCurrency,
-    useCurrentUser,
-} from '../../../utils'
+import { useCurrentUser } from '../../../shared/auth'
+import { formatCurrency } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
 
 export const HomeTotal: FunctionComponent = () => {
