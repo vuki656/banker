@@ -9,7 +9,7 @@ import {
     useFormContext,
 } from 'react-hook-form'
 
-import type { KeywordType } from '../../../../graphql/types.generated'
+import type { KeywordType } from '../../../../shared/types'
 import { useBoolean } from '../../../../utils'
 import type { CategoryFormType } from '../CategoryForm.types'
 import { KeywordForm } from '../KeywordForm'

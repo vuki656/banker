@@ -14,9 +14,9 @@ import {
     GetCategoriesDocument,
     GetTransactionsDocument,
 } from '../graphql/types.generated'
-import { 
+import {
     Home,
-    HomeStore
+    HomeStore,
 } from '../modules'
 import type { PageContext } from '../utils'
 

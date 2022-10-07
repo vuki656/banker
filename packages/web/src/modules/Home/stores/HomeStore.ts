@@ -1,11 +1,12 @@
 import dayjs from 'dayjs'
 
-import type {
-    CategoryType,
-} from '../../../graphql/types.generated'
+import type { CategoryType } from '../../../graphql/types.generated'
 import type { HomePageData } from '../../../pages/home'
 
-import type { CategoryTotal, TransactionType } from './HomeStore.types'
+import type {
+    CategoryTotal,
+    TransactionType,
+} from './HomeStore.types'
 
 export class HomeStore {
     public categories: CategoryType[] = []

@@ -6,8 +6,8 @@ import { showNotification } from '@mantine/notifications'
 import { useState } from 'react'
 
 import { Header } from '../../components'
-import type { CategoryType } from '../../graphql/types.generated'
 import { useGetCategoriesQuery } from '../../graphql/types.generated'
+import type { CategoryType } from '../../shared/types'
 
 import { Category } from './Category'
 import { CategoryCreateDialog } from './CategoryCreateDialog'

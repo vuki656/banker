@@ -1,4 +1,4 @@
-import { TransactionStatusEnum } from "../../../graphql/types.generated"
+import type { TransactionStatusEnum } from '../../../graphql/types.generated'
 
 export type CategoryTotal = {
     color?: string
@@ -8,14 +8,14 @@ export type CategoryTotal = {
 
 export type TransactionType = {
     amount: {
-        original: number
         converted: number
+        original: number
     }
     category: {
-        id: string
-        name: string
         color: string
         icon: string
+        id: string
+        name: string
     } | null
     currency: string
     date: string
