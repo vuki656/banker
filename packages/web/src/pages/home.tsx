@@ -14,8 +14,10 @@ import {
     GetCategoriesDocument,
     GetTransactionsDocument,
 } from '../graphql/types.generated'
-import { Home } from '../modules'
-import { HomeStore } from '../modules/Home/stores'
+import { 
+    Home,
+    HomeStore
+} from '../modules'
 import type { PageContext } from '../utils'
 
 export const HomeStoreContext = createContext<HomeStore | null>(null)
