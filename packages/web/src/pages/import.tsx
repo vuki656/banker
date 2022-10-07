@@ -2,15 +2,10 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import type {
-    GetCategoriesQuery,
-    GetCategoriesQueryVariables,
-    GetTransactionsQuery,
-    GetTransactionsQueryVariables,
+    GetImportPageDataQuery,
+    GetImportPageDataQueryVariables,
 } from '../graphql/types.generated'
-import {
-    GetCategoriesDocument,
-    GetTransactionsDocument,
-} from '../graphql/types.generated'
+import { GetImportPageDataDocument } from '../graphql/types.generated'
 import {
     Import,
     ImportStore,
@@ -42,25 +37,17 @@ const ImportPage: NextPage<ImportPageData> = (props) => {
 }
 
 ImportPage.getInitialProps = async (context: PageContext): Promise<ImportPageData> => {
-    const categoriesResponse = await context.apolloClient.query<
-        GetCategoriesQuery,
-        GetCategoriesQueryVariables
+    const response = await context.apolloClient.query<
+        GetImportPageDataQuery,
+        GetImportPageDataQueryVariables
     >({
         fetchPolicy: 'network-only',
-        query: GetCategoriesDocument,
-    })
-
-    const transactionsResponse = await context.apolloClient.query<
-        GetTransactionsQuery,
-        GetTransactionsQueryVariables
-    >({
-        fetchPolicy: 'network-only',
-        query: GetTransactionsDocument,
+        query: GetImportPageDataDocument,
     })
 
     return {
-        categories: categoriesResponse.data.categories,
-        transactions: transactionsResponse.data.transactions,
+        categories: response.data.categories,
+        transactions: response.data.transactions,
     }
 }
 

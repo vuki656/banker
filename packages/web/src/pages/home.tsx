@@ -3,15 +3,10 @@ import type { NextPage } from 'next'
 import { createContext } from 'react'
 
 import type {
-    GetCategoriesQuery,
-    GetCategoriesQueryVariables,
-    GetTransactionsQuery,
-    GetTransactionsQueryVariables,
+    GetHomePageDataQuery,
+    GetHomePageDataQueryVariables,
 } from '../graphql/types.generated'
-import {
-    GetCategoriesDocument,
-    GetTransactionsDocument,
-} from '../graphql/types.generated'
+import { GetHomePageDataDocument } from '../graphql/types.generated'
 import {
     Home,
     HomeStore,
@@ -45,21 +40,19 @@ const HomePage: NextPage<HomePageData> = (props) => {
 }
 
 HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> => {
-    const categoriesResponse = await context.apolloClient.query<
-        GetCategoriesQuery,
-        GetCategoriesQueryVariables
+    const response = await context.apolloClient.query<
+        GetHomePageDataQuery,
+        GetHomePageDataQueryVariables
     >({
-        query: GetCategoriesDocument,
-    })
-
-    const pastMonthTransactionsResponse = await context.apolloClient.query<
-        GetTransactionsQuery,
-        GetTransactionsQueryVariables
-    >({
-        fetchPolicy: 'network-only',
-        query: GetTransactionsDocument,
+        query: GetHomePageDataDocument,
         variables: {
-            args: {
+            currentMonthArgs: {
+                endDate: dayjs().toString(),
+                startDate: dayjs()
+                    .startOf('month')
+                    .toString(),
+            },
+            previousMonthArgs: {
                 endDate: dayjs()
                     .subtract(1, 'month')
                     .toString(),
@@ -71,26 +64,10 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
         },
     })
 
-    const currentMonthTransactionsResponse = await context.apolloClient.query<
-        GetTransactionsQuery,
-        GetTransactionsQueryVariables
-    >({
-        fetchPolicy: 'network-only',
-        query: GetTransactionsDocument,
-        variables: {
-            args: {
-                endDate: dayjs().toString(),
-                startDate: dayjs()
-                    .startOf('month')
-                    .toString(),
-            },
-        },
-    })
-
     return {
-        categories: categoriesResponse.data.categories,
-        currentMonthTransactions: currentMonthTransactionsResponse.data.transactions,
-        previousMonthTransactions: pastMonthTransactionsResponse.data.transactions,
+        categories: response.data.categories,
+        currentMonthTransactions: response.data.currentMonthTransactions,
+        previousMonthTransactions: response.data.previousMonthTransactions,
     }
 }
 

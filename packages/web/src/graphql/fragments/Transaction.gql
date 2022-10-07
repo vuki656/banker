@@ -6,8 +6,7 @@ fragment TransactionPayload on TransactionType {
     status
     currency
     amount {
-        original
-        converted
+        ...AmountPayload
     }
     category {
         ...CategoryPayload
