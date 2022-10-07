@@ -15,8 +15,8 @@ import {
     Header,
     RangeSelect,
 } from '../../components'
-import type { TransactionType } from '../../graphql/types.generated'
 import { useGetTransactionsQuery } from '../../graphql/types.generated'
+import type { TransactionType } from '../../shared/types'
 
 import { useTransactionsStore } from './hooks'
 import { Transaction } from './Transaction/Transaction'

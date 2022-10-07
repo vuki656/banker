@@ -1,8 +1,10 @@
 import dayjs from 'dayjs'
 
-import type { CategoryType } from '../../../graphql/types.generated'
 import type { HomePageData } from '../../../pages/home'
-import type { TransactionType } from '../../../shared/types'
+import type {
+    CategoryType,
+    TransactionType,
+} from '../../../shared/types'
 
 import type { CategoryTotal } from './HomeStore.types'
 
