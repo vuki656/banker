@@ -82,22 +82,23 @@ export class HomeStore {
     }
 
     public get expensesPerDay() {
-        const expensesPerDay = new Map<string, number>()
-        let max = 0
-
-        this.currentMonthTransactions.forEach((transaction) => {
-            const dayAmount = expensesPerDay.get(transaction.date)
+        const expensesPerDay = this.currentMonthTransactions.reduce((accumulator, transaction) => {
+            const dayAmount = accumulator.get(transaction.date) ?? 0
 
             if (dayAmount) {
-                expensesPerDay.set(transaction.date, dayAmount + transaction.amount.converted)
+                return accumulator.set(transaction.date, dayAmount + transaction.amount.converted)
             } else {
-                expensesPerDay.set(transaction.date, transaction.amount.converted)
+                return accumulator.set(transaction.date, transaction.amount.converted)
+            }
+        }, new Map<string, number>())
+
+        const max = Array.from(expensesPerDay).reduce((accumulator, [, amount]) => {
+            if (amount > accumulator) {
+                return amount
             }
 
-            if ((dayAmount ?? 0) > max) {
-                max = dayAmount ?? 0
-            }
-        })
+            return accumulator
+        }, 0)
 
         const yAxisScale = [...new Array(Math.round(max / 1000))].map((_, index) => {
             return (index + 1) * 1000
