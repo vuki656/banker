@@ -5,12 +5,11 @@ import {
     UnstyledButton,
 } from '@mantine/core'
 
-import { Icons } from '../../../components'
-import { useCurrentUser } from '../../../shared/auth'
 import {
-    formatCurrency,
-    formatDate,
-} from '../../../shared/utils'
+    HighlightedCurrency,
+    Icons,
+} from '../../../components'
+import { formatDate } from '../../../shared/utils'
 
 import type { TransactionProps } from './Transaction.types'
 
@@ -19,8 +18,6 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
         onClick,
         value,
     } = props
-
-    const { user } = useCurrentUser()
 
     return (
         <UnstyledButton
@@ -39,7 +36,7 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
                 boxShadow: theme.shadows.xs,
                 columnGap: theme.spacing.md,
                 display: 'grid',
-                gridTemplateColumns: '0.2fr 0.1fr 0.2fr 0.5fr',
+                gridTemplateColumns: '250px 50px 0.2fr 1fr',
                 padding: theme.spacing.xs,
             })}
         >
@@ -65,29 +62,10 @@ export const Transaction: React.FunctionComponent<TransactionProps> = (props) =>
             <Text size="sm">
                 {formatDate(value.date)}
             </Text>
-            <Text
-                size="sm"
-                sx={(theme) => {
-                    let color = theme.colors.green
-
-                    if (value.amount.converted >= 100) {
-                        color = theme.colors.orange
-                    }
-
-                    if (value.amount.converted >= 500) {
-                        color = theme.colors.red
-                    }
-
-                    return {
-                        color,
-                    }
-                }}
-                weight="bold"
-            >
-                {formatCurrency(value.amount.converted, { currency: user?.currency })}
-            </Text>
+            <HighlightedCurrency amount={value.amount.converted} />
             <Text
                 color="dimmed"
+                ml={30}
                 size="sm"
                 sx={{
                     overflow: 'hidden',

@@ -2,6 +2,7 @@ import { singleton } from 'tsyringe'
 
 import { orm } from '../../shared/orm'
 
+import type { CategoryArgs } from './args'
 import { CATEGORY_DEFAULT_SELECT } from './Category.select'
 import type {
     CreateCategoryInput,
@@ -69,6 +70,18 @@ export class CategoryService {
             select: CATEGORY_DEFAULT_SELECT(),
             where: {
                 isDeleted: false,
+                user: {
+                    id: userId,
+                },
+            },
+        })
+    }
+
+    public async findOne(args: CategoryArgs, userId?: string): Promise<CategoryType | null> {
+        return orm.category.findFirst({
+            select: CATEGORY_DEFAULT_SELECT(),
+            where: {
+                id: args.id,
                 user: {
                     id: userId,
                 },

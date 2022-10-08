@@ -12,7 +12,7 @@ import {
 } from 'react-hook-form'
 import { v4 as UUID } from 'uuid'
 
-import { extractFormFieldErrors } from '../../../../shared/utils'
+import { extractFormFieldErrors } from '../../../shared/utils'
 
 import type {
     KeywordFormProps,

@@ -1,4 +1,7 @@
 export * from './Sidebar'
+export * from './Panel'
+export * from './CategoryForm'
+export * from './HighlightedCurrency'
 export * from './MoneyInput'
 export * from './Root'
 export * from './GlobalStyles'

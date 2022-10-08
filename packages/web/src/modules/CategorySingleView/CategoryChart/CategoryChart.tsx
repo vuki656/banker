@@ -1,59 +1,40 @@
 import {
-    Center,
+    Box,
     Paper,
-    Stack,
     Text,
-    ThemeIcon,
 } from '@mantine/core'
 import { ResponsiveLine } from '@nivo/line'
-import { IconTimeline } from '@tabler/icons'
-import type { FunctionComponent } from 'react'
+import { IconChartLine } from '@tabler/icons'
+import dayjs from 'dayjs'
+import { observer } from 'mobx-react-lite'
 
+import { Panel } from '../../../components'
 import { useCurrentUser } from '../../../shared/auth'
 import { formatCurrency } from '../../../shared/utils'
-import { useHomeStore } from '../hooks'
+import { useCategoryStore } from '../hooks'
 
-export const HomeHistoryChart: FunctionComponent = () => {
+export const CategoryChart = observer(() => {
     const { user } = useCurrentUser()
 
-    const store = useHomeStore()
+    const store = useCategoryStore()
 
     return (
-        <Paper
-            p="md"
-            shadow="xs"
-            sx={{ gridArea: 'chart' }}
+        <Panel
+            isEmpty={store.transactions.length === 0}
+            placeholder={{
+                color: 'red',
+                icon: <IconChartLine />,
+                text: 'No transactions',
+            }}
+            title="History"
         >
-            <Text weight="bold">
-                Spent Per Day
-            </Text>
-            {store.expensesPerDay[0]?.data.length === 0 ? (
-                <Center sx={{ height: '100%' }}>
-                    <Stack
-                        align="center"
-                        spacing="xs"
-                    >
-                        <ThemeIcon
-                            color="red"
-                            size={35}
-                            variant="light"
-                        >
-                            <IconTimeline size={25} />
-                        </ThemeIcon>
-                        <Text
-                            color="dimmed"
-                            size={15}
-                        >
-                            Add some transactions to see a visualization.
-                        </Text>
-                    </Stack>
-                </Center>
-            ) : (
+            <Box sx={{ overflow: 'hidden' }}>
                 <ResponsiveLine
                     axisBottom={{
-                        legend: 'Days',
-                        legendOffset: 36,
-                        legendPosition: 'middle',
+                        format: (value) => {
+                            return dayjs(value).format('DD/MM')
+                        },
+                        tickRotation: -60,
                     }}
                     axisLeft={{
                         format: (value) => {
@@ -62,18 +43,18 @@ export const HomeHistoryChart: FunctionComponent = () => {
                                 precision: 0,
                             })
                         },
-                        legend: 'Amount',
-                        legendOffset: -85,
                         legendPosition: 'middle',
+                        tickPadding: 20,
+                        tickSize: 0,
                     }}
                     curve="cardinal"
                     data={store.expensesPerDay}
                     enableArea={true}
                     margin={{
-                        bottom: 70,
-                        left: 100,
+                        bottom: 60,
+                        left: 90,
                         right: 30,
-                        top: 30,
+                        top: 10,
                     }}
                     tooltip={(input) => {
                         return (
@@ -95,7 +76,7 @@ export const HomeHistoryChart: FunctionComponent = () => {
                     }}
                     useMesh={true}
                 />
-            )}
-        </Paper>
+            </Box>
+        </Panel>
     )
-}
+})

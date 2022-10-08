@@ -5,5 +5,6 @@ import type {
 
 export type HeaderProps = {
     action?: ReactElement
+    center?: ReactNode
     title: ReactNode
 }

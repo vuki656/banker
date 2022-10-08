@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-import { Categories } from '../modules'
+import { Categories } from '../../modules'
 
 const CategoriesPage: NextPage = () => {
     return (

@@ -68,11 +68,9 @@ export const Transactions = observer(() => {
                         />
                     )}
                     title={(
-                        <Group>
-                            <Text>
-                                Transactions
-                            </Text>
-                        </Group>
+                        <Text>
+                            Transactions
+                        </Text>
                     )}
                 />
                 <Group

@@ -9,6 +9,7 @@ import type { HeaderProps } from './Header.types'
 export const Header = (props: HeaderProps) => {
     const {
         action,
+        center,
         title,
     } = props
 
@@ -26,6 +27,7 @@ export const Header = (props: HeaderProps) => {
                 <Text weight="bold">
                     {title}
                 </Text>
+                {center ?? null}
                 {action}
             </Group>
         </MantineHeader>

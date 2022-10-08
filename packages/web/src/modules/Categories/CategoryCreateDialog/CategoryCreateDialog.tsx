@@ -5,9 +5,9 @@ import {
 import { showNotification } from '@mantine/notifications'
 import { IconPlus } from '@tabler/icons'
 
+import { CategoryForm } from '../../../components'
 import { useCreateCategoryMutation } from '../../../graphql/types.generated'
 import { useBoolean } from '../../../shared/hooks'
-import { CategoryForm } from '../CategoryForm'
 
 import type {
     CategoryCreateDialogProps,
