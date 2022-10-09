@@ -66,7 +66,6 @@ export const HomeHistoryChart: FunctionComponent = () => {
                         legendOffset: -85,
                         legendPosition: 'middle',
                     }}
-                    curve="cardinal"
                     data={store.expensesPerDay}
                     enableArea={true}
                     margin={{

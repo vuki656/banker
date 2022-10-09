@@ -47,7 +47,6 @@ export const CategoryChart = observer(() => {
                         tickPadding: 20,
                         tickSize: 0,
                     }}
-                    curve="cardinal"
                     data={store.expensesPerDay}
                     enableArea={true}
                     margin={{
