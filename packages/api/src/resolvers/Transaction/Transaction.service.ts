@@ -92,6 +92,11 @@ export class TransactionService {
                             lte: endDate,
                         },
                     },
+                    {
+                        category: {
+                            id: args?.categoryId ?? undefined,
+                        },
+                    },
                 ],
                 isDeleted: false,
                 user: {

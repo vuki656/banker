@@ -13,8 +13,8 @@ import {
     useForm,
 } from 'react-hook-form'
 
-import { IconPicker } from '../../../components'
-import { extractFormFieldErrors } from '../../../shared/utils'
+import { extractFormFieldErrors } from '../../shared/utils'
+import { IconPicker } from '../IconPicker'
 
 import type {
     CategoryFormProps,
@@ -46,8 +46,8 @@ export const CategoryForm: React.FunctionComponent<CategoryFormProps> = (props) 
 
     const { field: colorField } = useController({ control: form.control, name: 'color' })
 
-    const onSubmit = async (formValue: CategoryFormType) => {
-        await onSubmitProp(formValue)
+    const onSubmit = (formValue: CategoryFormType) => {
+        onSubmitProp(formValue)
 
         form.reset()
     }

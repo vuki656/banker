@@ -6,6 +6,7 @@
 
 type Query {
     currentUser: UserType
+    category(args: CategoryArgs!): CategoryType
     categories: [CategoryType!]!
     transactions(args: TransactionsArgs): [TransactionType!]!
 }
@@ -33,6 +34,10 @@ type CategoryType implements BaseType {
 type KeywordType implements BaseType {
     id: ID!
     name: String!
+}
+
+input CategoryArgs {
+    id: ID!
 }
 
 type TransactionType implements BaseType {
@@ -65,6 +70,7 @@ enum TransactionStatusEnum {
 input TransactionsArgs {
     endDate: DateTime
     startDate: DateTime
+    categoryId: String
 }
 
 type Mutation {

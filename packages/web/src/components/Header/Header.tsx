@@ -9,6 +9,7 @@ import type { HeaderProps } from './Header.types'
 export const Header = (props: HeaderProps) => {
     const {
         action,
+        center,
         title,
     } = props
 
@@ -20,12 +21,13 @@ export const Header = (props: HeaderProps) => {
             <Group
                 position="apart"
                 sx={(theme) => ({
-                    padding: theme.spacing.md,
+                    padding: `0px ${theme.spacing.md}px`,
                 })}
             >
                 <Text weight="bold">
                     {title}
                 </Text>
+                {center ?? null}
                 {action}
             </Group>
         </MantineHeader>

@@ -65,7 +65,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
                     return (
                         <Group
                             key={transaction.id}
-                            spacing={30}
+                            spacing={20}
                             sx={{
                                 display: 'grid',
                                 gridTemplateColumns: 'auto 100px 50px 1fr',
@@ -80,6 +80,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
                                 <Icons name={transaction.category?.icon} />
                             </ThemeIcon>
                             <Text
+                                align="right"
                                 size={14}
                                 weight={500}
                             >

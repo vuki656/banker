@@ -3,18 +3,16 @@ import {
     Stack,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { Header } from '../../components'
 import { useGetCategoriesQuery } from '../../graphql/types.generated'
-import type { CategoryType } from '../../shared/types'
 
 import { Category } from './Category'
 import { CategoryCreateDialog } from './CategoryCreateDialog'
-import { CategoryUpdateDialog } from './CategoryUpdateDialog'
 
 export const Categories: React.FunctionComponent = () => {
-    const [dialogValue, setDialogValue] = useState<CategoryType | null>()
+    const router = useRouter()
 
     const { data, loading, refetch } = useGetCategoriesQuery({
         onError: () => {
@@ -26,56 +24,35 @@ export const Categories: React.FunctionComponent = () => {
         },
     })
 
-    const onUpdate = () => {
-        void refetch()
-
-        setDialogValue(null)
-    }
-
-    const onCancel = () => {
-        setDialogValue(null)
-    }
-
     return (
-        <>
+        <Stack
+            spacing={0}
+            sx={{
+                flex: 1,
+                position: 'relative',
+            }}
+        >
+            <LoadingOverlay visible={loading} />
+            <Header
+                action={<CategoryCreateDialog onSubmit={refetch} />}
+                title="Categories"
+            />
             <Stack
-                spacing={0}
-                sx={{
-                    flex: 1,
-                    position: 'relative',
-                }}
-
+                p="md"
+                sx={{ overflow: 'auto' }}
             >
-                <LoadingOverlay visible={loading} />
-                <Header
-                    action={<CategoryCreateDialog onSubmit={refetch} />}
-                    title="Categories"
-                />
-                <Stack
-                    p="md"
-                    sx={{ overflow: 'auto' }}
-                >
-                    {data?.categories.map((category) => {
-                        return (
-                            <Category
-                                key={category.id}
-                                onClick={() => {
-                                    setDialogValue(category)
-                                }}
-                                value={category}
-                            />
-                        )
-                    })}
-                </Stack>
+                {data?.categories.map((category) => {
+                    return (
+                        <Category
+                            key={category.id}
+                            onClick={() => {
+                                void router.push(`/categories/${category.id}`)
+                            }}
+                            value={category}
+                        />
+                    )
+                })}
             </Stack>
-            {dialogValue ? (
-                <CategoryUpdateDialog
-                    isOpen={Boolean(dialogValue)}
-                    onCancel={onCancel}
-                    onSubmit={onUpdate}
-                    value={dialogValue}
-                />
-            ) : null}
-        </>
+        </Stack>
     )
 }

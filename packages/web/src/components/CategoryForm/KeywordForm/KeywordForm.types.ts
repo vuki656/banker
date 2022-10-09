@@ -1,6 +1,6 @@
 import type { z } from 'zod'
 
-import type { KeywordType } from '../../../../shared/types'
+import type { KeywordType } from '../../../shared/types'
 
 import type { keywordValidation } from './KeywordForm.validation'
 
