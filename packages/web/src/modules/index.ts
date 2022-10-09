@@ -1,5 +1,6 @@
 export * from './Import'
 export * from './Login'
 export * from './Categories'
+export * from './CategorySingleView'
 export * from './Transactions'
 export * from './Home'

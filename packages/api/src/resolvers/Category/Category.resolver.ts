@@ -10,6 +10,7 @@ import {
 
 import type { ContextType } from '../../shared/typescript-types'
 
+import { CategoryArgs } from './args'
 import { CategoryService } from './Category.service'
 import {
     CreateCategoryInput,
@@ -33,6 +34,15 @@ export class CategoryResolver {
         @Ctx() context: ContextType,
     ): Promise<CategoryType[]> {
         return this.service.findAll(context.user?.id)
+    }
+
+    @Authorized()
+    @Query(() => CategoryType, { nullable: true })
+    public async category(
+        @Arg('args', () => CategoryArgs) args: CategoryArgs,
+        @Ctx() context: ContextType,
+    ): Promise<CategoryType | null> {
+        return this.service.findOne(args, context.user?.id)
     }
 
     @Authorized()

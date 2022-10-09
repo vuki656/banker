@@ -92,30 +92,19 @@ export class HomeStore {
             }
         }, new Map<string, number>())
 
-        const max = Array.from(expensesPerDay).reduce((accumulator, [, amount]) => {
-            if (amount > accumulator) {
-                return amount
-            }
+        const data = Array
+            .from(expensesPerDay)
+            .reverse()
+            .map(([day, amount]) => {
+                return {
+                    x: dayjs(day).format('DD'),
+                    y: amount,
+                }
+            })
 
-            return accumulator
-        }, 0)
-
-        const yAxisScale = [...new Array(Math.round(max / 1000))].map((_, index) => {
-            return (index + 1) * 1000
-        })
-
-        return {
-            list: [{
-                data: Array.from(expensesPerDay).reverse()
-                    .map(([day, amount]) => {
-                        return {
-                            x: dayjs(day).format('DD'),
-                            y: amount,
-                        }
-                    }),
-                id: 'data',
-            }],
-            yAxisScale: yAxisScale.unshift(0),
-        }
+        return [{
+            data,
+            id: 'data',
+        }]
     }
 }

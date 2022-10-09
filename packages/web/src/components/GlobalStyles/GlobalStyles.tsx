@@ -20,7 +20,7 @@ export const GlobalStyles = () => {
                 '*::-webkit-scrollbar-track': {
                     background: theme.colorScheme === 'dark'
                         ? theme.colors.dark[6]
-                        : theme.colors.gray[0],
+                        : theme.white,
                 },
                 a: {
                     textDecoration: 'none',
