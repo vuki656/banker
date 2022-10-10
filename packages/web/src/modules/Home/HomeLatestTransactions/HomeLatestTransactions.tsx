@@ -70,7 +70,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
                             spacing={20}
                             sx={{
                                 display: 'grid',
-                                gridTemplateColumns: 'auto 100px 50px 1fr',
+                                gridTemplateColumns: 'auto 100px auto 1fr',
                                 overflow: 'hidden',
                             }}
                         >
