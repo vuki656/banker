@@ -56,7 +56,7 @@ export const CategorySingleView = observer(() => {
                 action={(
                     <RangeSelect
                         onSubmit={store.setRange}
-                        value={store.range}
+                        range={store.range}
                     />
                 )}
                 center={(

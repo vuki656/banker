@@ -16,7 +16,7 @@ import type { RangeSelectProps } from './RangeSelect.types'
 export const RangeSelect = (props: RangeSelectProps) => {
     const {
         onSubmit,
-        value,
+        range,
     } = props
 
     const [isOpen, isOpenActions] = useBoolean()
@@ -122,7 +122,7 @@ export const RangeSelect = (props: RangeSelectProps) => {
                 onClick={isOpenActions.setTrue}
                 rightIcon={<IconCalendar size={16} />}
             >
-                {`${formatDate(value.startDate)} - ${formatDate(value.endDate)}`}
+                {`${formatDate(range.startDate)} - ${formatDate(range.endDate)}`}
             </Button>
             <Modal
                 onClose={isOpenActions.setFalse}
@@ -179,7 +179,7 @@ export const RangeSelect = (props: RangeSelectProps) => {
                         amountOfMonths={2}
                         maxDate={dayjs().toDate()}
                         onChange={onDateChange}
-                        value={[value.startDate, value.endDate]}
+                        value={[range.startDate, range.endDate]}
                     />
                 </Group>
             </Modal>

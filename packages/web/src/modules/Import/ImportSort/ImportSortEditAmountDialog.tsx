@@ -20,26 +20,26 @@ export const ImportSortEditAmountDialog = observer(() => {
     const store = useImportStore()
 
     const [isOpen, isOpenActions] = useBoolean()
-    const [value, setValue] = useState<number | undefined>()
+    const [amount, setAmount] = useState<number | undefined>()
 
     useEffect(() => {
-        setValue(store.currentTransaction?.amount)
+        setAmount(store.currentTransaction?.amount)
     }, [isOpen])
 
     const onCancel = () => {
-        setValue(undefined)
+        setAmount(undefined)
 
         isOpenActions.setFalse()
     }
 
     const onSubmit = () => {
-        if (!value) {
+        if (!amount) {
             return
         }
 
-        store.setCurrentTransactionAmount(value)
+        store.setCurrentTransactionAmount(amount)
 
-        setValue(undefined)
+        setAmount(undefined)
 
         isOpenActions.setFalse()
     }
@@ -61,9 +61,9 @@ export const ImportSortEditAmountDialog = observer(() => {
                 <Stack>
                     <MoneyInput
                         label="Amount"
-                        onChange={setValue}
+                        onChange={setAmount}
                         placeholder="Enter an amount"
-                        value={value}
+                        value={amount}
                     />
                     <SimpleGrid cols={2}>
                         <Button
@@ -73,7 +73,7 @@ export const ImportSortEditAmountDialog = observer(() => {
                             Cancel
                         </Button>
                         <Button
-                            disabled={!value}
+                            disabled={!amount}
                             onClick={onSubmit}
                         >
                             Save

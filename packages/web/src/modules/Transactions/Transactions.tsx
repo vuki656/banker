@@ -64,7 +64,7 @@ export const Transactions = observer(() => {
                     action={(
                         <RangeSelect
                             onSubmit={store.setRange}
-                            value={store.range}
+                            range={store.range}
                         />
                     )}
                     title={(
@@ -114,7 +114,7 @@ export const Transactions = observer(() => {
                                 onClick={() => {
                                     setDialogValue(transaction)
                                 }}
-                                value={transaction}
+                                transaction={transaction}
                             />
                         )
                     })}

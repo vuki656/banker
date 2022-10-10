@@ -1,14 +1,10 @@
 import {
-    Center,
     Group,
     Stack,
     Text,
     ThemeIcon,
 } from '@mantine/core'
-import {
-    IconCircleDashed,
-    IconList,
-} from '@tabler/icons'
+import { IconList } from '@tabler/icons'
 import type { FunctionComponent } from 'react'
 
 import {
