@@ -13,20 +13,21 @@ export const Home: FunctionComponent = () => {
     return (
         <Box
             component={Stack}
-            p="xl"
-            sx={{
+            sx={(theme) => ({
                 display: 'grid',
+                gap: theme.spacing.xl,
                 gridTemplateAreas: `
                     "total total"
                     "recent chart"
                     "recent categories"
                 `,
-                gridTemplateColumns: '1fr 1.7fr',
+                gridTemplateColumns: '1fr 1.3fr',
                 gridTemplateRows: '130px 300px 1fr',
                 height: '100%',
                 overflow: 'hidden',
+                padding: theme.spacing.xl,
                 width: '100%',
-            }}
+            })}
         >
             <HomeTotal />
             <HomeLatestTransactions />
