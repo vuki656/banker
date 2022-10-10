@@ -38,32 +38,8 @@ export const HomeLatestTransactions: FunctionComponent = () => {
             sx={{ gridArea: 'recent' }}
             title="Latest Transactions"
         >
-            <Stack
-                justify={store.currentMonthTransactions.length === 0 ? 'center' : 'flex-start'}
-                spacing={30}
-            >
-                {store.currentMonthTransactions.length === 0 ? (
-                    <Center>
-                        <Stack
-                            align="center"
-                            spacing="xs"
-                        >
-                            <ThemeIcon
-                                color="green"
-                                size={35}
-                                variant="light"
-                            >
-                                <IconCircleDashed size={25} />
-                            </ThemeIcon>
-                            <Text
-                                color="dimmed"
-                                size={15}
-                            >
-                                Nothing here yet. Add some transactions.
-                            </Text>
-                        </Stack>
-                    </Center>
-                ) : store.currentMonthTransactions.map((transaction) => {
+            <Stack spacing={30}>
+                {store.currentMonthTransactions.map((transaction) => {
                     return (
                         <Group
                             key={transaction.id}
