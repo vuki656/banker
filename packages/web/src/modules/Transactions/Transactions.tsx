@@ -31,7 +31,7 @@ export const Transactions = observer(() => {
 
     const { loading, refetch } = useGetTransactionsQuery({
         onCompleted: (data) => {
-            store.transactions = data.transactions
+            store.setTransactions(data.transactions)
         },
         onError: () => {
             showNotification({

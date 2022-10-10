@@ -78,19 +78,19 @@ export class ImportStore {
         return `${currentTransactionNumber} / ${this._totalNewTransactions}`
     }
 
-    public set currentTransactionAmount(value: number) {
+    public setCurrentTransactionAmount(value: number) {
         if (this._newTransactions[0]) {
             this._newTransactions[0].amount = value
         }
     }
 
-    public set currentTransactionCategory(value: CategoryType) {
+    public setCurrentTransactionCategory(value: CategoryType) {
         if (this._newTransactions[0]) {
             this._newTransactions[0].category = value
         }
     }
 
-    public set newTransactions(newTransactions: NewTransactionType[]) {
+    public setNewTransactions(newTransactions: NewTransactionType[]) {
         this._totalNewTransactions = newTransactions.length
 
         this._newTransactions.push(...newTransactions.map((transaction) => {

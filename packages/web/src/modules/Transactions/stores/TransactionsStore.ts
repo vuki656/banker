@@ -56,11 +56,11 @@ export class TransactionsStore {
         })
     }
 
-    public set categoryFilter(categoryId: string | null) {
+    public setCategoryFilter(categoryId: string | null) {
         this._selectedCategoryId = categoryId
     }
 
-    public set transactions(transactions: TransactionType[]) {
+    public setTransactions(transactions: TransactionType[]) {
         this._transactions = transactions
     }
 

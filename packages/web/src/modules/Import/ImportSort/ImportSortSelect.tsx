@@ -17,7 +17,7 @@ export const ImportSortSelect = observer(() => {
 
     const onCategoryClick = (category: CategoryType) => {
         return () => {
-            store.currentTransactionCategory = category
+            store.setCurrentTransactionCategory(category)
         }
     }
 

@@ -37,7 +37,7 @@ export const ImportSortEditAmountDialog = observer(() => {
             return
         }
 
-        store.currentTransactionAmount = value
+        store.setCurrentTransactionAmount(value)
 
         setValue(undefined)
 
