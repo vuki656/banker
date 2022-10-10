@@ -9,7 +9,6 @@ import {
     IconCircleDashed,
     IconList,
 } from '@tabler/icons'
-import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 
 import {
@@ -17,7 +16,10 @@ import {
     Panel,
 } from '../../../components'
 import { useCurrentUser } from '../../../shared/auth'
-import { formatCurrency } from '../../../shared/utils'
+import {
+    formatCurrency,
+    formatDate,
+} from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
 
 export const HomeLatestTransactions: FunctionComponent = () => {
@@ -90,7 +92,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
                                 size={14}
                                 weight={500}
                             >
-                                {dayjs(transaction.date).format('DD.MM.YY')}
+                                {formatDate(transaction.date)}
                             </Text>
                             <Text
                                 color="gray.6"

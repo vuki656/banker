@@ -60,15 +60,15 @@ export class TransactionsStore {
         this._selectedCategoryId = categoryId
     }
 
-    public setTransactions(transactions: TransactionType[]) {
-        this._transactions = transactions
-    }
-
     public setRange(newRange: RangeSelectValue) {
         this.range = newRange
     }
 
     public setStatusFilter(newStatus: TransactionStatusEnum) {
         this.statusFilter = newStatus
+    }
+
+    public setTransactions(transactions: TransactionType[]) {
+        this._transactions = transactions
     }
 }

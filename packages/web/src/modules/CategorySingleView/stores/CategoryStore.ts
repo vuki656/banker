@@ -50,7 +50,7 @@ export class CategoryStore {
             .reverse()
             .map(([day, amount]) => {
                 return {
-                    x: dayjs(day).format('YYYY-MM-DD'),
+                    x: dayjs(day).format('DD/MM'),
                     y: amount,
                 }
             })
