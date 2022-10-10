@@ -15,7 +15,10 @@ import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 
 import { useCurrentUser } from '../../../shared/auth'
-import { formatCurrency } from '../../../shared/utils'
+import {
+    formatCurrency,
+    formatDate,
+} from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
 
 export const HomeTotal: FunctionComponent = () => {
@@ -47,8 +50,9 @@ export const HomeTotal: FunctionComponent = () => {
                             size="xs"
                             weight={500}
                         >
-                            {`${dayjs().startOf('month')
-                                .format('DD.MM.YYYY')} - ${dayjs().format('DD.MM.YYYY')}`}
+                            {/* // eslint-disable-next-line newline-per-chained-call */}
+                            {`${formatDate(dayjs().startOf('month')
+                                .toDate())} - ${formatDate(new Date())}`}
                         </Text>
                         <Text
                             size="xl"

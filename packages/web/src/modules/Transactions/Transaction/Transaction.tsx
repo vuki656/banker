@@ -16,7 +16,7 @@ import type { TransactionProps } from './Transaction.types'
 export const Transaction: React.FunctionComponent<TransactionProps> = (props) => {
     const {
         onClick,
-        value,
+        transaction: value,
     } = props
 
     return (

@@ -5,7 +5,6 @@ import {
 } from '@mantine/core'
 import { ResponsiveLine } from '@nivo/line'
 import { IconChartLine } from '@tabler/icons'
-import dayjs from 'dayjs'
 import { observer } from 'mobx-react-lite'
 
 import { Panel } from '../../../components'
@@ -31,9 +30,6 @@ export const CategoryChart = observer(() => {
             <Box sx={{ overflow: 'hidden' }}>
                 <ResponsiveLine
                     axisBottom={{
-                        format: (value) => {
-                            return dayjs(value).format('DD/MM')
-                        },
                         tickRotation: -60,
                     }}
                     axisLeft={{
@@ -47,7 +43,6 @@ export const CategoryChart = observer(() => {
                         tickPadding: 20,
                         tickSize: 0,
                     }}
-                    curve="cardinal"
                     data={store.expensesPerDay}
                     enableArea={true}
                     margin={{

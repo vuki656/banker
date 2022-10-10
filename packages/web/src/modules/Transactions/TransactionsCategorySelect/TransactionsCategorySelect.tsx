@@ -15,7 +15,7 @@ export const TransactionsCategorySelect = observer(() => {
             maxDropdownHeight={400}
             nothingFound="No Category Found"
             onChange={(selectedCategory) => {
-                store.categoryFilter = selectedCategory
+                store.setCategoryFilter(selectedCategory)
             }}
             placeholder="Pick a Category"
             searchable={true}

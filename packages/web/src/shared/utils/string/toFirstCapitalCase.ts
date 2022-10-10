@@ -1,5 +1,5 @@
-export const toFirstCapitalCase = (value: string) => {
-    const normalized = value.toLowerCase()
+export const toFirstCapitalCase = (word: string) => {
+    const normalized = word.toLowerCase()
 
     return normalized.charAt(0).toUpperCase() + normalized.slice(1)
 }

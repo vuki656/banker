@@ -157,7 +157,7 @@ export const ImportFileUpload: React.FunctionComponent = () => {
             return
         }
 
-        store.newTransactions = newTransactions
+        store.setNewTransactions(newTransactions)
 
         isOpenActions.setFalse()
     }

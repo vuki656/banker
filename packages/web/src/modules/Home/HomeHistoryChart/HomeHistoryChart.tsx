@@ -1,14 +1,13 @@
 import {
-    Center,
+    Box,
     Paper,
-    Stack,
     Text,
-    ThemeIcon,
 } from '@mantine/core'
 import { ResponsiveLine } from '@nivo/line'
 import { IconTimeline } from '@tabler/icons'
 import type { FunctionComponent } from 'react'
 
+import { Panel } from '../../../components'
 import { useCurrentUser } from '../../../shared/auth'
 import { formatCurrency } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
@@ -19,36 +18,18 @@ export const HomeHistoryChart: FunctionComponent = () => {
     const store = useHomeStore()
 
     return (
-        <Paper
-            p="md"
-            shadow="xs"
+        <Panel
+            isEmpty={store.expensesPerDay[0]?.data.length === 0}
+            placeholder={{
+                color: 'green',
+                icon: <IconTimeline />,
+                text: 'Add some transactions to see a visualization.',
+            }}
             sx={{ gridArea: 'chart' }}
+            title="History Per Day"
+
         >
-            <Text weight="bold">
-                Spent Per Day
-            </Text>
-            {store.expensesPerDay[0]?.data.length === 0 ? (
-                <Center sx={{ height: '100%' }}>
-                    <Stack
-                        align="center"
-                        spacing="xs"
-                    >
-                        <ThemeIcon
-                            color="red"
-                            size={35}
-                            variant="light"
-                        >
-                            <IconTimeline size={25} />
-                        </ThemeIcon>
-                        <Text
-                            color="dimmed"
-                            size={15}
-                        >
-                            Add some transactions to see a visualization.
-                        </Text>
-                    </Stack>
-                </Center>
-            ) : (
+            <Box sx={{ overflow: 'hidden' }}>
                 <ResponsiveLine
                     axisBottom={{
                         legend: 'Days',
@@ -66,14 +47,13 @@ export const HomeHistoryChart: FunctionComponent = () => {
                         legendOffset: -85,
                         legendPosition: 'middle',
                     }}
-                    curve="cardinal"
                     data={store.expensesPerDay}
                     enableArea={true}
                     margin={{
-                        bottom: 70,
+                        bottom: 45,
                         left: 100,
                         right: 30,
-                        top: 30,
+                        top: 0,
                     }}
                     tooltip={(input) => {
                         return (
@@ -95,7 +75,7 @@ export const HomeHistoryChart: FunctionComponent = () => {
                     }}
                     useMesh={true}
                 />
-            )}
-        </Paper>
+            </Box>
+        </Panel>
     )
 }

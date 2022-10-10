@@ -56,12 +56,8 @@ export class TransactionsStore {
         })
     }
 
-    public set categoryFilter(categoryId: string | null) {
+    public setCategoryFilter(categoryId: string | null) {
         this._selectedCategoryId = categoryId
-    }
-
-    public set transactions(transactions: TransactionType[]) {
-        this._transactions = transactions
     }
 
     public setRange(newRange: RangeSelectValue) {
@@ -70,5 +66,9 @@ export class TransactionsStore {
 
     public setStatusFilter(newStatus: TransactionStatusEnum) {
         this.statusFilter = newStatus
+    }
+
+    public setTransactions(transactions: TransactionType[]) {
+        this._transactions = transactions
     }
 }

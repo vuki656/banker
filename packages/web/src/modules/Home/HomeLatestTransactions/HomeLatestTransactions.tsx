@@ -1,18 +1,21 @@
 import {
-    Center,
     Group,
-    Paper,
     Stack,
     Text,
     ThemeIcon,
 } from '@mantine/core'
-import { IconCircleDashed } from '@tabler/icons'
-import dayjs from 'dayjs'
+import { IconList } from '@tabler/icons'
 import type { FunctionComponent } from 'react'
 
-import { Icons } from '../../../components'
+import {
+    Icons,
+    Panel,
+} from '../../../components'
 import { useCurrentUser } from '../../../shared/auth'
-import { formatCurrency } from '../../../shared/utils'
+import {
+    formatCurrency,
+    formatDate,
+} from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
 
 export const HomeLatestTransactions: FunctionComponent = () => {
@@ -21,54 +24,25 @@ export const HomeLatestTransactions: FunctionComponent = () => {
     const store = useHomeStore()
 
     return (
-        <Paper
-            p="md"
-            shadow="xs"
-            sx={{
-                display: 'grid',
-                gridArea: 'recent',
-                gridTemplateRows: 'auto 1fr',
-                overflow: 'auto',
+        <Panel
+            isEmpty={store.currentMonthTransactions.length === 0}
+            placeholder={{
+                color: 'orange',
+                icon: <IconList />,
+                text: 'No latest transactions',
             }}
+            sx={{ gridArea: 'recent' }}
+            title="Latest Transactions"
         >
-            <Text weight="bold">
-                Recent Transactions
-            </Text>
-            <Stack
-                align="center"
-                justify={store.currentMonthTransactions.length === 0 ? 'center' : 'flex-start'}
-                mt={30}
-                spacing={30}
-            >
-                {store.currentMonthTransactions.length === 0 ? (
-                    <Center>
-                        <Stack
-                            align="center"
-                            spacing="xs"
-                        >
-                            <ThemeIcon
-                                color="green"
-                                size={35}
-                                variant="light"
-                            >
-                                <IconCircleDashed size={25} />
-                            </ThemeIcon>
-                            <Text
-                                color="dimmed"
-                                size={15}
-                            >
-                                Nothing here yet. Add some transactions.
-                            </Text>
-                        </Stack>
-                    </Center>
-                ) : store.currentMonthTransactions.map((transaction) => {
+            <Stack spacing={30}>
+                {store.currentMonthTransactions.map((transaction) => {
                     return (
                         <Group
                             key={transaction.id}
                             spacing={20}
                             sx={{
                                 display: 'grid',
-                                gridTemplateColumns: 'auto 100px 50px 1fr',
+                                gridTemplateColumns: 'auto 100px auto 1fr',
                                 overflow: 'hidden',
                             }}
                         >
@@ -90,7 +64,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
                                 size={14}
                                 weight={500}
                             >
-                                {dayjs(transaction.date).format('DD.MM.YY')}
+                                {formatDate(transaction.date)}
                             </Text>
                             <Text
                                 color="gray.6"
@@ -108,6 +82,6 @@ export const HomeLatestTransactions: FunctionComponent = () => {
                     )
                 })}
             </Stack>
-        </Paper>
+        </Panel>
     )
 }
