@@ -25,6 +25,7 @@ export const env = cleanEnv(process.env, {
     DB_PORT: num(),
     DB_SCHEMA: str(),
     DB_USERNAME: str(),
+    HIVE_TOKEN: str(),
 }, {
     reporter: ({ errors }) => {
         for (const [environmentVariable, error] of Object.entries(errors)) {

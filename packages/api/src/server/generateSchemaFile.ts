@@ -24,11 +24,18 @@ const schema = generateSchema({
     },
 })
 
-const filePath = __dirname.concat('../../../../web/schema.graphql')
+const webFilePath = __dirname.concat('../../../../web/schema.graphql')
+const apiFilePath = __dirname.concat('../../../schema.graphql')
 
 writeFileSync(
-    path.join(filePath),
+    path.join(apiFilePath),
     generatedSchemaWarning + printSchema(schema),
 )
 
-exec(`prettier --write ${filePath}`)
+writeFileSync(
+    path.join(webFilePath),
+    generatedSchemaWarning + printSchema(schema),
+)
+
+exec(`prettier --write ${webFilePath}`)
+exec(`prettier --write ${apiFilePath}`)
