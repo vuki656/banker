@@ -14,11 +14,14 @@
         "production:migrate": "docker-compose run --no-deps --rm production-migrations",
         "production:start": "pm2 start yarn --interpreter bash --name api -- start",
         "production:kill": "pm2 stop api 2> /dev/null || true && pm2 delete api 2> /dev/null || true",
-        "production:restart": "yarn && yarn orm:generate && yarn build && yarn production:kill && yarn production:start",
+        "production:restart": "yarn && yarn orm:generate && yarn build && yarn schema:build && yarn schema:deploy && yarn production:kill && yarn production:start",
         "orm:generate": "prisma generate",
-        "schema:build": "ts-node './src/server/generateSchemaFile.ts'"
+        "schema:build": "ts-node './src/server/generateSchemaFile.ts'",
+        "schema:deploy": "hive schema:publish './schema.graphql'"
     },
     "dependencies": {
+        "@graphql-hive/cli": "^0.19.0",
+        "@graphql-hive/client": "^0.19.0",
         "@prisma/client": "^4.4.0",
         "apollo-server": "^3.10.3",
         "bcrypt": "^5.1.0",
