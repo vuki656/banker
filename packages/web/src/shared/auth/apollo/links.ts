@@ -76,6 +76,7 @@ export const initApolloClient = (options: InitApolloOptions<any>) => {
             typePolicies: Object.fromEntries(typesPolicies),
         }).restore(options.initialState ?? {}),
         link: from([errorLink, authLink, httpLink]),
+        name: '@banker/web',
         ssrMode: typeof window === 'undefined',
     })
 
