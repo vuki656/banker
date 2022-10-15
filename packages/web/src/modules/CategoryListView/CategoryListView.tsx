@@ -11,7 +11,7 @@ import { useGetCategoriesQuery } from '../../graphql/types.generated'
 import { Category } from './Category'
 import { CategoryCreateDialog } from './CategoryCreateDialog'
 
-export const Categories: React.FunctionComponent = () => {
+export const CategoryListView: React.FunctionComponent = () => {
     const router = useRouter()
 
     const { data, loading, refetch } = useGetCategoriesQuery({
