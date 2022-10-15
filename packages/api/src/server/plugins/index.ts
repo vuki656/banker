@@ -1,2 +1,2 @@
-export * from './ApolloPluginLogger'
 export * from './ApolloPluginHive'
+export * from './ApolloPluginLogger'

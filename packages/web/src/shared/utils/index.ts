@@ -1,5 +1,5 @@
 export * from './createDateRange'
 export * from './date'
-export * from './string'
-export * from './formatCurrency'
 export * from './extractFormFieldError'
+export * from './formatCurrency'
+export * from './string'
