@@ -4,9 +4,10 @@ import {
     Modal,
     Stack,
 } from '@mantine/core'
-import { RangeCalendar } from '@mantine/dates'
+import { DatePicker } from '@mantine/dates'
 import { IconCalendar } from '@tabler/icons'
 import dayjs from 'dayjs'
+import { useState } from 'react'
 
 import { useBoolean } from '../../shared/hooks'
 import { formatDate } from '../../shared/utils'
@@ -17,21 +18,21 @@ export const RangeSelect = (props: RangeSelectProps) => {
     const {
         onSubmit,
         range,
+        value: valueProp
     } = props
 
     const [isOpen, isOpenActions] = useBoolean()
+    const [value, setValue] = useState<[Date | null, Date | null]>(valueProp ?? [null, null])
 
-    const onDateChange = (newDateRange: [Date, Date | null]) => {
-        const startDate = newDateRange[0]
-        const endDate = newDateRange[1]
-
-        if (!endDate) {
+    // TODO: this is stupid, reimplement
+    const onCustomRangeSelect = () => {
+        if (!value[0] || !value[1]) {
             return
         }
 
         onSubmit({
-            endDate,
-            startDate,
+            endDate: value[1],
+            startDate: value[0],
         })
 
         isOpenActions.setFalse()
@@ -175,12 +176,14 @@ export const RangeSelect = (props: RangeSelectProps) => {
                             Last 12 Months
                         </Button>
                     </Stack>
-                    <RangeCalendar
-                        amountOfMonths={2}
+                    <DatePicker
+                        numberOfColumns={2}
+                        type='range'
                         maxDate={dayjs().toDate()}
-                        onChange={onDateChange}
-                        value={[range.startDate, range.endDate]}
+                        onChange={setValue}
+                        value={value}
                     />
+                    <Button onClick={onCustomRangeSelect}>Confirm</Button>
                 </Group>
             </Modal>
         </>

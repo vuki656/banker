@@ -41,8 +41,10 @@ export const ThemeRoot: React.FunctionComponent<ThemeRootProps> = (props) => {
                     components: {
                         Modal: {
                             defaultProps: {
-                                overlayBlur: 3,
-                                overlayOpacity: 0.55,
+                                overlayProps: {
+                                    blur: 3,
+                                    opacity: 0.55,
+                                }
                             },
                         },
                     },

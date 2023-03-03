@@ -10,7 +10,6 @@ import { logger } from '../shared/utils'
 import { context } from './context'
 import { generateSchema } from './generateSchema'
 import {
-    ApolloPluginHive,
     ApolloPluginLogger,
 } from './plugins'
 
@@ -21,7 +20,6 @@ export const server = new ApolloServer({
     introspection: env.isDev,
     plugins: [
         ApolloPluginLogger,
-        ApolloPluginHive,
     ],
     schema: generateSchema(),
 })

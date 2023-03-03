@@ -9,7 +9,7 @@ import {
     Stack,
     Textarea,
 } from '@mantine/core'
-import { DatePicker } from '@mantine/dates'
+import { DatePicker, DatePickerInput } from '@mantine/dates'
 import { showNotification } from '@mantine/notifications'
 import {
     Controller,
@@ -203,7 +203,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                     name="date"
                     render={(controller) => {
                         return (
-                            <DatePicker
+                            <DatePickerInput
                                 clearable={false}
                                 label="Date"
                                 maxDate={new Date()}

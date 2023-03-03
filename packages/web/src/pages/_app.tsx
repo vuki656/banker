@@ -1,7 +1,7 @@
 import { ApolloProvider } from '@apollo/client'
 import { getDataFromTree } from '@apollo/client/react/ssr'
 import { ModalsProvider } from '@mantine/modals'
-import { NotificationsProvider } from '@mantine/notifications'
+import { Notifications } from '@mantine/notifications'
 import { getCookie } from 'cookies-next'
 import withApollo from 'next-with-apollo'
 import NextApp from 'next/app'
@@ -44,8 +44,8 @@ const App = (props: AppProps) => {
             </Head>
             <ThemeRoot colorScheme={colorScheme}>
                 <ModalsProvider>
-                    <NotificationsProvider>
                         <GlobalStyles />
+                        <Notifications />
                         <ApolloProvider client={apollo}>
                             {isAppAppRoute ? (
                                 <Root>
@@ -55,7 +55,6 @@ const App = (props: AppProps) => {
                                 <Component {...pageProps} />
                             )}
                         </ApolloProvider>
-                    </NotificationsProvider>
                 </ModalsProvider>
             </ThemeRoot>
         </>
