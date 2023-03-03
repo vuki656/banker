@@ -5,7 +5,7 @@ const emailValidation = z
         .min(1)
         .max(300)
 
-export const updateUserValidation = z.object({
+export const userValidation = z.object({
     email: emailValidation,
     firstName: z
         .string()
@@ -24,7 +24,10 @@ export const updateUserValidation = z.object({
         .max(3),
 })
 
-export const loginUserValidation = z.object({
+
+export const updateUserMutationValidation = userValidation
+
+export const loginUserMutationValidation = z.object({
     email: emailValidation,
     password: z
         .string()
@@ -32,21 +35,8 @@ export const loginUserValidation = z.object({
         .max(500)
 })
 
-export const deleteUserValidation = z.object({
+export const deleteUserMutationValidation = z.object({
     id: z
         .string()
         .uuid(),
-})
-
-export const userValidation = z.object({
-    id: z
-        .string()
-        .uuid(),
-})
-
-export const usersValidation = z.object({
-    skip: z
-        .number()
-        .int()
-        .nullish(),
 })
