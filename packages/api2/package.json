@@ -8,6 +8,7 @@
         "database:migrate": "docker compose run --no-deps --rm migration",
         "database:setup": "docker compose run --rm migration",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
+        "database:inspector": "prisma studio",
         "dev": "nodemon",
         "generate:dev-types": "graphql-codegen --config='./codegen.ts'",
         "generate:orm": "prisma generate",
@@ -48,5 +49,8 @@
         "webpack": "^5.75.0",
         "webpack-cli": "^5.0.1",
         "webpack-node-externals": "^3.0.0"
+    },
+    "prisma": {
+        "schema": "./src/database/schema.prisma"
     }
 }
