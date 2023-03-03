@@ -1,0 +1,8 @@
+input UpdateUserInput {
+    firstName: String!
+    id: ID!
+    currency: String!
+    lastName: String!
+    email: String!
+    password: String!
+}
