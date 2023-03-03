@@ -1,0 +1,49 @@
+{
+    "name": "@banker/api2",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "build:project": "yarn build:schema && webpack",
+        "build:schema": "ts-node ./src/server/build-schema.ts",
+        "database:migrate": "docker compose run --no-deps --rm migration",
+        "database:setup": "docker compose run --rm migration",
+        "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
+        "dev": "nodemon",
+        "generate:orm": "prisma generate",
+        "generate:template": "plop",
+        "generate:test-types": "graphql-codegen --config='./codegen.tests.ts'",
+        "generate:types": "graphql-codegen --config='./codegen.ts'",
+        "start": "node 'dist/main.js'"
+    },
+    "dependencies": {
+        "@apollo/server": "^4.4.1",
+        "@paralleldrive/cuid2": "^2.2.0",
+        "@prisma/client": "^4.11.0",
+        "bcrypt": "^5.1.0",
+        "dotenv": "^16.0.3",
+        "envalid": "^7.3.1",
+        "graphql": "^16.6.0",
+        "pino": "^8.11.0",
+        "zod": "^3.20.6"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "^7.6.0",
+        "@graphql-tools/load-files": "^6.6.1",
+        "@graphql-tools/merge": "^8.3.18",
+        "@types/bcrypt": "^5.0.0",
+        "@types/jest": "^29.4.0",
+        "@types/node": "^18.14.5",
+        "@types/string-replace-loader": "^2.3.2",
+        "@types/webpack-node-externals": "^3.0.0",
+        "copy-webpack-plugin": "^11.0.0",
+        "nodemon": "^2.0.21",
+        "pino-pretty": "^9.4.0",
+        "prisma": "^4.11.0",
+        "string-replace-loader": "^3.1.0",
+        "ts-loader": "^9.4.2",
+        "ts-node": "^10.9.1",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^5.0.1",
+        "webpack-node-externals": "^3.0.0"
+    }
+}

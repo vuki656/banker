@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "dayjs": "^1.11.7",
-        "graphql": "15.3.0",
+        "graphql": "16.6.0",
         "uuid": "^9.0.0"
     },
     "devDependencies": {

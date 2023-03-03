@@ -1,0 +1,34 @@
+{
+    "databaseChangeLog": [
+        {
+            "logicalFilePath": "1655574120-add-user-currency.migration.json",
+            "objectQuotingStrategy": "QUOTE_ALL_OBJECTS"
+        },
+        {
+            "changeSet": {
+                "id": "1655574120",
+                "author": "off.vukovic@gmail.com",
+                "comment": "Add user currency",
+                "changes": [
+                    {
+                        "addColumn": {
+                            "tableName": "users",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "currency",
+                                        "type": "varchar(3)",
+                                        "defaultValue": "HRK",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
