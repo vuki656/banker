@@ -1,0 +1,30 @@
+import { startStandaloneServer } from '@apollo/server/standalone'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+import {
+    server,
+    context,
+} from './server'
+import env from './shared/env'
+import { logger } from './shared/logger'
+
+void startStandaloneServer(
+    server,
+    {
+        context,
+        listen: {
+            port: env.APP_PORT,
+        },
+    }
+)
+    .then((info) => {
+        logger.info(`🚀 Server started on: ${info.url}`)
+    })
+    .catch((error: unknown) => {
+        logger.info({
+            error,
+            message: '💥 Server crashed when starting',
+        })
+    })
