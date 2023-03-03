@@ -5,17 +5,17 @@ import env from "../../shared/env"
 import { orm } from "../../shared/orm"
 import { TokenDataType } from "../../shared/types"
 import { UserModule } from "./resolver-types.generated"
-import { loginUserValidation, updateUserValidation } from "./user.validation"
+import { loginUserMutationValidation, updateUserMutationValidation } from "./user.validation"
 import { userSelect } from './user.select'
 
 // TODO: is this type correct?
 const UserResolver: UserModule.Resolvers = {
-    Mutation: { // TODO: currency is nullable, it shouldn't be
+    Mutation: {
         loginUser: async (_, variables) => {
             const {
                 email,
                 password,
-            } = loginUserValidation.parse(variables.input)
+            } = loginUserMutationValidation.parse(variables.input)
 
             const user = await orm.user.findUnique({
                 select: {
@@ -27,7 +27,7 @@ const UserResolver: UserModule.Resolvers = {
                 },
             })
 
-            if (!user?.password) {
+            if (!user) {
                 throw new GraphQLError("User not found")
             }
 
@@ -59,7 +59,7 @@ const UserResolver: UserModule.Resolvers = {
                 firstName,
                 id,
                 lastName,
-            } = updateUserValidation.parse(variables.input)
+            } = updateUserMutationValidation.parse(variables.input)
 
             const updatedUser = await orm.user.update({
                 where: {
