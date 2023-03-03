@@ -16,11 +16,6 @@ export class CategoryStore {
 
     public endDate: Date
 
-    public setRange = (dates: RangeSelectValue) => {
-        this.startDate = dates.startDate
-        this.endDate = dates.endDate
-    }
-
     public startDate: Date
 
     public transactions = observable.array<TransactionType>([])
@@ -76,6 +71,11 @@ export class CategoryStore {
 
     public setCategory(category: CategoryType) {
         this.category = category
+    }
+
+    public setRange(dates: RangeSelectValue) {
+        this.endDate = dates.endDate
+        this.startDate = dates.startDate
     }
 
     public setTransactions(transactions: TransactionType[]) {

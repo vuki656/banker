@@ -20,7 +20,7 @@ export const ImportSortEditAmountDialog = observer(() => {
     const store = useImportStore()
 
     const [isOpen, isOpenActions] = useBoolean()
-    const [amount, setAmount] = useState<number | undefined>()
+    const [amount, setAmount] = useState<number | ''>()
 
     useEffect(() => {
         setAmount(store.currentTransaction?.amount)

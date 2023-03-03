@@ -57,6 +57,7 @@ export const CategorySingleView = observer(() => {
                     <RangeSelect
                         onSubmit={store.setRange}
                         range={store.range}
+                        value={[store.startDate, store.endDate]}
                     />
                 )}
                 center={(
