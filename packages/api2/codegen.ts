@@ -7,6 +7,9 @@ const config: CodegenConfig = {
                 contextType: '../shared/types#Context',
                 useIndexSignature: true,
             },
+            hooks: {
+                afterOneFileWrite: 'prettier --write',
+            },
             plugins: [
                 'typescript',
                 'typescript-resolvers',
@@ -16,9 +19,6 @@ const config: CodegenConfig = {
                 baseTypesPath: 'graphql-types.generated.ts',
                 filename: 'resolver-types.generated.ts',
                 useGraphQLModules: false,
-            },
-            hooks: {
-                afterOneFileWrite: 'prettier --write',
             },
         },
     },

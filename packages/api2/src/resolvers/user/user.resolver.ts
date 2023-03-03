@@ -1,12 +1,17 @@
+import { compare } from 'bcrypt'
+import { GraphQLError } from 'graphql'
 import { sign } from 'jsonwebtoken'
-import { compare } from "bcrypt"
-import { GraphQLError } from "graphql"
-import env from "../../shared/env"
-import { orm } from "../../shared/orm"
-import { TokenDataType } from "../../shared/types"
-import { UserModule } from "./resolver-types.generated"
-import { loginUserMutationValidation, updateUserMutationValidation } from "./user.validation"
+
+import env from '../../shared/env'
+import { orm } from '../../shared/orm'
+import type { TokenDataType } from '../../shared/types'
+
+import type { UserModule } from './resolver-types.generated'
 import { userSelect } from './user.select'
+import {
+    loginUserMutationValidation,
+    updateUserMutationValidation,
+} from './user.validation'
 
 // TODO: is this type correct?
 const UserResolver: UserModule.Resolvers = {
@@ -28,7 +33,7 @@ const UserResolver: UserModule.Resolvers = {
             })
 
             if (!user) {
-                throw new GraphQLError("User not found")
+                throw new GraphQLError('User not found')
             }
 
             const isValid = await compare(user.password, password)
@@ -62,9 +67,6 @@ const UserResolver: UserModule.Resolvers = {
             } = updateUserMutationValidation.parse(variables.input)
 
             const updatedUser = await orm.user.update({
-                where: {
-                    id,
-                },
                 data: {
                     currency,
                     email,
@@ -72,17 +74,20 @@ const UserResolver: UserModule.Resolvers = {
                     lastName,
                 },
                 select: userSelect,
+                where: {
+                    id,
+                },
             })
 
             return {
                 user: updatedUser,
             }
-        }
+        },
     },
     Query: {
         currentUser: (_, __, context) => {
             if (!context.user) {
-                throw new GraphQLError("No current user")
+                throw new GraphQLError('No current user')
             }
 
             return context.user
