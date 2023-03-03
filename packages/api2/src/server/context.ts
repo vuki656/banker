@@ -1,9 +1,10 @@
-import { ContextFunction } from '@apollo/server'
-import { StandaloneServerContextFunctionArgument } from '@apollo/server/dist/esm/standalone'
+import type { StandaloneServerContextFunctionArgument } from '@apollo/server/dist/esm/standalone'
 import { verify } from 'jsonwebtoken'
+
 import env from '../shared/env'
 import { logger } from '../shared/logger'
-import type { Context, TokenDataType } from '../shared/types'
+import type { Context } from '../shared/types'
+
 import { cookieValidation } from './context.validation'
 
 // eslint-disable-next-line @typescript-eslint/require-await -- Apollo context has to be async

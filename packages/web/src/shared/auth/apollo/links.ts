@@ -57,7 +57,7 @@ export const initApolloClient = (options: InitApolloOptions<any>) => {
             console.error('[GraphQLError] GraphQL error occurred: ', JSON.stringify(graphQLErrors))
 
             const isAuthenticationError = graphQLErrors.some((graphQLError) => {
-                return graphQLError.extensions?.code === 'AUTHENTICATION_ERROR'
+                return graphQLError.extensions.code === 'AUTHENTICATION_ERROR'
             })
 
             if (isAuthenticationError) {

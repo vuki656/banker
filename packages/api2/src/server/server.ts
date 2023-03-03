@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 
 import { logger } from '../shared/logger'
-import { Context } from '../shared/types'
+import type { Context } from '../shared/types'
 
 import {
     ApolloPluginLandingPage,
