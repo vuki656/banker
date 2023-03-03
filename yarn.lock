@@ -1392,6 +1392,9 @@ __metadata:
   dependencies:
     "@apollo/server": ^4.4.1
     "@faker-js/faker": ^7.6.0
+    "@graphql-codegen/cli": ^3.2.1
+    "@graphql-codegen/graphql-modules-preset": ^3.1.0
+    "@graphql-codegen/typescript-resolvers": ^3.1.0
     "@graphql-tools/load-files": ^6.6.1
     "@graphql-tools/merge": ^8.3.18
     "@paralleldrive/cuid2": ^2.2.0
@@ -2303,6 +2306,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/graphql-modules-preset@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@graphql-codegen/graphql-modules-preset@npm:3.1.0"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^4.1.0
+    "@graphql-codegen/visitor-plugin-common": 3.0.1
+    "@graphql-tools/utils": ^9.0.0
+    change-case-all: 1.0.15
+    parse-filepath: ^1.0.2
+    tslib: ~2.5.0
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: cee2e7f8afbc0b0d81592abfc8894422b791f0eca6e878a789de980bf1710a3c726786ade296e653cc83f920b2618aa9f5c9dbb6934ee9da0122b2d10ef5bdb5
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/introspection@npm:^3.0.1":
   version: 3.0.1
   resolution: "@graphql-codegen/introspection@npm:3.0.1"
@@ -2436,6 +2455,22 @@ __metadata:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     graphql-tag: ^2.0.0
   checksum: e21d111ce1c968499a7f233d15801725f67745c53b70a3d6c6076824f81787e7dda34b248e8f606c8a4920dd0c078db1cf644ebd6ffde9b4e7b5b0cd652a4127
+  languageName: node
+  linkType: hard
+
+"@graphql-codegen/typescript-resolvers@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@graphql-codegen/typescript-resolvers@npm:3.1.0"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^4.1.0
+    "@graphql-codegen/typescript": ^3.0.1
+    "@graphql-codegen/visitor-plugin-common": 3.0.1
+    "@graphql-tools/utils": ^9.0.0
+    auto-bind: ~4.0.0
+    tslib: ~2.5.0
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 05888a9dfd1556fe15465a524750c36881334c231297e2e89bccb536450bed61fde2ba182ba4e79e34be846ce2e2439f3f6b31a67e7437f03a4e4ace62e84dcd
   languageName: node
   linkType: hard
 

@@ -1,0 +1,4 @@
+type Mutation {
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
+    loginUser(input: LoginUserInput!): LoginUserPayload!
+}
