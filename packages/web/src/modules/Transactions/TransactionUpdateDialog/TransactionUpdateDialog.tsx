@@ -9,7 +9,7 @@ import {
     Stack,
     Textarea,
 } from '@mantine/core'
-import { DatePicker, DatePickerInput } from '@mantine/dates'
+import { DatePickerInput } from '@mantine/dates'
 import { showNotification } from '@mantine/notifications'
 import {
     Controller,

@@ -2,17 +2,17 @@
     "name": "banker",
     "version": "1.0.0",
     "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "api:restart": "yarn workspace @banker/api production:restart",
-        "web:restart": "yarn workspace @banker/web production:restart",
+        "lint": "yarn lint:cspell && yarn lint:prettier && yarn lint:eslint",
+        "lint:cspell": "cspell --no-progress --no-summary '**'",
+        "lint:eslint": "eslint './**/*.{js,ts,tsx}' --quiet --cache",
+        "lint:prettier": "prettier --loglevel warn --check './**/*{yaml,yml,json,md,gql,graphql,css,prisma}'",
         "restart": "yarn api:restart && yarn web:restart",
-        "lint": "yarn lint:config && yarn lint:spell && yarn lint:source ",
-        "lint:ci": "yarn workspace @banker/api orm:generate && yarn workspace @banker/web codegen && yarn lint",
-        "lint:fix": "eslint './packages/**/*' --fix --quiet",
-        "lint:source": "eslint './packages/**/*' --quiet --cache --cache-strategy='content' --cache-location='.eslintcache/'",
-        "lint:config": "prettier --loglevel warn --check {*,**/*}.{json,yml,yaml}",
-        "lint:spell": "cspell lint '**' --no-summary --no-progress",
-        "lint:clean": "rm -rf ./eslintcache && rm .cspellcache"
+        "web:restart": "yarn workspace @banker/web production:restart"
     },
     "dependencies": {
         "dayjs": "^1.11.7",
@@ -22,16 +22,15 @@
     "devDependencies": {
         "@graphql-codegen/cli": "^3.2.1",
         "@graphql-codegen/gql-tag-operations-preset": "^2.1.0",
-        "@rimac-technology/eslint-config": "^30.0.0",
+        "@rimac-technology/style-guide": "^6.1.0",
+        "@types/eslint": "^8.21.1",
         "@types/node": "18.14.5",
+        "@types/prettier": "^2.7.2",
         "@types/uuid": "^9.0.1",
         "cspell": "^6.27.0",
-        "eslint": "8.35.0",
+        "eslint": "^8.35.0",
         "prettier": "^2.8.4",
         "typescript": "4.9.5"
     },
-    "packageManager": "yarn@3.2.0",
-    "workspaces": [
-        "packages/*"
-    ]
+    "packageManager": "yarn@3.2.0"
 }

@@ -72,7 +72,10 @@ export class HomeStore {
             return accumulator + transaction.amount.converted
         }, 0)
 
-        const difference = 100 * Math.abs((currentMonthTotal - previousMonthTotal) / ((currentMonthTotal + previousMonthTotal) / 2))
+        const difference = 100 * Math.abs(
+            (currentMonthTotal - previousMonthTotal) /
+            ((currentMonthTotal + previousMonthTotal) / 2)
+        )
 
         if (currentMonthTotal < previousMonthTotal) {
             return Math.abs(difference) * -1

@@ -9,9 +9,7 @@ import { logger } from '../shared/utils'
 
 import { context } from './context'
 import { generateSchema } from './generateSchema'
-import {
-    ApolloPluginLogger,
-} from './plugins'
+import { ApolloPluginLogger } from './plugins'
 
 export const server = new ApolloServer({
     cache: 'bounded',

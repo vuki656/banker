@@ -9,9 +9,9 @@ import Document, {
 const getInitialProps = createGetInitialProps()
 
 export default class _Document extends Document {
-    static getInitialProps = getInitialProps
+    public static getInitialProps = getInitialProps
 
-    render() {
+    public render() {
         return (
             <Html>
                 <Head>

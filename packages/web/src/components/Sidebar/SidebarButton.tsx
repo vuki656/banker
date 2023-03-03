@@ -8,7 +8,7 @@ import { forwardRef } from 'react'
 
 import type { SidebarButtonProps } from './SidebarButton.types'
 
-export const SidebarButton = forwardRef<HTMLButtonElement, SidebarButtonProps>((props, ref) => {
+export const SidebarButton = forwardRef<HTMLButtonElement, SidebarButtonProps>(function SidebarButton(props, ref) {
     const {
         color,
         icon,
