@@ -4,8 +4,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import {
-    server,
     context,
+    server,
 } from './server'
 import env from './shared/env'
 import { logger } from './shared/logger'

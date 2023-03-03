@@ -1,5 +1,5 @@
 import type { User } from '../../resolvers/graphql-types.generated'
-import { logger } from "../logger"
+import type { logger } from '../logger'
 
 export type Context = {
     logger: typeof logger

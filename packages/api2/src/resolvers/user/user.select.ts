@@ -1,9 +1,9 @@
 import type { Prisma } from '@prisma/client'
 
 export const userSelect = {
+    currency: true,
+    email: true,
+    firstName: true,
     id: true,
     lastName: true,
-    firstName: true,
-    email: true,
-    currency: true,
 } satisfies Prisma.UserSelect
