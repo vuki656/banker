@@ -1,0 +1,85 @@
+{
+    "databaseChangeLog": [
+        {
+            "logicalFilePath": "1655501134-add-created-at-columns.migration.json",
+            "objectQuotingStrategy": "QUOTE_ALL_OBJECTS"
+        },
+        {
+            "changeSet": {
+                "id": "1655501134",
+                "author": "off.vukovic@gmail.com",
+                "comment": "Add created at columns",
+                "changes": [
+                    {
+                        "addColumn": {
+                            "tableName": "users",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "datetime",
+                                        "defaultValueComputed": "timezone('utc', NOW())",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addColumn": {
+                            "tableName": "categories",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "datetime",
+                                        "defaultValueComputed": "timezone('utc', NOW())",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addColumn": {
+                            "tableName": "keywords",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "datetime",
+                                        "defaultValueComputed": "timezone('utc', NOW())",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addColumn": {
+                            "tableName": "transactions",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "datetime",
+                                        "defaultValueComputed": "timezone('utc', NOW())",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

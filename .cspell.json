@@ -58,6 +58,7 @@
         "nvmrc",
         "nivo",
         "Businessplan",
-        "loglevel"
+        "loglevel",
+        "paralleldrive"
     ]
 }
