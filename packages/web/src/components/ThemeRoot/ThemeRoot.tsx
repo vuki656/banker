@@ -44,7 +44,7 @@ export const ThemeRoot: React.FunctionComponent<ThemeRootProps> = (props) => {
                                 overlayProps: {
                                     blur: 3,
                                     opacity: 0.55,
-                                }
+                                },
                             },
                         },
                     },

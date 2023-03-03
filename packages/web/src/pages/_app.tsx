@@ -44,17 +44,17 @@ const App = (props: AppProps) => {
             </Head>
             <ThemeRoot colorScheme={colorScheme}>
                 <ModalsProvider>
-                        <GlobalStyles />
-                        <Notifications />
-                        <ApolloProvider client={apollo}>
-                            {isAppAppRoute ? (
-                                <Root>
-                                    <Component {...pageProps} />
-                                </Root>
-                            ) : (
+                    <GlobalStyles />
+                    <Notifications />
+                    <ApolloProvider client={apollo}>
+                        {isAppAppRoute ? (
+                            <Root>
                                 <Component {...pageProps} />
-                            )}
-                        </ApolloProvider>
+                            </Root>
+                        ) : (
+                            <Component {...pageProps} />
+                        )}
+                    </ApolloProvider>
                 </ModalsProvider>
             </ThemeRoot>
         </>

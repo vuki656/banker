@@ -57,6 +57,7 @@
         "sheetjs",
         "nvmrc",
         "nivo",
-        "Businessplan"
+        "Businessplan",
+        "loglevel"
     ]
 }

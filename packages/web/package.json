@@ -3,13 +3,13 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "start": "next start",
         "build": "yarn codegen && next build",
         "codegen": "yarn graphql-codegen --config ./codegen.yaml",
-        "production:start": "pm2 start yarn --interpreter bash --name client -- start",
+        "dev": "next dev",
         "production:kill": "pm2 stop client 2> /dev/null || true && pm2 delete client 2> /dev/null ||true",
-        "production:restart": "yarn && yarn codegen && yarn build && yarn production:kill && yarn production:start"
+        "production:restart": "yarn && yarn codegen && yarn build && yarn production:kill && yarn production:start",
+        "production:start": "pm2 start yarn --interpreter bash --name client -- start",
+        "start": "next start"
     },
     "dependencies": {
         "@apollo/client": "3.7.10",

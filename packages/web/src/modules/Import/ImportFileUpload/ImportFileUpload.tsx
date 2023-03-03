@@ -39,11 +39,11 @@ export const ImportFileUpload: React.FunctionComponent = () => {
         reader.onloadstart = function() {
             showNotification({
                 autoClose: false,
-                withCloseButton: false,
                 id: 'progress',
                 loading: true,
                 message: 'This might take a second',
                 title: 'Loading File',
+                withCloseButton: false,
             })
         }
 

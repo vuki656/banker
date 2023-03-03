@@ -18,7 +18,7 @@ export const RangeSelect = (props: RangeSelectProps) => {
     const {
         onSubmit,
         range,
-        value: valueProp
+        value: valueProp,
     } = props
 
     const [isOpen, isOpenActions] = useBoolean()
@@ -178,12 +178,14 @@ export const RangeSelect = (props: RangeSelectProps) => {
                     </Stack>
                     <DatePicker
                         numberOfColumns={2}
-                        type='range'
+                        type="range"
                         maxDate={dayjs().toDate()}
                         onChange={setValue}
                         value={value}
                     />
-                    <Button onClick={onCustomRangeSelect}>Confirm</Button>
+                    <Button onClick={onCustomRangeSelect}>
+                        Confirm
+                    </Button>
                 </Group>
             </Modal>
         </>

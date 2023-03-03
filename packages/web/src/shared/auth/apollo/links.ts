@@ -53,7 +53,7 @@ export const initApolloClient = (options: InitApolloOptions<any>) => {
             networkError,
         } = errorHandler
 
-        if (graphQLErrors) { // eslint-disable-next-line no-console
+        if (graphQLErrors) {
             console.error('[GraphQLError] GraphQL error occurred: ', JSON.stringify(graphQLErrors))
 
             const isAuthenticationError = graphQLErrors.some((graphQLError) => {
@@ -65,7 +65,7 @@ export const initApolloClient = (options: InitApolloOptions<any>) => {
             }
         }
 
-        if (networkError) { // eslint-disable-next-line no-console
+        if (networkError) {
             console.error('[NetworkError] Network error occurred: ', JSON.stringify(networkError))
         }
     })
