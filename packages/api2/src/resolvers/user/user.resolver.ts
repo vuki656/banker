@@ -13,7 +13,6 @@ import {
     updateUserMutationValidation,
 } from './user.validation'
 
-// TODO: is this type correct?
 const UserResolver: UserModule.Resolvers = {
     Mutation: {
         loginUser: async (_, variables) => {
