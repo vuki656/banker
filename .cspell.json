@@ -5,7 +5,7 @@
         "cacheStrategy": "content",
         "cacheLocation": "./.cspellcache"
     },
-    "ignorePaths": ["dump.sql"],
+    "ignorePaths": ["dump.sql", "TODO.md"],
     "ignoreWords": [
         "cashify",
         "datetime",
@@ -60,6 +60,7 @@
         "Businessplan",
         "loglevel",
         "paralleldrive",
-        "nextjs"
+        "nextjs",
+        "dmmf"
     ]
 }

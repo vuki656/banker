@@ -1,7 +1,7 @@
 import type { StandaloneServerContextFunctionArgument } from '@apollo/server/dist/esm/standalone'
 import { verify } from 'jsonwebtoken'
-import { User } from '../resolvers/graphql-types.generated'
 
+import type { User } from '../resolvers/graphql-types.generated'
 import env from '../shared/env'
 import { logger } from '../shared/logger'
 import type { Context } from '../shared/types'
@@ -22,9 +22,7 @@ export const context = async ({ req }: StandaloneServerContextFunctionArgument):
         const { user: parsedUser } = cookieValidation.parse(tokenData)
 
         user = parsedUser
-    } catch(error) {
-
-    }
+    } catch {}
 
     return {
         logger,
