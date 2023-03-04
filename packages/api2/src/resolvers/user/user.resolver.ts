@@ -16,10 +16,7 @@ import {
 const UserResolver: UserModule.Resolvers = {
     Mutation: {
         loginUser: async (_, variables) => {
-            const {
-                email,
-                password,
-            } = loginUserMutationValidation.parse(variables.input)
+            const input = loginUserMutationValidation.parse(variables.input)
 
             const user = await orm.user.findUniqueOrThrow({
                 select: {
@@ -27,11 +24,11 @@ const UserResolver: UserModule.Resolvers = {
                     password: true,
                 },
                 where: {
-                    email,
+                    email: input.email,
                 },
             })
 
-            const isValid = await compare(user.password, password)
+            const isValid = await compare(user.password, input.password)
 
             if (!isValid) {
                 throw new GraphQLError('Wrong email or password')
@@ -53,24 +50,18 @@ const UserResolver: UserModule.Resolvers = {
             }
         },
         updateUser: async (_, variables) => {
-            const {
-                currency,
-                email,
-                firstName,
-                id,
-                lastName,
-            } = updateUserMutationValidation.parse(variables.input)
+            const input = updateUserMutationValidation.parse(variables.input)
 
             const updatedUser = await orm.user.update({
                 data: {
-                    currency,
-                    email,
-                    firstName,
-                    lastName,
+                    currency: input.currency,
+                    email: input.email,
+                    firstName: input.firstName,
+                    lastName: input.lastName,
                 },
                 select: userSelect,
                 where: {
-                    id,
+                    id: input.id,
                 },
             })
 
