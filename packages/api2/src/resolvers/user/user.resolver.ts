@@ -21,7 +21,7 @@ const UserResolver: UserModule.Resolvers = {
                 password,
             } = loginUserMutationValidation.parse(variables.input)
 
-            const user = await orm.user.findUnique({
+            const user = await orm.user.findUniqueOrThrow({
                 select: {
                     ...userSelect,
                     password: true,
@@ -30,10 +30,6 @@ const UserResolver: UserModule.Resolvers = {
                     email,
                 },
             })
-
-            if (!user) {
-                throw new GraphQLError('User not found')
-            }
 
             const isValid = await compare(user.password, password)
 
