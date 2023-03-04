@@ -1,5 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
+export const SCHEMA_FILES_LOCATION = './src/resolvers/**/*.gql'
+
 const config: CodegenConfig = {
     generates: {
         './src/resolvers/': {
@@ -22,7 +24,7 @@ const config: CodegenConfig = {
             },
         },
     },
-    schema: './src/resolvers/**/*.gql',
+    schema: SCHEMA_FILES_LOCATION,
 }
 
 export default config

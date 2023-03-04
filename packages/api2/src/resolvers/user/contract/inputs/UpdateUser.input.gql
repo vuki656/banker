@@ -4,5 +4,4 @@ input UpdateUserInput {
     currency: String!
     lastName: String!
     email: String!
-    password: String!
 }
