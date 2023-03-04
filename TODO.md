@@ -1,7 +1,5 @@
 ## NEXT
 
--   [ ] Fix resolver loading
-
 ## BACKLOG
 
 -   [ ] Clean up dup deps
