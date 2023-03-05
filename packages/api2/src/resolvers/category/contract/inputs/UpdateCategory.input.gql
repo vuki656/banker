@@ -1,0 +1,7 @@
+input UpdateCategoryInput {
+    id: String!
+    color: String!
+    icon: String!
+    keyword: [String!]!
+    name: String!
+}
