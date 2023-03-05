@@ -1,0 +1,46 @@
+{
+    "databaseChangeLog": [
+        {
+            "logicalFilePath": "1678031255-make-keywords-user-specific.migration.json",
+            "objectQuotingStrategy": "QUOTE_ALL_OBJECTS"
+        },
+        {
+            "changeSet": {
+                "id": "1678031255",
+                "author": "off.vukovic@gmail.com",
+                "comment": "make-keywords-user-specific",
+                "changes": [
+                    {
+                        "addColumn": {
+                            "tableName": "keywords",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "user_fk",
+                                        "type": "uuid",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseColumnNames": "user_fk",
+                            "baseTableName": "keywords",
+                            "constraintName": "FK_keywords__users",
+                            "deferrable": true,
+                            "initiallyDeferred": true,
+                            "onDelete": "CASCADE",
+                            "onUpdate": "RESTRICT",
+                            "referencedColumnNames": "id",
+                            "referencedTableName": "users"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+type Category {
+    id: ID!
+    color: String!
+    icon: String!
+    keywords: [Keyword!]!
+    name: String!
+}

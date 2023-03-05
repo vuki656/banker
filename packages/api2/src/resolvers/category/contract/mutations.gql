@@ -1,0 +1,5 @@
+type Mutation {
+    createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
+    deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
+    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
+}
