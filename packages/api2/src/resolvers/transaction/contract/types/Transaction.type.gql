@@ -1,0 +1,9 @@
+type Transaction {
+    currency: String!
+    category: Category
+    amount: Amount!
+    date: String!
+    description: String!
+    reference: String!
+    status: TransactionStatus
+}
