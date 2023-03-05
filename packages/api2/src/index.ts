@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+import { registerSyncRatesCron } from './crons'
 import {
     context,
     server,
@@ -21,6 +22,8 @@ void startStandaloneServer(
 )
     .then((info) => {
         logger.info(`🚀 Server started on: ${info.url}`)
+
+        registerSyncRatesCron()
     })
     .catch((error: unknown) => {
         logger.info({

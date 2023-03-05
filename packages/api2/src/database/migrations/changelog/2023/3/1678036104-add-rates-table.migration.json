@@ -1,0 +1,43 @@
+{
+    "databaseChangeLog": [
+        {
+            "logicalFilePath": "1678036104-add-rates-table.migration.json",
+            "objectQuotingStrategy": "QUOTE_ALL_OBJECTS"
+        },
+        {
+            "changeSet": {
+                "id": "1678036104",
+                "author": "off.vukovic@gmail.com",
+                "comment": "add-rates-table",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "rates",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "code",
+                                        "type": "VARCHAR(3)",
+                                        "constraints": {
+                                            "nullable": false,
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "value",
+                                        "type": "double",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

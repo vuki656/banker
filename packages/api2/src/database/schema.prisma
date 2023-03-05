@@ -69,6 +69,13 @@ model Transaction {
     @@map("transactions")
 }
 
+model Rate {
+    code  String @unique @db.VarChar(3)
+    value Float
+
+    @@map("rates")
+}
+
 enum TransactionStatus {
     DONE
     DISCARDED
