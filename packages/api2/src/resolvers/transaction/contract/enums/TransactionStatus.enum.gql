@@ -1,0 +1,5 @@
+enum TransactionStatus {
+    DISCARDED
+    DONE
+    SKIPPED
+}

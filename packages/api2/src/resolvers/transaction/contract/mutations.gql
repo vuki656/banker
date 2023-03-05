@@ -1,0 +1,5 @@
+type Mutation {
+    createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
+    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
+    discardTransaction(input: DiscardTransactionInput!): DiscardTransactionPayload!
+}
