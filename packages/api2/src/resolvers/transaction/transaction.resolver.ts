@@ -25,10 +25,6 @@ import {
 const TransactionResolver: TransactionModule.Resolvers = {
     Mutation: {
         createTransaction: async (_, variables, context) => {
-            if (!context.user) {
-                throw new Error('No user in context')
-            }
-
             const input = createTransactionMutationValidation.parse(variables.input)
 
             const createdTransaction = await orm.transaction.create({
@@ -42,7 +38,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
                     status: input.status,
                     user: {
                         connect: {
-                            id: context.user.id,
+                            id: context.user.nonNullValue.id,
                         },
                     },
                 },
@@ -55,7 +51,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const convertedTransaction = await convertTransaction(
                 createdTransaction,
-                context.user.currency,
+                context.user.nonNullValue.currency,
                 rates
             )
 
@@ -64,10 +60,6 @@ const TransactionResolver: TransactionModule.Resolvers = {
             }
         },
         updateTransaction: async (_, variables, context) => {
-            if (!context.user) {
-                throw new Error('No user')
-            }
-
             const input = updateTransactionMutationValidation.parse(variables.input)
 
             const updatedTransaction = await orm.transaction.update({
@@ -99,7 +91,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const convertedTransaction = await convertTransaction(
                 updatedTransaction,
-                context.user.currency,
+                context.user.nonNullValue.currency,
                 rates
             )
 
@@ -110,14 +102,6 @@ const TransactionResolver: TransactionModule.Resolvers = {
     },
     Query: {
         transactions: async (_, variables, context) => {
-            // TODO: why is this needed??
-            const user = context.user
-
-            // TODO: handle this
-            if (!user) {
-                throw new Error('No current user when converting currencies')
-            }
-
             const args = transactionsQueryValidation.parse(variables.args)
 
             const transactions = await orm.transaction.findMany({
@@ -158,7 +142,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
                     ],
                     isDeleted: false,
                     user: {
-                        id: user.id,
+                        id: context.user.nonNullValue.id,
                     },
                 },
             })
@@ -168,7 +152,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
             return transactions.map(async (transaction) => {
                 return convertTransaction(
                     transaction,
-                    user.currency,
+                    context.user.nonNullValue.currency,
                     rates
                 )
             })

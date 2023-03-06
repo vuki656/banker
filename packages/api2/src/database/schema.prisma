@@ -32,7 +32,6 @@ model User {
     createdAt    DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     currency     String        @default("HRK") @db.VarChar(3)
     categories   Category[]
-    keywords     Keyword[]
     transactions Transaction[]
 
     @@map("users")
@@ -44,9 +43,7 @@ model Keyword {
     categoryFk String   @map("category_fk") @db.Uuid
     isDeleted  Boolean  @default(false) @map("is_deleted")
     createdAt  DateTime @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
-    userFk     String   @map("user_fk") @db.Uuid
     category   Category @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__categories")
-    users      User     @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__users")
 
     @@map("keywords")
 }

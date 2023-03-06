@@ -72,11 +72,7 @@ const UserResolver: UserModule.Resolvers = {
     },
     Query: {
         currentUser: (_, __, context) => {
-            if (!context.user) {
-                throw new GraphQLError('No current user')
-            }
-
-            return context.user
+            return context.user.nonNullValue
         },
     },
 }
