@@ -14,7 +14,7 @@ import {
     IconPackage,
     IconSun,
     IconUpload,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import { deleteCookie } from 'cookies-next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'

@@ -4,7 +4,7 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
-import { IconListDetails } from '@tabler/icons'
+import { IconListDetails } from '@tabler/icons-react'
 import type { FunctionComponent } from 'react'
 
 import {

@@ -4,7 +4,7 @@ import {
     Modal,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { IconPencil } from '@tabler/icons'
+import { IconPencil } from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 

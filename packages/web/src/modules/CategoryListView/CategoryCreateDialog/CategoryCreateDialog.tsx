@@ -3,7 +3,7 @@ import {
     Modal,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { IconPlus } from '@tabler/icons'
+import { IconPlus } from '@tabler/icons-react'
 
 import { CategoryForm } from '../../../components'
 import { useCreateCategoryMutation } from '../../../graphql/types.generated'

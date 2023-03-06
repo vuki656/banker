@@ -7,7 +7,7 @@ import {
     IconCheck,
     IconClock,
     IconTrash,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 
 import { TransactionStatusEnum } from '../../../graphql/types.generated'

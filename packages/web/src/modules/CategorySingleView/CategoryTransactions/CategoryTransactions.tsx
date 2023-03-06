@@ -3,7 +3,7 @@ import {
     Stack,
     Text,
 } from '@mantine/core'
-import { IconList } from '@tabler/icons'
+import { IconList } from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 
 import {

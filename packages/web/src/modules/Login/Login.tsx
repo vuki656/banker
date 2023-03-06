@@ -13,7 +13,7 @@ import { showNotification } from '@mantine/notifications'
 import {
     IconAt,
     IconLock,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import { setCookies } from 'cookies-next'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'

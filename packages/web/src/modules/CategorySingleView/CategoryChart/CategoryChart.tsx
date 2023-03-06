@@ -4,7 +4,7 @@ import {
     Text,
 } from '@mantine/core'
 import { ResponsiveLine } from '@nivo/line'
-import { IconChartLine } from '@tabler/icons'
+import { IconChartLine } from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 
 import { Panel } from '../../../components'

@@ -2,7 +2,7 @@ import {
     ActionIcon,
     Modal,
 } from '@mantine/core'
-import { IconPlus } from '@tabler/icons'
+import { IconPlus } from '@tabler/icons-react'
 import type { FunctionComponent } from 'react'
 import {
     useController,

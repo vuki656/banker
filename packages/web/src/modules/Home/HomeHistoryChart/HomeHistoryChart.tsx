@@ -4,7 +4,7 @@ import {
     Text,
 } from '@mantine/core'
 import { ResponsiveLine } from '@nivo/line'
-import { IconTimeline } from '@tabler/icons'
+import { IconTimeline } from '@tabler/icons-react'
 import type { FunctionComponent } from 'react'
 
 import { Panel } from '../../../components'

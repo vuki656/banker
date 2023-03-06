@@ -4,7 +4,7 @@ import {
     Input,
     useMantineTheme,
 } from '@mantine/core'
-import { IconCheck } from '@tabler/icons'
+import { IconCheck } from '@tabler/icons-react'
 import { useController } from 'react-hook-form'
 
 import type { CategoryFormType } from './CategoryForm.types'

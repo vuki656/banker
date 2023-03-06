@@ -2,7 +2,7 @@ import {
     Stack,
     Text,
 } from '@mantine/core'
-import { IconLetterK } from '@tabler/icons'
+import { IconLetterK } from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 
 import { Panel } from '../../../components'
