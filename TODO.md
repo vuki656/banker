@@ -4,7 +4,6 @@
 
 -   [ ] Auth
 -   [ ] Auth in tests
--   [ ] Prettier format not working for generated test types
 -   [ ] Try to setup aliases with webpack // Nextjs did it
 -   [ ] Internal errors/filter them from logger
 -   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
@@ -17,6 +16,7 @@
 -   [ ] You might not need db migration url env variable
 -   [ ] Setup prometheus and other cool tracking/tracing stuff
 -   [ ] Eslint for gql files
+-   [ ] How to share deps -- do this later -- create github issue
 -   [ ] How to throw more complex errors?? Should you throw a normal error, graphql error??? what???
 -   [ ] Check if keywords can just be an array of strings on category, cuz the current way of updating category and it's keywords
         is stupid
