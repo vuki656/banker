@@ -3,8 +3,8 @@ import type {
     NormalizedCacheObject,
 } from '@apollo/client'
 import type { ColorScheme } from '@mantine/core'
-import type { ApolloPageContext } from 'next-with-apollo'
 import type { AppProps as NextAppProps } from 'next/app'
+import type { ApolloPageContext } from 'next-with-apollo'
 
 export interface PageContext extends ApolloPageContext {
     apolloClient: ApolloClient<unknown>

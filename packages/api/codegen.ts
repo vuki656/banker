@@ -3,9 +3,6 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 export const SCHEMA_FILES_LOCATION = './src/resolvers/**/*.gql'
 
 const config: CodegenConfig = {
-    hooks: { 
-        afterOneFileWrite: ['prettier --write'] 
-    },
     generates: {
         './src/resolvers/': {
             config: {
@@ -23,6 +20,9 @@ const config: CodegenConfig = {
                 useGraphQLModules: false,
             },
         },
+    },
+    hooks: {
+        afterOneFileWrite: ['prettier --write'],
     },
     schema: SCHEMA_FILES_LOCATION,
 }

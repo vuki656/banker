@@ -113,19 +113,19 @@ const CategoryResolver: CategoryModule.Resolvers = {
         },
     },
     Query: {
-        categories: (_, __, context) => {
+        categories: async (_, __, context) => {
             return orm.category.findMany({
+                select: {
+                    ...categorySelect,
+                    keywords: {
+                        select: keywordSelect,
+                    },
+                },
                 where: {
                     user: {
                         id: context.user.nonNullValue.id,
                     },
                 },
-                select: {
-                    ...categorySelect,
-                    keywords: {
-                        select: keywordSelect,
-                    }
-                }
             })
         },
         category: (_, variables) => {
