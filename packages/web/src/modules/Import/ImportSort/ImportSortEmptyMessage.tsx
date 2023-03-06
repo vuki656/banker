@@ -3,7 +3,7 @@ import {
     Text,
     ThemeIcon,
 } from '@mantine/core'
-import { IconFileAnalytics } from '@tabler/icons'
+import { IconFileAnalytics } from '@tabler/icons-react'
 
 export const ImportSortEmptyMessage: React.FunctionComponent = () => {
     return (

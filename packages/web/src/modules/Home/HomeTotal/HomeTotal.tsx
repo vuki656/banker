@@ -10,7 +10,7 @@ import {
     IconReceipt,
     IconTrendingDown,
     IconTrendingUp,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 

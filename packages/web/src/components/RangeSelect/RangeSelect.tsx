@@ -5,7 +5,7 @@ import {
     Stack,
 } from '@mantine/core'
 import { DatePicker } from '@mantine/dates'
-import { IconCalendar } from '@tabler/icons'
+import { IconCalendar } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 
