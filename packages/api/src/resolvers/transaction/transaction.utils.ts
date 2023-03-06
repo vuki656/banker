@@ -2,7 +2,6 @@ import { orm } from '../../shared/orm'
 
 import type { BaseTransaction } from './transaction.types'
 
-// TODO: i don't like this
 export const fetchRates = async () => {
     return orm
         .rate
