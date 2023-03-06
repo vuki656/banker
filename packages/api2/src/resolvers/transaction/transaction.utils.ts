@@ -1,6 +1,6 @@
 import { orm } from '../../shared/orm'
-import type { User } from '../graphql-types.generated'
-import { BaseTransaction } from './transaction.types'
+
+import type { BaseTransaction } from './transaction.types'
 
 // TODO: i don't like this
 export const fetchRates = async () => {
@@ -18,10 +18,9 @@ export const fetchRates = async () => {
         })
 }
 
-
 export const convertTransaction = async <TTransaction extends BaseTransaction>(
     transaction: TTransaction,
-    user: User,
+    userCurrency: string,
     rates: Map<string, number>
 ) => {
     const transactionRate = rates.get(transaction.currency)
@@ -30,7 +29,7 @@ export const convertTransaction = async <TTransaction extends BaseTransaction>(
         throw new Error(`Transaction has invalid code: ${JSON.stringify(transaction)}`)
     }
 
-    const targetRate = rates.get(user.currency ?? '')
+    const targetRate = rates.get(userCurrency ?? '')
 
     if (!targetRate) {
         throw new Error('Couldn\'t find target rate while converting currency')

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+
 import { currencyCodeValidation } from '../../resolvers/transaction'
 
 export const ratesValidation = z.object({
