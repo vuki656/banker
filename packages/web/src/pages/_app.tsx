@@ -3,10 +3,10 @@ import { getDataFromTree } from '@apollo/client/react/ssr'
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import { getCookie } from 'cookies-next'
-import withApollo from 'next-with-apollo'
 import NextApp from 'next/app'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import withApollo from 'next-with-apollo'
 
 import {
     GlobalStyles,
