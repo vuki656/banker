@@ -21,6 +21,7 @@ const config: CodegenConfig = {
             },
         },
     },
+    overwrite: true,
     hooks: {
         afterOneFileWrite: ['prettier --write'],
     },

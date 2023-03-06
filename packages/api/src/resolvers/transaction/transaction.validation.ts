@@ -18,7 +18,7 @@ export const updateTransactionMutationValidation = z.object({
         .string()
         .uuid(),
     reference: z.string(),
-    status: z.nativeEnum(TransactionStatus), // TODO: this isn't enum
+    status: z.nativeEnum(TransactionStatus),
 })
 
 export const createTransactionMutationValidation = z.object({
@@ -31,7 +31,7 @@ export const createTransactionMutationValidation = z.object({
     date: z.date(),
     description: z.string(),
     reference: z.string(),
-    status: z.nativeEnum(TransactionStatus), // TODO: this isn't enum
+    status: z.nativeEnum(TransactionStatus),
 })
 
 export const transactionsQueryValidation = z.object({
