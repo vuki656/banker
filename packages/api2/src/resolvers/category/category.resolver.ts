@@ -33,7 +33,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
                     name: input.name,
                     user: {
                         connect: {
-                            id: context.user?.id,
+                            id: context.user.nonNullValue.id,
                         },
                     },
                 },
@@ -65,7 +65,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
                 id: input.id,
             }
         },
-        updateCategory: async (_, variables) => {
+        updateCategory: async (_, variables, context) => {
             const input = updateCategoryMutationValidation.parse(variables.input)
 
             const updatedCategory = await orm.$transaction(async (transaction) => {
@@ -91,6 +91,11 @@ const CategoryResolver: CategoryModule.Resolvers = {
                             },
                         },
                         name: input.name,
+                        user: {
+                            connect: {
+                                id: context.user.nonNullValue.id,
+                            },
+                        },
                     },
                     select: {
                         ...categorySelect,
