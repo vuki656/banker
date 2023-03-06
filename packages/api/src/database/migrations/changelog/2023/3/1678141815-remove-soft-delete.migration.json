@@ -1,0 +1,41 @@
+{
+    "databaseChangeLog": [
+        {
+            "logicalFilePath": "1678141815-remove-soft-delete.migration.json",
+            "objectQuotingStrategy": "QUOTE_ALL_OBJECTS"
+        },
+        {
+            "changeSet": {
+                "id": "1678141815",
+                "author": "off.vukovic@gmail.com",
+                "comment": "remove-soft-delete",
+                "changes": [
+                    {
+                        "dropColumn": {
+                            "tableName": "categories",
+                            "columnName": "is_deleted"
+                        }
+                    },
+                    {
+                        "dropColumn": {
+                            "tableName": "keywords",
+                            "columnName": "is_deleted"
+                        }
+                    },
+                    {
+                        "dropColumn": {
+                            "tableName": "users",
+                            "columnName": "is_deleted"
+                        }
+                    },
+                    {
+                        "dropColumn": {
+                            "tableName": "transactions",
+                            "columnName": "is_deleted"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

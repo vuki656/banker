@@ -140,7 +140,6 @@ const TransactionResolver: TransactionModule.Resolvers = {
                             },
                         },
                     ],
-                    isDeleted: false,
                     user: {
                         id: context.user.nonNullValue.id,
                     },
