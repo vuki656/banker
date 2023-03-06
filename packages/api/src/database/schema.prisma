@@ -13,7 +13,6 @@ model Category {
     icon         String        @db.VarChar(200)
     color        String        @db.VarChar(200)
     userFk       String        @map("user_fk") @db.Uuid
-    isDeleted    Boolean       @default(false) @map("is_deleted")
     createdAt    DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     user         User          @relation(fields: [userFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_categories__users")
     keywords     Keyword[]
@@ -28,7 +27,6 @@ model User {
     lastName     String        @map("last_name") @db.VarChar(200)
     password     String        @db.VarChar(500)
     email        String        @unique @db.VarChar(300)
-    isDeleted    Boolean       @default(false) @map("is_deleted")
     createdAt    DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     currency     String        @default("HRK") @db.VarChar(3)
     categories   Category[]
@@ -41,7 +39,6 @@ model Keyword {
     id         String   @id @default(dbgenerated("public.uuid_generate_v4()")) @db.Uuid
     name       String   @db.VarChar(200)
     categoryFk String   @map("category_fk") @db.Uuid
-    isDeleted  Boolean  @default(false) @map("is_deleted")
     createdAt  DateTime @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
     category   Category @relation(fields: [categoryFk], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FK_keywords__categories")
 
@@ -56,7 +53,6 @@ model Transaction {
     currency    String            @db.VarChar(3)
     date        DateTime          @db.Timestamp(6)
     userFk      String            @map("user_fk") @db.Uuid
-    isDeleted   Boolean           @default(false) @map("is_deleted")
     status      TransactionStatus
     categoryFk  String?           @map("category_fk") @db.Uuid
     createdAt   DateTime          @default(dbgenerated("timezone('utc'::text, now())")) @map("created_at") @db.Timestamp(6)
