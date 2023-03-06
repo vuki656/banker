@@ -10,6 +10,7 @@
 -   [ ] Try to setup aliases with webpack // Nextjs did it
 -   [ ] Update xlsx
 -   [ ] Internal errors/filter them from logger
+-   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
 -   [ ] APi tests in docker?
         https://akashsingh.blog/testing-typescript-graphql-server-using-jest-with-docker#heading-docker-compose
 -   [ ] Figure out how to use pm2 better

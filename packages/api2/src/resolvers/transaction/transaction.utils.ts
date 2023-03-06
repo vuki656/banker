@@ -1,41 +1,51 @@
-import { Prisma } from "@prisma/client"
-import { GraphQLError } from "graphql"
-import { context } from "../../server"
-import { orm } from "../../shared/orm"
+import { orm } from '../../shared/orm'
+import type { User } from '../graphql-types.generated'
+import { BaseTransaction } from './transaction.types'
 
-export const convertTransaction = async (transactions: Prisma.TransactionType) => {
-            const rates = await orm
-                .rate
-                .findMany()
-                .then((response) => {
-                    const values = new Map<string, number>()
+// TODO: i don't like this
+export const fetchRates = async () => {
+    return orm
+        .rate
+        .findMany()
+        .then((response) => {
+            const values = new Map<string, number>()
 
-                    response.forEach((rate) => {
-                        values.set(rate.code, rate.value)
-                    })
+            response.forEach((rate) => {
+                values.set(rate.code, rate.value)
+            })
 
-                    return values
-                })
-
-            for await (const transaction of transactions) {
-                const transactionRate = rates.get(transaction.currency)
-
-                if (!transactionRate) {
-                    throw new GraphQLError(`{
-                        message: "Transaction has invalid currency code",
-                        transaction,
-                    }`)
-                }
+            return values
+        })
+}
 
 
-                const targetRate = rates.get(context.user?.currency ?? '')
+export const convertTransaction = async <TTransaction extends BaseTransaction>(
+    transaction: TTransaction,
+    user: User,
+    rates: Map<string, number>
+) => {
+    const transactionRate = rates.get(transaction.currency)
 
-                if (!targetRate) {
-                    throw new Error('Couldn\'t find target rate while converting currency')
-                }
+    if (!transactionRate) {
+        throw new Error(`Transaction has invalid code: ${JSON.stringify(transaction)}`)
+    }
 
-                const baseValue = transaction.amount.toNumber() / transactionRate
+    const targetRate = rates.get(user.currency ?? '')
 
-                return baseValue * targetRate
-            }
+    if (!targetRate) {
+        throw new Error('Couldn\'t find target rate while converting currency')
+    }
+
+    const baseValue = transaction.amount.toNumber() / transactionRate
+
+    const convertedValue = baseValue * targetRate
+
+    return {
+        ...transaction,
+        amount: {
+            converted: convertedValue,
+            original: transaction.amount.toNumber(),
+        },
+        date: transaction.date.toString(),
+    }
 }
