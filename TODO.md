@@ -2,7 +2,6 @@
 
 ## BACKLOG
 
--   [ ] Clean up dup deps
 -   [ ] Auth
 -   [ ] Auth in tests
 -   [ ] Move shard ones to root
@@ -12,6 +11,7 @@
 -   [ ] Internal errors/filter them from logger
 -   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
 -   [ ] See if you can reduce duplication in api validation, check transaction validation
+-   [ ] Clean up codegen packages on web, you prob don't need all of them
 -   [ ] APi tests in docker?
         https://akashsingh.blog/testing-typescript-graphql-server-using-jest-with-docker#heading-docker-compose
 -   [ ] Figure out how to use pm2 better
