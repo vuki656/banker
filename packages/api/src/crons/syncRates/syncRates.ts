@@ -1,8 +1,8 @@
-import { logger } from '@banker/api/src/shared/utils'
 import { schedule } from 'node-cron'
 import fetch from 'node-fetch'
 
 import env from '../../shared/env'
+import { logger } from '../../shared/logger'
 import { orm } from '../../shared/orm'
 
 import { ratesValidation } from './syncRates.validation'
