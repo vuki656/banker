@@ -1,4 +1,4 @@
-import { Decimal } from "@prisma/client/runtime"
+import type { Decimal } from '@prisma/client/runtime'
 
 export type BaseTransaction = {
     [key: string]: unknown

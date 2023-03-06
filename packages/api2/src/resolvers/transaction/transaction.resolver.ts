@@ -1,7 +1,10 @@
 import dayjs from 'dayjs'
 
 import { orm } from '../../shared/orm'
-import { nullableConnect } from '../../shared/utils'
+import {
+    connectDisconnect,
+    nullableConnect,
+} from '../../shared/utils'
 import {
     categorySelect,
     keywordSelect,
@@ -16,6 +19,7 @@ import {
 import {
     createTransactionMutationValidation,
     transactionsQueryValidation,
+    updateTransactionMutationValidation,
 } from './transaction.validation'
 
 const TransactionResolver: TransactionModule.Resolvers = {
@@ -51,7 +55,51 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const convertedTransaction = await convertTransaction(
                 createdTransaction,
-                context.user,
+                context.user.currency,
+                rates
+            )
+
+            return {
+                transaction: convertedTransaction,
+            }
+        },
+        updateTransaction: async (_, variables, context) => {
+            if (!context.user) {
+                throw new Error('No user')
+            }
+
+            const input = updateTransactionMutationValidation.parse(variables.input)
+
+            const updatedTransaction = await orm.transaction.update({
+                data: {
+                    amount: input.amount,
+                    category: connectDisconnect(input.categoryId),
+                    currency: input.currency,
+                    date: input.date,
+                    description: input.description,
+                    status: input.status,
+                },
+                select: {
+                    ...transactionSelect,
+                    category: {
+                        select: {
+                            ...categorySelect,
+                            keywords: {
+                                select: keywordSelect,
+                            },
+                        },
+                    },
+                },
+                where: {
+                    id: input.id,
+                },
+            })
+
+            const rates = await fetchRates()
+
+            const convertedTransaction = await convertTransaction(
+                updatedTransaction,
+                context.user.currency,
                 rates
             )
 
@@ -82,9 +130,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
                         select: {
                             ...categorySelect,
                             keywords: {
-                                select: {
-                                    ...keywordSelect,
-                                },
+                                select: keywordSelect,
                             },
 
                         },
@@ -120,7 +166,11 @@ const TransactionResolver: TransactionModule.Resolvers = {
             const rates = await fetchRates()
 
             return transactions.map(async (transaction) => {
-                return convertTransaction(transaction, user, rates)
+                return convertTransaction(
+                    transaction,
+                    user.currency,
+                    rates
+                )
             })
         },
     },
