@@ -1323,7 +1323,7 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     react-hook-form: ^7.43.5
-    xlsx: "https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz"
+    xlsx: "https://cdn.sheetjs.com/xlsx-0.19.2/xlsx-0.19.2.tgz"
   languageName: unknown
   linkType: soft
 
@@ -16274,12 +16274,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xlsx@https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz":
-  version: 0.18.12
-  resolution: "xlsx@https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz"
+"xlsx@https://cdn.sheetjs.com/xlsx-0.19.2/xlsx-0.19.2.tgz":
+  version: 0.19.2
+  resolution: "xlsx@https://cdn.sheetjs.com/xlsx-0.19.2/xlsx-0.19.2.tgz"
   bin:
     xlsx: ./bin/xlsx.njs
-  checksum: f073ecb2e2513c8d4a9435532db9abaf148f10a1828ae164935f811c4126c92ec3a175e3ffeacba062a9bb689b5325b80f3c5060d8d0ba0526fd9fb8a76a9891
+  checksum: 262918c806252beb77fbccb2e516829814aa3efa5b09d5b94ce1eb45a0b10efb33085ff42c832051eb7a17b94d645a5da888e28421689d9f7263354cda175408
   languageName: node
   linkType: hard
 
