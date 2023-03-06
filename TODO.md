@@ -4,10 +4,8 @@
 
 -   [ ] Auth
 -   [ ] Auth in tests
--   [ ] Move shard ones to root
 -   [ ] Prettier format not working for generated test types
 -   [ ] Try to setup aliases with webpack // Nextjs did it
--   [ ] Update xlsx
 -   [ ] Internal errors/filter them from logger
 -   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
 -   [ ] See if you can reduce duplication in api validation, check transaction validation
