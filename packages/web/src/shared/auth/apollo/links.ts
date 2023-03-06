@@ -7,8 +7,8 @@ import {
 } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 import isomorphicFetch from 'isomorphic-fetch'
-import type { InitApolloOptions } from 'next-with-apollo'
 import getConfig from 'next/config'
+import type { InitApolloOptions } from 'next-with-apollo'
 
 import introspectionGeneratedTS from '../../../graphql/introspection.generated.json'
 import introspectionGeneratedJSON from '../../../graphql/types.generated'
