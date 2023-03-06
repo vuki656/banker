@@ -10,7 +10,7 @@
         "database:setup": "docker compose run --rm migration",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "dev": "nodemon",
-        "generate:dev-types": "graphql-codegen --config='./codegen.ts'",
+        "generate:dev-types": "yarn graphql-codegen --config='./codegen.ts'",
         "generate:orm": "prisma generate",
         "generate:template": "plop",
         "generate:test-types": "graphql-codegen --config='./codegen.tests.ts'",
@@ -31,6 +31,7 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
+        "@graphql-codegen/cli": "^3.2.1",
         "@graphql-codegen/graphql-modules-preset": "^3.1.0",
         "@graphql-codegen/typescript-operations": "^3.0.1",
         "@graphql-codegen/typescript-resolvers": "^3.1.0",
