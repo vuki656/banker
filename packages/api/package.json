@@ -19,22 +19,18 @@
     },
     "dependencies": {
         "@apollo/server": "^4.4.1",
-        "@paralleldrive/cuid2": "^2.2.0",
         "@prisma/client": "^4.11.0",
         "bcrypt": "^5.1.0",
         "dotenv": "^16.0.3",
         "envalid": "^7.3.1",
-        "graphql": "^16.6.0",
         "graphql-tag": "^2.12.6",
         "node-cron": "^3.0.2",
         "node-fetch": "2",
         "pino": "^8.11.0",
-        "plop": "^3.1.2",
-        "zod": "^3.20.6"
+        "plop": "^3.1.2"
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
-        "@graphql-codegen/cli": "^3.2.1",
         "@graphql-codegen/graphql-modules-preset": "^3.1.0",
         "@graphql-codegen/typescript-operations": "^3.0.1",
         "@graphql-codegen/typescript-resolvers": "^3.1.0",
@@ -42,7 +38,6 @@
         "@graphql-tools/merge": "^8.3.18",
         "@types/bcrypt": "^5.0.0",
         "@types/jest": "^29.4.0",
-        "@types/node": "^18.14.5",
         "@types/node-cron": "^3.0.7",
         "@types/node-fetch": "2",
         "@types/string-replace-loader": "^2.3.2",

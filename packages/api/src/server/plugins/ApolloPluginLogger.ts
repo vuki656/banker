@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await -- Apollo plugin definition requires every step to be async */
 
 import type { ApolloServerPlugin } from '@apollo/server'
-import { createId } from '@paralleldrive/cuid2'
+import { v4 } from 'uuid'
 
 import { logger } from '../../shared/logger'
 import type { Context } from '../../shared/types'
@@ -13,7 +13,7 @@ export const ApolloPluginLogger: ApolloServerPlugin<Context> = {
             return
         }
 
-        const loggerInstance = logger.child({ requestId: createId() })
+        const loggerInstance = logger.child({ requestId: v4() })
 
         // Set the global logger instance so it's available throughout requests
         requestContext.contextValue.logger = loggerInstance
