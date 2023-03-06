@@ -15,6 +15,9 @@
 -   [ ] Figure out how to use pm2 better
 -   [ ] Proper tsconfigs for production
 -   [ ] You might not need db migration url env variable
+-   [ ] Remove soft deletes
+-   [ ] Setup prometheus and other cool tracking/tracing stuff
 -   [ ] Eslint for gql files
+-   [ ] How to throw more complex errors?? Should you throw a normal error, graphql error??? what???
 -   [ ] Check if keywords can just be an array of strings on category, cuz the current way of updating category and it's keywords
         is stupid
