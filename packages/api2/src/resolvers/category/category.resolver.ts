@@ -40,9 +40,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
                 select: {
                     ...categorySelect,
                     keywords: {
-                        select: {
-                            ...keywordSelect,
-                        },
+                        select: keywordSelect,
                     },
                 },
             })
@@ -100,9 +98,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
                     select: {
                         ...categorySelect,
                         keywords: {
-                            select: {
-                                ...keywordSelect,
-                            },
+                            select: keywordSelect,
                         },
                     },
                     where: {
@@ -117,6 +113,21 @@ const CategoryResolver: CategoryModule.Resolvers = {
         },
     },
     Query: {
+        categories: (_, __, context) => {
+            return orm.category.findMany({
+                where: {
+                    user: {
+                        id: context.user.nonNullValue.id,
+                    },
+                },
+                select: {
+                    ...categorySelect,
+                    keywords: {
+                        select: keywordSelect,
+                    }
+                }
+            })
+        },
         category: (_, variables) => {
             const args = categoryQueryValidation.parse(variables.args)
 
@@ -124,9 +135,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
                 select: {
                     ...categorySelect,
                     keywords: {
-                        select: {
-                            ...keywordSelect,
-                        },
+                        select: keywordSelect,
                     },
                 },
                 where: {
