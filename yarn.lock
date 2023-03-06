@@ -1246,6 +1246,7 @@ __metadata:
   dependencies:
     "@apollo/server": ^4.4.1
     "@faker-js/faker": ^7.6.0
+    "@graphql-codegen/cli": ^3.2.1
     "@graphql-codegen/graphql-modules-preset": ^3.1.0
     "@graphql-codegen/typescript-operations": ^3.0.1
     "@graphql-codegen/typescript-resolvers": ^3.1.0
@@ -1288,6 +1289,7 @@ __metadata:
     "@apollo/client": 3.7.10
     "@emotion/react": ^11.10.6
     "@emotion/server": ^11.10.0
+    "@graphql-codegen/cli": ^3.2.1
     "@graphql-codegen/fragment-matcher": ^4.0.1
     "@graphql-codegen/gql-tag-operations-preset": ^2.1.0
     "@graphql-codegen/introspection": ^3.0.1
@@ -6248,8 +6250,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "banker@workspace:."
   dependencies:
-    "@graphql-codegen/cli": ^3.2.1
-    "@graphql-codegen/gql-tag-operations-preset": ^2.1.0
     "@rimac-technology/style-guide": ^6.1.1
     "@types/eslint": ^8.21.1
     "@types/node": 18.14.6

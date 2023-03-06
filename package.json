@@ -21,8 +21,6 @@
         "zod": "^3.21.3"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "^3.2.1",
-        "@graphql-codegen/gql-tag-operations-preset": "^2.1.0",
         "@rimac-technology/style-guide": "^6.1.1",
         "@types/eslint": "^8.21.1",
         "@types/node": "18.14.6",
