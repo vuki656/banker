@@ -11,6 +11,7 @@
 -   [ ] Update xlsx
 -   [ ] Internal errors/filter them from logger
 -   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
+-   [ ] See if you can reduce duplication in api validation, check transaction validation
 -   [ ] APi tests in docker?
         https://akashsingh.blog/testing-typescript-graphql-server-using-jest-with-docker#heading-docker-compose
 -   [ ] Figure out how to use pm2 better
