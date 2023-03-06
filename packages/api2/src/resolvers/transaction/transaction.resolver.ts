@@ -1,20 +1,75 @@
- import { userId } from '@banker/api/src/database/seed/user'
-import { TRANSACTION_DEFAULT_SELECT } from '@banker/api/src/resolvers'
-import { convertTransaction } from '@banker/api/src/shared/utils'
 import dayjs from 'dayjs'
-import { GraphQLError } from 'graphql'
 
 import { orm } from '../../shared/orm'
-import { categorySelect, keywordSelect } from '../category'
+import { nullableConnect } from '../../shared/utils'
+import {
+    categorySelect,
+    keywordSelect,
+} from '../category'
 
 import type { TransactionModule } from './resolver-types.generated'
 import { transactionSelect } from './transaction.select'
-import { transactionsQueryValidation } from './transaction.validation'
+import {
+    convertTransaction,
+    fetchRates,
+} from './transaction.utils'
+import {
+    createTransactionMutationValidation,
+    transactionsQueryValidation,
+} from './transaction.validation'
 
 const TransactionResolver: TransactionModule.Resolvers = {
-    Mutation: {},
+    Mutation: {
+        createTransaction: async (_, variables, context) => {
+            if (!context.user) {
+                throw new Error('No user in context')
+            }
+
+            const input = createTransactionMutationValidation.parse(variables.input)
+
+            const createdTransaction = await orm.transaction.create({
+                data: {
+                    amount: input.amount,
+                    category: nullableConnect(input.categoryId),
+                    currency: input.currency,
+                    date: input.date,
+                    description: input.description,
+                    reference: input.reference,
+                    status: input.status,
+                    user: {
+                        connect: {
+                            id: context.user.id,
+                        },
+                    },
+                },
+                select: {
+                    ...transactionSelect,
+                },
+            })
+
+            const rates = await fetchRates()
+
+            const convertedTransaction = await convertTransaction(
+                createdTransaction,
+                context.user,
+                rates
+            )
+
+            return {
+                transaction: convertedTransaction,
+            }
+        },
+    },
     Query: {
         transactions: async (_, variables, context) => {
+            // TODO: why is this needed??
+            const user = context.user
+
+            // TODO: handle this
+            if (!user) {
+                throw new Error('No current user when converting currencies')
+            }
+
             const args = transactionsQueryValidation.parse(variables.args)
 
             const transactions = await orm.transaction.findMany({
@@ -23,17 +78,17 @@ const TransactionResolver: TransactionModule.Resolvers = {
                 },
                 select: {
                     ...transactionSelect,
-                     category: {
-                         select: {
-                             ...categorySelect,
-                             keywords: {
-                                 select: {
-                                     ...keywordSelect,
-                                 }
-                             }
+                    category: {
+                        select: {
+                            ...categorySelect,
+                            keywords: {
+                                select: {
+                                    ...keywordSelect,
+                                },
+                            },
 
-                         }
-                     },
+                        },
+                    },
                 },
                 where: {
                     AND: [
@@ -46,70 +101,27 @@ const TransactionResolver: TransactionModule.Resolvers = {
                         },
                         {
                             date: {
-                                lte: args?.endDate ?? dayjs().toDate(),
+                                lte: args.endDate ?? dayjs().toDate(),
                             },
                         },
                         {
                             category: {
-                                id: args?.categoryId ?? undefined,
+                                id: args.categoryId ?? undefined,
                             },
                         },
                     ],
                     isDeleted: false,
                     user: {
-                        id: userId,
+                        id: user.id,
                     },
                 },
             })
 
-            const rates = await orm
-                .rate
-                .findMany()
-                .then((response) => {
-                    const values = new Map<string, number>()
+            const rates = await fetchRates()
 
-                    response.forEach((rate) => {
-                        values.set(rate.code, rate.value)
-                    })
-
-                    return values
-                })
-
-             // TODO: i don't like this
-             return transactions.map((transaction) => {
-                const transactionRate = rates.get(transaction.currency)
-
-                if (!transactionRate) {
-                    throw new Error(`Transaction has invalid code: ${JSON.stringify(transaction)}`)
-                }
-
-                if (!context.user) {
-                    throw new Error("No current user when converting currencies")
-                }
-
-                const targetRate = rates.get(context.user?.currency ?? '')
-
-                if (!targetRate) {
-                    throw new Error(`Couldn\'t find target rate while converting currency`)
-                }
-
-                const baseValue = transaction.amount.toNumber() / transactionRate
-
-                const convertedValue = baseValue * targetRate
-
-                 return {
-                     amount: {
-                         converted: convertedValue,
-                         original: transaction.amount.toNumber(),
-                     },
-                     reference: transaction.reference,
-                     status: transaction.status,
-                     description: transaction.description,
-                     category: transaction.category,
-                     date: transaction.date.toString(),
-                     currency: transaction.currency,
-                 }
-             })
+            return transactions.map(async (transaction) => {
+                return convertTransaction(transaction, user, rates)
+            })
         },
     },
 }
