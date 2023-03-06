@@ -7,7 +7,7 @@ import {
     ThemeIcon,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { IconList } from '@tabler/icons'
+import { IconList } from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 

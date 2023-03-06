@@ -7,7 +7,7 @@ import {
     IconClock,
     IconDeviceFloppy,
     IconTrash,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 
 import {

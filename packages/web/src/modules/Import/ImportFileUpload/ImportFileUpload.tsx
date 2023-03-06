@@ -9,7 +9,7 @@ import {
 import {
     IconCheck,
     IconCloudUpload,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import {
     read,
     utils,

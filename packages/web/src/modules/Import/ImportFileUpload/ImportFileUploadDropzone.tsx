@@ -9,7 +9,7 @@ import {
     MS_EXCEL_MIME_TYPE,
 } from '@mantine/dropzone'
 import { showNotification } from '@mantine/notifications'
-import { IconFileAnalytics } from '@tabler/icons'
+import { IconFileAnalytics } from '@tabler/icons-react'
 
 import type { ImportFileUploadDropzoneProps } from './ImportFileUploadDropzone.types'
 

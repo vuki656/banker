@@ -16,7 +16,7 @@ import {
     IconRotateClockwise,
     IconShirt,
     IconShoppingCart,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import { cloneElement } from 'react'
 
 import type { IconsProps } from './Icons.props'

@@ -9,7 +9,7 @@ import {
 import {
     IconPencil,
     IconX,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import { useState } from 'react'
 import {
     useController,
