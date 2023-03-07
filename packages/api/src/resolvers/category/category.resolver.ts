@@ -1,4 +1,5 @@
 import { orm } from '../../shared/orm'
+import { validateRequest } from '../../shared/utils'
 
 import {
     categorySelect,
@@ -15,6 +16,8 @@ import type { CategoryModule } from './resolver-types.generated'
 const CategoryResolver: CategoryModule.Resolvers = {
     Mutation: {
         createCategory: async (_, variables, context) => {
+            validateRequest(context)
+
             const input = createCategoryMutationValidation.parse(variables.input)
 
             const createdCategory = await orm.category.create({
@@ -49,7 +52,9 @@ const CategoryResolver: CategoryModule.Resolvers = {
                 category: createdCategory,
             }
         },
-        deleteCategory: async (_, variables) => {
+        deleteCategory: async (_, variables, context) => {
+            validateRequest(context)
+
             const input = deleteCategoryMutationValidation.parse(variables.input)
 
             // TODO: what about keywords that are related
@@ -64,6 +69,8 @@ const CategoryResolver: CategoryModule.Resolvers = {
             }
         },
         updateCategory: async (_, variables, context) => {
+            validateRequest(context)
+
             const input = updateCategoryMutationValidation.parse(variables.input)
 
             const updatedCategory = await orm.$transaction(async (transaction) => {
@@ -114,6 +121,8 @@ const CategoryResolver: CategoryModule.Resolvers = {
     },
     Query: {
         categories: async (_, __, context) => {
+            validateRequest(context)
+
             return orm.category.findMany({
                 select: {
                     ...categorySelect,
@@ -128,7 +137,9 @@ const CategoryResolver: CategoryModule.Resolvers = {
                 },
             })
         },
-        category: (_, variables) => {
+        category: (_, variables, context) => {
+            validateRequest(context)
+
             const args = categoryQueryValidation.parse(variables.args)
 
             return orm.category.findUniqueOrThrow({

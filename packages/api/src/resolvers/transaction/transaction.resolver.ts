@@ -4,6 +4,7 @@ import { orm } from '../../shared/orm'
 import {
     connectDisconnect,
     nullableConnect,
+    validateRequest,
 } from '../../shared/utils'
 import {
     categorySelect,
@@ -25,6 +26,8 @@ import {
 const TransactionResolver: TransactionModule.Resolvers = {
     Mutation: {
         createTransaction: async (_, variables, context) => {
+            validateRequest(context)
+
             const input = createTransactionMutationValidation.parse(variables.input)
 
             const createdTransaction = await orm.transaction.create({
@@ -60,6 +63,8 @@ const TransactionResolver: TransactionModule.Resolvers = {
             }
         },
         updateTransaction: async (_, variables, context) => {
+            validateRequest(context)
+
             const input = updateTransactionMutationValidation.parse(variables.input)
 
             const updatedTransaction = await orm.transaction.update({
@@ -102,6 +107,8 @@ const TransactionResolver: TransactionModule.Resolvers = {
     },
     Query: {
         transactions: async (_, variables, context) => {
+            validateRequest(context)
+
             const args = transactionsQueryValidation.parse(variables.args)
 
             const transactions = await orm.transaction.findMany({
