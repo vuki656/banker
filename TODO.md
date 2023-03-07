@@ -1,7 +1,5 @@
 ## NEXT
 
--   [ ] Auth
-
 ## BACKLOG
 
 -   [ ] Tests

@@ -21,10 +21,10 @@ const config: CodegenConfig = {
             },
         },
     },
-    overwrite: true,
     hooks: {
         afterOneFileWrite: ['prettier --write'],
     },
+    overwrite: true,
     schema: SCHEMA_FILES_LOCATION,
 }
 
