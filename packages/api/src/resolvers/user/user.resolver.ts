@@ -5,6 +5,7 @@ import { sign } from 'jsonwebtoken'
 import env from '../../shared/env'
 import { orm } from '../../shared/orm'
 import type { TokenDataType } from '../../shared/types'
+import { validateRequest } from '../../shared/utils'
 
 import type { UserModule } from './resolver-types.generated'
 import { userSelect } from './user.select'
@@ -49,7 +50,9 @@ const UserResolver: UserModule.Resolvers = {
                 user,
             }
         },
-        updateUser: async (_, variables) => {
+        updateUser: async (_, variables, context) => {
+            validateRequest(context)
+
             const input = updateUserMutationValidation.parse(variables.input)
 
             const updatedUser = await orm.user.update({
@@ -72,6 +75,8 @@ const UserResolver: UserModule.Resolvers = {
     },
     Query: {
         currentUser: (_, __, context) => {
+            validateRequest(context)
+
             return context.user.nonNullValue
         },
     },
