@@ -29,10 +29,10 @@ const UserResolver: UserModule.Resolvers = {
                 },
             })
 
-            const isValid = await compare(user.password, input.password)
+            const isValid = await compare(input.password, user.password)
 
             if (!isValid) {
-                throw new GraphQLError('Wrong email or password')
+                throw new GraphQLError('Wrong password')
             }
 
             const tokenData: TokenDataType = {
