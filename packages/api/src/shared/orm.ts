@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { logger } from './logger'
 
 export const orm = new PrismaClient({
-    errorFormat: 'colorless',
+    errorFormat: 'minimal',
     log: [
         { emit: 'event', level: 'query' },
         { emit: 'event', level: 'error' },
