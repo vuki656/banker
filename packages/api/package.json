@@ -15,7 +15,7 @@
         "generate:template": "plop",
         "generate:test-types": "graphql-codegen --config='./codegen.tests.ts'",
         "start": "node 'dist/main.js'",
-        "test": "jest"
+        "test": "jest --runInBand"
     },
     "dependencies": {
         "@apollo/server": "^4.4.1",
@@ -31,10 +31,10 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
-        "@graphql-codegen/cli": "^3.2.1",
-        "@graphql-codegen/graphql-modules-preset": "^3.1.0",
-        "@graphql-codegen/typescript-operations": "^3.0.1",
-        "@graphql-codegen/typescript-resolvers": "^3.1.0",
+        "@graphql-codegen/cli": "^3.2.2",
+        "@graphql-codegen/graphql-modules-preset": "^3.1.1",
+        "@graphql-codegen/typescript-operations": "^3.0.2",
+        "@graphql-codegen/typescript-resolvers": "^3.1.1",
         "@graphql-tools/load-files": "^6.6.1",
         "@graphql-tools/merge": "^8.4.0",
         "@types/bcrypt": "^5.0.0",

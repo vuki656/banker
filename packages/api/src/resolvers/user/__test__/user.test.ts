@@ -1,72 +1,66 @@
 import { faker } from '@faker-js/faker'
+import { hash } from 'bcrypt'
 
 import { server } from '../../../server'
 import { orm } from '../../../shared/orm'
-import { wipeDatabase } from '../../../shared/test-utils'
+import {
+    authenticatedContext,
+    unauthenticatedContext,
+    wipeDatabase,
+} from '../../../shared/test-utils'
 import type {
     CurrentUserQuery,
     CurrentUserQueryVariables,
+    LoginUserMutation,
+    LoginUserMutationVariables,
     UpdateUserMutation,
     UpdateUserMutationVariables,
 } from '../../../shared/types/test-types.generated'
 import type { UpdateUserInput } from '../../graphql-types.generated'
 
-import { UPDATE_USER } from './graphql/mutations.gql'
+import {
+    LOGIN_USER,
+    UPDATE_USER,
+} from './graphql/mutations.gql'
 import { CURRENT_USER } from './graphql/queries.gql'
 
-// TODO: auth tests for each thing?
 describe('User resolver', () => {
     beforeEach(async () => {
         await wipeDatabase()
     })
 
-    describe.skip('when `currentUser` query is called', () => {
-        it('should return current user if logged in', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
-
+    describe('when `currentUser` query is called', () => {
+        it('should return current user', async () => {
             const response = await server.executeOperation<
                 CurrentUserQuery,
                 CurrentUserQueryVariables
-            >({
-                query: CURRENT_USER,
-            })
+            >(
+                { query: CURRENT_USER },
+                authenticatedContext
+            )
 
             if (response.body.kind === 'incremental') {
                 throw new Error('Wrong response type')
             }
 
-            expect(existingUser).toMatchObject(response.body.singleResult.data?.currentUser ?? {})
+            expect(response.body.singleResult.errors).toBeUndefined()
+            expect(response.body.singleResult.data?.currentUser).toBeDefined()
         })
 
-        it('should return null if not logged in', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
-
+        it('should return an error if not authenticated', async () => {
             const response = await server.executeOperation<
                 CurrentUserQuery,
                 CurrentUserQueryVariables
-            >({
-                query: CURRENT_USER,
-            })
+            >(
+                { query: CURRENT_USER },
+                unauthenticatedContext
+            )
 
             if (response.body.kind === 'incremental') {
                 throw new Error('Wrong response type')
             }
 
-            expect(existingUser).toMatchObject(response.body.singleResult.data?.currentUser ?? {})
+            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 
@@ -99,12 +93,13 @@ describe('User resolver', () => {
                         ...input,
                     },
                 },
-            })
+            }, authenticatedContext)
 
             if (response.body.kind === 'incremental') {
                 throw new Error('Wrong response type')
             }
 
+            expect(response.body.singleResult.errors).toBeUndefined()
             expect(response.body.singleResult.data?.updateUser.user).toMatchObject({
                 id: existingUser.id,
                 ...input,
@@ -126,7 +121,7 @@ describe('User resolver', () => {
                         lastName: faker.name.lastName(),
                     },
                 },
-            })
+            }, authenticatedContext)
 
             if (response.body.kind === 'incremental') {
                 throw new Error('Wrong response type')
@@ -134,15 +129,121 @@ describe('User resolver', () => {
 
             expect(response.body.singleResult.errors?.[0]?.message).toContain('Record to update not found')
         })
+
+        it('should return an error if not authenticated', async () => {
+            const response = await server.executeOperation<
+                UpdateUserMutation,
+                UpdateUserMutationVariables
+            >({
+                query: UPDATE_USER,
+                variables: {
+                    input: {
+                        currency: faker.finance.currencyCode(),
+                        email: faker.internet.email(),
+                        firstName: faker.name.firstName(),
+                        id: faker.datatype.uuid(),
+                        lastName: faker.name.lastName(),
+                    },
+                },
+            }, unauthenticatedContext)
+
+            if (response.body.kind === 'incremental') {
+                throw new Error('Wrong response type')
+            }
+
+            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+        })
     })
 
     describe('when login mutation is called', () => {
-        it.todo('something is missing')
+        it('should return an error if user not found in database', async () => {
+            const response = await server.executeOperation<
+                LoginUserMutation,
+                LoginUserMutationVariables
+            >({
+                query: LOGIN_USER,
+                variables: {
+                    input: {
+                        email: faker.internet.email(),
+                        password: faker.internet.password(),
+                    },
+                },
+            })
 
-        it.todo('should throw an error when sent token is not holding an object')
+            if (response.body.kind === 'incremental') {
+                throw new Error('Wrong response type')
+            }
 
-        it.todo('should throw an error if user not found in database')
+            expect(response.body.singleResult.errors?.[0]?.message).toBe('No User found')
+        })
 
-        it.todo('should return user')
+        it('should return an error if the password is wrong', async () => {
+            const existingUser = await orm.user.create({
+                data: {
+                    currency: faker.finance.currencyCode(),
+                    email: faker.internet.email(),
+                    firstName: faker.name.firstName(),
+                    id: faker.datatype.uuid(),
+                    lastName: faker.name.lastName(),
+                    password: faker.internet.password(),
+                },
+            })
+
+            const response = await server.executeOperation<
+                LoginUserMutation,
+                LoginUserMutationVariables
+            >({
+                query: LOGIN_USER,
+                variables: {
+                    input: {
+                        email: existingUser.email,
+                        password: faker.lorem.word(),
+                    },
+                },
+            })
+
+            if (response.body.kind === 'incremental') {
+                throw new Error('Wrong response type')
+            }
+
+            expect(response.body.singleResult.errors?.[0]?.message).toBe('Wrong password')
+        })
+
+        it('should return user and token on valid login', async () => {
+            const password = faker.lorem.word()
+            const passwordHash = await hash(password, 10)
+
+            const existingUser = await orm.user.create({
+                data: {
+                    currency: faker.finance.currencyCode(),
+                    email: faker.internet.email(),
+                    firstName: faker.name.firstName(),
+                    id: faker.datatype.uuid(),
+                    lastName: faker.name.lastName(),
+                    password: passwordHash,
+                },
+            })
+
+            const response = await server.executeOperation<
+                LoginUserMutation,
+                LoginUserMutationVariables
+            >({
+                query: LOGIN_USER,
+                variables: {
+                    input: {
+                        email: existingUser.email,
+                        password,
+                    },
+                },
+            })
+
+            if (response.body.kind === 'incremental') {
+                throw new Error('Wrong response type')
+            }
+
+            expect(response.body.singleResult.errors).toBeUndefined()
+            expect(response.body.singleResult.data?.loginUser.token).toBeDefined()
+            expect(existingUser).toMatchObject(response.body.singleResult.data?.loginUser.user ?? {})
+        })
     })
 })

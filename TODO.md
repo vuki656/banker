@@ -1,12 +1,17 @@
 ## NEXT
 
-## BACKLOG
-
 -   [ ] Tests
     -   [ ] Category
     -   [ ] User
     -   [ ] Transaction
--   [ ] Internal errors/filter them from logger
+    -   [ ] Context
+
+## BACKLOG
+
+-   [ ] Factories
+-   [ ] What about testing that stuff is actually created in the database
+-   [ ] Internal errors/filter them from logger -- https://www.apollographql.com/docs/apollo-server/data/errors/
+    -   They expose apollo errors, use that? wbu other erros not from apollo?
 -   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
 -   [ ] Proper tsconfigs for production -- prod build
 -   [ ] Eslint for gql files
