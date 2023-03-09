@@ -15,9 +15,11 @@ const user: User = {
     lastName: faker.name.lastName(),
 }
 
-export const authenticatedContext: ExecuteOperationOptions<Context> = {
-    contextValue: {
-        logger,
-        user: new ContextUser(user),
-    },
+export const authenticatedContext = (existingUser?: User): ExecuteOperationOptions<Context> => {
+    return {
+        contextValue: {
+            logger,
+            user: new ContextUser(existingUser ?? user),
+        },
+    }
 }

@@ -5,7 +5,7 @@
     "scripts": {
         "build:project": "yarn build:schema && webpack",
         "build:schema": "ts-node ./src/server/build-schema.ts",
-        "database:inspector": "prisma studio",
+        "database:inspect": "prisma studio",
         "database:migrate": "docker compose run --no-deps --rm migration",
         "database:setup": "docker compose run --rm migration",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
