@@ -8,7 +8,7 @@ import { orm } from '../../orm'
 import { UserFactory } from './user.factory'
 
 export const CategoryFactory = {
-    build: (input?: Partial<Prisma.CategoryCreateInput>): Prisma.CategoryCreateInput => {
+    build: (input?: Partial<Prisma.CategoryCreateInput>) => {
         return {
             color: faker.color.rgb({ format: 'hex' }),
             icon: faker.lorem.word(),
@@ -18,7 +18,7 @@ export const CategoryFactory = {
                 create: UserFactory.build(),
             },
             ...input,
-        }
+        } satisfies Prisma.CategoryCreateInput 
     },
     create: (input?: Partial<Prisma.CategoryCreateInput>) => {
         return orm.category.create({
