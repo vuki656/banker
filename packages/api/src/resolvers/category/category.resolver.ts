@@ -1,5 +1,5 @@
 import { orm } from '../../shared/orm'
-import { validateRequest } from '../../shared/utils'
+import { checkAuth } from '../../shared/utils'
 
 import {
     categorySelect,
@@ -16,7 +16,7 @@ import type { CategoryModule } from './resolver-types.generated'
 const CategoryResolver: CategoryModule.Resolvers = {
     Mutation: {
         createCategory: async (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const input = createCategoryMutationValidation.parse(variables.input)
 
@@ -53,7 +53,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
             }
         },
         deleteCategory: async (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const input = deleteCategoryMutationValidation.parse(variables.input)
 
@@ -69,7 +69,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
             }
         },
         updateCategory: async (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const input = updateCategoryMutationValidation.parse(variables.input)
 
@@ -121,7 +121,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
     },
     Query: {
         categories: async (_, __, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             return orm.category.findMany({
                 select: {
@@ -138,7 +138,7 @@ const CategoryResolver: CategoryModule.Resolvers = {
             })
         },
         category: (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const args = categoryQueryValidation.parse(variables.args)
 
