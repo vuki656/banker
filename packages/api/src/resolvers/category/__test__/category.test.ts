@@ -187,7 +187,7 @@ describe('Category resolver', () => {
                 },
             })
 
-            const INPUT: CreateCategoryInput = {
+            const input: CreateCategoryInput = {
                 color: faker.color.rgb({ format: 'hex' }),
                 icon: faker.lorem.word(),
                 keywords: [],
@@ -200,7 +200,7 @@ describe('Category resolver', () => {
             >({
                 query: CREATE_CATEGORY,
                 variables: {
-                    input: INPUT,
+                    input: input,
                 },
             }, authenticatedContext(existingUser))
 
@@ -209,7 +209,7 @@ describe('Category resolver', () => {
             }
 
             expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.createCategory.category).toMatchObject(INPUT)
+            expect(response.body.singleResult.data?.createCategory.category).toMatchObject(input)
         })
 
         it('should return an error if not authenticated', async () => {
@@ -261,7 +261,7 @@ describe('Category resolver', () => {
                 },
             })
 
-            const INPUT: UpdateCategoryInput = {
+            const input: UpdateCategoryInput = {
                 color: faker.color.rgb({ format: 'hex' }),
                 icon: faker.lorem.word(),
                 id: existingCategory.id,
@@ -275,7 +275,7 @@ describe('Category resolver', () => {
             >({
                 query: UPDATE_CATEGORY,
                 variables: {
-                    input: INPUT,
+                    input: input,
                 },
             }, authenticatedContext(existingUser))
 
@@ -284,7 +284,7 @@ describe('Category resolver', () => {
             }
 
             expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.updateCategory.category).toMatchObject(INPUT)
+            expect(response.body.singleResult.data?.updateCategory.category).toMatchObject(input)
         })
 
         it('should return an error if not authenticated', async () => {
