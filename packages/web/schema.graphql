@@ -1,164 +1,164 @@
 type Mutation {
-  createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
-  deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
-  updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
-  createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
-  updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
-  discardTransaction(input: DiscardTransactionInput!): DiscardTransactionPayload!
-  updateUser(input: UpdateUserInput!): UpdateUserPayload!
-  loginUser(input: LoginUserInput!): LoginUserPayload!
+    createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
+    deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
+    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
+    createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
+    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
+    discardTransaction(input: DiscardTransactionInput!): DiscardTransactionPayload!
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
+    loginUser(input: LoginUserInput!): LoginUserPayload!
 }
 
 type Query {
-  category(args: CategoryArgs!): Category!
-  categories: [Category!]!
-  transactions(args: TransactionsArgs!): [Transaction!]!
-  currentUser: User!
+    category(args: CategoryArgs!): Category!
+    categories: [Category!]!
+    transactions(args: TransactionsArgs!): [Transaction!]!
+    currentUser: User!
 }
 
 input CategoryArgs {
-  id: ID!
+    id: ID!
 }
 
 input CreateCategoryInput {
-  color: String!
-  icon: String!
-  keywords: [String!]!
-  name: String!
+    color: String!
+    icon: String!
+    keywords: [String!]!
+    name: String!
 }
 
 input DeleteCategoryInput {
-  id: String!
+    id: String!
 }
 
 input UpdateCategoryInput {
-  id: String!
-  color: String!
-  icon: String!
-  keywords: [String!]!
-  name: String!
+    id: String!
+    color: String!
+    icon: String!
+    keywords: [String!]!
+    name: String!
 }
 
 type CreateCategoryPayload {
-  category: Category!
+    category: Category!
 }
 
 type DeleteCategoryPayload {
-  id: ID!
+    id: ID!
 }
 
 type UpdateCategoryPayload {
-  category: Category!
+    category: Category!
 }
 
 type Category {
-  id: ID!
-  color: String!
-  icon: String!
-  keywords: [Keyword!]!
-  name: String!
+    id: ID!
+    color: String!
+    icon: String!
+    keywords: [Keyword!]!
+    name: String!
 }
 
 type Keyword {
-  id: ID!
-  name: String!
+    id: ID!
+    name: String!
 }
 
 input TransactionsArgs {
-  categoryId: ID
-  startDate: String
-  endDate: String
+    categoryId: ID
+    startDate: String
+    endDate: String
 }
 
 enum TransactionStatus {
-  DISCARDED
-  DONE
-  SKIPPED
+    DISCARDED
+    DONE
+    SKIPPED
 }
 
 input CreateTransactionInput {
-  amount: Float!
-  categoryId: ID
-  currency: String!
-  date: String!
-  description: String!
-  reference: String!
-  status: TransactionStatus!
+    amount: Float!
+    categoryId: ID
+    currency: String!
+    date: String!
+    description: String!
+    reference: String!
+    status: TransactionStatus!
 }
 
 input DiscardTransactionInput {
-  id: ID!
+    id: ID!
 }
 
 input UpdateTransactionInput {
-  id: ID!
-  amount: Float!
-  categoryId: ID
-  currency: String!
-  date: String!
-  description: String!
-  status: TransactionStatus!
+    id: ID!
+    amount: Float!
+    categoryId: ID
+    currency: String!
+    date: String!
+    description: String!
+    status: TransactionStatus!
 }
 
 type CreateTransactionPayload {
-  transaction: Transaction!
+    transaction: Transaction!
 }
 
 type DiscardTransactionPayload {
-  transaction: Transaction!
+    transaction: Transaction!
 }
 
 type UpdateTransactionPayload {
-  transaction: Transaction!
+    transaction: Transaction!
 }
 
 type Amount {
-  converted: Float!
-  original: Float!
+    converted: Float!
+    original: Float!
 }
 
 type Transaction {
-  id: ID!
-  currency: String!
-  category: Category
-  amount: Amount!
-  date: String!
-  description: String!
-  reference: String!
-  status: TransactionStatus!
+    id: ID!
+    currency: String!
+    category: Category
+    amount: Amount!
+    date: String!
+    description: String!
+    reference: String!
+    status: TransactionStatus!
 }
 
 input LoginUserInput {
-  email: String!
-  password: String!
+    email: String!
+    password: String!
 }
 
 input UpdateUserInput {
-  firstName: String!
-  id: ID!
-  currency: String!
-  lastName: String!
-  email: String!
+    firstName: String!
+    id: ID!
+    currency: String!
+    lastName: String!
+    email: String!
 }
 
 type LoginUserPayload {
-  user: User!
-  token: String!
+    user: User!
+    token: String!
 }
 
 type UpdateUserPayload {
-  user: User!
+    user: User!
 }
 
 type User {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  currency: String!
-  email: String!
+    id: ID!
+    firstName: String!
+    lastName: String!
+    currency: String!
+    email: String!
 }
 
 schema {
-  query: Query
-  mutation: Mutation
+    query: Query
+    mutation: Mutation
 }
