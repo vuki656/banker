@@ -178,6 +178,8 @@ describe('Category resolver', () => {
 
     describe('when `createCategory` mutation is called', () => {
         it('should create category', async () => {
+            const KEYWORD_COUNT = 5
+
             const existingUser = await orm.user.create({
                 data: {
                     email: faker.internet.email(),
@@ -190,7 +192,9 @@ describe('Category resolver', () => {
             const input: CreateCategoryInput = {
                 color: faker.color.rgb({ format: 'hex' }),
                 icon: faker.lorem.word(),
-                keywords: [],
+                keywords: [...new Array(KEYWORD_COUNT)].map(() => {
+                    return faker.lorem.word()
+                }),
                 name: faker.lorem.word(),
             }
 
@@ -200,7 +204,7 @@ describe('Category resolver', () => {
             >({
                 query: CREATE_CATEGORY,
                 variables: {
-                    input: input,
+                    input,
                 },
             }, authenticatedContext(existingUser))
 
@@ -208,8 +212,18 @@ describe('Category resolver', () => {
                 throw new Error('Wrong response type')
             }
 
+            const category = response.body.singleResult.data?.createCategory.category ?? {}
+
             expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.createCategory.category).toMatchObject(input)
+            expect(category).toMatchObject({
+                ...input,
+                keywords: input.keywords.map((keyword) => {
+                    return {
+                        id: expect.any(String),
+                        name: keyword,
+                    }
+                }),
+            })
         })
 
         it('should return an error if not authenticated', async () => {
@@ -275,7 +289,7 @@ describe('Category resolver', () => {
             >({
                 query: UPDATE_CATEGORY,
                 variables: {
-                    input: input,
+                    input,
                 },
             }, authenticatedContext(existingUser))
 
