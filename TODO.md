@@ -1,6 +1,5 @@
 ## NEXT
 
--   [ ] Factories
 -   [ ] Tests
     -   [x] Category
     -   [x] User
