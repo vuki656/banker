@@ -1,13 +1,12 @@
 import { faker } from '@faker-js/faker'
 
 import { server } from '../../../server'
-import { orm } from '../../../shared/orm'
 import {
     authenticatedContext,
     unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
-import { UserFactory } from '../../../shared/test-utils/factories'
+import { CategoryFactory, UserFactory } from '../../../shared/test-utils/factories'
 import type {
     CategoriesQuery,
     CategoriesQueryVariables,
@@ -22,10 +21,6 @@ import type {
     UpdateCategoryMutation,
     UpdateCategoryMutationVariables,
 } from '../../../shared/types/test-types.generated'
-import {
-    categorySelect,
-    keywordSelect,
-} from '../category.select'
 
 import {
     CATEGORIES,
@@ -42,35 +37,7 @@ describe('Category resolver', () => {
 
     describe('when `category` query is called', () => {
         it('should return category', async () => {
-            const existingUser = await UserFactory.create()
-
-            const existingCategory = await orm.category.create({
-                data: {
-                    color: faker.color.rgb({ format: 'hex' }),
-                    icon: faker.lorem.word(),
-                    keywords: {
-                        createMany: {
-                            data: [...new Array(5)].map(() => {
-                                return {
-                                    name: faker.lorem.word(),
-                                }
-                            }),
-                        },
-                    },
-                    name: faker.lorem.word(),
-                    user: {
-                        connect: {
-                            id: existingUser.id,
-                        },
-                    },
-                },
-                select: {
-                    ...categorySelect,
-                    keywords: {
-                        select: keywordSelect,
-                    },
-                },
-            })
+            const existingCategory = await CategoryFactory.create()
 
             const response = await server.executeOperation<
                 CategoryQuery,
@@ -119,15 +86,12 @@ describe('Category resolver', () => {
 
             const existingUser = await UserFactory.create()
 
-            await orm.category.createMany({
-                data: [...new Array(CATEGORY_COUNT)].map(() => {
-                    return {
-                        color: faker.color.rgb({ format: 'hex' }),
-                        icon: faker.lorem.word(),
-                        name: faker.lorem.word(),
-                        userFk: existingUser.id,
+            await CategoryFactory.createMany(CATEGORY_COUNT, {
+                user: {
+                    connect: {
+                        id: existingUser.id
                     }
-                }),
+                }
             })
 
             const response = await server.executeOperation<
@@ -234,18 +198,12 @@ describe('Category resolver', () => {
         it('should update category', async () => {
             const existingUser = await UserFactory.create()
 
-            const existingCategory = await orm.category.create({
-                data: {
-                    color: faker.color.rgb({ format: 'hex' }),
-                    icon: faker.lorem.word(),
-                    id: faker.datatype.uuid(),
-                    name: faker.lorem.word(),
-                    user: {
-                        connect: {
-                            id: existingUser.id,
-                        },
-                    },
-                },
+            const existingCategory = await CategoryFactory.create({
+                user: {
+                    connect: {
+                        id: existingUser.id,
+                    }
+                }
             })
 
             const input: UpdateCategoryInput = {
@@ -303,18 +261,12 @@ describe('Category resolver', () => {
         it('should delete category', async () => {
             const existingUser = await UserFactory.create()
 
-            const existingCategory = await orm.category.create({
-                data: {
-                    color: faker.color.rgb({ format: 'hex' }),
-                    icon: faker.lorem.word(),
-                    id: faker.datatype.uuid(),
-                    name: faker.lorem.word(),
-                    user: {
-                        connect: {
-                            id: existingUser.id,
-                        },
-                    },
-                },
+            const existingCategory = await CategoryFactory.create({
+                user: {
+                    connect: {
+                        id: existingUser.id,
+                    }
+                }
             })
 
             const response = await server.executeOperation<
