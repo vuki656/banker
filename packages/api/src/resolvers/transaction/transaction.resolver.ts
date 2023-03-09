@@ -2,9 +2,9 @@ import dayjs from 'dayjs'
 
 import { orm } from '../../shared/orm'
 import {
+    checkAuth,
     connectDisconnect,
     nullableConnect,
-    checkAuth,
 } from '../../shared/utils'
 import {
     categorySelect,

@@ -16,7 +16,6 @@
     -   They expose apollo errors, use that? wbu other erros not from apollo?
     -   [ ] How to throw more complex errors?? Should you throw a normal error, graphql error??? what???
 -   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
--   [ ] Proper tsconfigs for production -- prod build
 
 ## Later
 
