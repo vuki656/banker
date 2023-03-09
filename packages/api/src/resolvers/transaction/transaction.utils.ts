@@ -1,3 +1,4 @@
+import { UnexpectedError } from '../../shared/errors'
 import { orm } from '../../shared/orm'
 
 import type { BaseTransaction } from './transaction.types'
@@ -25,13 +26,21 @@ export const convertTransaction = async <TTransaction extends BaseTransaction>(
     const transactionRate = rates.get(transaction.currency)
 
     if (!transactionRate) {
-        throw new Error(`Transaction has invalid code: ${JSON.stringify(transaction)}`)
+        throw new UnexpectedError('Transaction has invalid code', {
+            extensions: {
+                transaction,
+            },
+        })
     }
 
     const targetRate = rates.get(userCurrency ?? '')
 
     if (!targetRate) {
-        throw new Error('Couldn\'t find target rate while converting currency')
+        throw new UnexpectedError('Couldn\'t find target rate while converting user currency', {
+            extensions: {
+                userCurrency,
+            },
+        })
     }
 
     const baseValue = transaction.amount.toNumber() / transactionRate
