@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "exclude": [
+        "./__templates__",
+        "./src/**/__test__/",
+        "./src/database/migrations",
+        "./src/database/seed",
+        "./src/shared/test-utils"
+    ],
+    "include": ["./src/**/*"]
+}

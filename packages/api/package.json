@@ -10,10 +10,10 @@
         "database:setup": "docker compose run --rm migration",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "dev": "nodemon",
-        "generate:dev-types": "yarn graphql-codegen --config='./codegen.ts'",
-        "generate:orm": "prisma generate",
         "generate:template": "plop",
-        "generate:test-types": "graphql-codegen --config='./codegen.tests.ts'",
+        "generate:types:dev": "yarn graphql-codegen --config='./codegen.ts'",
+        "generate:types:orm": "prisma generate",
+        "generate:types:test": "graphql-codegen --config='./codegen.tests.ts'",
         "start": "node 'dist/main.js'",
         "test": "jest --runInBand"
     },
@@ -26,8 +26,7 @@
         "graphql-tag": "^2.12.6",
         "node-cron": "^3.0.2",
         "node-fetch": "2.6.9",
-        "pino": "^8.11.0",
-        "plop": "^3.1.2"
+        "pino": "^8.11.0"
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
@@ -47,12 +46,13 @@
         "jest": "^29.5.0",
         "nodemon": "^2.0.21",
         "pino-pretty": "^9.4.0",
+        "plop": "^3.1.2",
         "prisma": "^4.11.0",
         "string-replace-loader": "^3.1.0",
         "ts-jest": "^29.0.5",
         "ts-loader": "^9.4.2",
         "ts-node": "^10.9.1",
-        "webpack": "^5.75.0",
+        "webpack": "^5.76.0",
         "webpack-cli": "^5.0.1",
         "webpack-node-externals": "^3.0.0"
     },
