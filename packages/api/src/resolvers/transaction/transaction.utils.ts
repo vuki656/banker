@@ -18,7 +18,7 @@ export const fetchRates = async () => {
         })
 }
 
-export const convertTransaction = async <TTransaction extends BaseTransaction>(
+export const convertTransactionAmount = async <TTransaction extends BaseTransaction>(
     transaction: TTransaction,
     userCurrency: string,
     rates: Map<string, number>

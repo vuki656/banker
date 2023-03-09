@@ -8,10 +8,6 @@
 
 ## BACKLOG
 
--   [ ] What about testing that stuff is actually created in the database
--   [ ] Fetch rates fn seems out of place
--   [ ] Imports?? Handle things like syncCron file where we are importing from transaction resolver
-
 ## Later
 
 -   [ ] Remove casting from execute operation
