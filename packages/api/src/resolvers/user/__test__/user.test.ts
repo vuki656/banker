@@ -36,7 +36,7 @@ describe('User resolver', () => {
                 CurrentUserQueryVariables
             >(
                 { query: CURRENT_USER },
-                authenticatedContext
+                authenticatedContext()
             )
 
             if (response.body.kind === 'incremental') {
@@ -93,7 +93,7 @@ describe('User resolver', () => {
                         ...input,
                     },
                 },
-            }, authenticatedContext)
+            }, authenticatedContext())
 
             if (response.body.kind === 'incremental') {
                 throw new Error('Wrong response type')
@@ -121,7 +121,7 @@ describe('User resolver', () => {
                         lastName: faker.name.lastName(),
                     },
                 },
-            }, authenticatedContext)
+            }, authenticatedContext())
 
             if (response.body.kind === 'incremental') {
                 throw new Error('Wrong response type')

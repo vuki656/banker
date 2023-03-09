@@ -1,6 +1,6 @@
 input CreateCategoryInput {
     color: String!
     icon: String!
-    keyword: [String!]!
+    keywords: [String!]!
     name: String!
 }
