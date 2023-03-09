@@ -1,5 +1,6 @@
 ## NEXT
 
+-   [ ] Factories
 -   [ ] Tests
     -   [x] Category
     -   [x] User
@@ -8,7 +9,6 @@
 
 ## BACKLOG
 
--   [ ] Factories
 -   [ ] What about testing that stuff is actually created in the database
 -   [ ] Fetch rates fn seems out of place
 -   [ ] Internal errors/filter them from logger -- https://www.apollographql.com/docs/apollo-server/data/errors/

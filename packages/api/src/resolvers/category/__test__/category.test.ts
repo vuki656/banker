@@ -7,6 +7,7 @@ import {
     unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
+import { UserFactory } from '../../../shared/test-utils/factories'
 import type {
     CategoriesQuery,
     CategoriesQueryVariables,
@@ -41,14 +42,7 @@ describe('Category resolver', () => {
 
     describe('when `category` query is called', () => {
         it('should return category', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             const existingCategory = await orm.category.create({
                 data: {
@@ -123,14 +117,7 @@ describe('Category resolver', () => {
         it('should return categories', async () => {
             const CATEGORY_COUNT = 30
 
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             await orm.category.createMany({
                 data: [...new Array(CATEGORY_COUNT)].map(() => {
@@ -180,14 +167,7 @@ describe('Category resolver', () => {
         it('should create category', async () => {
             const KEYWORD_COUNT = 5
 
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             const input: CreateCategoryInput = {
                 color: faker.color.rgb({ format: 'hex' }),
@@ -252,14 +232,7 @@ describe('Category resolver', () => {
 
     describe('when `updateCategory` mutation is called', () => {
         it('should update category', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             const existingCategory = await orm.category.create({
                 data: {
@@ -328,14 +301,7 @@ describe('Category resolver', () => {
 
     describe('when `deleteCategory` mutation is called', () => {
         it('should delete category', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             const existingCategory = await orm.category.create({
                 data: {

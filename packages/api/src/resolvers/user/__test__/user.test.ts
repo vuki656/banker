@@ -2,12 +2,12 @@ import { faker } from '@faker-js/faker'
 import { hash } from 'bcrypt'
 
 import { server } from '../../../server'
-import { orm } from '../../../shared/orm'
 import {
     authenticatedContext,
     unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
+import { UserFactory } from '../../../shared/test-utils/factories'
 import type {
     CurrentUserQuery,
     CurrentUserQueryVariables,
@@ -66,14 +66,7 @@ describe('User resolver', () => {
 
     describe('when `updateUser` mutation is called', () => {
         it('should update that user', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             const input: Omit<UpdateUserInput, 'id'> = {
                 currency: faker.finance.currencyCode(),
@@ -178,16 +171,7 @@ describe('User resolver', () => {
         })
 
         it('should return an error if the password is wrong', async () => {
-            const existingUser = await orm.user.create({
-                data: {
-                    currency: faker.finance.currencyCode(),
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    id: faker.datatype.uuid(),
-                    lastName: faker.name.lastName(),
-                    password: faker.internet.password(),
-                },
-            })
+            const existingUser = await UserFactory.create()
 
             const response = await server.executeOperation<
                 LoginUserMutation,
@@ -213,15 +197,8 @@ describe('User resolver', () => {
             const password = faker.lorem.word()
             const passwordHash = await hash(password, 10)
 
-            const existingUser = await orm.user.create({
-                data: {
-                    currency: faker.finance.currencyCode(),
-                    email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    id: faker.datatype.uuid(),
-                    lastName: faker.name.lastName(),
-                    password: passwordHash,
-                },
+            const existingUser = await UserFactory.create({
+                password: passwordHash,
             })
 
             const response = await server.executeOperation<
