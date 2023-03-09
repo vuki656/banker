@@ -4,6 +4,7 @@ import { hash } from 'bcrypt'
 import { server } from '../../../server'
 import {
     authenticatedContext,
+    executeOperation,
     unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
@@ -31,24 +32,20 @@ describe('User resolver', () => {
 
     describe('when `currentUser` query is called', () => {
         it('should return current user', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CurrentUserQuery,
                 CurrentUserQueryVariables
             >(
                 { query: CURRENT_USER },
-                authenticatedContext()
+                authenticatedContext(),
             )
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.currentUser).toBeDefined()
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.currentUser).toBeDefined()
         })
 
         it('should return an error if not authenticated', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CurrentUserQuery,
                 CurrentUserQueryVariables
             >(
@@ -56,11 +53,7 @@ describe('User resolver', () => {
                 unauthenticatedContext
             )
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+            expect(response?.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 

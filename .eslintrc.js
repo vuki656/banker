@@ -4,6 +4,7 @@ module.exports = {
     ignorePatterns: [
         '*generated*',
         'dist',
+        'coverage',
     ],
     overrides: [
         {
@@ -19,6 +20,7 @@ module.exports = {
             rules: {
                 // TODO: Isn't detected for some reason -- check style guide config on setup for this
                 '@next/next/no-html-link-for-pages': ['error', 'packages/web/src'],
+                // Broken for some reason
                 'react/sort-default-props': 'off',
             },
         },
