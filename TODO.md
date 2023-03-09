@@ -4,7 +4,7 @@
     -   [x] Category
     -   [x] User
     -   [ ] Transaction
-    -   [ ] Context
+    -   [x] Context
 
 ## BACKLOG
 

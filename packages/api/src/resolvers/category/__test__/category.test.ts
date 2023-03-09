@@ -116,14 +116,12 @@ describe('Category resolver', () => {
 
     describe('when `createCategory` mutation is called', () => {
         it('should create category', async () => {
-            const KEYWORD_COUNT = 5
-
             const existingUser = await UserFactory.create()
 
             const input: CreateCategoryInput = {
                 color: faker.color.rgb({ format: 'hex' }),
                 icon: faker.lorem.word(),
-                keywords: [...new Array(KEYWORD_COUNT)].map(() => {
+                keywords: [...new Array(5)].map(() => {
                     return faker.lorem.word()
                 }),
                 name: faker.lorem.word(),

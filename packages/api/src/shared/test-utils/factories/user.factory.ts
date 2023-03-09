@@ -6,7 +6,7 @@ import { userSelect } from '../../../resolvers/user/user.select'
 import { orm } from '../../orm'
 
 export const UserFactory = {
-    build: (input?: Partial<Prisma.UserCreateInput>): Prisma.UserCreateInput => {
+    build: (input?: Partial<Prisma.UserCreateInput>) => {
         return {
             currency: faker.finance.currencyCode(),
             email: faker.internet.email(),
@@ -15,7 +15,7 @@ export const UserFactory = {
             lastName: faker.name.lastName(),
             password: faker.internet.password(),
             ...input,
-        }
+        } satisfies Prisma.UserCreateInput 
     },
     create: (input?: Partial<Prisma.UserCreateInput>) => {
         return orm.user.create({
