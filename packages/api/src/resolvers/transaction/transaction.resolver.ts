@@ -4,7 +4,7 @@ import { orm } from '../../shared/orm'
 import {
     connectDisconnect,
     nullableConnect,
-    validateRequest,
+    checkAuth,
 } from '../../shared/utils'
 import {
     categorySelect,
@@ -26,7 +26,7 @@ import {
 const TransactionResolver: TransactionModule.Resolvers = {
     Mutation: {
         createTransaction: async (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const input = createTransactionMutationValidation.parse(variables.input)
 
@@ -63,7 +63,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
             }
         },
         updateTransaction: async (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const input = updateTransactionMutationValidation.parse(variables.input)
 
@@ -107,7 +107,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
     },
     Query: {
         transactions: async (_, variables, context) => {
-            validateRequest(context)
+            checkAuth(context)
 
             const args = transactionsQueryValidation.parse(variables.args)
 
