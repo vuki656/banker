@@ -1,11 +1,11 @@
-fragment HomePageCategoryPayload on CategoryType {
+fragment HomePageCategoryPayload on Category {
     id
     name
     color
     icon
 }
 
-fragment HomePageTransactionPayload on TransactionType {
+fragment HomePageTransactionPayload on Transaction {
     id
     reference
     description

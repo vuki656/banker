@@ -1,4 +1,4 @@
-query GetTransactions($args: TransactionsArgs) {
+query GetTransactions($args: TransactionsArgs!) {
     transactions(args: $args) {
         ...TransactionPayload
     }

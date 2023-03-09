@@ -17,7 +17,6 @@ export const updateTransactionMutationValidation = z.object({
     id: z
         .string()
         .uuid(),
-    reference: z.string(),
     status: z.nativeEnum(TransactionStatus),
 })
 

@@ -1,5 +1,5 @@
 input TransactionsArgs {
-    categoryId: ID!
+    categoryId: ID
     startDate: String
     endDate: String
 }

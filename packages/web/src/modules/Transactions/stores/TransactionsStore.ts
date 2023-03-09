@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { makeAutoObservable } from 'mobx'
 
 import type { RangeSelectValue } from '../../../components'
-import { TransactionStatusEnum } from '../../../graphql/types.generated'
+import { TransactionStatus } from '../../../graphql/types.generated'
 import type { TransactionsPageData } from '../../../pages/transactions'
 import type {
     CategoryType,
@@ -19,7 +19,7 @@ export class TransactionsStore {
             .toDate(),
     }
 
-    public statusFilter = TransactionStatusEnum.Done
+    public statusFilter = TransactionStatus.Done
 
     private _selectedCategoryId: string | null = null
 
@@ -64,7 +64,7 @@ export class TransactionsStore {
         this.range = newRange
     }
 
-    public setStatusFilter(newStatus: TransactionStatusEnum) {
+    public setStatusFilter(newStatus: TransactionStatus) {
         this.statusFilter = newStatus
     }
 
