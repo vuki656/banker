@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { TransactionStatusEnum } from '../../../graphql/types.generated'
+import { TransactionStatus } from '../../../graphql/types.generated'
 
 export const transactionUpdateValidation = z.object({
     amount: z
@@ -14,5 +14,5 @@ export const transactionUpdateValidation = z.object({
     currency: z.string(),
     date: z.string(),
     description: z.string(),
-    status: z.nativeEnum(TransactionStatusEnum),
+    status: z.nativeEnum(TransactionStatus),
 })

@@ -18,7 +18,7 @@ import {
 
 import { MoneyInput } from '../../../components'
 import {
-    TransactionStatusEnum,
+    TransactionStatus,
     useUpdateTransactionMutation,
 } from '../../../graphql/types.generated'
 import { CURRENCIES } from '../../../shared/constants'
@@ -163,7 +163,7 @@ export const TransactionUpdateDialog: React.FunctionComponent<TransactionUpdateD
                         return (
                             <Select
                                 {...extractFormFieldErrors(formState.errors.status)}
-                                data={Object.values(TransactionStatusEnum).map((name) => {
+                                data={Object.values(TransactionStatus).map((name) => {
                                     return {
                                         label: toFirstCapitalCase(name),
                                         value: name,

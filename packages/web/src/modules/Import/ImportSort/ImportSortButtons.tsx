@@ -11,7 +11,7 @@ import {
 import { observer } from 'mobx-react-lite'
 
 import {
-    TransactionStatusEnum,
+    TransactionStatus,
     useCreateTransactionMutation,
 } from '../../../graphql/types.generated'
 import { useImportStore } from '../hooks'
@@ -32,8 +32,8 @@ export const ImportSortButtons = observer(() => {
         },
     })
 
-    const onTransactionSave = (status: TransactionStatusEnum) => {
-        if (!store.currentTransaction?.category && status === TransactionStatusEnum.Done) {
+    const onTransactionSave = (status: TransactionStatus) => {
+        if (!store.currentTransaction?.category && status === TransactionStatus.Done) {
             showNotification({
                 color: 'red',
                 message: 'No category selected for transaction',
@@ -69,15 +69,15 @@ export const ImportSortButtons = observer(() => {
     }
 
     const onSkipClick = () => {
-        onTransactionSave(TransactionStatusEnum.Skipped)
+        onTransactionSave(TransactionStatus.Skipped)
     }
 
     const onSaveClick = () => {
-        onTransactionSave(TransactionStatusEnum.Done)
+        onTransactionSave(TransactionStatus.Done)
     }
 
     const onDiscardClick = () => {
-        onTransactionSave(TransactionStatusEnum.Discarded)
+        onTransactionSave(TransactionStatus.Discarded)
     }
 
     return (

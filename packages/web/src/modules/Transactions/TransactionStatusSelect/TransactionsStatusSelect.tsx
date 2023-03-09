@@ -10,7 +10,7 @@ import {
 } from '@tabler/icons-react'
 import { observer } from 'mobx-react-lite'
 
-import { TransactionStatusEnum } from '../../../graphql/types.generated'
+import { TransactionStatus } from '../../../graphql/types.generated'
 import { toFirstCapitalCase } from '../../../shared/utils'
 import { useTransactionsStore } from '../hooks'
 
@@ -25,36 +25,36 @@ export const TransactionsStatusSelect = observer(() => {
                         <Center>
                             <IconCheck size={16} />
                             <Box ml={10}>
-                                {toFirstCapitalCase(TransactionStatusEnum.Done)}
+                                {toFirstCapitalCase(TransactionStatus.Done)}
                             </Box>
                         </Center>
                     ),
-                    value: TransactionStatusEnum.Done,
+                    value: TransactionStatus.Done,
                 },
                 {
                     label: (
                         <Center>
                             <IconClock size={16} />
                             <Box ml={10}>
-                                {toFirstCapitalCase(TransactionStatusEnum.Skipped)}
+                                {toFirstCapitalCase(TransactionStatus.Skipped)}
                             </Box>
                         </Center>
                     ),
-                    value: TransactionStatusEnum.Skipped,
+                    value: TransactionStatus.Skipped,
                 },
                 {
                     label: (
                         <Center>
                             <IconTrash size={16} />
                             <Box ml={10}>
-                                {toFirstCapitalCase(TransactionStatusEnum.Discarded)}
+                                {toFirstCapitalCase(TransactionStatus.Discarded)}
                             </Box>
                         </Center>
                     ),
-                    value: TransactionStatusEnum.Discarded,
+                    value: TransactionStatus.Discarded,
                 },
             ]}
-            onChange={(status: TransactionStatusEnum) => {
+            onChange={(status: TransactionStatus) => {
                 store.setStatusFilter(status)
             }}
             value={store.statusFilter}

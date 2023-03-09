@@ -1,4 +1,4 @@
-fragment UserPayload on UserType {
+fragment UserPayload on User {
     id
     firstName
     lastName

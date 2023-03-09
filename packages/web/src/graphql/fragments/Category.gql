@@ -1,4 +1,4 @@
-fragment CategoryPayload on CategoryType {
+fragment CategoryPayload on Category {
     id
     name
     color

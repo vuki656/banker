@@ -1,4 +1,4 @@
-fragment KeywordPayload on KeywordType {
+fragment KeywordPayload on Keyword {
     id
     name
 }
