@@ -14,6 +14,8 @@
 
 ## Later
 
+-   [ ] Remove casting from execute operation
+-   [ ] How to make execute operation variables required only if request mandates it
 -   [ ] Eslint for gql files
 -   [ ] How to share deps between workspaces
 -   [ ] Clean up codegen packages on web, you prob don't need all of them

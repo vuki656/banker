@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker'
 
-import { server } from '../../../server'
 import {
     authenticatedContext,
+    executeOperation,
     unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
@@ -42,7 +42,7 @@ describe('Category resolver', () => {
         it('should return category', async () => {
             const existingCategory = await CategoryFactory.create()
 
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CategoryQuery,
                 CategoryQueryVariables
             >({
@@ -54,16 +54,12 @@ describe('Category resolver', () => {
                 },
             }, authenticatedContext())
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.category).toMatchObject(existingCategory)
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.category).toMatchObject(existingCategory)
         })
 
         it('should return an error if not authenticated', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CategoryQuery,
                 CategoryQueryVariables
             >({
@@ -75,11 +71,7 @@ describe('Category resolver', () => {
                 },
             }, unauthenticatedContext)
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 
@@ -97,7 +89,7 @@ describe('Category resolver', () => {
                 },
             })
 
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CategoriesQuery,
                 CategoriesQueryVariables
             >(
@@ -105,16 +97,12 @@ describe('Category resolver', () => {
                 authenticatedContext(existingUser)
             )
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.categories).toHaveLength(CATEGORY_COUNT)
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.categories).toHaveLength(CATEGORY_COUNT)
         })
 
         it('should return an error if not authenticated', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CategoriesQuery,
                 CategoriesQueryVariables
             >(
@@ -122,11 +110,7 @@ describe('Category resolver', () => {
                 unauthenticatedContext
             )
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 
@@ -145,7 +129,7 @@ describe('Category resolver', () => {
                 name: faker.lorem.word(),
             }
 
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CreateCategoryMutation,
                 CreateCategoryMutationVariables
             >({
@@ -155,13 +139,9 @@ describe('Category resolver', () => {
                 },
             }, authenticatedContext(existingUser))
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
+            const category = response.body?.singleResult.data?.createCategory.category ?? {}
 
-            const category = response.body.singleResult.data?.createCategory.category ?? {}
-
-            expect(response.body.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.errors).toBeUndefined()
             expect(category).toMatchObject({
                 ...input,
                 keywords: input.keywords.map((keyword) => {
@@ -174,7 +154,7 @@ describe('Category resolver', () => {
         })
 
         it('should return an error if not authenticated', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 CreateCategoryMutation,
                 CreateCategoryMutationVariables
             >({
@@ -189,11 +169,7 @@ describe('Category resolver', () => {
                 },
             }, unauthenticatedContext)
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 
@@ -217,7 +193,7 @@ describe('Category resolver', () => {
                 name: faker.lorem.word(),
             }
 
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 UpdateCategoryMutation,
                 UpdateCategoryMutationVariables
             >({
@@ -227,16 +203,12 @@ describe('Category resolver', () => {
                 },
             }, authenticatedContext(existingUser))
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.updateCategory.category).toMatchObject(input)
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.updateCategory.category).toMatchObject(input)
         })
 
         it('should return an error if not authenticated', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 UpdateCategoryMutation,
                 UpdateCategoryMutationVariables
             >({
@@ -252,11 +224,7 @@ describe('Category resolver', () => {
                 },
             }, unauthenticatedContext)
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 
@@ -272,7 +240,7 @@ describe('Category resolver', () => {
                 },
             })
 
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 DeleteCategoryMutation,
                 DeleteCategoryMutationVariables
             >({
@@ -284,16 +252,12 @@ describe('Category resolver', () => {
                 },
             }, authenticatedContext())
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors).toBeUndefined()
-            expect(response.body.singleResult.data?.deleteCategory.id).toBe(existingCategory.id)
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.deleteCategory.id).toBe(existingCategory.id)
         })
 
         it('should return an error if not authenticated', async () => {
-            const response = await server.executeOperation<
+            const response = await executeOperation<
                 DeleteCategoryMutation,
                 DeleteCategoryMutationVariables
             >({
@@ -305,11 +269,7 @@ describe('Category resolver', () => {
                 },
             }, unauthenticatedContext)
 
-            if (response.body.kind === 'incremental') {
-                throw new Error('Wrong response type')
-            }
-
-            expect(response.body.singleResult.errors?.[0]?.message).toBe('Forbidden')
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 })

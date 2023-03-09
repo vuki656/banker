@@ -1,18 +1,23 @@
 import type { HTTPGraphQLHead } from '@apollo/server'
-import type { GraphQLResponseBody } from '@apollo/server/dist/esm/externalTypes/graphql'
+import type {
+    GraphQLResponseBody,
+    VariableValues,
+} from '@apollo/server/dist/esm/externalTypes/graphql'
 
 import type { server } from '../../../server'
-
-export type RequestType = Parameters<typeof server.executeOperation>[0]
-export type OptionsType = Parameters<typeof server.executeOperation>[1]
-
-export type ResponseDataType = Record<string, unknown>
 
 type BaseResponse = {
     http: HTTPGraphQLHead
 }
 
-export type SingleResponseReturnType<TData = ResponseDataType> = BaseResponse & {
+export type ResponseDataType = Record<string, unknown>
+
+export type RequestType<
+    TData extends ResponseDataType,
+    TVariables extends VariableValues
+> = Parameters<typeof server.executeOperation<TData, TVariables>>[0]
+
+export type SingleResponseReturnType<TData extends ResponseDataType> = BaseResponse & {
     body?: Extract<GraphQLResponseBody<TData>, { kind: 'single' }>
 }
 
