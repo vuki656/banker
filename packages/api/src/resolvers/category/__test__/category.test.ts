@@ -6,7 +6,10 @@ import {
     unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
-import { CategoryFactory, UserFactory } from '../../../shared/test-utils/factories'
+import {
+    CategoryFactory,
+    UserFactory,
+} from '../../../shared/test-utils/factories'
 import type {
     CategoriesQuery,
     CategoriesQueryVariables,
@@ -89,9 +92,9 @@ describe('Category resolver', () => {
             await CategoryFactory.createMany(CATEGORY_COUNT, {
                 user: {
                     connect: {
-                        id: existingUser.id
-                    }
-                }
+                        id: existingUser.id,
+                    },
+                },
             })
 
             const response = await server.executeOperation<
@@ -202,8 +205,8 @@ describe('Category resolver', () => {
                 user: {
                     connect: {
                         id: existingUser.id,
-                    }
-                }
+                    },
+                },
             })
 
             const input: UpdateCategoryInput = {
@@ -265,8 +268,8 @@ describe('Category resolver', () => {
                 user: {
                     connect: {
                         id: existingUser.id,
-                    }
-                }
+                    },
+                },
             })
 
             const response = await server.executeOperation<

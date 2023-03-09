@@ -1,4 +1,5 @@
 import type { User } from '../../resolvers/graphql-types.generated'
+import { ForbiddenError } from '../../shared/errors'
 
 export class ContextUser {
     public value: User | null
@@ -9,7 +10,7 @@ export class ContextUser {
 
     public get nonNullValue() {
         if (!this.value) {
-            throw new Error('No user in context')
+            throw new ForbiddenError('No user in context')
         }
 
         return this.value

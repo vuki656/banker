@@ -1,8 +1,8 @@
 import { compare } from 'bcrypt'
-import { GraphQLError } from 'graphql'
 import { sign } from 'jsonwebtoken'
 
 import env from '../../shared/env'
+import { ForbiddenError } from '../../shared/errors'
 import { orm } from '../../shared/orm'
 import type { TokenDataType } from '../../shared/types'
 import { checkAuth } from '../../shared/utils'
@@ -32,7 +32,7 @@ const UserResolver: UserModule.Resolvers = {
             const isValid = await compare(input.password, user.password)
 
             if (!isValid) {
-                throw new GraphQLError('Wrong password')
+                throw new ForbiddenError('Wrong password')
             }
 
             const tokenData: TokenDataType = {
