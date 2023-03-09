@@ -14,7 +14,7 @@ import {
 import type { TransactionModule } from './resolver-types.generated'
 import { transactionSelect } from './transaction.select'
 import {
-    convertTransaction,
+    convertTransactionAmount,
     fetchRates,
 } from './transaction.utils'
 import {
@@ -52,7 +52,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const rates = await fetchRates()
 
-            const convertedTransaction = await convertTransaction(
+            const convertedTransaction = await convertTransactionAmount(
                 createdTransaction,
                 context.user.nonNullValue.currency,
                 rates
@@ -94,7 +94,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const rates = await fetchRates()
 
-            const convertedTransaction = await convertTransaction(
+            const convertedTransaction = await convertTransactionAmount(
                 updatedTransaction,
                 context.user.nonNullValue.currency,
                 rates
@@ -156,7 +156,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
             const rates = await fetchRates()
 
             return transactions.map(async (transaction) => {
-                return convertTransaction(
+                return convertTransactionAmount(
                     transaction,
                     context.user.nonNullValue.currency,
                     rates
