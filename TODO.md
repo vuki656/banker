@@ -8,7 +8,6 @@
 
 ## BACKLOG
 
--   [ ] Clean up context
 -   [ ] Factories
 -   [ ] What about testing that stuff is actually created in the database
 -   [ ] Fetch rates fn seems out of place

@@ -11,19 +11,22 @@ import { ContextUser } from './ContextUser'
 
 // eslint-disable-next-line @typescript-eslint/require-await -- Apollo context has to be async
 export const context = async ({ req }: StandaloneServerContextFunctionArgument): Promise<Context> => {
-    const [,token] = req.headers.authorization?.split(' ') ?? []
+    const [, token] = req.headers.authorization?.split(' ') ?? []
 
     let user: User | null = null
 
-    // TODO: without try catch this will fail and prevent graphql apollo playground from working
-    // TODO: Write this so it's not trash
     try {
         const tokenData = verify(token ?? '', env.APP_JWT_SECRET)
 
         const { user: parsedUser } = cookieValidation.parse(tokenData)
 
         user = parsedUser
-    } catch {}
+    } catch (error: unknown) {
+        logger.trace({
+            error,
+            message: 'Error while parsing auth header',
+        })
+    }
 
     return {
         logger,
