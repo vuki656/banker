@@ -1,6 +1,6 @@
 input CreateTransactionInput {
     amount: Float!
-    categoryId: ID!
+    categoryId: ID
     currency: String!
     date: String!
     description: String!

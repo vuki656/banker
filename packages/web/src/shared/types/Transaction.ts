@@ -1,4 +1,4 @@
-import type { TransactionStatusEnum } from '../../graphql/types.generated'
+import type { TransactionStatus } from '../../graphql/types.generated'
 
 import type { AmountType } from './Amount'
 import type { CategoryType } from './Category'
@@ -11,5 +11,5 @@ export type TransactionType = {
     description: string
     id: string
     reference: string
-    status: TransactionStatusEnum
+    status: TransactionStatus
 }

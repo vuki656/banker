@@ -1,4 +1,4 @@
-query GetImportPageData($transactionsArgs: TransactionsArgs) {
+query GetImportPageData($transactionsArgs: TransactionsArgs!) {
     categories {
         id
         name

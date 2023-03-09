@@ -1,4 +1,4 @@
-fragment TransactionPayload on TransactionType {
+fragment TransactionPayload on Transaction {
     id
     reference
     description

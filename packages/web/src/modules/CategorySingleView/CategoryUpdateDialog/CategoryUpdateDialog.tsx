@@ -73,7 +73,9 @@ export const CategoryUpdateDialog = observer(() => {
                     color: formValue.color,
                     icon: formValue.icon,
                     id: store.category.id,
-                    keywords: formValue.keywords,
+                    keywords: formValue.keywords.map((keyword) => {
+                        return keyword.name
+                    }),
                     name: formValue.name,
                 },
             },
