@@ -1,8 +1,3 @@
-import type { Decimal } from '@prisma/client/runtime'
+import type { Transaction } from '@prisma/client'
 
-export type BaseTransaction = {
-    [key: string]: unknown
-    amount: Decimal
-    currency: string
-    date: Date
-}
+export type BaseTransaction = Pick<Transaction, 'amount' | 'currency' | 'date'> & Record<string, unknown>
