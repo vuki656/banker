@@ -12,5 +12,5 @@ export const transactionSelect = {
 
 export const rateSelect = {
     code: true,
-    value: true
+    value: true,
 } satisfies Prisma.RateSelect

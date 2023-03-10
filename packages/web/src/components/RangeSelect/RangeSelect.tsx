@@ -24,7 +24,6 @@ export const RangeSelect = (props: RangeSelectProps) => {
     const [isOpen, isOpenActions] = useBoolean()
     const [value, setValue] = useState<[Date | null, Date | null]>(valueProp ?? [null, null])
 
-    // TODO: this is stupid, reimplement
     const onCustomRangeSelect = () => {
         if (!value[0] || !value[1]) {
             return

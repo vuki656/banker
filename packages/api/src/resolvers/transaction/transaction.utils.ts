@@ -18,7 +18,7 @@ export const fetchRates = async () => {
         })
 }
 
-export const convertTransactionAmount = async <TTransaction extends BaseTransaction>(
+export const convertTransactionAmount = <TTransaction extends BaseTransaction>(
     transaction: TTransaction,
     userCurrency: string,
     rates: Map<string, number>
@@ -33,7 +33,7 @@ export const convertTransactionAmount = async <TTransaction extends BaseTransact
         })
     }
 
-    const targetRate = rates.get(userCurrency ?? '')
+    const targetRate = rates.get(userCurrency)
 
     if (!targetRate) {
         throw new UnexpectedError('Couldn\'t find target rate while converting user currency', {

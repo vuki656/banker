@@ -52,7 +52,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const rates = await fetchRates()
 
-            const convertedTransaction = await convertTransactionAmount(
+            const convertedTransaction = convertTransactionAmount(
                 createdTransaction,
                 context.user.nonNullValue.currency,
                 rates
@@ -94,7 +94,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const rates = await fetchRates()
 
-            const convertedTransaction = await convertTransactionAmount(
+            const convertedTransaction = convertTransactionAmount(
                 updatedTransaction,
                 context.user.nonNullValue.currency,
                 rates
@@ -155,7 +155,7 @@ const TransactionResolver: TransactionModule.Resolvers = {
 
             const rates = await fetchRates()
 
-            return transactions.map(async (transaction) => {
+            return transactions.map((transaction) => {
                 return convertTransactionAmount(
                     transaction,
                     context.user.nonNullValue.currency,

@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 
+// eslint-disable-next-line import/default -- This plugin has broken import so this has to be done
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import type { Configuration } from 'webpack'
 import nodeExternals from 'webpack-node-externals'
@@ -30,7 +31,7 @@ const config: Configuration = {
                     replace: './schema.graphql',
                     search: DEVELOPMENT_SCHEMA_PATH,
                 },
-                test: /type-defs\.ts$/,
+                test: /type-defs\.ts$/u,
             },
         ],
     },

@@ -32,6 +32,7 @@ export const executeOperation = async <
     options?: ExecuteOperationOptions<Context>,
     expectedTypeProp?: ExpectedType
 ): Promise<ExecuteOperationReturnType<ExpectedType, TData>> => {
+    // eslint-disable-next-line unicorn/prefer-default-parameters -- Not valid in this case
     const expectedType = expectedTypeProp ?? 'single'
 
     const response = await server.executeOperation<TData, TVariables>(request, options)

@@ -10,9 +10,9 @@ type Mutation {
 }
 
 type Query {
-    category(args: CategoryArgs!): Category!
+    category(args: CategoryArgs!): Category
     categories: [Category!]!
-    transactions(args: TransactionsArgs!): [Transaction!]!
+    transactions(args: TransactionsArgs): [Transaction!]!
     currentUser: User!
 }
 

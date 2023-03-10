@@ -1,4 +1,4 @@
 type Query {
-    category(args: CategoryArgs!): Category!
+    category(args: CategoryArgs!): Category
     categories: [Category!]!
 }
