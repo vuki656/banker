@@ -8,7 +8,7 @@ import type { Context } from '../types'
 
 const user: User = {
     __typename: 'User',
-    currency: faker.finance.currencyCode(),
+    currency: "USD",
     email: faker.internet.email(),
     firstName: faker.name.firstName(),
     id: faker.datatype.uuid(),
