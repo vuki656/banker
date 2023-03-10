@@ -12,7 +12,9 @@ export const updateTransactionMutationValidation = z.object({
         .uuid()
         .nullish(),
     currency: currencyCodeValidation,
-    date: z.date(),
+    date: z
+        .string()
+        .datetime(),
     description: z.string(),
     id: z
         .string()
@@ -27,7 +29,9 @@ export const createTransactionMutationValidation = z.object({
         .uuid()
         .nullish(),
     currency: currencyCodeValidation,
-    date: z.date(),
+    date: z
+        .string()
+        .datetime(),
     description: z.string(),
     reference: z.string(),
     status: z.nativeEnum(TransactionStatus),

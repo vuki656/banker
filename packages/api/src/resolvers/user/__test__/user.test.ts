@@ -61,7 +61,7 @@ describe('User resolver', () => {
             const existingUser = await UserFactory.create()
 
             const input: Omit<UpdateUserInput, 'id'> = {
-                currency: faker.finance.currencyCode(),
+                currency: "USD",
                 email: faker.internet.email(),
                 firstName: faker.name.firstName(),
                 lastName: faker.name.lastName(),
@@ -95,7 +95,7 @@ describe('User resolver', () => {
                 query: UPDATE_USER,
                 variables: {
                     input: {
-                        currency: faker.finance.currencyCode(),
+                        currency: "USD",
                         email: faker.internet.email(),
                         firstName: faker.name.firstName(),
                         id: faker.datatype.uuid(),
@@ -115,7 +115,7 @@ describe('User resolver', () => {
                 query: UPDATE_USER,
                 variables: {
                     input: {
-                        currency: faker.finance.currencyCode(),
+                        currency: "USD",
                         email: faker.internet.email(),
                         firstName: faker.name.firstName(),
                         id: faker.datatype.uuid(),
