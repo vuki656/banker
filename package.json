@@ -23,7 +23,7 @@
     "devDependencies": {
         "@rimac-technology/style-guide": "^6.1.1",
         "@types/eslint": "^8.21.1",
-        "@types/node": "18.14.6",
+        "@types/node": "18.15.0",
         "@types/prettier": "^2.7.2",
         "@types/uuid": "^9.0.1",
         "cspell": "^6.28.0",
