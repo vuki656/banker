@@ -15,7 +15,7 @@ export const UserFactory = {
             lastName: faker.name.lastName(),
             password: faker.internet.password(),
             ...input,
-        } satisfies Prisma.UserCreateInput 
+        } satisfies Prisma.UserCreateInput
     },
     create: (input?: Partial<Prisma.UserCreateInput>) => {
         return orm.user.create({
