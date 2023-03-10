@@ -20,6 +20,7 @@ import type {
     CreateTransactionMutationVariables,
     TransactionsQuery,
     TransactionsQueryVariables,
+    UpdateTransactionInput,
     UpdateTransactionMutation,
     UpdateTransactionMutationVariables,
 } from '../../../shared/types/test-types.generated'
@@ -256,6 +257,42 @@ describe('Category resolver', () => {
     })
 
     describe('when `updateTransaction` mutation is called', () => {
+        it('should update transaction', async () => {
+            await RateFactory.createAll()
+
+            const existingUser = await UserFactory.create()
+            const existingTransaction = await TransactionFactory.create()
+
+            const input: UpdateTransactionInput = {
+                amount: faker.datatype.number(),
+                currency: 'USD',
+                date: new Date().toISOString(),
+                description: faker.lorem.sentence(),
+                id: existingTransaction.id,
+                status: TransactionStatus.Done,
+            }
+
+            const response = await executeOperation<
+                UpdateTransactionMutation,
+                UpdateTransactionMutationVariables
+            >({
+                query: UPDATE_TRANSACTION,
+                variables: {
+                    input,
+                },
+            }, authenticatedContext(existingUser))
+
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.updateTransaction.transaction).toMatchObject({
+                ...input,
+                amount: {
+                    converted: input.amount,
+                    original: input.amount,
+                },
+                date: expect.any(String),
+            })
+        })
+
         it('should return an error if not authenticated', async () => {
             const response = await executeOperation<
                 UpdateTransactionMutation,
