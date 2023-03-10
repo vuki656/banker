@@ -131,19 +131,19 @@ const TransactionResolver: TransactionModule.Resolvers = {
                     AND: [
                         {
                             date: {
-                                gte: args.startDate ?? dayjs()
+                                gte: args?.startDate ?? dayjs()
                                     .subtract(30, 'year')
                                     .toDate(),
                             },
                         },
                         {
                             date: {
-                                lte: args.endDate ?? dayjs().toDate(),
+                                lte: args?.endDate ?? dayjs().toDate(),
                             },
                         },
                         {
                             category: {
-                                id: args.categoryId ?? undefined,
+                                id: args?.categoryId ?? undefined,
                             },
                         },
                     ],
