@@ -1,4 +1,6 @@
+import { faker } from '@faker-js/faker'
 import dayjs from 'dayjs'
+import { v4 } from 'uuid'
 
 import {
     authenticatedContext,
@@ -12,13 +14,18 @@ import {
     TransactionFactory,
     UserFactory,
 } from '../../../shared/test-utils/factories'
-import type {
+import {
+    CreateTransactionMutation,
+    CreateTransactionMutationVariables,
     TransactionsQuery,
     TransactionsQueryVariables,
+    TransactionStatus,
+    UpdateTransactionMutation,
+    UpdateTransactionMutationVariables,
 } from '../../../shared/types/test-types.generated'
-import { iterateDateRange } from '../../../shared/utils'
+import { iterateDateRange, randomObjectValue } from '../../../shared/utils'
 
-import { TRANSACTIONS } from './graphql'
+import { CREATE_TRANSACTION, TRANSACTIONS, UPDATE_TRANSACTION } from './graphql'
 
 describe('Category resolver', () => {
     beforeEach(async () => {
@@ -179,6 +186,52 @@ describe('Category resolver', () => {
                 { query: TRANSACTIONS },
                 unauthenticatedContext
             )
+
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
+        })
+    })
+
+    describe('when `createTransaction` mutation is called', () => {
+        it('should return an error if not authenticated', async () => {
+            const response = await executeOperation<
+                CreateTransactionMutation,
+                CreateTransactionMutationVariables
+            >({ 
+                query: CREATE_TRANSACTION,
+                variables: {
+                    input: {
+                        amount: faker.datatype.number(),
+                        currency: "USD",
+                        date: new Date().toISOString(),
+                        description: faker.lorem.sentence(),
+                        reference: v4(),
+                        status: TransactionStatus.Done
+                    }
+                }
+            }, unauthenticatedContext)
+
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
+        })
+    })
+
+    describe('when `updateTransaction` mutation is called', () => {
+        it('should return an error if not authenticated', async () => {
+            const response = await executeOperation<
+                UpdateTransactionMutation,
+                UpdateTransactionMutationVariables
+            >({ 
+                query: UPDATE_TRANSACTION,
+                variables: {
+                    input: {
+                        amount: faker.datatype.number(),
+                        currency: "USD",
+                        date: new Date().toISOString(),
+                        description: faker.lorem.sentence(),
+                        id: faker.datatype.uuid(),
+                        status: TransactionStatus.Done
+                    }
+                }
+            }, unauthenticatedContext)
 
             expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
