@@ -17,7 +17,7 @@ services:
         depends_on:
             database:
                 condition: service_healthy
-        image: liquibase/liquibase:4.18.0
+        image: liquibase/liquibase:4.20.0
         volumes:
             - ./src/database/migrations:/liquibase/changelog
         command:
