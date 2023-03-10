@@ -8,7 +8,7 @@ import { orm } from '../../orm'
 export const UserFactory = {
     build: (input?: Partial<Prisma.UserCreateInput>) => {
         return {
-            currency: faker.finance.currencyCode(),
+            currency: "USD",
             email: faker.internet.email(),
             firstName: faker.name.firstName(),
             id: v4(),

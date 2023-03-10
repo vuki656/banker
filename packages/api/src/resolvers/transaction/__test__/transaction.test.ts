@@ -14,18 +14,23 @@ import {
     TransactionFactory,
     UserFactory,
 } from '../../../shared/test-utils/factories'
-import {
+import type {
+    CreateTransactionInput,
     CreateTransactionMutation,
     CreateTransactionMutationVariables,
     TransactionsQuery,
     TransactionsQueryVariables,
-    TransactionStatus,
     UpdateTransactionMutation,
     UpdateTransactionMutationVariables,
 } from '../../../shared/types/test-types.generated'
-import { iterateDateRange, randomObjectValue } from '../../../shared/utils'
+import { TransactionStatus } from '../../../shared/types/test-types.generated'
+import { iterateDateRange } from '../../../shared/utils'
 
-import { CREATE_TRANSACTION, TRANSACTIONS, UPDATE_TRANSACTION } from './graphql'
+import {
+    CREATE_TRANSACTION,
+    TRANSACTIONS,
+    UPDATE_TRANSACTION,
+} from './graphql'
 
 describe('Category resolver', () => {
     beforeEach(async () => {
@@ -33,6 +38,7 @@ describe('Category resolver', () => {
     })
 
     describe('when `transactions` query is called', () => {
+        // TODO: this is flaky, sometimes 1 more
         it('should return transactions in date range', async () => {
             await RateFactory.createAll()
 
@@ -192,22 +198,57 @@ describe('Category resolver', () => {
     })
 
     describe('when `createTransaction` mutation is called', () => {
+        it('should create transaction', async () => {
+            await RateFactory.createAll()
+
+            const existingUser = await UserFactory.create()
+
+            const input: CreateTransactionInput = {
+                amount: faker.datatype.number(),
+                currency: 'USD',
+                date: new Date().toISOString(),
+                description: faker.lorem.sentence(),
+                reference: v4(),
+                status: TransactionStatus.Done,
+            }
+
+            const response = await executeOperation<
+                CreateTransactionMutation,
+                CreateTransactionMutationVariables
+            >({
+                query: CREATE_TRANSACTION,
+                variables: {
+                    input,
+                },
+            }, authenticatedContext(existingUser))
+
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.createTransaction.transaction).toMatchObject({
+                ...input,
+                amount: {
+                    converted: input.amount,
+                    original: input.amount,
+                },
+                date: expect.any(String),
+            })
+        })
+
         it('should return an error if not authenticated', async () => {
             const response = await executeOperation<
                 CreateTransactionMutation,
                 CreateTransactionMutationVariables
-            >({ 
+            >({
                 query: CREATE_TRANSACTION,
                 variables: {
                     input: {
                         amount: faker.datatype.number(),
-                        currency: "USD",
+                        currency: 'USD',
                         date: new Date().toISOString(),
                         description: faker.lorem.sentence(),
                         reference: v4(),
-                        status: TransactionStatus.Done
-                    }
-                }
+                        status: TransactionStatus.Done,
+                    },
+                },
             }, unauthenticatedContext)
 
             expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
@@ -219,18 +260,18 @@ describe('Category resolver', () => {
             const response = await executeOperation<
                 UpdateTransactionMutation,
                 UpdateTransactionMutationVariables
-            >({ 
+            >({
                 query: UPDATE_TRANSACTION,
                 variables: {
                     input: {
                         amount: faker.datatype.number(),
-                        currency: "USD",
+                        currency: 'USD',
                         date: new Date().toISOString(),
                         description: faker.lorem.sentence(),
                         id: faker.datatype.uuid(),
-                        status: TransactionStatus.Done
-                    }
-                }
+                        status: TransactionStatus.Done,
+                    },
+                },
             }, unauthenticatedContext)
 
             expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
