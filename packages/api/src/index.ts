@@ -1,7 +1,4 @@
 import { startStandaloneServer } from '@apollo/server/standalone'
-import dotenv from 'dotenv'
-
-dotenv.config()
 
 import { registerSyncRatesCron } from './crons'
 import {

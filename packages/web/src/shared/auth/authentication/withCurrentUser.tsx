@@ -40,11 +40,7 @@ export const withCurrentUser = (AppComponent: AppComponentType) => {
                     query: GetCurrentUserDocument,
                 })
 
-                if (apolloResult.data.currentUser) {
-                    return apolloResult.data.currentUser
-                }
-
-                return null
+                return apolloResult.data.currentUser
             } catch {
                 return null
             }

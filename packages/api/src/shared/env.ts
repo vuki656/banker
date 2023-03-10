@@ -6,7 +6,6 @@ import {
 } from 'envalid'
 import type { Level } from 'pino'
 
-// TODO: this is only needed for build, how to make this clean?
 config()
 
 const env = cleanEnv(process.env, {

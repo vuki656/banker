@@ -1,11 +1,5 @@
 ## NEXT
 
--   [ ] Tests
-    -   [x] Category
-    -   [x] User
-    -   [ ] Transaction
-    -   [x] Context
-
 ## BACKLOG
 
 ## Later
@@ -19,3 +13,4 @@
 -   [ ] Try to make keywords just a string array on category
 -   [ ] Setup prometheus and other cool tracking/tracing stuff
 -   [ ] Figure out how to use pm2 better
+-   [ ] See if you can remove web hardcoded types and use generated ones
