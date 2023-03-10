@@ -36,7 +36,8 @@ export const createTransactionMutationValidation = z.object({
 export const transactionsQueryValidation = z.object({
     categoryId: z
         .string()
-        .uuid(),
+        .uuid()
+        .nullish(),
     endDate: z
         .string()
         .datetime()

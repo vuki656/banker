@@ -18,7 +18,7 @@ export const CategoryFactory = {
                 create: UserFactory.build(),
             },
             ...input,
-        } satisfies Prisma.CategoryCreateInput 
+        } satisfies Prisma.CategoryCreateInput
     },
     create: (input?: Partial<Prisma.CategoryCreateInput>) => {
         return orm.category.create({
