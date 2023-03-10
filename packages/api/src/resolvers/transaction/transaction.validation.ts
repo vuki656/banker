@@ -33,18 +33,20 @@ export const createTransactionMutationValidation = z.object({
     status: z.nativeEnum(TransactionStatus),
 })
 
-export const transactionsQueryValidation = z.object({
-    categoryId: z
-        .string()
-        .uuid()
-        .nullish(),
-    endDate: z
-        .string()
-        .datetime()
-        .nullish(),
-    startDate: z
-        .string()
-        .datetime()
-        .nullish(),
-})
+export const transactionsQueryValidation = z
+    .object({
+        categoryId: z
+            .string()
+            .uuid()
+            .nullish(),
+        endDate: z
+            .string()
+            .datetime()
+            .nullish(),
+        startDate: z
+            .string()
+            .datetime()
+            .nullish(),
+    })
+    .optional()
 

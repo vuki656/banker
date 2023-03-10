@@ -6,10 +6,10 @@ import {
     wipeDatabase,
 } from '../../../shared/test-utils'
 import {
+    RateFactory,
     TransactionFactory,
     UserFactory,
 } from '../../../shared/test-utils/factories'
-import { RateFactory } from '../../../shared/test-utils/factories'
 import type {
     TransactionsQuery,
     TransactionsQueryVariables,
@@ -25,7 +25,7 @@ describe('Category resolver', () => {
     })
 
     describe('when `transactions` query is called', () => {
-        it('should return transactions', async () => {
+        it('should return transactions in date range', async () => {
             const TRANSACTION_COUNT = 45
 
             const existingUser = await UserFactory.create()
@@ -87,6 +87,38 @@ describe('Category resolver', () => {
 
             expect(response.body?.singleResult.errors).toBeUndefined()
             expect(response.body?.singleResult.data?.transactions).toHaveLength(TRANSACTION_COUNT)
+        })
+
+        it('should return only logged in users transactions', async () => {
+            const loggedInUser = await UserFactory.create()
+            const otherUser = await UserFactory.create()
+
+            await TransactionFactory.create({
+                user: {
+                    connect: {
+                        id: loggedInUser.id,
+                    },
+                },
+            })
+
+            await TransactionFactory.create({
+                user: {
+                    connect: {
+                        id: otherUser.id,
+                    },
+                },
+            })
+
+            const response = await executeOperation<
+                TransactionsQuery,
+                TransactionsQueryVariables
+            >(
+                { query: TRANSACTIONS },
+                authenticatedContext(loggedInUser)
+            )
+
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.transactions).toHaveLength(1)
         })
     })
 })
