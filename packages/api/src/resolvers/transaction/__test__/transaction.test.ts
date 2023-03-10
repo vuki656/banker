@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import {
     authenticatedContext,
     executeOperation,
+    unauthenticatedContext,
     wipeDatabase,
 } from '../../../shared/test-utils'
 import {
@@ -22,11 +23,12 @@ import { TRANSACTIONS } from './graphql'
 describe('Category resolver', () => {
     beforeEach(async () => {
         await wipeDatabase()
-        await RateFactory.createAll()
     })
 
     describe('when `transactions` query is called', () => {
         it('should return transactions in date range', async () => {
+            await RateFactory.createAll()
+
             const TRANSACTION_COUNT = 45
 
             const existingUser = await UserFactory.create()
@@ -91,6 +93,8 @@ describe('Category resolver', () => {
         })
 
         it('should return only logged in users transactions', async () => {
+            await RateFactory.createAll()
+
             const loggedInUser = await UserFactory.create()
             const otherUser = await UserFactory.create()
 
@@ -123,6 +127,8 @@ describe('Category resolver', () => {
         })
 
         it('should return only transactions for a given category', async () => {
+            await RateFactory.createAll()
+
             const TRANSACTION_COUNT = 10
 
             const existingUser = await UserFactory.create()
@@ -163,6 +169,18 @@ describe('Category resolver', () => {
 
             expect(response.body?.singleResult.errors).toBeUndefined()
             expect(response.body?.singleResult.data?.transactions).toHaveLength(TRANSACTION_COUNT)
+        })
+
+        it('should return an error if not authenticated', async () => {
+            const response = await executeOperation<
+                TransactionsQuery,
+                TransactionsQueryVariables
+            >(
+                { query: TRANSACTIONS },
+                unauthenticatedContext
+            )
+
+            expect(response.body?.singleResult.errors?.[0]?.message).toBe('Forbidden')
         })
     })
 })
