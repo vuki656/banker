@@ -36,7 +36,7 @@ export const TransactionFactory = {
     },
     createMany: async (
         amount: number,
-        input: Partial<Prisma.TransactionCreateInput>
+        input?: Partial<Prisma.TransactionCreateInput>
     ) => {
         const promises = [...new Array(amount)].map(() => {
             return orm.transaction.create({

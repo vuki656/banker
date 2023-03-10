@@ -28,7 +28,7 @@ export const UserFactory = {
     },
     createMany: async (
         amount: number,
-        input: Partial<Prisma.UserCreateInput>
+        input?: Partial<Prisma.UserCreateInput>
     ) => {
         const promises = [...new Array(amount)].map(() => {
             return orm.user.create({

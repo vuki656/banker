@@ -6,6 +6,7 @@ import {
     wipeDatabase,
 } from '../../../shared/test-utils'
 import {
+    CategoryFactory,
     RateFactory,
     TransactionFactory,
     UserFactory,
@@ -119,6 +120,49 @@ describe('Category resolver', () => {
 
             expect(response.body?.singleResult.errors).toBeUndefined()
             expect(response.body?.singleResult.data?.transactions).toHaveLength(1)
+        })
+
+        it('should return only transactions for a given category', async () => {
+            const TRANSACTION_COUNT = 10
+
+            const existingUser = await UserFactory.create()
+            const existingCategory = await CategoryFactory.create()
+
+            await TransactionFactory.createMany(TRANSACTION_COUNT, {
+                category: {
+                    connect: {
+                        id: existingCategory.id,
+                    },
+                },
+                user: {
+                    connect: {
+                        id: existingUser.id,
+                    },
+                },
+            })
+
+            await TransactionFactory.createMany(5, {
+                user: {
+                    connect: {
+                        id: existingUser.id,
+                    },
+                },
+            })
+
+            const response = await executeOperation<
+                TransactionsQuery,
+                TransactionsQueryVariables
+            >({
+                query: TRANSACTIONS,
+                variables: {
+                    args: {
+                        categoryId: existingCategory.id,
+                    },
+                },
+            }, authenticatedContext(existingUser))
+
+            expect(response.body?.singleResult.errors).toBeUndefined()
+            expect(response.body?.singleResult.data?.transactions).toHaveLength(TRANSACTION_COUNT)
         })
     })
 })
