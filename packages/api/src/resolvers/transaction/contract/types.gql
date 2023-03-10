@@ -1,3 +1,8 @@
+type Amount {
+    converted: Float!
+    original: Float!
+}
+
 type Transaction {
     id: ID!
     currency: String!

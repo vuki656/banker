@@ -1,3 +1,8 @@
+type Keyword {
+    id: ID!
+    name: String!
+}
+
 type Category {
     id: ID!
     color: String!

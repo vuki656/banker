@@ -1,4 +1,0 @@
-type Amount {
-    converted: Float!
-    original: Float!
-}

@@ -1,3 +1,4 @@
 .next
+dist
 coverage
-./packages/api/schema.graphql
+packages/api/schema.graphql

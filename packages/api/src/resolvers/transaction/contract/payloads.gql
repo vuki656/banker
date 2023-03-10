@@ -1,0 +1,7 @@
+type CreateTransactionPayload {
+    transaction: Transaction!
+}
+
+type UpdateTransactionPayload {
+    transaction: Transaction!
+}

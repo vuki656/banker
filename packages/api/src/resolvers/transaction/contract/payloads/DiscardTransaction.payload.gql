@@ -1,3 +1,0 @@
-type DiscardTransactionPayload {
-    transaction: Transaction!
-}

@@ -1,3 +1,0 @@
-input DiscardTransactionInput {
-    id: ID!
-}

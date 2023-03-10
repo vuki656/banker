@@ -1,3 +1,0 @@
-type UpdateTransactionPayload {
-    transaction: Transaction!
-}

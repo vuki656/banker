@@ -1,0 +1,11 @@
+type CreateCategoryPayload {
+    category: Category!
+}
+
+type DeleteCategoryPayload {
+    id: ID!
+}
+
+type UpdateCategoryPayload {
+    category: Category!
+}

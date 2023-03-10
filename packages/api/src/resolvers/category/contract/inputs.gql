@@ -1,0 +1,18 @@
+input DeleteCategoryInput {
+    id: String!
+}
+
+input CreateCategoryInput {
+    color: String!
+    icon: String!
+    keywords: [String!]!
+    name: String!
+}
+
+input UpdateCategoryInput {
+    id: String!
+    color: String!
+    icon: String!
+    keywords: [String!]!
+    name: String!
+}

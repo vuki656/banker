@@ -1,9 +1,0 @@
-input UpdateTransactionInput {
-    id: ID!
-    amount: Float!
-    categoryId: ID
-    currency: String!
-    date: String!
-    description: String!
-    status: TransactionStatus!
-}
