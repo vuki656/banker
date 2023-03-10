@@ -8,7 +8,7 @@ export const iterateDateRange = async ({ callback, endDate, startDate }: DateRan
 
     let currentDate = start
 
-    while (currentDate.isBefore(end) || currentDate.isSame(end, 'day')) {
+    while (currentDate.isBefore(end)) {
         await callback(currentDate.toDate())
 
         currentDate = currentDate.add(1, 'day')
