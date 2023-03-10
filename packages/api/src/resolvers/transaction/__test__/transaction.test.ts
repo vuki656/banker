@@ -41,7 +41,7 @@ describe('Category resolver', () => {
     describe('when `transactions` query is called', () => {
         // TODO: this is flaky, sometimes 1 more
         it('should return transactions in date range', async () => {
-            await RateFactory.createAll()
+            const rate = await RateFactory.create()
 
             const TRANSACTION_COUNT = 45
 
@@ -56,7 +56,7 @@ describe('Category resolver', () => {
             await iterateDateRange({
                 callback: async (date) => {
                     await TransactionFactory.create({
-                        currency: 'USD',
+                        currency: rate.code,
                         date,
                         user: {
                             connect: {
@@ -107,12 +107,12 @@ describe('Category resolver', () => {
         })
 
         it('should return only logged in users transactions', async () => {
-            await RateFactory.createAll()
-
+            const existingRate = await RateFactory.create()
             const loggedInUser = await UserFactory.create()
             const otherUser = await UserFactory.create()
 
             await TransactionFactory.create({
+                currency: existingRate.code,
                 user: {
                     connect: {
                         id: loggedInUser.id,
@@ -121,6 +121,7 @@ describe('Category resolver', () => {
             })
 
             await TransactionFactory.create({
+                currency: existingRate.code,
                 user: {
                     connect: {
                         id: otherUser.id,
@@ -141,10 +142,9 @@ describe('Category resolver', () => {
         })
 
         it('should return only transactions for a given category', async () => {
-            await RateFactory.createAll()
-
             const TRANSACTION_COUNT = 10
 
+            const existingRate = await RateFactory.create()
             const existingUser = await UserFactory.create()
             const existingCategory = await CategoryFactory.create()
 
@@ -154,6 +154,7 @@ describe('Category resolver', () => {
                         id: existingCategory.id,
                     },
                 },
+                currency: existingRate.code,
                 user: {
                     connect: {
                         id: existingUser.id,
@@ -162,6 +163,7 @@ describe('Category resolver', () => {
             })
 
             await TransactionFactory.createMany(5, {
+                currency: existingRate.code,
                 user: {
                     connect: {
                         id: existingUser.id,
@@ -200,13 +202,12 @@ describe('Category resolver', () => {
 
     describe('when `createTransaction` mutation is called', () => {
         it('should create transaction', async () => {
-            await RateFactory.createAll()
-
+            const existingRate = await RateFactory.create()
             const existingUser = await UserFactory.create()
 
             const input: CreateTransactionInput = {
                 amount: faker.datatype.number(),
-                currency: 'USD',
+                currency: existingRate.code,
                 date: new Date().toISOString(),
                 description: faker.lorem.sentence(),
                 reference: v4(),
@@ -258,14 +259,13 @@ describe('Category resolver', () => {
 
     describe('when `updateTransaction` mutation is called', () => {
         it('should update transaction', async () => {
-            await RateFactory.createAll()
-
+            const existingRate = await RateFactory.create()
             const existingUser = await UserFactory.create()
             const existingTransaction = await TransactionFactory.create()
 
             const input: UpdateTransactionInput = {
                 amount: faker.datatype.number(),
-                currency: 'USD',
+                currency: existingRate.code,
                 date: new Date().toISOString(),
                 description: faker.lorem.sentence(),
                 id: existingTransaction.id,

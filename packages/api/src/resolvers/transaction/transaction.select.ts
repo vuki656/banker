@@ -9,3 +9,8 @@ export const transactionSelect = {
     reference: true,
     status: true,
 } satisfies Prisma.TransactionSelect
+
+export const rateSelect = {
+    code: true,
+    value: true
+} satisfies Prisma.RateSelect
