@@ -7,7 +7,7 @@ import { orm } from '../../orm'
 export const RateFactory = {
     build: (input?: Partial<Prisma.RateCreateInput>) => {
         return {
-            code: "USD",
+            code: 'USD',
             value: faker.datatype.number(),
             ...input,
         } satisfies Prisma.RateCreateInput

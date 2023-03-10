@@ -57,7 +57,6 @@ const CategoryResolver: CategoryModule.Resolvers = {
 
             const input = deleteCategoryMutationValidation.parse(variables.input)
 
-            // TODO: what about keywords that are related
             await orm.category.delete({
                 where: {
                     id: input.id,

@@ -39,7 +39,6 @@ describe('Category resolver', () => {
     })
 
     describe('when `transactions` query is called', () => {
-        // TODO: this is flaky, sometimes 1 more
         it('should return transactions in date range', async () => {
             const rate = await RateFactory.create()
 
