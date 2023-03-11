@@ -1,0 +1,1 @@
+-   Hack for liquibase duplicate migrations is to run folder by folder (05, 06) by setting the include all path to them
