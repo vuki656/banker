@@ -40,8 +40,8 @@ export const CategorySingleView = observer(() => {
             variables: {
                 args: {
                     categoryId: store.category.id,
-                    endDate: store.range.endDate.toString(),
-                    startDate: store.range.startDate.toString(),
+                    endDate: store.range.endDate.toISOString(),
+                    startDate: store.range.startDate.toISOString(),
                 },
             },
         })

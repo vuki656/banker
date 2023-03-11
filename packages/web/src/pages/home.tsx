@@ -47,19 +47,19 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
         query: GetHomePageDataDocument,
         variables: {
             currentMonthArgs: {
-                endDate: dayjs().toString(),
+                endDate: dayjs().toISOString(),
                 startDate: dayjs()
                     .startOf('month')
-                    .toString(),
+                    .toISOString(),
             },
             previousMonthArgs: {
                 endDate: dayjs()
                     .subtract(1, 'month')
-                    .toString(),
+                    .toISOString(),
                 startDate: dayjs()
                     .subtract(1, 'month')
                     .startOf('month')
-                    .toString(),
+                    .toISOString(),
             },
         },
     })
