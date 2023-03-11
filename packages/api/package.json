@@ -14,6 +14,9 @@
         "generate:types:dev": "yarn graphql-codegen --config='./codegen.ts'",
         "generate:types:orm": "prisma generate",
         "generate:types:test": "graphql-codegen --config='./codegen.tests.ts'",
+        "production:kill": "pm2 stop api 2> /dev/null || true && pm2 delete api 2> /dev/null || true",
+        "production:restart": "yarn && yarn orm:generate && yarn build && yarn schema:build && yarn schema:deploy && yarn production:kill && yarn production:start",
+        "production:start": "pm2 start yarn --interpreter bash --name api -- start",
         "start": "node 'dist/main.js'",
         "test": "jest --runInBand"
     },
