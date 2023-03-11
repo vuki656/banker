@@ -3,6 +3,7 @@ import { sign } from 'jsonwebtoken'
 
 import env from '../../shared/env'
 import { ForbiddenError } from '../../shared/errors'
+import { logger } from '../../shared/logger'
 import { orm } from '../../shared/orm'
 import type { TokenDataType } from '../../shared/types'
 import { checkAuth } from '../../shared/utils'
@@ -19,6 +20,8 @@ const UserResolver: UserModule.Resolvers = {
         loginUser: async (_, variables) => {
             const input = loginUserMutationValidation.parse(variables.input)
 
+            logger.info('input: ', input)
+
             const user = await orm.user.findUniqueOrThrow({
                 select: {
                     ...userSelect,
@@ -29,7 +32,11 @@ const UserResolver: UserModule.Resolvers = {
                 },
             })
 
+            logger.info('user: ', user)
+
             const isValid = await compare(input.password, user.password)
+
+            logger.info('isValid: ', isValid)
 
             if (!isValid) {
                 throw new ForbiddenError('Wrong password')
@@ -39,11 +46,15 @@ const UserResolver: UserModule.Resolvers = {
                 user,
             }
 
+            logger.info('tokenData: ', tokenData)
+
             const token = sign(
                 tokenData,
                 env.APP_JWT_SECRET,
                 { expiresIn: env.APP_JWT_DURATION }
             )
+
+            logger.info('token: ', token)
 
             return {
                 token,
@@ -83,3 +94,4 @@ const UserResolver: UserModule.Resolvers = {
 }
 
 export default UserResolver
+
