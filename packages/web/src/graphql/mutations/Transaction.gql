@@ -13,11 +13,3 @@ mutation UpdateTransaction($input: UpdateTransactionInput!) {
         }
     }
 }
-
-mutation DiscardTransaction($input: DiscardTransactionInput!) {
-    discardTransaction(input: $input) {
-        transaction {
-            ...TransactionPayload
-        }
-    }
-}
