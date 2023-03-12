@@ -2,9 +2,9 @@ import type { StandaloneServerContextFunctionArgument } from '@apollo/server/dis
 import { faker } from '@faker-js/faker'
 import { sign } from 'jsonwebtoken'
 
-import env from '../../shared/env'
-import { UserFactory } from '../../shared/test-utils/factories'
-import type { TokenDataType } from '../../shared/types'
+import env from '../../../shared/env'
+import { UserFactory } from '../../../shared/test-utils/factories'
+import type { TokenDataType } from '../../../shared/types'
 
 import { context } from './context'
 

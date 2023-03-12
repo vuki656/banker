@@ -1,10 +1,10 @@
 import type { StandaloneServerContextFunctionArgument } from '@apollo/server/dist/esm/standalone'
 import { verify } from 'jsonwebtoken'
 
-import type { User } from '../../resolvers/graphql-types.generated'
-import env from '../../shared/env'
-import { logger } from '../../shared/logger'
-import type { Context } from '../../shared/types'
+import type { User } from '../../../resolvers/graphql-types.generated'
+import env from '../../../shared/env'
+import { logger } from '../../../shared/logger'
+import type { Context } from '../../../shared/types'
 
 import { cookieValidation } from './context.validation'
 import { ContextUser } from './ContextUser'

@@ -3,8 +3,8 @@
 import type { ApolloServerPlugin } from '@apollo/server'
 import { v4 } from 'uuid'
 
-import { logger } from '../../shared/logger'
-import type { Context } from '../../shared/types'
+import { logger } from '../../../shared/logger'
+import type { Context } from '../../../shared/types'
 
 export const ApolloPluginLogger: ApolloServerPlugin<Context> = {
     async requestDidStart(requestContext) {
