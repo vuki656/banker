@@ -36,6 +36,9 @@ const syncRates = async () => {
                     }),
             })
         })
+        .then(() => {
+            logger.error("Rates synced successfully")
+        })
         .catch((error: unknown) => {
             logger.error({
                 error,
@@ -44,7 +47,19 @@ const syncRates = async () => {
         })
 }
 
-export function registerSyncRatesCron() {
+const updateIfDbEmpty = async () => {
+    const rates = await orm.rate.findMany()
+
+    if (rates.length !== 0) {
+        return
+    }
+
+    await syncRates()
+}
+
+export async function registerSyncRatesCron() {
+    await updateIfDbEmpty()
+
     const task = schedule(env.APP_CURRENCY_REFRESH_CRON, () => {
         void syncRates()
     })
