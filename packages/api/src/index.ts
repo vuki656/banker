@@ -1,3 +1,4 @@
+import { expressMiddleware } from '@apollo/server/express4';
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import type {
@@ -29,10 +30,14 @@ const startApolloServer = async () => {
 }
 
 const startExpressServer = async () => {
+    // FIXME: typing is likely their fuck up as it expects a base context and doesn't allow custom context
+    const middleware = expressMiddleware(apolloServer as any)
+
     expressApp.use(
-        '/',
+        '/graphql',
         cors(),
         bodyParser.json({ limit: '50mb' }),
+        middleware
     )
 
     // expressApp.use((error: any, _: Request, response: Response) => {
