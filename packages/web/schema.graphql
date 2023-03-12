@@ -1,23 +1,9 @@
-type Mutation {
-    createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
-    deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
-    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
-    createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
-    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
-    discardTransaction(input: DiscardTransactionInput!): DiscardTransactionPayload!
-    updateUser(input: UpdateUserInput!): UpdateUserPayload!
-    loginUser(input: LoginUserInput!): LoginUserPayload!
-}
-
-type Query {
-    category(args: CategoryArgs!): Category
-    categories: [Category!]!
-    transactions(args: TransactionsArgs): [Transaction!]!
-    currentUser: User!
-}
-
 input CategoryArgs {
     id: ID!
+}
+
+input DeleteCategoryInput {
+    id: String!
 }
 
 input CreateCategoryInput {
@@ -27,16 +13,22 @@ input CreateCategoryInput {
     name: String!
 }
 
-input DeleteCategoryInput {
-    id: String!
-}
-
 input UpdateCategoryInput {
     id: String!
     color: String!
     icon: String!
     keywords: [String!]!
     name: String!
+}
+
+type Mutation {
+    createCategory(input: CreateCategoryInput!): CreateCategoryPayload!
+    deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload!
+    updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload!
+    createTransaction(input: CreateTransactionInput!): CreateTransactionPayload!
+    updateTransaction(input: UpdateTransactionInput!): UpdateTransactionPayload!
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
+    loginUser(input: LoginUserInput!): LoginUserPayload!
 }
 
 type CreateCategoryPayload {
@@ -51,16 +43,23 @@ type UpdateCategoryPayload {
     category: Category!
 }
 
+type Query {
+    category(args: CategoryArgs!): Category
+    categories: [Category!]!
+    transactions(args: TransactionsArgs): [Transaction!]!
+    currentUser: User!
+}
+
+type Keyword {
+    id: ID!
+    name: String!
+}
+
 type Category {
     id: ID!
     color: String!
     icon: String!
     keywords: [Keyword!]!
-    name: String!
-}
-
-type Keyword {
-    id: ID!
     name: String!
 }
 
@@ -86,10 +85,6 @@ input CreateTransactionInput {
     status: TransactionStatus!
 }
 
-input DiscardTransactionInput {
-    id: ID!
-}
-
 input UpdateTransactionInput {
     id: ID!
     amount: Float!
@@ -101,10 +96,6 @@ input UpdateTransactionInput {
 }
 
 type CreateTransactionPayload {
-    transaction: Transaction!
-}
-
-type DiscardTransactionPayload {
     transaction: Transaction!
 }
 
