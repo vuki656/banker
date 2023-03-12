@@ -1,4 +1,5 @@
 import { logger } from '../../shared/logger'
+
 import { seedUsers } from './user'
 
 const seed = async () => {
@@ -7,11 +8,11 @@ const seed = async () => {
 
 void seed()
     .then(() => {
-        logger.info("Seed completed")
+        logger.info('Seed completed')
     })
-    .catch((error) => {
+    .catch((error: unknown) => {
         logger.error({
-            message: "Seed failed",
-            error
+            error,
+            message: 'Seed failed',
         })
     })

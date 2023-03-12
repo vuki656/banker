@@ -1,4 +1,4 @@
-import { expressMiddleware } from '@apollo/server/express4';
+import { expressMiddleware } from '@apollo/server/express4'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import type {
@@ -7,6 +7,7 @@ import type {
 } from 'express'
 
 import { registerSyncRatesCron } from './crons'
+import { metricsRoute } from './resolvers/metrics'
 import { apolloServer } from './server/apollo'
 import {
     expressApp,
@@ -40,14 +41,17 @@ const startExpressServer = async () => {
         middleware
     )
 
-    // expressApp.use((error: any, _: Request, response: Response) => {
-    //     logger.error({
-    //         error,
-    //         message: 'Error fulfilling express request',
-    //     })
-    //
-    //     response.status(500).end()
-    // })
+    // TODO: how to not do this for every route
+    expressApp.use('/metrics', metricsRoute)
+
+    expressApp.use((error: any, _: Request, response: Response) => {
+        logger.error({
+            error,
+            message: 'Error fulfilling express request',
+        })
+
+        response.status(500).end()
+    })
 
     await new Promise<void>((resolve) => {
         httpServer.listen({ port: env.APP_PORT }, resolve)

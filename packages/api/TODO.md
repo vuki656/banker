@@ -1,2 +1,2 @@
-- [ ] There seems to be a bug on homepage query that causes a memory overflow and crashes the app
-- [ ] Rates are empty since you never fetched them
+-   [ ] There seems to be a bug on homepage query that causes a memory overflow and crashes the app
+-   [ ] Rates are empty since you never fetched them
