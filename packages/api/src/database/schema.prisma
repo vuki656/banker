@@ -1,6 +1,7 @@
 generator client {
     provider        = "prisma-client-js"
     previewFeatures = ["metrics"]
+    engineType = "binary" // Fix for https://github.com/prisma/prisma/issues/10649
 }
 
 datasource db {
