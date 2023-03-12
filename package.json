@@ -26,8 +26,8 @@
         "@types/node": "18.15.0",
         "@types/prettier": "^2.7.2",
         "@types/uuid": "^9.0.1",
-        "cspell": "^6.28.0",
-        "eslint": "^8.35.0",
+        "cspell": "^6.29.0",
+        "eslint": "^8.36.0",
         "prettier": "^2.8.4",
         "typescript": "4.9.5"
     },
