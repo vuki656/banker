@@ -4,7 +4,7 @@ import type {
     VariableValues,
 } from '@apollo/server/dist/esm/externalTypes/graphql'
 
-import { apolloServer } from '../../../server/apollo'
+import type { apolloServer } from '../../../server/apollo'
 
 type BaseResponse = {
     http: HTTPGraphQLHead

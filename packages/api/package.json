@@ -12,15 +12,15 @@
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "dev": "nodemon",
         "generate:template": "plop",
-        "start:grafana": "docker compose up grafana -d",
-        "start:prometheus": "docker compose up prometheus -d",
-        "start:app": "node 'dist/main.js'",
         "generate:types:dev": "yarn graphql-codegen --config='./codegen.ts'",
         "generate:types:orm": "prisma generate",
         "generate:types:test": "graphql-codegen --config='./codegen.tests.ts'",
         "production:kill": "pm2 stop api 2> /dev/null || true && pm2 delete api 2> /dev/null || true",
         "production:restart": "yarn && yarn generate:types:orm && yarn generate:types:dev && yarn build:project && yarn build:schema && yarn production:kill && yarn production:start",
         "production:start": "pm2 start yarn --interpreter bash --name api -- start:app",
+        "start:app": "node 'dist/main.js'",
+        "start:grafana": "docker compose up grafana -d",
+        "start:prometheus": "docker compose up prometheus -d",
         "test": "jest --runInBand"
     },
     "dependencies": {

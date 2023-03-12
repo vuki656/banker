@@ -8,7 +8,10 @@ import type {
 
 import { registerSyncRatesCron } from './crons'
 import { metricsRoute } from './resolvers/metrics'
-import { apolloServer, context } from './server/apollo'
+import {
+    apolloServer,
+    context,
+} from './server/apollo'
 import {
     expressApp,
     httpServer,
@@ -36,7 +39,7 @@ const startExpressServer = async () => {
         cors(),
         bodyParser.json({ limit: '50mb' }),
         expressMiddleware(apolloServer, {
-            context
+            context,
         })
     )
 
@@ -66,15 +69,14 @@ const startExpressServer = async () => {
         })
 }
 
-const startCrons = () => {
-    registerSyncRatesCron()
+const startCrons = async () => {
+    await registerSyncRatesCron()
 }
 
 const startServers = async () => {
     await startApolloServer()
     await startExpressServer()
-
-    startCrons()
+    await startCrons()
 }
 
 void startServers()

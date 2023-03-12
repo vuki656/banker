@@ -8,9 +8,9 @@ import type { Context } from '../../../shared/types'
 
 export const ApolloPluginLogger: ApolloServerPlugin<Context> = {
     async requestDidStart(requestContext) {
-        const operationName =  requestContext.request.operationName 
+        const operationName = requestContext.request.operationName
 
-        if (operationName === 'IntrospectionQuery' || operationName === "GetCurrentUser") {
+        if (operationName === 'IntrospectionQuery' || operationName === 'GetCurrentUser') {
             return
         }
 
