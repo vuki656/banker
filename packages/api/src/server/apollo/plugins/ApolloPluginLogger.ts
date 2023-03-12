@@ -8,8 +8,9 @@ import type { Context } from '../../../shared/types'
 
 export const ApolloPluginLogger: ApolloServerPlugin<Context> = {
     async requestDidStart(requestContext) {
-        // Don't log constant apollo playground pinging query
-        if (requestContext.request.operationName === 'IntrospectionQuery') {
+        const operationName =  requestContext.request.operationName 
+
+        if (operationName === 'IntrospectionQuery' || operationName === "GetCurrentUser") {
             return
         }
 

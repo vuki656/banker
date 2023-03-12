@@ -5,7 +5,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin'
 import type { Configuration } from 'webpack'
 import nodeExternals from 'webpack-node-externals'
 
-import { DEVELOPMENT_SCHEMA_PATH } from './src/server'
+import { DEVELOPMENT_SCHEMA_PATH } from './src/server/apollo'
 
 const config: Configuration = {
     entry: './src/index.ts',

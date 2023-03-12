@@ -62,8 +62,8 @@ CategoryPage.getInitialProps = async (context: PageContext): Promise<CategoryPag
             },
             transactionArgs: {
                 categoryId,
-                endDate: endDate.toString(),
-                startDate: startDate.toString(),
+                endDate: endDate.toISOString(),
+                startDate: startDate.toISOString(),
             },
         },
     })

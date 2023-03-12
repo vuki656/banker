@@ -2,7 +2,7 @@ import type { ExecuteOperationOptions } from '@apollo/server/dist/esm/externalTy
 import { faker } from '@faker-js/faker'
 
 import type { User } from '../../resolvers/graphql-types.generated'
-import { ContextUser } from '../../server'
+import { ContextUser } from '../../server/apollo'
 import { logger } from '../logger'
 import type { Context } from '../types'
 

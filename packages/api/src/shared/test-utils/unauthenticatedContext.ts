@@ -1,6 +1,6 @@
 import type { ExecuteOperationOptions } from '@apollo/server/dist/esm/externalTypes/graphql'
 
-import { ContextUser } from '../../server'
+import { ContextUser } from '../../server/apollo'
 import { logger } from '../logger'
 import type { Context } from '../types'
 

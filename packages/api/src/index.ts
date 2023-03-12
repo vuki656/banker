@@ -8,7 +8,7 @@ import type {
 
 import { registerSyncRatesCron } from './crons'
 import { metricsRoute } from './resolvers/metrics'
-import { apolloServer } from './server/apollo'
+import { apolloServer, context } from './server/apollo'
 import {
     expressApp,
     httpServer,
@@ -31,14 +31,13 @@ const startApolloServer = async () => {
 }
 
 const startExpressServer = async () => {
-    // FIXME: typing is likely their fuck up as it expects a base context and doesn't allow custom context
-    const middleware = expressMiddleware(apolloServer as any)
-
     expressApp.use(
         '/graphql',
         cors(),
         bodyParser.json({ limit: '50mb' }),
-        middleware
+        expressMiddleware(apolloServer, {
+            context
+        })
     )
 
     // TODO: how to not do this for every route

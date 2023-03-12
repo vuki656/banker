@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "build:project": "yarn build:schema && webpack",
-        "build:schema": "ts-node ./src/server/build-schema.ts",
+        "build:schema": "ts-node ./src/server/apollo/build-schema.ts",
         "database:inspect": "prisma studio",
         "database:migrate": "docker compose run --no-deps --rm migration",
         "database:seed": "ts-node ./src/database/seed/index.ts",
@@ -12,7 +12,7 @@
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "dev": "nodemon",
         "generate:template": "plop",
-        "start:metrics": "docker compose run prometheus",
+        "start:metrics": "docker compose up prometheus -d",
         "start:app": "node 'dist/main.js'",
         "generate:types:dev": "yarn graphql-codegen --config='./codegen.ts'",
         "generate:types:orm": "prisma generate",
