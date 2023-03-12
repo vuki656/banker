@@ -39,6 +39,7 @@ const HomePage: NextPage<HomePageData> = (props) => {
     )
 }
 
+// TODO: rewrite this so it fetches transactions in one query
 HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> => {
     const response = await context.apolloClient.query<
         GetHomePageDataQuery,
@@ -46,15 +47,20 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
     >({
         query: GetHomePageDataDocument,
         variables: {
-            currentMonthArgs: {
-                endDate: dayjs().toISOString(),
+            beforePreviousMonthTransactionsArgs: {
+                endDate: dayjs()
+                    .subtract(2, 'month')
+                    .endOf('month')
+                    .toISOString(),
                 startDate: dayjs()
+                    .subtract(2, 'month')
                     .startOf('month')
                     .toISOString(),
             },
-            previousMonthArgs: {
+            previousMonthTransactionsArgs: {
                 endDate: dayjs()
                     .subtract(1, 'month')
+                    .endOf('month')
                     .toISOString(),
                 startDate: dayjs()
                     .subtract(1, 'month')
@@ -66,8 +72,8 @@ HomePage.getInitialProps = async (context: PageContext): Promise<HomePageData> =
 
     return {
         categories: response.data.categories,
-        currentMonthTransactions: response.data.currentMonthTransactions,
-        previousMonthTransactions: response.data.previousMonthTransactions,
+        currentMonthTransactions: response.data.previousMonthTransactions,
+        previousMonthTransactions: response.data.beforePreviousMonthTransactions,
     }
 }
 
