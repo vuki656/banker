@@ -12,6 +12,8 @@ services:
             - POSTGRES_DB=${DB_NAME}
         healthcheck:
             test: 'exit 0'
+        volumes:
+            - database:/var/lib/postgresql/data
     migration:
         container_name: banker-migrations
         depends_on:
@@ -23,3 +25,20 @@ services:
         command:
             'update --username=${DB_USERNAME} --password=${DB_PASSWORD} --url=${DB_MIGRATION_URL} --liquibase-schema-name=public
             --changelogFile="./master.json"'
+    prometheus:
+        container_name: banker-prometheus
+        image: prom/prometheus
+        volumes:
+            - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+            - prometheus-storage:/prometheus
+        command:
+            - '--config.file=/etc/prometheus/prometheus.yml'
+            - '--storage.tsdb.path=/prometheus'
+        ports:
+            - '${APP_PROMETHEUS_PORT}:${APP_PROMETHEUS_PORT}'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+
+volumes:
+    prometheus-storage:
+    database:
