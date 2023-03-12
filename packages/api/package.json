@@ -8,6 +8,7 @@
         "database:inspect": "prisma studio",
         "database:migrate": "docker compose run --no-deps --rm migration",
         "database:setup": "docker compose run --rm migration",
+        "database:seed": "ts-node ./src/database/seed/index.ts",
         "database:sync": "prisma db pull && prettier --write './src/database/schema.prisma'",
         "dev": "nodemon",
         "generate:template": "plop",
