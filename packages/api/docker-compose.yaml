@@ -27,7 +27,7 @@ services:
             --changelogFile="./master.json"'
     prometheus:
         container_name: banker-prometheus
-        image: prom/prometheus
+        image: prom/prometheus:v2.42.0
         volumes:
             - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
             - prometheus-storage:/prometheus
@@ -38,7 +38,15 @@ services:
             - '${APP_PROMETHEUS_PORT}:${APP_PROMETHEUS_PORT}'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
+    grafana:
+        container_name: banker-grafana
+        image: grafana/grafana:9.4.3
+        volumes:
+            - grafana-storage:/var/lib/grafana
+        ports:
+            - '${APP_GRAFANA_PORT}:3000'
 
 volumes:
     prometheus-storage:
+    grafana-storage:
     database:
