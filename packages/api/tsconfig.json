@@ -3,13 +3,11 @@
         "strict": true,
         "rootDirs": ["src"],
         "noUncheckedIndexedAccess": true,
-        "outDir": "dist",
         "lib": ["es2020"],
         "target": "es2020",
         "module": "CommonJS",
         "moduleResolution": "node",
         "esModuleInterop": true,
         "types": ["node", "jest"]
-    },
-    "include": ["src"]
+    }
 }
