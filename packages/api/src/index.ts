@@ -7,7 +7,6 @@ import type {
 } from 'express'
 
 import { registerSyncRatesCron } from './crons'
-import { metricsRoute } from './resolvers/metrics'
 import {
     apolloServer,
     context,
@@ -42,9 +41,6 @@ const startExpressServer = async () => {
             context,
         })
     )
-
-    // TODO: how to not do this for every route
-    expressApp.use('/metrics', metricsRoute)
 
     expressApp.use((error: any, _: Request, response: Response) => {
         logger.error({

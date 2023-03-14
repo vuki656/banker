@@ -20,7 +20,10 @@ fragment HomePageTransactionPayload on Transaction {
     }
 }
 
-query GetHomePageData($previousMonthTransactionsArgs: TransactionsArgs!, $beforePreviousMonthTransactionsArgs: TransactionsArgs!) {
+query GetHomePageData(
+    $previousMonthTransactionsArgs: TransactionsArgs!
+    $beforePreviousMonthTransactionsArgs: TransactionsArgs!
+) {
     categories {
         ...CategoryPayload
     }
