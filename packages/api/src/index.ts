@@ -43,6 +43,9 @@ const startExpressServer = async () => {
         })
     )
 
+    // TODO: how to not do this for every route
+    expressApp.use('/metrics', metricsRoute)
+
     expressApp.use((error: any, _: Request, response: Response) => {
         logger.error({
             error,
@@ -51,9 +54,6 @@ const startExpressServer = async () => {
 
         response.status(500).end()
     })
-
-    // TODO: how to not do this for every route
-    expressApp.use('/metrics', metricsRoute)
 
     await new Promise<void>((resolve) => {
         httpServer.listen({ port: env.APP_PORT }, resolve)
