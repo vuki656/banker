@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { currencyCodeValidation } from '../../resolvers/transaction'
+import { currencyCodeValidation } from '../../resolvers/transaction/graphql'
 
 export const ratesValidation = z.object({
     base: currencyCodeValidation,

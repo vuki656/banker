@@ -7,6 +7,7 @@ import type {
 } from 'express'
 
 import { registerSyncRatesCron } from './crons'
+import { metricsRoute } from './resolvers/metrics/rest'
 import {
     apolloServer,
     context,
@@ -50,6 +51,9 @@ const startExpressServer = async () => {
 
         response.status(500).end()
     })
+
+    // TODO: how to not do this for every route
+    expressApp.use('/metrics', metricsRoute)
 
     await new Promise<void>((resolve) => {
         httpServer.listen({ port: env.APP_PORT }, resolve)

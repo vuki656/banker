@@ -1,5 +1,6 @@
-import { orm } from '../../shared/orm'
-import { checkAuth } from '../../shared/utils'
+import { orm } from '../../../shared/orm'
+import { checkAuth } from '../../../shared/utils'
+import type { CategoryModule } from '../resolver-types.generated'
 
 import {
     categorySelect,
@@ -11,7 +12,6 @@ import {
     deleteCategoryMutationValidation,
     updateCategoryMutationValidation,
 } from './category.validation'
-import type { CategoryModule } from './resolver-types.generated'
 
 const CategoryResolver: CategoryModule.Resolvers = {
     Mutation: {

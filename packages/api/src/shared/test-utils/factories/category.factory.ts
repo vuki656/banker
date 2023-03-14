@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import type { Prisma } from '@prisma/client'
 import { v4 } from 'uuid'
 
-import { categorySelect } from '../../../resolvers/category'
+import { categorySelect } from '../../../resolvers/category/graphql'
 import { orm } from '../../orm'
 
 import { UserFactory } from './user.factory'

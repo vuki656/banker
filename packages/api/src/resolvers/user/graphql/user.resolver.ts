@@ -1,13 +1,13 @@
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 
-import env from '../../shared/env'
-import { ForbiddenError } from '../../shared/errors'
-import { orm } from '../../shared/orm'
-import type { TokenDataType } from '../../shared/types'
-import { checkAuth } from '../../shared/utils'
+import env from '../../../shared/env'
+import { ForbiddenError } from '../../../shared/errors'
+import { orm } from '../../../shared/orm'
+import type { TokenDataType } from '../../../shared/types'
+import { checkAuth } from '../../../shared/utils'
+import type { UserModule } from '../resolver-types.generated'
 
-import type { UserModule } from './resolver-types.generated'
 import { userSelect } from './user.select'
 import {
     loginUserMutationValidation,

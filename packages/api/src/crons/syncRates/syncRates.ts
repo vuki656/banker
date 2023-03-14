@@ -37,7 +37,7 @@ const syncRates = async () => {
             })
         })
         .then(() => {
-            logger.error('Rates synced successfully')
+            logger.info('Rates synced successfully')
         })
         .catch((error: unknown) => {
             logger.error({
@@ -51,6 +51,8 @@ const updateIfDatabaseEmpty = async () => {
     const rates = await orm.rate.findMany()
 
     if (rates.length !== 0) {
+        logger.info(`Skipping rate sync as there are ${rates.length} already`)
+
         return
     }
 

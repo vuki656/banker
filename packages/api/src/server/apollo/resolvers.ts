@@ -6,7 +6,7 @@ import { mergeResolvers } from '@graphql-tools/merge'
 const resolverFiles = loadFilesSync(
     join(
         __dirname,
-        '../../resolvers/**/*.resolver.*'
+        '../../resolvers/**/graphql/**/*.resolver.*'
     ),
     { recursive: true }
 )

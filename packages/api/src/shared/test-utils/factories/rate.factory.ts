@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import type { Prisma } from '@prisma/client'
 
-import { rateSelect } from '../../../resolvers/transaction'
+import { rateSelect } from '../../../resolvers/transaction/graphql'
 import { orm } from '../../orm'
 
 export const RateFactory = {

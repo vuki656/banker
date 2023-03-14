@@ -5,11 +5,11 @@ import {
     executeOperation,
     unauthenticatedContext,
     wipeDatabase,
-} from '../../../shared/test-utils'
+} from '../../../../shared/test-utils'
 import {
     CategoryFactory,
     UserFactory,
-} from '../../../shared/test-utils/factories'
+} from '../../../../shared/test-utils/factories'
 import type {
     CategoriesQuery,
     CategoriesQueryVariables,
@@ -23,7 +23,7 @@ import type {
     UpdateCategoryInput,
     UpdateCategoryMutation,
     UpdateCategoryMutationVariables,
-} from '../../../shared/types/test-types.generated'
+} from '../../../../shared/types/test-types.generated'
 
 import {
     CATEGORIES,

@@ -6,8 +6,8 @@ import {
     executeOperation,
     unauthenticatedContext,
     wipeDatabase,
-} from '../../../shared/test-utils'
-import { UserFactory } from '../../../shared/test-utils/factories'
+} from '../../../../shared/test-utils'
+import { UserFactory } from '../../../../shared/test-utils/factories'
 import type {
     CurrentUserQuery,
     CurrentUserQueryVariables,
@@ -15,8 +15,8 @@ import type {
     LoginUserMutationVariables,
     UpdateUserMutation,
     UpdateUserMutationVariables,
-} from '../../../shared/types/test-types.generated'
-import type { UpdateUserInput } from '../../graphql-types.generated'
+} from '../../../../shared/types/test-types.generated'
+import type { UpdateUserInput } from '../../../graphql-types.generated'
 
 import {
     LOGIN_USER,

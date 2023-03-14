@@ -3,7 +3,7 @@ import type { Prisma } from '@prisma/client'
 import { TransactionStatus } from '@prisma/client'
 import { v4 } from 'uuid'
 
-import { transactionSelect } from '../../../resolvers/transaction'
+import { transactionSelect } from '../../../resolvers/transaction/graphql'
 import { orm } from '../../orm'
 import { randomObjectValue } from '../../utils'
 

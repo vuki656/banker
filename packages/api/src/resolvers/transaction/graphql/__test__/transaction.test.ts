@@ -7,13 +7,13 @@ import {
     executeOperation,
     unauthenticatedContext,
     wipeDatabase,
-} from '../../../shared/test-utils'
+} from '../../../../shared/test-utils'
 import {
     CategoryFactory,
     RateFactory,
     TransactionFactory,
     UserFactory,
-} from '../../../shared/test-utils/factories'
+} from '../../../../shared/test-utils/factories'
 import type {
     CreateTransactionInput,
     CreateTransactionMutation,
@@ -23,9 +23,9 @@ import type {
     UpdateTransactionInput,
     UpdateTransactionMutation,
     UpdateTransactionMutationVariables,
-} from '../../../shared/types/test-types.generated'
-import { TransactionStatus } from '../../../shared/types/test-types.generated'
-import { iterateDateRange } from '../../../shared/utils'
+} from '../../../../shared/types/test-types.generated'
+import { TransactionStatus } from '../../../../shared/types/test-types.generated'
+import { iterateDateRange } from '../../../../shared/utils'
 
 import {
     CREATE_TRANSACTION,

@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import type { Prisma } from '@prisma/client'
 import { v4 } from 'uuid'
 
-import { userSelect } from '../../../resolvers/user/user.select'
+import { userSelect } from '../../../resolvers/user/graphql'
 import { orm } from '../../orm'
 
 export const UserFactory = {
