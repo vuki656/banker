@@ -50,13 +50,13 @@ const syncRates = async () => {
 const updateIfDatabaseEmpty = async () => {
     const rates = await orm.rate.findMany()
 
-    if (rates.length !== 0) {
-        logger.info(`Skipping rate sync as there are ${rates.length} already`)
+    if (rates.length === 0) {
+        await syncRates()
 
         return
     }
 
-    await syncRates()
+    logger.info(`Skipping rate sync as there are ${rates.length} already`)
 }
 
 export async function registerSyncRatesCron() {
