@@ -1,8 +1,12 @@
+import { v4 } from 'uuid'
 import { orm } from '../../shared/orm'
+
+export const USER_ID = v4()
 
 export const seedUsers = async () => {
     return orm.user.create({
         data: {
+            id: USER_ID,
             email: 'off.vukovic@gmail.com',
             firstName: 'Domagoj',
             lastName: 'Vukovic', // cspell:disable-next-line

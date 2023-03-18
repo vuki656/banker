@@ -3,7 +3,7 @@
         {
             "includeAll": {
                 "logicalFilePath": "database/migrations/master.yaml",
-                "path": "changelog/2023",
+                "path": "changelog",
                 "errorIfMissingOrEmpty": true,
                 "relativeToChangelogFile": true
             }
