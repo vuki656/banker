@@ -6,22 +6,55 @@ import type {
     TransactionType,
 } from '../../../shared/types'
 
-import type { CategoryTotal } from './HomeStore.types'
+import type { CategoryTotal, DateRange } from './HomeStore.types'
 
 export class HomeStore {
+    public dateRange: DateRange = {
+        end: dayjs()
+            .startOf('day')
+            .toDate(),
+        start: dayjs()
+            .subtract(1, 'month')
+            .startOf('month')
+            .toDate()
+    }
+
     public categories: CategoryType[] = []
 
-    public currentMonthTransactions: TransactionType[] = []
-
-    public previousMonthTransactions: TransactionType[] = []
+    public transactions: TransactionType[] = []
 
     constructor(data: HomePageData) {
-        this.currentMonthTransactions = data.currentMonthTransactions
-        this.previousMonthTransactions = data.previousMonthTransactions
         this.categories = data.categories
     }
 
+    public setTransactions(transactions: TransactionType[]) {
+        this.transactions = transactions
+    }
+
+    private splitTransactions() {
+        console.log(this.transactionsArgs)
+
+        const focusedMonthTransactions = this.transactions.filter((transaction) => {
+            return dayjs(transaction.date).isAfter(dayjs(this.dateRange.end).startOf('month'))
+        })
+
+        console.log('focusedMonthTransactions: ', focusedMonthTransactions)
+
+        const previousMonthTransactions = this.transactions.filter((transaction) => {
+            return dayjs(transaction.date).isBefore(dayjs(this.dateRange.end).startOf('month'))
+        })
+
+        console.log('previousMonthTransactions: ', previousMonthTransactions)
+
+        return {
+            focusedMonthTransactions,
+            previousMonthTransactions
+        }
+    }
+
     public get categoriesTotal() {
+        this.splitTransactions()
+
         const categories = new Map<string, CategoryTotal>()
 
         this.categories.forEach((category) => {
@@ -32,7 +65,7 @@ export class HomeStore {
             })
         })
 
-        this.currentMonthTransactions.forEach((transaction) => {
+        this.transactions.forEach((transaction) => {
             const name = transaction.category?.name ?? 'Other'
             const category = categories.get(name)
 
@@ -56,7 +89,7 @@ export class HomeStore {
     }
 
     public get currentMonthTotal() {
-        return this.currentMonthTransactions.reduce((accumulator, transaction) => {
+        return this.transactions.reduce((accumulator, transaction) => {
             return accumulator + transaction.amount.converted
         }, 0)
     }
@@ -68,9 +101,10 @@ export class HomeStore {
             return 0
         }
 
-        const previousMonthTotal = this.previousMonthTransactions.reduce((accumulator, transaction) => {
-            return accumulator + transaction.amount.converted
-        }, 0)
+        const previousMonthTotal = 0
+        // const previousMonthTotal = this.previousMonthTransactions.reduce((accumulator, transaction) => {
+        //     return accumulator + transaction.amount.converted
+        // }, 0)
 
         const difference = 100 * Math.abs(
             (currentMonthTotal - previousMonthTotal) /
@@ -85,7 +119,7 @@ export class HomeStore {
     }
 
     public get expensesPerDay() {
-        const expensesPerDay = this.currentMonthTransactions.reduce((accumulator, transaction) => {
+        const expensesPerDay = this.transactions.reduce((accumulator, transaction) => {
             const dayAmount = accumulator.get(transaction.date) ?? 0
 
             if (dayAmount) {

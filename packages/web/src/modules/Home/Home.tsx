@@ -8,8 +8,30 @@ import { HomeCategories } from './HomeCategories'
 import { HomeHistoryChart } from './HomeHistoryChart'
 import { HomeLatestTransactions } from './HomeLatestTransactions'
 import { HomeTotal } from './HomeTotal'
+import { useHomeStore } from './hooks'
+import { useGetTransactionsQuery } from '../../graphql/types.generated'
 
 export const Home: FunctionComponent = () => {
+    const store = useHomeStore()
+
+    useGetTransactionsQuery({
+        variables: {
+            args: {
+                startDate: store
+                    .dateRange
+                    .start
+                    .toISOString(),
+                endDate: store
+                    .dateRange
+                    .end
+                    .toISOString(),
+            }
+        },
+        onCompleted: (data) => {
+            store.setTransactions(data.transactions)
+        }
+    })
+
     return (
         <Box
             component={Stack}

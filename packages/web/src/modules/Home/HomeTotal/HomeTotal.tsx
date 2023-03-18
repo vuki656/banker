@@ -26,6 +26,7 @@ export const HomeTotal: FunctionComponent = () => {
 
     const { user } = useCurrentUser()
 
+    // TODO: fix dates
     return (
         <Paper
             p="md"

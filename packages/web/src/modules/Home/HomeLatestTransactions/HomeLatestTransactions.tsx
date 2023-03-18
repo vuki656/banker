@@ -25,7 +25,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
 
     return (
         <Panel
-            isEmpty={store.currentMonthTransactions.length === 0}
+            isEmpty={store.transactions.length === 0}
             placeholder={{
                 color: 'orange',
                 icon: <IconList />,
@@ -35,7 +35,7 @@ export const HomeLatestTransactions: FunctionComponent = () => {
             title="Latest Transactions"
         >
             <Stack spacing={30}>
-                {store.currentMonthTransactions.map((transaction) => {
+                {store.transactions.map((transaction) => {
                     return (
                         <Group
                             key={transaction.id}
