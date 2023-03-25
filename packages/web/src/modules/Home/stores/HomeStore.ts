@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { makeAutoObservable } from 'mobx'
 
 import type { HomePageData } from '../../../pages/home'
 import type {
@@ -15,6 +16,7 @@ import type {
 export class HomeStore {
     public categories: CategoryType[] = []
 
+    // TODO: this should include focused month + comparison month and then split
     public dateRange: DateRange = {
         end: dayjs()
             .startOf('day')
@@ -32,6 +34,8 @@ export class HomeStore {
 
     constructor(data: HomePageData) {
         this.categories = data.categories
+
+        makeAutoObservable(this, undefined, { autoBind: true })
     }
 
     public get categoriesTotal() {
@@ -96,9 +100,15 @@ export class HomeStore {
             const dayAmount = accumulator.get(transaction.date) ?? 0
 
             if (dayAmount) {
-                return accumulator.set(transaction.date, dayAmount + transaction.amount.converted)
+                return accumulator.set(
+                    transaction.date,
+                    dayAmount + transaction.amount.converted
+                )
             } else {
-                return accumulator.set(transaction.date, transaction.amount.converted)
+                return accumulator.set(
+                    transaction.date,
+                    transaction.amount.converted
+                )
             }
         }, new Map<string, number>())
 
@@ -124,8 +134,34 @@ export class HomeStore {
         }, 0)
     }
 
+    public goToNextMonth() {
+        this.dateRange = {
+            end: dayjs(this.dateRange.end)
+                .add(1, 'month')
+                .endOf('month')
+                .toDate(),
+            start: dayjs(this.dateRange.start)
+                .add(1, 'month')
+                .startOf('month')
+                .toDate(),
+        }
+    }
+
+    public goToPreviousMonth() {
+        this.dateRange = {
+            end: dayjs(this.dateRange.end)
+                .subtract(1, 'month')
+                .endOf('month')
+                .toDate(),
+            start: dayjs(this.dateRange.start)
+                .subtract(1, 'month')
+                .startOf('month')
+                .toDate(),
+        }
+    }
+
     public setTransactions(transactions: TransactionType[]) {
-        const { comparisonMonth, focusedMonth } = transactions.reduce<SplitTransactions>((accumulator, transaction) => {
+        this.transactions = transactions.reduce<SplitTransactions>((accumulator, transaction) => {
             const isFocusedMonthDate = dayjs(transaction.date).isAfter(this.dateRange.start)
 
             if (isFocusedMonthDate) {
@@ -146,10 +182,5 @@ export class HomeStore {
                 ],
             }
         }, { comparisonMonth: [], focusedMonth: [] })
-
-        this.transactions = {
-            comparisonMonth,
-            focusedMonth,
-        }
     }
 }

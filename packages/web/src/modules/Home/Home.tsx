@@ -2,7 +2,9 @@ import {
     Box,
     Stack,
 } from '@mantine/core'
+import { observer } from 'mobx-react-lite'
 import type { FunctionComponent } from 'react'
+import { useEffect } from 'react'
 
 import { useGetTransactionsQuery } from '../../graphql/types.generated'
 
@@ -12,10 +14,10 @@ import { HomeLatestTransactions } from './HomeLatestTransactions'
 import { HomeTotal } from './HomeTotal'
 import { useHomeStore } from './hooks'
 
-export const Home: FunctionComponent = () => {
+export const Home: FunctionComponent = observer(() => {
     const store = useHomeStore()
 
-    useGetTransactionsQuery({
+    const { refetch } = useGetTransactionsQuery({
         onCompleted: (data) => {
             store.setTransactions(data.transactions)
         },
@@ -32,6 +34,21 @@ export const Home: FunctionComponent = () => {
             },
         },
     })
+
+    useEffect(() => {
+        void refetch({
+            args: {
+                endDate: store
+                    .dateRange
+                    .end
+                    .toISOString(),
+                startDate: store
+                    .dateRange
+                    .start
+                    .toISOString(),
+            },
+        })
+    }, [store.dateRange])
 
     return (
         <Box
@@ -58,4 +75,4 @@ export const Home: FunctionComponent = () => {
             <HomeHistoryChart />
         </Box>
     )
-}
+})
