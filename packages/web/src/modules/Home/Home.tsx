@@ -4,32 +4,33 @@ import {
 } from '@mantine/core'
 import type { FunctionComponent } from 'react'
 
+import { useGetTransactionsQuery } from '../../graphql/types.generated'
+
 import { HomeCategories } from './HomeCategories'
 import { HomeHistoryChart } from './HomeHistoryChart'
 import { HomeLatestTransactions } from './HomeLatestTransactions'
 import { HomeTotal } from './HomeTotal'
 import { useHomeStore } from './hooks'
-import { useGetTransactionsQuery } from '../../graphql/types.generated'
 
 export const Home: FunctionComponent = () => {
     const store = useHomeStore()
 
     useGetTransactionsQuery({
+        onCompleted: (data) => {
+            store.setTransactions(data.transactions)
+        },
         variables: {
             args: {
-                startDate: store
-                    .dateRange
-                    .start
-                    .toISOString(),
                 endDate: store
                     .dateRange
                     .end
                     .toISOString(),
-            }
+                startDate: store
+                    .dateRange
+                    .start
+                    .toISOString(),
+            },
         },
-        onCompleted: (data) => {
-            store.setTransactions(data.transactions)
-        }
     })
 
     return (

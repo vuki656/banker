@@ -5,6 +5,7 @@ import {
     ThemeIcon,
 } from '@mantine/core'
 import { IconList } from '@tabler/icons-react'
+import { observer } from 'mobx-react-lite'
 import type { FunctionComponent } from 'react'
 
 import {
@@ -17,7 +18,6 @@ import {
     formatDate,
 } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
-import { observer } from 'mobx-react-lite'
 
 export const HomeLatestTransactions: FunctionComponent = observer(() => {
     const { user } = useCurrentUser()

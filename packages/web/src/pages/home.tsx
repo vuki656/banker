@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { createContext } from 'react'
 
-import {
-    GetCategoriesDocument,
+import type {
     GetCategoriesQuery,
     GetCategoriesQueryVariables,
 } from '../graphql/types.generated'
+import { GetCategoriesDocument } from '../graphql/types.generated'
 import {
     Home,
     HomeStore,

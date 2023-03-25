@@ -6,57 +6,32 @@ import type {
     TransactionType,
 } from '../../../shared/types'
 
-import type { CategoryTotal, DateRange, SplitTransactions } from './HomeStore.types'
+import type {
+    CategoryTotal,
+    DateRange,
+    SplitTransactions,
+} from './HomeStore.types'
 
 export class HomeStore {
+    public categories: CategoryType[] = []
+
     public dateRange: DateRange = {
         end: dayjs()
             .startOf('day')
             .toDate(),
         start: dayjs()
             .startOf('month')
-            .toDate()
+            .toDate(),
     }
-
-    public categories: CategoryType[] = []
 
     public transactions: SplitTransactions = {
         comparisonMonth: [],
-        focusedMonth: []
+        focusedMonth: [],
 
     }
 
     constructor(data: HomePageData) {
         this.categories = data.categories
-    }
-
-    public setTransactions(transactions: TransactionType[]) {
-        const { comparisonMonth, focusedMonth } = transactions.reduce<SplitTransactions>((accumulator, transaction) => {
-            const isFocusedMonthDate = dayjs(transaction.date).isAfter(this.dateRange.start)
-
-            if (isFocusedMonthDate) {
-                return {
-                    ...accumulator,
-                    focusedMonth: [
-                        ...accumulator.focusedMonth,
-                        transaction
-                    ]
-                }
-            }
-
-            return {
-                ...accumulator,
-                comparisonMonth: [
-                    ...accumulator.comparisonMonth,
-                    transaction
-                ]
-            }
-        }, { focusedMonth: [], comparisonMonth: [] })
-
-        this.transactions = {
-            comparisonMonth,
-            focusedMonth,
-        }
     }
 
     public get categoriesTotal() {
@@ -91,12 +66,6 @@ export class HomeStore {
 
             return 0
         })
-    }
-
-    public get focusedMonthTotal() {
-        return this.transactions.focusedMonth.reduce((accumulator, transaction) => {
-            return accumulator + transaction.amount.converted
-        }, 0)
     }
 
     public get difference() {
@@ -147,5 +116,40 @@ export class HomeStore {
             data,
             id: 'data',
         }]
+    }
+
+    public get focusedMonthTotal() {
+        return this.transactions.focusedMonth.reduce((accumulator, transaction) => {
+            return accumulator + transaction.amount.converted
+        }, 0)
+    }
+
+    public setTransactions(transactions: TransactionType[]) {
+        const { comparisonMonth, focusedMonth } = transactions.reduce<SplitTransactions>((accumulator, transaction) => {
+            const isFocusedMonthDate = dayjs(transaction.date).isAfter(this.dateRange.start)
+
+            if (isFocusedMonthDate) {
+                return {
+                    ...accumulator,
+                    focusedMonth: [
+                        ...accumulator.focusedMonth,
+                        transaction,
+                    ],
+                }
+            }
+
+            return {
+                ...accumulator,
+                comparisonMonth: [
+                    ...accumulator.comparisonMonth,
+                    transaction,
+                ],
+            }
+        }, { comparisonMonth: [], focusedMonth: [] })
+
+        this.transactions = {
+            comparisonMonth,
+            focusedMonth,
+        }
     }
 }

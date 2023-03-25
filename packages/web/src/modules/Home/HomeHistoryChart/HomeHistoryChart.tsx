@@ -5,13 +5,13 @@ import {
 } from '@mantine/core'
 import { ResponsiveLine } from '@nivo/line'
 import { IconTimeline } from '@tabler/icons-react'
+import { observer } from 'mobx-react-lite'
 import type { FunctionComponent } from 'react'
 
 import { Panel } from '../../../components'
 import { useCurrentUser } from '../../../shared/auth'
 import { formatCurrency } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
-import { observer } from 'mobx-react-lite'
 
 export const HomeHistoryChart: FunctionComponent = observer(() => {
     const { user } = useCurrentUser()

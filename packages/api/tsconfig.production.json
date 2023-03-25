@@ -1,10 +1,6 @@
 {
     "extends": "./tsconfig.json",
-    "exclude": [
-        "./src/**/__test__",
-        "./src/**/*.test.*",
-        "./src/database/seed"
-    ],
+    "exclude": ["./src/**/__test__", "./src/**/*.test.*", "./src/database/seed"],
     "include": ["./src"],
     "compilerOptions": {
         "outDir": "dist/src"

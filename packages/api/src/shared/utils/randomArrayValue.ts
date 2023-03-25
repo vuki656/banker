@@ -1,4 +1,4 @@
-export const randomArrayValue = <T>(array: T[]): T => {
+export const randomArrayValue = <TValue>(array: TValue[]): TValue => {
     if (array.length === 0) {
         throw new Error('Array is empty')
     }
