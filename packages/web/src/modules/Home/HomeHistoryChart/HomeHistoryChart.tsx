@@ -11,8 +11,9 @@ import { Panel } from '../../../components'
 import { useCurrentUser } from '../../../shared/auth'
 import { formatCurrency } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
+import { observer } from 'mobx-react-lite'
 
-export const HomeHistoryChart: FunctionComponent = () => {
+export const HomeHistoryChart: FunctionComponent = observer(() => {
     const { user } = useCurrentUser()
 
     const store = useHomeStore()
@@ -78,4 +79,4 @@ export const HomeHistoryChart: FunctionComponent = () => {
             </Box>
         </Panel>
     )
-}
+})

@@ -100,22 +100,22 @@ export class HomeStore {
     }
 
     public get difference() {
-        const currentMonthTotal = this.focusedMonthTotal
+        const focusedMonthTotal = this.focusedMonthTotal
 
-        if (currentMonthTotal === 0) {
+        if (focusedMonthTotal === 0) {
             return 0
         }
 
-        const previousMonthTotal = this.transactions.comparisonMonth.reduce((accumulator, transaction) => {
+        const comparisonMonthTotal = this.transactions.comparisonMonth.reduce((accumulator, transaction) => {
             return accumulator + transaction.amount.converted
         }, 0)
 
         const difference = 100 * Math.abs(
-            (currentMonthTotal - previousMonthTotal) /
-            ((currentMonthTotal + previousMonthTotal) / 2)
+            (focusedMonthTotal - comparisonMonthTotal) /
+            ((focusedMonthTotal + comparisonMonthTotal) / 2)
         )
 
-        if (currentMonthTotal < previousMonthTotal) {
+        if (focusedMonthTotal < comparisonMonthTotal) {
             return Math.abs(difference) * -1
         }
 

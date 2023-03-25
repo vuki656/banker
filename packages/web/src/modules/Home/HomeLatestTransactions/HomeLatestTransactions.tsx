@@ -17,8 +17,9 @@ import {
     formatDate,
 } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
+import { observer } from 'mobx-react-lite'
 
-export const HomeLatestTransactions: FunctionComponent = () => {
+export const HomeLatestTransactions: FunctionComponent = observer(() => {
     const { user } = useCurrentUser()
 
     const store = useHomeStore()
@@ -84,4 +85,4 @@ export const HomeLatestTransactions: FunctionComponent = () => {
             </Stack>
         </Panel>
     )
-}
+})

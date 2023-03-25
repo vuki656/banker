@@ -11,7 +11,6 @@ import {
     IconTrendingDown,
     IconTrendingUp,
 } from '@tabler/icons-react'
-import dayjs from 'dayjs'
 import type { FunctionComponent } from 'react'
 
 import { useCurrentUser } from '../../../shared/auth'
@@ -20,13 +19,13 @@ import {
     formatDate,
 } from '../../../shared/utils'
 import { useHomeStore } from '../hooks'
+import { observer } from 'mobx-react-lite'
 
-export const HomeTotal: FunctionComponent = () => {
+export const HomeTotal: FunctionComponent = observer(() => {
     const store = useHomeStore()
 
     const { user } = useCurrentUser()
 
-    // TODO: fix dates
     return (
         <Paper
             p="md"
@@ -129,4 +128,4 @@ export const HomeTotal: FunctionComponent = () => {
             </Stack>
         </Paper>
     )
-}
+})
