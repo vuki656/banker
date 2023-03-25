@@ -51,14 +51,7 @@ export const HomeTotal: FunctionComponent = () => {
                             size="xs"
                             weight={500}
                         >
-                            {/* // eslint-disable-next-line newline-per-chained-call */}
-                            {`
-                                ${formatDate(dayjs().subtract(1, 'month')
-            .startOf('month')
-            .toDate())} -
-                                ${formatDate(dayjs().subtract(1, 'month')
-            .endOf('month')
-            .toDate())}`}
+                            {`${formatDate(store.dateRange.start)} - ${formatDate(store.dateRange.end)}`}
                         </Text>
                         <Text
                             size="xl"

@@ -38,16 +38,6 @@ export const ThemeRoot: React.FunctionComponent<ThemeRootProps> = (props) => {
             <MantineProvider
                 theme={{
                     colorScheme: currentColorScheme,
-                    components: {
-                        Modal: {
-                            defaultProps: {
-                                overlayProps: {
-                                    blur: 3,
-                                    opacity: 0.55,
-                                },
-                            },
-                        },
-                    },
                     fontFamily: 'montserrat',
                 }}
                 withGlobalStyles={true}
