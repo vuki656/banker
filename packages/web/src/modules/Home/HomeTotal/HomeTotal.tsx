@@ -64,7 +64,7 @@ export const HomeTotal: FunctionComponent = () => {
                             size="xl"
                             weight="bold"
                         >
-                            {formatCurrency(store.currentMonthTotal, { currency: user?.currency })}
+                            {formatCurrency(store.focusedMonthTotal, { currency: user?.currency })}
                         </Text>
                     </Stack>
                 </Group>

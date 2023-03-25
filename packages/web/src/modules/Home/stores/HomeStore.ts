@@ -6,7 +6,7 @@ import type {
     TransactionType,
 } from '../../../shared/types'
 
-import type { CategoryTotal, DateRange } from './HomeStore.types'
+import type { CategoryTotal, DateRange, SplitTransactions } from './HomeStore.types'
 
 export class HomeStore {
     public dateRange: DateRange = {
@@ -14,47 +14,52 @@ export class HomeStore {
             .startOf('day')
             .toDate(),
         start: dayjs()
-            .subtract(1, 'month')
             .startOf('month')
             .toDate()
     }
 
     public categories: CategoryType[] = []
 
-    public transactions: TransactionType[] = []
+    public transactions: SplitTransactions = {
+        comparisonMonth: [],
+        focusedMonth: []
+
+    }
 
     constructor(data: HomePageData) {
         this.categories = data.categories
     }
 
     public setTransactions(transactions: TransactionType[]) {
-        this.transactions = transactions
-    }
+        const { comparisonMonth, focusedMonth } = transactions.reduce<SplitTransactions>((accumulator, transaction) => {
+            const isFocusedMonthDate = dayjs(transaction.date).isAfter(this.dateRange.start)
 
-    private splitTransactions() {
-        console.log(this.transactionsArgs)
+            if (isFocusedMonthDate) {
+                return {
+                    ...accumulator,
+                    focusedMonth: [
+                        ...accumulator.focusedMonth,
+                        transaction
+                    ]
+                }
+            }
 
-        const focusedMonthTransactions = this.transactions.filter((transaction) => {
-            return dayjs(transaction.date).isAfter(dayjs(this.dateRange.end).startOf('month'))
-        })
+            return {
+                ...accumulator,
+                comparisonMonth: [
+                    ...accumulator.comparisonMonth,
+                    transaction
+                ]
+            }
+        }, { focusedMonth: [], comparisonMonth: [] })
 
-        console.log('focusedMonthTransactions: ', focusedMonthTransactions)
-
-        const previousMonthTransactions = this.transactions.filter((transaction) => {
-            return dayjs(transaction.date).isBefore(dayjs(this.dateRange.end).startOf('month'))
-        })
-
-        console.log('previousMonthTransactions: ', previousMonthTransactions)
-
-        return {
-            focusedMonthTransactions,
-            previousMonthTransactions
+        this.transactions = {
+            comparisonMonth,
+            focusedMonth,
         }
     }
 
     public get categoriesTotal() {
-        this.splitTransactions()
-
         const categories = new Map<string, CategoryTotal>()
 
         this.categories.forEach((category) => {
@@ -65,7 +70,7 @@ export class HomeStore {
             })
         })
 
-        this.transactions.forEach((transaction) => {
+        this.transactions.focusedMonth.forEach((transaction) => {
             const name = transaction.category?.name ?? 'Other'
             const category = categories.get(name)
 
@@ -88,23 +93,22 @@ export class HomeStore {
         })
     }
 
-    public get currentMonthTotal() {
-        return this.transactions.reduce((accumulator, transaction) => {
+    public get focusedMonthTotal() {
+        return this.transactions.focusedMonth.reduce((accumulator, transaction) => {
             return accumulator + transaction.amount.converted
         }, 0)
     }
 
     public get difference() {
-        const currentMonthTotal = this.currentMonthTotal
+        const currentMonthTotal = this.focusedMonthTotal
 
         if (currentMonthTotal === 0) {
             return 0
         }
 
-        const previousMonthTotal = 0
-        // const previousMonthTotal = this.previousMonthTransactions.reduce((accumulator, transaction) => {
-        //     return accumulator + transaction.amount.converted
-        // }, 0)
+        const previousMonthTotal = this.transactions.comparisonMonth.reduce((accumulator, transaction) => {
+            return accumulator + transaction.amount.converted
+        }, 0)
 
         const difference = 100 * Math.abs(
             (currentMonthTotal - previousMonthTotal) /
@@ -119,7 +123,7 @@ export class HomeStore {
     }
 
     public get expensesPerDay() {
-        const expensesPerDay = this.transactions.reduce((accumulator, transaction) => {
+        const expensesPerDay = this.transactions.focusedMonth.reduce((accumulator, transaction) => {
             const dayAmount = accumulator.get(transaction.date) ?? 0
 
             if (dayAmount) {

@@ -1,3 +1,5 @@
+import { TransactionType } from "../../../shared/types"
+
 export type CategoryTotal = {
     color?: string
     icon?: string
@@ -7,4 +9,9 @@ export type CategoryTotal = {
 export type DateRange = {
     start: Date
     end: Date
+}
+
+export type SplitTransactions = {
+    focusedMonth: TransactionType[]
+    comparisonMonth: TransactionType[]
 }

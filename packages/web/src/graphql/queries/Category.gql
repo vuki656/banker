@@ -3,3 +3,26 @@ query GetCategories {
         ...CategoryPayload
     }
 }
+
+query GetCategoryPageData($transactionArgs: TransactionsArgs!, $categoryArgs: CategoryArgs!) {
+    category(args: $categoryArgs) {
+        ...CategoryPayload
+    }
+    transactions(args: $transactionArgs) {
+        id
+        reference
+        description
+        date
+        status
+        currency
+        amount {
+            ...AmountPayload
+        }
+        category {
+            id
+            name
+            color
+            icon
+        }
+    }
+}
